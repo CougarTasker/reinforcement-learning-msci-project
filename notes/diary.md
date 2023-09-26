@@ -13,14 +13,15 @@
 ### Week 1 (18/09/23)
 
  - (Tue 19) attended first meeting 
- - (Thu 21) Started Reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
- - (Fri 22) Finished Reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
+ - (Thu 21) Started reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
+ - (Fri 22) Finished reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
 
 ### Week 2 (25/09/23)
 
  - (Mon 25) Decided on project idea 
-   - started draft project plan 
-   -  abstract
-   -  risks
+   - Started draft project plan 
+   -  Abstract
+   -  Risks
 -  (Tue 26) First meeting with Anand
-   -  started putting together timeline
+   - Started putting together timeline
+   - Started reading Reinforcement Learning An Introduction by Richard S. Sutton and Andrew G. Barto

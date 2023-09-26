@@ -42,7 +42,8 @@ Final Deliverables:
 Suggested Extensions:
  - Implementing RL for more a more challenging problem than a grid world, such as an acrobat.
  - Experimental analysis of the performance of different learning algorithms is interesting but challenging
- - Reading
+
+Reading:
  - Chapter on Reinforcement Learning in 'Machine Learning' by Tom Mitchell
 
 Prerequisites:
