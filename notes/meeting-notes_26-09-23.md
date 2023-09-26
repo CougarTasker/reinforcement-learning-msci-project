@@ -13,3 +13,7 @@
      - need to focus on my own motivations
      - how this will help me learn 
      - how this will help set me up for employment
+ - Project structure
+   - essentially the first submission is a dry run for the complete submission
+   - I have six meetings with Anand this term and four next term
+   - 

@@ -79,4 +79,7 @@ Notes:
 
 ## sources
 
-- Chapter on reinforcement Learning in 'Machine Learning' by Tom Mitchell
+ - Chapter on reinforcement Learning in 'Machine Learning' by Tom Mitchell
+ - Reinforcement Learning An Introduction by Richard S. Sutton and Andrew G. Barto
+   - page: 24
+   - only read up to chaper 8: max 
