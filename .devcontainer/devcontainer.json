@@ -23,7 +23,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"James-Yu.latex-workshop"
+				"James-Yu.latex-workshop",
+				"znck.grammarly",
 			]
 		}
 	},
