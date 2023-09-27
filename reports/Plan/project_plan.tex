@@ -51,9 +51,18 @@ Signature:
 
 \begin{abstract}
 
-This document serves as a layout and formatting template for your project report. It does not tell you how to write it, or what it should contain. It explains how it should be formatted and typeset. Please refer to your project booklet for information about report sizes, contents and rules.
+  Autonomous systems are becoming integral to modern society\cite{zaouter2020autonomous}. Within this context, this project seeks to address a pressing challenge: the efficient utilisation of resources by autonomous robots operating in dynamic environments.
 
-\textbf{\textit{NOTE: in your report, you should replace this with an appropriate Abstract for your project report.}}
+  The motivation for this project stems from the increasing prevalence of autonomous robots across various domains, such as drones and Boston-dynamic's Spot. As these robots take on more complex tasks, optimising their resource consumption, particularly energy, becomes paramount.
+  
+  The primary objective is to develop and evaluate reinforcement learning algorithms in a simulated grid world environment where a robot must navigate, make decisions, and gather resources while managing its energy reserves. This project intends to achieve the following goals:
+  \begin{itemize}
+    \item Energy-Efficient Navigation: Create a robot that can autonomously navigate a grid world while making optimal decisions to conserve energy. The robot should learn to prioritise energy-efficient paths.
+    \item Resource Gathering Strategies: Design intelligent resource-gathering strategies for the robot, ensuring it collects essential resources while balancing energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
+    \item Dynamic Energy Management: The robot should monitor its energy reserves and adjust its actions accordingly. This includes learning when to engage in resource gathering and when to return to a charging station.
+    \item Scalable Learning: Develop reinforcement learning algorithms that enable the robot to learn and adapt to different grid world scenarios and environmental changes. The system should demonstrate scalability and the ability to generalise knowledge across diverse grid layouts and resource distributions.
+  \end{itemize}
+
 
 \end{abstract}
 \newpage
@@ -85,7 +94,7 @@ A \textbf{final project report} is approximately 15,000 words and must include a
 Your \textbf{interim report} for the December Review meeting, even if it is a collection of reports, should have a total word count of about 5,000 words. 
 This should summarise the work you have done so far, with sections on the theory you have learnt and the code that you have written.
 
-Also remember that any details of report content and submission rules, as well as other deliverables, are defined in the project booklet~\cite{COHEN:2013}.
+Also remember that any details of report content and submission rules, as well as other deliverables, are defined in the project booklet~.
 
 \section{How to use this template}
 \subsection{Test}
@@ -149,17 +158,17 @@ Use one consistent system for citing works in the body of your report. Several s
 
 \chapter{Project Information and Rules}
 
-The details about how your project will be assessed, as well as the rules you must follow for this final project report, are detailed in the project booklet~\cite{COHEN:2013}.
+The details about how your project will be assessed, as well as the rules you must follow for this final project report, are detailed in the project booklet~.
 
 \textbf{You must read that document and strictly follow it.}
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
-\begin{thebibliography}{99}
+
+\bibliographystyle{plain}
+\bibliography{refrences}
 \addcontentsline{toc}{chapter}{Bibliography}
-\bibitem{COHEN:2013} Dave Cohen and Carlos Matos. \emph{Third Year Projects -- Rules and Guidelines}. Royal Holloway, University of London, 2013.
-\end{thebibliography}
 \label{endpage}
 
 
