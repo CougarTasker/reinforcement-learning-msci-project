@@ -75,7 +75,9 @@ Notes:
     - so far this has been done with one step lookahead (13.5) it can be done with more steps of lookahead
     - Sutton describes a general process of blending different levels of lookahead into one Q estimate
 
+## ideas
 
+[extension: car](https://gymnasium.farama.org/environments/box2d/car_racing/)
 
 ## sources
 
