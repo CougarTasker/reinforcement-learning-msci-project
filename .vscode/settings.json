@@ -6,5 +6,6 @@
         "**/README.md",
         "**/*.txt",
         "**/*.tex"
-    ]
+    ],
+    "cSpell.language": "en-GB"
 }

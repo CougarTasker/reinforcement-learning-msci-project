@@ -27,3 +27,6 @@
    - Started reading Reinforcement Learning An Introduction by Richard S. Sutton and Andrew G. Barto
  - (Wed 27) 
    - Attended second lecture
+   - moved project plan over to LaTeX
+ - (Thu 28) Worked on project plan report 
+   - improved 
