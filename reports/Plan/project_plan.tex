@@ -51,16 +51,12 @@ Signature:
 
 \begin{abstract}
 
-  Autonomous robots such as Boston-dynamic's Spot are increasing in prevalence across various domains\cite{hagele2016robots}. Furthermore, these robotics are becoming integral to modern society, completing more advanced tasks\cite{zaouter2020autonomous}. As autonomous robots take on more complex and resource-intensive tasks, optimising their resource consumption, particularly energy, becomes paramount.
+  Autonomous robots such as Boston-dynamic's Spot are increasing in prevalence across a wide range of fields\cite{hagele2016robots}. Furthermore, these robots are increasingly integral in modern society, taking on ever more advanced tasks\cite{zaouter2020autonomous}. As autonomous robots take on increasingly complex and resource-intensive tasks, optimising their resource consumption while meeting objectives becomes an increasingly significant challenge.
+  These autonomous robots operate in diverse environments with varying objectives, so a singular algorithm will not perform optimally for all cases. 
   
-  these autonomous robots act in varying environments with different objectives. this project intends to explore reinfomrnet learning as a solution for prioritising these objectives, resources. 
-
-  Reinforcement Learning is a type of machine learning where an agent learns to make decisions by interacting with an environment. specifically unlike other types of machine learning the reward are delayed after when some actions have been performed, this makes it an ideal framework for this type of problem
-  
-  in this project we will be simulating the environment, as a grid world or later with some more advanced environments from OpenAI's gym library
+  This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement Learning, a form of machine learning, involves an agent learning to make decisions through interactions with its environment. Its ability to handle delayed rewards sets it apart from other machine-learning approaches, making it particularly well-suited for addressing this problem. In this project, we will simulate the environment, initially using a grid world and later incorporating more advanced environments from OpenAI's gym library\cite{gym}.
   
   
-
   \section*{Motivations}
 
   My inspiration for studying this degree in artificial intelligence comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
@@ -74,19 +70,17 @@ Signature:
 
   \section*{Objectives}
 
-  The primary objective is to develop and evaluate reinforcement learning agents. where the agent must navigate, make decisions, and gather resources while managing its energy reserves. the project will include two parts the report and a graphical program that implements the 
-  
-  This project intends to achieve the following goals:
+  The primary objective is to develop and understand reinforcement learning agents. The project will include two parts: a report and a graphical program. In the report, I will describe the reinforcement learning concepts that are implemented by the program, such as Markov decision processes and finding optimal policies by the Bellman equations. The report will also cover the software engineering process of the program and the results of different parameter choices and exploration strategies. The program will be developed in Python using the libraries Kivy for graphics and PyTorch for Deep Neural networks. The program should achieve the following goals:
   \begin{itemize}
     \item Energy-Efficient Navigation: Create a robot that can autonomously navigate a grid world while making optimal decisions to conserve energy. The robot should learn to prioritise energy-efficient paths.
     \item Resource Gathering Strategies: Design intelligent resource-gathering strategies for the robot, ensuring it collects essential resources while balancing energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
     \item Dynamic Energy Management: The robot should monitor its energy reserves and adjust its actions accordingly. This includes learning when to engage in resource gathering and when to return to a charging station.
     \item Effective Exploration: Develop exploration strategies that enable the robot to learn and adapt to different grid world scenarios.
+    \item Deep Reinforcement Learning: As an extension, the program should integrate deep neural networks (DNN) with Q-learning. The advantage of using a DNN instead of a table is the DNN's ability to generalise knowledge\cite{franccois2018introduction}. This unlocks working in environments with far more extensive observations and action spaces, allowing for added complexity to our existing environment or an extension of integrating a different environment, such as one from OpenAI's gym library\cite{gym}.
   \end{itemize}
   
-  Extension:
   
-  an extension would be to implement deep reinforcement learning, this is integrating artificial neural networks with Q-learning. this unlocks working in environments with far larger observations and action spaces. this can be used to extend our existing environment or a further extension of integrating a different environment such as one from OpenAI's gym library.
+  
 
 \end{abstract}
 \newpage
