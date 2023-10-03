@@ -56,8 +56,10 @@ Signature:
   
   This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement Learning, a form of machine learning, involves an agent learning to make decisions through interactions with its environment. Its ability to handle delayed rewards sets it apart from other machine-learning approaches, making it particularly well-suited for addressing this problem. In this project, we will simulate the environment, initially using a grid world and later incorporating more advanced environments from OpenAI's gym library\cite{gym}.
   
+  //todo add more detail about reinforment learning add more refrences -> refrence the sutton book! and the other one
   
   \section*{Motivations}
+  \addcontentsline{toc}{section}{Motivations}
 
   My inspiration for studying this degree in artificial intelligence comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
 
@@ -69,6 +71,7 @@ Signature:
 
 
   \section*{Objectives}
+  \addcontentsline{toc}{section}{Objectives}
 
   The primary objective is to develop and understand reinforcement learning agents. The project will include two parts: a report and a graphical program. In the report, I will describe the reinforcement learning concepts that are implemented by the program, such as Markov decision processes and finding optimal policies by the Bellman equations. The report will also cover the software engineering process of the program and the results of different parameter choices and exploration strategies. The program will be developed in Python using the libraries Kivy for graphics and PyTorch for Deep Neural networks. The program should achieve the following goals:
   \begin{itemize}
@@ -88,97 +91,82 @@ Signature:
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Project Spec
 
-\chapter*{Project Specification}
-\addcontentsline{toc}{chapter}{Project Specification}
-Your project specification goes here.
+% \chapter*{Project Specification}
+% \addcontentsline{toc}{chapter}{Project Specification}
+% Your project specification goes here.
 
 %%%%%%%%%%%%%%%%%%%%%%
-%%% Introduction
-\chapter{Introduction}
+%%% Timeline
+\chapter{Timeline}
 
-The project report is a very important part of your project and its preparation and presentation should be of extremely high quality. Remember that a significant portion of the marks for your project are awarded for this report. 
+\chapter{Risks And Mitigations}
 
-The format of the final report is fixed by the template of this document and the Department of Computer Science suggests its usage. 
+\section{Hardware Issues}
 
-While this may sound like a rather prescriptive approach to report writing, it is introduced for the following reasons:
-\begin{enumerate}
- \item The template allows students to focus on the critical task of producing clear and concise content, instead of being distracted by font settings and paragraph spacing. 
- \item By providing a comprehensive template the Department benefits from a consistent and professional look to its internal project reports.
-\end{enumerate}
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Low \\
+    Importance: & High \\
+    \end{tabular}
+  \end{center}
 
-The remainder of this document briefly outlines the main components and their usage.
-
-A \textbf{final project report} is approximately 15,000 words and must include a word count. It is acceptable to have other material in appendixes.  
-Your \textbf{interim report} for the December Review meeting, even if it is a collection of reports, should have a total word count of about 5,000 words. 
-This should summarise the work you have done so far, with sections on the theory you have learnt and the code that you have written.
-
-Also remember that any details of report content and submission rules, as well as other deliverables, are defined in the project booklet~.
-
-\section{How to use this template}
-\subsection{Test}
-\subsubsection{Test}
-The simplest way to get started with your report is to save a copy of this document. 
-First change the values for the initial document definitions such as \verb|studentname| and \verb|reportyear| to match your details.
-Delete the unneeded sections and start adding your own sections using the styles provided.
-Before submission, remember to fill in the Declaration section fields.
-
-\chapter{Page Layout \& Size}
-
-The page size and margins have been set in this document. These should not be changed or adjusted. 
-
-In addition, page headers and footers have been included. They will be automatically filled in, so do not attempt to change their contents.
-
-\chapter{Headings}
-
-Your report will be structured as a collection of numbered sections at different levels of detail. For example, the heading to this section is a first-level heading and has been defined with a particular set of font and spacing characteristics. At the start of a new section, you need to select the appropriate \LaTeX{} command, \verb|\chapter| in this case.
-\section{Second Level Headings}
-Second level headings, like this one, are created by using the command \verb|\section|.
-\subsection{Third Level Headings}
-The heading for this subsection is a third level heading, which is obtained by using command \verb|\subsection|. In general, it is unlikely that fourth of fifth level headings will be required in your final report. Indeed it is more likely that if you do find yourself needing them, then your document structure is probably not ideal. So, try to stick to these three levels.
-\section{A Word on Numbering}
-You will notice that the main section headings in this document are all numbered in a hierarchical fashion. You don't have to worry about the numbering. It is all automatic as it has been built into the heading styles. Each time you create a new heading by selecting the appropriate style, the correct number will be assigned. 
+Hardware failures, such as a lost or malfunctioning laptop, could disrupt the project's progress. Project data should be regularly backed up externally to reduce this risk. The project will be stored under Git with a GitHub remote repository. Under this arrangement, frequent code pushes upstream can minimise potential data loss. The report will be written on the Google Docs platform, providing cloud backup and version control. 
 
 
-\chapter{Presentation Issues}
+\section{Time Management Issues}
 
-\section{Figures, Charts and Tables}
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & Moderate \\
+    \end{tabular}
+  \end{center}
 
-Most final reports will contain a mixture of figures and charts along with the main body of text. The figure caption should appear directly after the figure as seen in Figure~\ref{fig:logo} whereas a table caption should appear directly above the table. Figures, charts and tables should always be centered horizontally. 
+Underestimating the time required for tasks could result in missing milestones or goals. Perfect time estimates are impossible; however, tasks can subdivided appropriately to avoid significant surprises. Spreading out tasks evenly and leaving some buffer time can assist in avoiding work being cut short. 
 
-\begin{figure}[h]
-\centering
-\fboxsep 2mm
-\framebox{
-	\includegraphics[width=6cm]{logo} 
-}
-\caption{\label{fig:logo} Logo of RHUL.}
-\end{figure} 
+\section{Machine Learning Risks}
 
-\section{Source Code}
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & Low \\
+    \end{tabular}
+  \end{center}
 
-If you wish to print a short excerpt of your source code,  ensure that you are using a fixed-width sans-serif font such as the Courier font. By using the \verb|verbatim| environment your code will be properly indented and will appear as follows:
+Machine learning can be a slow and computationally expensive task; this risks slowing the development or failing to train an effective model. The Q-learning table's complexity and size can be gradually increased and dynamically controlled to avoid computational bottlenecks. Manual fine-tuning of the system can be timely. Instead, the hyperparameters will be optimised with grid search. 
 
-\begin{verbatim}
-static public void main(String[] args) {
-  try  {
-    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-  }
-  catch(Exception e) {
-    e.printStackTrace();
-  }
-  new WelcomeApp();
-} 
-\end{verbatim}
+\section{Software Development Challenges}
 
-\chapter{References}
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & High \\
+    Importance: & Moderate \\
+    \end{tabular}
+  \end{center}
 
-Use one consistent system for citing works in the body of your report. Several such systems are in common use in textbooks and in conference and journal papers. Ensure that any works you cite are listed in the references section, and vice versa. 
+Developing a complete graphical application can be complex, and unexpected software bugs may arise. Modern software engineering principles can minimise bugs and improve software quality. That is why this project will have version control, test-driven development, documentation, and static code analysis. 
 
-\chapter{Project Information and Rules}
+\section{GUI Development Challenges}
 
-The details about how your project will be assessed, as well as the rules you must follow for this final project report, are detailed in the project booklet~.
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & Low \\
+    \end{tabular}
+  \end{center}
 
-\textbf{You must read that document and strictly follow it.}
+Designing and implementing the Graphical User Interface may be more time-consuming or challenging than anticipated. This project will use GUI development libraries or frameworks that streamline the process. Start GUI development early in the project to allow for iterative improvements.
+
+\section{Understanding of Reinforcement Concepts}
+
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & High \\
+    \end{tabular}
+  \end{center}
+
+Reinforcement learning has several abstract concepts, such as MDPs, Bellman equations, dynamic programming, or Q-learning, which may lead to incorrect implementations or interpretations. Referencing textbooks and research papers to check results can validate findings. Thoroughly studying reinforcement learning concepts can avoid misinterpretations.
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
