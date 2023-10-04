@@ -6,6 +6,7 @@
   - [Weeks](#weeks)
     - [Week 1 (18/09/23)](#week-1-180923)
     - [Week 2 (25/09/23)](#week-2-250923)
+    - [Week 3 (02/10/23)](#week-3-021023)
 
 
 ## Weeks
@@ -29,4 +30,11 @@
    - Attended second lecture
    - moved project plan over to LaTeX
  - (Thu 28) Worked on project plan report 
-   - improved 
+   - improved bibliography
+
+### Week 3 (02/10/23)
+
+ - (Tue 3) worked on project plan
+   - Put together risks section 
+   - put together timeline 
+   - submitted project to Anand

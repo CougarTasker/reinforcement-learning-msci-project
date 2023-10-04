@@ -2,6 +2,18 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 
+\usepackage{longtable}
+\usepackage[utf8]{inputenc}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{array, booktabs}
+\usepackage{graphicx}
+\usepackage[x11names,table]{xcolor}
+\usepackage{caption}
+\DeclareCaptionFont{blue}{\color{LightSteelBlue3}}
+
+\newcommand{\foo}{\color{LightSteelBlue3}\makebox[0pt]{\textbullet}\hskip-0.5pt\vrule width 1pt\hspace{\labelsep}}
+
+
 \emergencystretch=0.1em
 \hfuzz=0.2pt
 \tolerance=1000
@@ -101,6 +113,58 @@ Signature:
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Timeline
 \chapter{Timeline}
+
+\begin{table}
+\renewcommand\arraystretch{1.4}\arrayrulecolor{LightSteelBlue3}
+\captionsetup{singlelinecheck=false, font=blue, labelfont=sc, labelsep=quad}
+\caption{Timeline}\vskip -1.5ex
+\begin{longtable}{@{\,}p{.15\textwidth} <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{.35\textwidth} p{.4\textwidth}}
+\toprule
+\addlinespace[1.5ex]
+18/09/2023-22/09/2023 & Study Reinforcement Learning: Reinforcement Learning in 'Machine Learning' by Tom Mitchell & This book has established a foundational understanding of reinforcement learning, which will serve as the basis for creating this project plan.\\
+ 25/09/2023-29/09/2023 & Create first project plan draft & Creating a project plan draft enables my supervisor to review and guide the final report in the right direction.\\
+ 02/10/2023-06/10/2023 & Complete project plan and its formatting & Incorporate enhancements suggested by my supervisor, refine document formatting to enhance its visual appeal, and gain proficiency in LaTeX for future reports.\\
+ 09/10/2023-13/10/2023 & Research reinforcement learning: \begin{itemize}
+  \item read first chapters 1,3,4 of Reinforcement Learning An Introduction second edition Richard S. Sutton and Andrew G. Barto
+  \item create first draft of Markov decision processes (MDPs) report
+  \item create first draft of  policy and value function report 
+\end{itemize} & Starting with research on reinforcement learning provides a strong foundation for application development. Additionally, early report drafting allows for increased opportunity for feedback \\
+ 16/10/2023-20/10/2023 & Research reinforcement learning: \begin{itemize}
+ \item read first chapters 6 of Reinforcement Learning An Introduction second edition Richard S. Sutton and Andrew G. Barto
+ \item create first draft of Q-learning report
+ \item create first draft of report about learning as incrementally optimising policy in a MDP \end{itemize} & This research helps to deepen my understanding of reinforcement learning, and the reports serve the dual purpose of advancing toward the Interim submission while also testing my knowledge.\\
+23/10/2023-27/10/2023 & Initialise project: \begin{itemize}
+ \item development environment configuration
+ \item basic project configuration \end{itemize} & This setup will establish the essential groundwork for application development, ensuring the proper configuration of the environment and tools to facilitate the creation of a robust application while upholding high code standards and quality.\\
+ 30/10/2023-04/11/2023 & model simple state and reward function for grid world. 
+provide basic visualisation for a grid world state. 
+mock the ai with hard coded actions and visualise these actions being played out.  & The primary objective for this week is to create a vertical slice of the application, enabling rapid feedback and issue identification before committing to full-scale development.\\
+% 06/11/2023-11/11/2023 & Implementation of value iteration algorithm & As a planning algorithm, implementing this algorithm will efficiently generate optimal policies for our environment and grid world, providing a benchmark for our Q-learning implementation and assisting in the debugging process.\\
+% 13/11/2023-18/11/2023 & Implementation of Q-learning & The implementation of Q-learning will serve as an important focal point for the presentation. Initiating this process at an early stage will allow pleanty of time to ensure its completion.\\
+% 20/11/2023-25/11/2023 & finalise the report
+%  & As the Interim report deadline approaches, this week is dedicated to the finalization of the report, identifying errors, and making improvments wherever possible.\\
+%  27/11/2023-02/12/2023 & prepare for the presentation
+% improving project graphics, adding controls 
+% submit interim report & Improving the graphics will help make the main functionality clear and appealing, and adding controls will provide interactivity that will help the program come across well for the presentation. \\
+% 04/12/2023-09/12/2023 & give the presentation  & \\
+% 30/12/1899-04/01/1900 &  & \\
+% 08/01/2024-13/01/2024 & Make first draft of poster & As a precaution, given the absence of a specific deadline, I intend to start the poster at the start of the term.\\
+% 15/01/2024-20/01/2024 & develop diffrent exploration stratgies & The implementation of multiple exploration strategies is important for my final report, so, I am giving it a high priority.\\
+% 22/01/2024-27/01/2024 & 
+%  - record data from diffrent exploration strigies and paramter chocies
+%  - anlyse the exploration stratigies effectiveness & After creating the strategies it's the ideal time to get their data and analyse it because I can iterate on the strategies to provide more in-depth research, however, I will need to be careful of not introducing data snooping.\\
+%  29/01/2024-03/02/2024 & 
+% write a report on the effect of different parameter choices and exploration strategies & Following the recent data analysis, the report's writing follows naturally and benefits from the insights gained.\\
+% 05/02/2024-10/02/2024 & implement deep learning  & While a two-week timeline for implementing deep learning may be ambitious, leveraging the PyTorch library will simplify the process. The remaining tasks would include integrating the model with the existing codebase and fine-tuning the model\\
+% 12/02/2024-17/02/2024 & implement deep learning  & \\
+% 19/02/2024-24/02/2024 & Write report on the software engineering process involved in generating your software. & With the majority of development now complete, this is a good week to reflect on the whole engineering process and report on it.\\
+% 26/02/2024-02/03/2024 & integrate agent with different environments from gym & As a further extension, it would be valuable to assess how well the agent generalizes to entirely novel environments. However, if there are time constraints, this can be omitted without compromising the core objectives.\\
+% 04/03/2024-09/03/2024 & Report on the data from deep learning and how the agent generalised to new environments & The results obtained from deep learning will help elevate the section on different learning strategies, offering an additional perspective from a different type of environment.\\
+% 11/03/2024-16/03/2024 & improve and Finalise report & ""Given that the report accounts for 30% of the final grade, it is crucial to allocate time to enhance and refine it according to my supervisor's feedback.""\\
+% 18/03/2024-23/03/2024 & improve and Finalise report & \\
+% 25/03/2024-30/03/2024 & submit report & \\
+\end{longtable}
+\end{table}
 
 \chapter{Risks And Mitigations}
 
