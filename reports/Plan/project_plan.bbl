@@ -30,6 +30,10 @@ C.~Zaouter, A.~Joosten, J.~Rinehart, M.~M. Struys, and T.~M. Hemmerling,
   ``Autonomous systems in anesthesia: where do we stand in 2020? a narrative
   review,'' \emph{Anesthesia \& Analgesia}, vol. 130, no.~5, 2020.
 
+\bibitem{mitchell1997machine}
+T.~Mitchell, \emph{Machine Learning}, ser. McGraw-Hill International
+  Editions.\hskip 1em plus 0.5em minus 0.4em\relax McGraw-Hill, 1997.
+
 \bibitem{gym}
 \BIBentryALTinterwordspacing
 OpenAI. Gym documentation. [Online]. Available:
