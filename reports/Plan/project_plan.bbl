@@ -74,7 +74,7 @@ S.~Raschka, J.~Patterson, and C.~Nolet, ``Machine learning in python: Main
   developments and technology trends in data science, machine learning, and
   artificial intelligence,'' \emph{Information}, vol.~11, no.~4, p. 193, 2020.
 
-\bibitem{pypy2023Benchmarks}
+\bibitem{pypy2023benchmarks}
 \BIBentryALTinterwordspacing
 T.~P. Team. Pypy performance benchmarks. [Online]. Available:
   \url{https://speed.pypy.org/}

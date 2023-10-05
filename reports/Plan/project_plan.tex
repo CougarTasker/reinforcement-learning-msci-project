@@ -1,7 +1,7 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
 \usepackage{hyperref}
-
+\usepackage{xltabular}
 \usepackage{longtable}
 \usepackage[utf8]{inputenc}
 \usepackage[TS1,T1]{fontenc}
@@ -101,7 +101,8 @@ Signature: {\calligra \LARGE \studentname}
     \item Effective Exploration: Develop exploration strategies that enable the robot to learn and adapt to different grid world scenarios.
     \item Deep Reinforcement Learning: As an extension, the program should integrate deep neural networks (DNN) with Q-learning. The advantage of using a DNN instead of a table is the DNN's ability to generalise knowledge\cite{franccois2018introduction}. This unlocks working in environments with far more extensive observations and action spaces, allowing for added complexity to our existing environment or an extension of integrating a different environment, such as one from OpenAI's gym library\cite{gym}.
   \end{itemize}
-  
+
+  \newpage
   \section*{Technology}
   \addcontentsline{toc}{section}{Technology}
 
@@ -113,7 +114,7 @@ Signature: {\calligra \LARGE \studentname}
   performance trade-offs.\cite{raschka2020machine}
   \end{quotation}. 
   
-  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023Benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
+  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
   
   To focus the program's development on its primary objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}. PyTorch is a Python library that provides the functionality for training Deep Neural networks with hardware (GPU) acceleration\cite{paszke2019pytorch}. PyTorch will enable this application to integrate deep learning with the Q-Learning agent without getting caught up in implementing efficient tensor algorithms such as for backpropagation \cite{paszke2019pytorch}. The application may also use other utility libraries, such as NumPy\cite{numpy} for efficient calculations or Pandas\cite{pandas} for data analysis. 
 \end{abstract}
@@ -139,16 +140,16 @@ Signature: {\calligra \LARGE \studentname}
 \multicolumn{1}{@{\,}p{.15\textwidth}}{Week} & \multicolumn{1}{p{.35\textwidth}}{Goals} & \multicolumn{1}{p{.4\textwidth}}{Explanation/Motivation} \\ 
 \hline
 \endhead
-18/09/2023-22/09/2023 & Study Reinforcement Learning: Reinforcement Learning in 'Machine Learning' by Tom Mitchell & This book has established a foundational understanding of reinforcement learning, which will serve as the basis for creating this project plan.\\
+18/09/2023-22/09/2023 & Study Reinforcement Learning chapter in Machine Learning\cite{mitchell1997machine} & This book has established a foundational understanding of reinforcement learning, which will serve as the basis for creating this project plan.\\
  25/09/2023-29/09/2023 & Create first project plan draft & Creating a project plan draft enables my supervisor to review and guide the final report in the right direction.\\
  02/10/2023-06/10/2023 & Complete project plan and its formatting & Incorporate enhancements suggested by my supervisor, refine document formatting to enhance its visual appeal, and gain proficiency in LaTeX for future reports.\\
  09/10/2023-13/10/2023 & Research reinforcement learning: \begin{itemize}
-  \item Read chapters 1,3 and 4 of Reinforcement Learning An Introduction second edition Richard S. Sutton and Andrew G. Barto
+  \item Read chapters 1,3 and 4 of Reinforcement Learning An Introduction \cite{sutton2018reinforcement}
   \item Create the first draft of Markov decision processes (MDPs) report
   \item Create the first draft of policy and value function report 
 \end{itemize} & Starting with research on reinforcement learning provides a strong foundation for application development. Additionally, early report drafting allows for increased opportunities for feedback \\
  16/10/2023-20/10/2023 & Research reinforcement learning: \begin{itemize}
- \item Read chapter 6 of Reinforcement Learning An Introduction second edition Richard S. Sutton and Andrew G. Barto
+ \item Read chapter 6 of Reinforcement Learning An Introduction \cite{sutton2018reinforcement}
  \item Create the first draft of the Q-learning report
  \item Create the first draft report about learning as incrementally optimising policy in an MDP \end{itemize} & This research helps deepen my understanding of reinforcement learning, and the reports serve the dual purpose of advancing toward the Interim submission while testing my knowledge.\\
 23/10/2023-27/10/2023 & Initialise project: \begin{itemize}
@@ -230,6 +231,7 @@ Underestimating the time required for tasks could result in missing milestones o
 
 Machine learning can be a slow and computationally expensive task; this risks slowing the development or failing to train an effective model. The Q-learning table's complexity and size can be gradually increased and dynamically controlled to avoid computational bottlenecks. Manual fine-tuning of the system can be timely. Instead, the hyperparameters will be optimised with grid search. 
 
+\newpage
 \section{Software Development Challenges}
 
 \begin{center}
@@ -272,9 +274,37 @@ Reinforcement learning has several abstract concepts, such as MDPs, Bellman equa
     \end{tabular}
   \end{center}
 
-While not setting pessimistic goals is key to creating a worthwhile project, setting optimistic goals may not be realistic, as there are likely unforeseen obstacles. To mitigate the risks of missing cascading deadlines, the project plan is ordered in importance to the core objectives. For example, in the second term, different exploration strategies are implemented at the beginning however, integrating environments from OpenAI's gym library\cite{gym} is at the end as it can be removed without compromising on the main objectives.
+While not setting pessimistic goals is key to creating a worthwhile project, setting optimistic goals may not be realistic, as there are likely unforeseen obstacles. To mitigate the risks of missing cascading deadlines, the project plan is ordered in importance to the core objectives. For example, in the second term, different exploration strategies are implemented at the beginning; however, integrating environments from OpenAI's gym library\cite{gym} is at the end as it can be removed without compromising on the main objectives.
 
-\section{Literature Review}
+\chapter{Literature Review}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{xltabular}{\textwidth}{p{6cm} X}
+  Robots conquer the world [turning point]\cite{hagele2016robots} & This article shows the growing usage of autonomous robots in both household and industrial settings, demonstrating the growing value of their efficient operation \\
+  Autonomous systems in anaesthesia: where do we stand in 2020? A narrative review\cite{zaouter2020autonomous} & This article drives the potential value of this project further by showing how important and complex the tasks that autonomous agents are performing; it also shows how reinforcement learning approaches can improve effectiveness over conventional "proportional-integral-derivative" controllers \\
+  Machine Learning\cite{mitchell1997machine} & This book contains a chapter (13) that provides a fantastic overview of reinforcement learning with a succinct description of Q-learning \\
+Reinforcement learning-based real-time energy management for a hybrid tracked vehicle\cite{ZOU2016372} & This article details using reinforcement learning for an energy optimisation problem; although there are many differences with this project, it has enough similarities to provide a proof of concept for this project to build upon \\
+Reinforcement learning: An introduction\cite{sutton2018reinforcement} & This book provides a
+approachable but detailed explanation of reinforcement learning concepts and algorithms that will form the research foundation for this project. \\
+Reshaping business with artificial intelligence: Closing the gap between ambition and action\cite{ransbotham2017reshaping} & This article provides clear evidence for the business value that artificial intelligence can provide. To complete this project, I must develop my understanding of reinforcement learning and artificial intelligence. This article shows that "respondents overwhelmingly agree that AI will both require employees to learn new skills within the next five years and augment their existing skills." the understanding of artificial intelligence could be key to providing value as an employee.   \\
+An introduction to deep reinforcement learning\cite{franccois2018introduction} & \\
+Machine learning in Python: Main developments and technology trends in data science, machine learning, and artificial intelligence\cite{raschka2020machine} & \\
+PyPy performance benchmarks\cite{pypy2023benchmarks} & \\
+Kivy--a framework for rapid creation of innovative user interfaces\cite{virbel2011kivy} & \\
+Pytorch: An imperative style, high-performance deep learning library\cite{paszke2019pytorch} & \\
+\end{xltabular}
+
+\section{Documentation}
+I have cited the documentation for the technologies I intend to use, as this is the definitive source of information regarding their functionality and an excellent place to learn. These are the technologies mentioned: 
+
+\begin{itemize}
+  \item Gym Documentation\cite{gym}
+  \item Python Documentation\cite{python}
+  \item Kivy Documentation\cite{kivy}
+  \item PyTorch Documentation\cite{pytorch}
+  \item NumPy Documentation\cite{numpy}
+  \item Pandas Documentation\cite{pandas} 
+\end{itemize}
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
