@@ -80,13 +80,13 @@ Signature:
   
   This project interests me because of its generality and applicability to many different scenarios. Resource-gathering has the potential to incorporate many real-world constraints like energy, visibility and obstacles. I would like to see how this impacts different exploration strategies.
    
-  Last year, I completed my year-long internship at Zing, a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. <<insert reference to the increased value of ai in business>>. Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
+  Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. <<insert reference to the increased value of ai in business>>. Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
 
 
   \section*{Objectives}
   \addcontentsline{toc}{section}{Objectives}
 
-  The primary objective is to develop and understand reinforcement learning agents. The project will include two parts: a report and a graphical program. In the report, I will describe the reinforcement learning concepts that are implemented by the program, such as Markov decision processes and finding optimal policies by the Bellman equations. The report will also cover the software engineering process of the program and the results of different parameter choices and exploration strategies. The program will be developed in Python using the libraries Kivy for graphics and PyTorch for Deep Neural networks. The program should achieve the following goals:
+  The primary objective is to develop and understand reinforcement learning agents. The project will include two parts: a report and a graphical program. In the report, I will describe the reinforcement learning concepts that are implemented by the program, such as Markov decision processes and finding optimal policies by the Bellman equations. The report will also cover the software engineering process of the program and the results of different parameter choices and exploration strategies. The program should achieve the following goals:
   \begin{itemize}
     \item Energy-Efficient Navigation: Create a robot that can autonomously navigate a grid world while making optimal decisions to conserve energy. The robot should learn to prioritise energy-efficient paths.
     \item Resource Gathering Strategies: Design intelligent resource-gathering strategies for the robot, ensuring it collects essential resources while balancing energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
@@ -95,9 +95,22 @@ Signature:
     \item Deep Reinforcement Learning: As an extension, the program should integrate deep neural networks (DNN) with Q-learning. The advantage of using a DNN instead of a table is the DNN's ability to generalise knowledge\cite{franccois2018introduction}. This unlocks working in environments with far more extensive observations and action spaces, allowing for added complexity to our existing environment or an extension of integrating a different environment, such as one from OpenAI's gym library\cite{gym}.
   \end{itemize}
   
-  
-  
+  \section*{Technology}
+  \addcontentsline{toc}{section}{Technology}
 
+  The program will be developed in Python; this is motivated by Python's strong ecosystem of tooling and community for data processing tasks. Performance is essential with machine learning tasks. Python enables the use of low-level libraries that can use the hardware efficiently with high-level APIs. These high-level APIs abstract over unimportant details, increasing productivity. However, Raschka et al. states:
+  
+  \begin{quotation}
+    Unfortunately, the most widely used implementation of the Python compiler and interpreter, CPython,
+  executes CPU-bound code in a single thread, and its multiprocessing packages come with other significant
+  performance trade-offs.\cite{raschka2020machine}
+  \end{quotation}. 
+  
+  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023Benchmarks}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
+  
+  To focus the development on the program's main objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}.  
+
+  using the libraries Kivy for graphics and PyTorch\cite{pytorch} for Deep Neural networks. Python 
 \end{abstract}
 \newpage
 
@@ -118,7 +131,7 @@ Signature:
   \renewcommand{\arraystretch}{1.5}
   
 \begin{longtable}{@{\,}p{.15\textwidth} <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{.35\textwidth} p{.4\textwidth}}
-\multicolumn{1}{@{\,}p{.15\textwidth}}{Week} & \multicolumn{1}{p{.35\textwidth}}{Goals} & \multicolumn{1}{p{.4\textwidth}}{Explanation/Motivation} \\
+\multicolumn{1}{@{\,}p{.15\textwidth}}{Week} & \multicolumn{1}{p{.35\textwidth}}{Goals} & \multicolumn{1}{p{.4\textwidth}}{Explanation/Motivation} \\ 
 \hline
 \endhead
 18/09/2023-22/09/2023 & Study Reinforcement Learning: Reinforcement Learning in 'Machine Learning' by Tom Mitchell & This book has established a foundational understanding of reinforcement learning, which will serve as the basis for creating this project plan.\\
@@ -134,8 +147,8 @@ Signature:
  \item Create the first draft of the Q-learning report
  \item Create the first draft report about learning as incrementally optimising policy in an MDP \end{itemize} & This research helps deepen my understanding of reinforcement learning, and the reports serve the dual purpose of advancing toward the Interim submission while testing my knowledge.\\
 23/10/2023-27/10/2023 & Initialise project: \begin{itemize}
- \item development environment configuration
- \item basic project configuration \end{itemize} & This setup will establish the essential groundwork for application development, ensuring the proper configuration of the environment and tools to facilitate the creation of a robust application while upholding high code standards and quality.\\
+ \item Configure development environment 
+ \item Project setup and configuration \end{itemize} & This setup will establish the essential groundwork for application development, ensuring the proper configuration of the environment and tools to facilitate the creation of a robust application while upholding high code standards and quality.\\
  30/10/2023-03/11/2023 & 
  \begin{itemize}
   \item Model simple state and reward function for grid world. 
@@ -165,9 +178,9 @@ Signature:
   \item  Record data from different exploration strategies and parameter choices
   \item Analyse the exploration strategies' effectiveness \end{itemize}  & After creating the strategies, it is the ideal time to get their data and analyse it because I can iterate on the strategies to provide more in-depth research. However, I will need to be careful not to introduce data snooping.\\
  29/01/2024-02/02/2024 & Write a report on the effect of different parameter choices and exploration strategies & Following the recent data analysis, the report's writing follows naturally and benefits from the insights gained.\\
-05/02/2024-09/02/2024 and 12/02/2024-16/02/2024 & Implement deep learning  & While a two-week timeline for implementing deep learning may be ambitious, leveraging the PyTorch library will simplify the process. The remaining tasks would include integrating the model with the existing codebase and fine-tuning the model\\
+05/02/2024-09/02/2024 and 12/02/2024-16/02/2024 & Implement deep learning  & While a two-week timeline for implementing deep learning may be ambitious, leveraging the PyTorch library will simplify the process\cite{paszke2019pytorch}. The remaining tasks would include integrating the model with the existing codebase and fine-tuning the model\\
 19/02/2024-23/02/2024 & Write the report on the software engineering process involved in generating this program & With the majority of development now complete, this is a good week to reflect on the whole engineering process and report on it.\\
-26/02/2024-01/03/2024 & Integrate agent with different environments from gym & As a further extension, it would be valuable to assess how well the agent generalises to entirely novel environments. However, if there are time constraints, this can be omitted without compromising the core objectives.\\
+26/02/2024-01/03/2024 & Integrate agent with different environments from OpenAI's gym library\cite{gym} & As a further extension, it would be valuable to assess how well the agent generalises to entirely novel environments. However, if there are time constraints, this can be omitted without compromising the core objectives.\\
 04/03/2024-08/03/2024 & Report on the data from deep learning and how the agent generalised to new environments & The results obtained from deep learning will help elevate the section on different learning strategies, offering an additional perspective from a different type of environment.\\
 11/03/2024-15/03/2024 and 18/03/2024-22/03/2024 & Improve and Finalise report & Given that the report accounts for 30\% of the final grade, it is crucial to allocate time to enhance and refine it according to my supervisor's feedback.\\
 25/03/2024-29/03/2024 & Submit report & \\
@@ -249,7 +262,7 @@ Reinforcement learning has several abstract concepts, such as MDPs, Bellman equa
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 
-\bibliographystyle{plain}
+\bibliographystyle{IEEEtran}
 \bibliography{refrences}
 \addcontentsline{toc}{chapter}{Bibliography}
 \label{endpage}
