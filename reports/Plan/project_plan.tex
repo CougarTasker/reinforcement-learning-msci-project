@@ -67,9 +67,11 @@ Signature:
   Autonomous robots such as Boston-dynamic's Spot are increasing in prevalence across a wide range of fields\cite{hagele2016robots}. Furthermore, these robots are increasingly integral in modern society, taking on ever more advanced tasks\cite{zaouter2020autonomous}. As autonomous robots take on increasingly complex and resource-intensive tasks, optimising their resource consumption while meeting objectives becomes an increasingly significant challenge.
   These autonomous robots operate in diverse environments with varying objectives, so a singular algorithm will not perform optimally for all cases. 
   
-  This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement Learning, a form of machine learning, involves an agent that can perceive and perform actions in an environment, learning to make optimal decisions\cite{mitchell1997machine}. Its ability to handle delayed rewards sets it apart from other machine-learning approaches, making it particularly well-suited for addressing this problem. In this project, we will simulate the environment, initially using a grid world and later incorporating more advanced environments from OpenAI's gym library\cite{gym}.
+  This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement Learning, a form of machine learning, involves an agent that can perceive and perform actions in an environment, learning to make optimal decisions\cite{mitchell1997machine}. Its ability to handle delayed rewards sets it apart from other machine-learning approaches\cite{mitchell1997machine}, making it particularly well-suited for addressing this problem. In a similar problem, reinforcement learning has already proven to improve the efficiency of hybrid tracked vehicles over traditional dynamic-programming strategies\cite{ZOU2016372}. This project differs from the work by Yuan Zou et al. \cite{ZOU2016372}. The agent's perception will be the environment around the machine rather than its internals, and its actions and goals will be more abstract, such as positioning the vehicle to achieve objectives. This project will simulate the environment, initially using a grid world and potentially incorporating more advanced environments from OpenAI's gym library\cite{gym}.
   
-  //todo add more detail about reinforment learning add more refrences -> refrence the sutton book! and the other one
+  Reinforcement learning differs from supervised learning. In supervised learning, a model receives input and expected output data, usually supplied by a human\cite{sutton2018reinforcement}. In contrast, in reinforcement learning, the agent isn't given predefined correct actions; instead, it has to learn the right actions from exploring the environment\cite{sutton2018reinforcement}. This characteristic makes reinforcement learning well-suited for our problem since our agent can adapt to novel environments, just like in the real world, without needing external guidance. However, our agent will need a reward signal. For our problem, the definition is straightforward: the agent is rewarded for gathering resources and penalised for running out of energy. Importantly, our agent will perceive its energy capacity and the environment.  
+  
+ 
   
   \section*{Motivations}
   \addcontentsline{toc}{section}{Motivations}
@@ -260,6 +262,16 @@ Designing and implementing the Graphical User Interface may be more time-consumi
 
 Reinforcement learning has several abstract concepts, such as MDPs, Bellman equations, dynamic programming, or Q-learning, which may lead to incorrect implementations or interpretations. Referencing textbooks and research papers to check results can validate findings. Thoroughly studying reinforcement learning concepts can avoid misinterpretations.
 
+\section{Optimistic time estimates}
+
+\begin{center}
+    \begin{tabular}{l l }
+    Likelihood: & Moderate \\
+    Importance: & Moderate \\
+    \end{tabular}
+  \end{center}
+
+While not setting pessimistic goals is key to creating a worthwhile project, setting optimistic goals may not be realistic, as there are likely unforeseen obstacles. To mitigate the risks of missing cascading deadlines, the project plan is ordered in importance to the core objectives. For example, in the second term, different exploration strategies are implemented at the beginning however, integrating environments from OpenAI's gym library\cite{gym} is at the end as it can be removed without compromising on the main objectives.
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage

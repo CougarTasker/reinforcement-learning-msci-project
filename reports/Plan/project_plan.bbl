@@ -34,11 +34,23 @@ C.~Zaouter, A.~Joosten, J.~Rinehart, M.~M. Struys, and T.~M. Hemmerling,
 T.~Mitchell, \emph{Machine Learning}, ser. McGraw-Hill International
   Editions.\hskip 1em plus 0.5em minus 0.4em\relax McGraw-Hill, 1997.
 
+\bibitem{ZOU2016372}
+\BIBentryALTinterwordspacing
+Y.~Zou, T.~Liu, D.~Liu, and F.~Sun, ``Reinforcement learning-based real-time
+  energy management for a hybrid tracked vehicle,'' \emph{Applied Energy}, vol.
+  171, pp. 372--382, 2016. [Online]. Available:
+  \url{https://www.sciencedirect.com/science/article/pii/S0306261916304081}
+\BIBentrySTDinterwordspacing
+
 \bibitem{gym}
 \BIBentryALTinterwordspacing
 OpenAI. Gym documentation. [Online]. Available:
   \url{https://www.gymlibrary.dev}
 \BIBentrySTDinterwordspacing
+
+\bibitem{sutton2018reinforcement}
+R.~S. Sutton and A.~G. Barto, \emph{Reinforcement learning: An
+  introduction}.\hskip 1em plus 0.5em minus 0.4em\relax MIT press, 2018.
 
 \bibitem{ransbotham2017reshaping}
 S.~Ransbotham, D.~Kiron, P.~Gerbert, and M.~Reeves, ``Reshaping business with
