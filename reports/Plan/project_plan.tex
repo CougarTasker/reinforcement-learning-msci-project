@@ -98,7 +98,7 @@ Signature:
   \section*{Technology}
   \addcontentsline{toc}{section}{Technology}
 
-  The program will be developed in Python; this is motivated by Python's strong ecosystem of tooling and community for data processing tasks. Performance is essential with machine learning tasks. Python enables the use of low-level libraries that can use the hardware efficiently with high-level APIs. These high-level APIs abstract over unimportant details, increasing productivity. However, Raschka et al. states:
+  The program will be developed in Python; this is motivated by Python's strong ecosystem of tooling and community for data processing tasks. Performance is essential with machine learning tasks\cite{raschka2020machine}. Python enables the use of low-level libraries that can use the hardware efficiently with high-level APIs\cite{raschka2020machine}. These high-level APIs abstract over unimportant details, increasing productivity\cite{raschka2020machine}. However, Raschka et al. states:
   
   \begin{quotation}
     Unfortunately, the most widely used implementation of the Python compiler and interpreter, CPython,
@@ -106,11 +106,11 @@ Signature:
   performance trade-offs.\cite{raschka2020machine}
   \end{quotation}. 
   
-  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023Benchmarks}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
+  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023Benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
   
-  To focus the development on the program's main objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}.  
+  To focus the program's development on its primary objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}. PyTorch is a Python library that provides the functionality for training Deep Neural networks with hardware (GPU) acceleration\cite{paszke2019pytorch}. PyTorch will enable this application to integrate deep learning with the Q-Learning agent without getting caught up in implementing efficient tensor algorithms such as for backpropagation \cite{paszke2019pytorch}. The application may also use other utility libraries, such as NumPy\cite{numpy} for efficient calculations or Pandas\cite{pandas} for data analysis. 
 
-  using the libraries Kivy for graphics and PyTorch\cite{pytorch} for Deep Neural networks. Python 
+  
 \end{abstract}
 \newpage
 

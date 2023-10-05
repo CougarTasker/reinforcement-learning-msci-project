@@ -68,13 +68,25 @@ P.~Foundation. Pytorch documentation. [Online]. Available:
 \bibitem{virbel2011kivy}
 M.~Virbel, T.~Hansen, and O.~Lobunets, ``Kivy--a framework for rapid creation
   of innovative user interfaces,'' in \emph{Workshop-Proceedings der Tagung
-  Mensch \& Computer 2011. überMEDIEN| ÜBERmorgen}.\hskip 1em plus 0.5em
-  minus 0.4em\relax Universit{\"a}tsverlag Chemnitz, 2011.
+  Mensch \& Computer 2011. {\"u}berMEDIEN| {\"U}BERmorgen}.\hskip 1em plus
+  0.5em minus 0.4em\relax Universit{\"a}tsverlag Chemnitz, 2011.
 
 \bibitem{paszke2019pytorch}
 A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
   Z.~Lin, N.~Gimelshein, L.~Antiga \emph{et~al.}, ``Pytorch: An imperative
   style, high-performance deep learning library,'' \emph{Advances in neural
   information processing systems}, vol.~32, 2019.
+
+\bibitem{numpy}
+\BIBentryALTinterwordspacing
+Community. Numpy documentation. [Online]. Available:
+  \url{https://numpy.org/doc/stable}
+\BIBentrySTDinterwordspacing
+
+\bibitem{pandas}
+\BIBentryALTinterwordspacing
+------. Kivy documentation. [Online]. Available:
+  \url{https://pandas.pydata.org/docs/}
+\BIBentrySTDinterwordspacing
 
 \end{thebibliography}
