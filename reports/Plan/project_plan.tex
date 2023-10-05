@@ -80,8 +80,12 @@ Signature:
   
   This project interests me because of its generality and applicability to many different scenarios. Resource-gathering has the potential to incorporate many real-world constraints like energy, visibility and obstacles. I would like to see how this impacts different exploration strategies.
    
-  Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. <<insert reference to the increased value of ai in business>>. Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
-
+  Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. It is clear that AI is a clear focus for most companies, Ransbotham et al. said: 
+  \begin{quotation}
+    Almost 85\% believe AI will allow their companies to obtain or sustain a competitive advantage \cite{ransbotham2017reshaping}
+  \end{quotation}
+  
+  Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
 
   \section*{Objectives}
   \addcontentsline{toc}{section}{Objectives}
@@ -98,7 +102,7 @@ Signature:
   \section*{Technology}
   \addcontentsline{toc}{section}{Technology}
 
-  The program will be developed in Python; this is motivated by Python's strong ecosystem of tooling and community for data processing tasks. Performance is essential with machine learning tasks\cite{raschka2020machine}. Python enables the use of low-level libraries that can use the hardware efficiently with high-level APIs\cite{raschka2020machine}. These high-level APIs abstract over unimportant details, increasing productivity\cite{raschka2020machine}. However, Raschka et al. states:
+  The program will be developed in Python\cite{python}; this is motivated by Python's strong ecosystem of tooling and community for data processing tasks. Performance is essential with machine learning tasks\cite{raschka2020machine}. Python enables the use of low-level libraries that can use the hardware efficiently with high-level APIs\cite{raschka2020machine}. These high-level APIs abstract over unimportant details, increasing productivity\cite{raschka2020machine}. However, Raschka et al. states:
   
   \begin{quotation}
     Unfortunately, the most widely used implementation of the Python compiler and interpreter, CPython,
@@ -109,8 +113,6 @@ Signature:
   For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023Benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
   
   To focus the program's development on its primary objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}. PyTorch is a Python library that provides the functionality for training Deep Neural networks with hardware (GPU) acceleration\cite{paszke2019pytorch}. PyTorch will enable this application to integrate deep learning with the Q-Learning agent without getting caught up in implementing efficient tensor algorithms such as for backpropagation \cite{paszke2019pytorch}. The application may also use other utility libraries, such as NumPy\cite{numpy} for efficient calculations or Pandas\cite{pandas} for data analysis. 
-
-  
 \end{abstract}
 \newpage
 
@@ -141,7 +143,7 @@ Signature:
   \item Read chapters 1,3 and 4 of Reinforcement Learning An Introduction second edition Richard S. Sutton and Andrew G. Barto
   \item Create the first draft of Markov decision processes (MDPs) report
   \item Create the first draft of policy and value function report 
-\end{itemize} & Starting with research on reinforcement learning provides a strong foundation for application development. Additionally, early report drafting allows for increased opportunity for feedback \\
+\end{itemize} & Starting with research on reinforcement learning provides a strong foundation for application development. Additionally, early report drafting allows for increased opportunities for feedback \\
  16/10/2023-20/10/2023 & Research reinforcement learning: \begin{itemize}
  \item Read chapter 6 of Reinforcement Learning An Introduction second edition Richard S. Sutton and Andrew G. Barto
  \item Create the first draft of the Q-learning report

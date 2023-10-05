@@ -36,11 +36,22 @@ OpenAI. Gym documentation. [Online]. Available:
   \url{https://www.gymlibrary.dev}
 \BIBentrySTDinterwordspacing
 
+\bibitem{ransbotham2017reshaping}
+S.~Ransbotham, D.~Kiron, P.~Gerbert, and M.~Reeves, ``Reshaping business with
+  artificial intelligence: Closing the gap between ambition and action,''
+  \emph{MIT Sloan Management Review}, vol.~59, no.~1, 2017.
+
 \bibitem{franccois2018introduction}
 V.~Fran{\c{c}}ois-Lavet, P.~Henderson, R.~Islam, M.~G. Bellemare, J.~Pineau
   \emph{et~al.}, ``An introduction to deep reinforcement learning,''
   \emph{Foundations and Trends{\textregistered} in Machine Learning}, vol.~11,
   no. 3-4, 2018.
+
+\bibitem{python}
+\BIBentryALTinterwordspacing
+P.~S. Foundation. Python documentation. [Online]. Available:
+  \url{https://docs.python.org/3/}
+\BIBentrySTDinterwordspacing
 
 \bibitem{raschka2020machine}
 S.~Raschka, J.~Patterson, and C.~Nolet, ``Machine learning in python: Main
@@ -79,14 +90,12 @@ A.~Paszke, S.~Gross, F.~Massa, A.~Lerer, J.~Bradbury, G.~Chanan, T.~Killeen,
 
 \bibitem{numpy}
 \BIBentryALTinterwordspacing
-Community. Numpy documentation. [Online]. Available:
-  \url{https://numpy.org/doc/stable}
+Numpy documentation. [Online]. Available: \url{https://numpy.org/doc/stable}
 \BIBentrySTDinterwordspacing
 
 \bibitem{pandas}
 \BIBentryALTinterwordspacing
-------. Kivy documentation. [Online]. Available:
-  \url{https://pandas.pydata.org/docs/}
+Pandas documentation. [Online]. Available: \url{https://pandas.pydata.org/docs}
 \BIBentrySTDinterwordspacing
 
 \end{thebibliography}
