@@ -114,7 +114,7 @@ Signature: {\calligra \LARGE \studentname}
   performance trade-offs.\cite{raschka2020machine}
   \end{quotation}. 
   
-  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython. 
+  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython or Pyjion. 
   
   To focus the program's development on its primary objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}. PyTorch is a Python library that provides the functionality for training Deep Neural networks with hardware (GPU) acceleration\cite{paszke2019pytorch}. PyTorch will enable this application to integrate deep learning with the Q-Learning agent without getting caught up in implementing efficient tensor algorithms such as for backpropagation \cite{paszke2019pytorch}. The application may also use other utility libraries, such as NumPy\cite{numpy} for efficient calculations or Pandas\cite{pandas} for data analysis. 
 \end{abstract}
@@ -284,14 +284,14 @@ While not setting pessimistic goals is key to creating a worthwhile project, set
   Autonomous systems in anaesthesia: where do we stand in 2020? A narrative review\cite{zaouter2020autonomous} & This article drives the potential value of this project further by showing how important and complex the tasks that autonomous agents are performing; it also shows how reinforcement learning approaches can improve effectiveness over conventional "proportional-integral-derivative" controllers \\
   Machine Learning\cite{mitchell1997machine} & This book contains a chapter (13) that provides a fantastic overview of reinforcement learning with a succinct description of Q-learning \\
 Reinforcement learning-based real-time energy management for a hybrid tracked vehicle\cite{ZOU2016372} & This article details using reinforcement learning for an energy optimisation problem; although there are many differences with this project, it has enough similarities to provide a proof of concept for this project to build upon \\
-Reinforcement learning: An introduction\cite{sutton2018reinforcement} & This book provides a
+Reinforcement learning: An introduction\cite{sutton2018reinforcement} & This book provides an
 approachable but detailed explanation of reinforcement learning concepts and algorithms that will form the research foundation for this project. \\
 Reshaping business with artificial intelligence: Closing the gap between ambition and action\cite{ransbotham2017reshaping} & This article provides clear evidence for the business value that artificial intelligence can provide. To complete this project, I must develop my understanding of reinforcement learning and artificial intelligence. This article shows that "respondents overwhelmingly agree that AI will both require employees to learn new skills within the next five years and augment their existing skills." the understanding of artificial intelligence could be key to providing value as an employee.   \\
-An introduction to deep reinforcement learning\cite{franccois2018introduction} & \\
-Machine learning in Python: Main developments and technology trends in data science, machine learning, and artificial intelligence\cite{raschka2020machine} & \\
-PyPy performance benchmarks\cite{pypy2023benchmarks} & \\
-Kivy--a framework for rapid creation of innovative user interfaces\cite{virbel2011kivy} & \\
-Pytorch: An imperative style, high-performance deep learning library\cite{paszke2019pytorch} & \\
+An introduction to deep reinforcement learning\cite{franccois2018introduction} & This book provides an overview and explanation of deep reinforcement learning. Understanding deep reinforcement learning is key to extending our agent to handle environments with many more states. This increases the agent's capabilities, improving its potential in real-world operation   \\
+Machine learning in Python: Main developments and technology trends in data science, machine learning, and artificial intelligence\cite{raschka2020machine} & This article analyses building AI systems and processing data in Python and the libraries used to achieve this. This article is important to this project because it considers the challenges of training AI models and has helped inform my choice of technologies. It even touches upon deep reinforcement learning.\\
+PyPy performance benchmarks\cite{pypy2023benchmarks} & These benchmarks show a potential performance improvement to elevate some of the computational bottlenecks associated with CPython. As a straightforward swap, this could provide a boost for this project. \\
+Kivy--a framework for rapid creation of innovative user interfaces\cite{virbel2011kivy} & This article describes the advantages, motivations, architecture and disadvantages of Kivy. This article explains that Kivy should provide a developer-friendly interface to make a natural user interface easily by providing low-level functionality; this aligns with the goals of this project \\
+Pytorch: An imperative style, high-performance deep learning library\cite{paszke2019pytorch} & This article demonstrates how PyTorch improves developing deep learning models with its speed and interface. this project can benefit from the functionality that is exhibited in this paper\\
 \end{xltabular}
 
 \section{Documentation}
