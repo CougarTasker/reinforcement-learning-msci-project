@@ -40,7 +40,7 @@ This report has been prepared on the basis of my own work. Where other published
 
 \vskip3em
 
-Word Count: 
+Word Count: 2906
 
 \vskip3em
 
@@ -48,7 +48,7 @@ Student Name: \studentname
 
 \vskip3em
 
-Date of Submission: 05/10/2023
+Date of Submission: 06/10/2023
 
 \vskip3em 
 
@@ -68,7 +68,7 @@ Signature: {\calligra \LARGE \studentname}
   Autonomous robots such as Boston-dynamic's Spot are increasing in prevalence across a wide range of fields\cite{hagele2016robots}. Furthermore, these robots are increasingly integral in modern society, taking on ever more advanced tasks\cite{zaouter2020autonomous}. As autonomous robots take on increasingly complex and resource-intensive tasks, optimising their resource consumption while meeting objectives becomes an increasingly significant challenge.
   These autonomous robots operate in diverse environments with varying objectives, so a singular algorithm will not perform optimally for all cases. 
   
-  This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement learning, a form of machine learning, involves an agent that can perceive and perform actions in an environment, learning to make optimal decisions\cite{mitchell1997machine}. Its ability to handle delayed rewards sets it apart from other machine-learning approaches\cite{mitchell1997machine}, making it particularly well-suited for addressing this problem. In a similar problem, reinforcement learning has already proven to improve the efficiency of hybrid tracked vehicles over traditional dynamic-programming strategies\cite{ZOU2016372}. This project differs from the work by Yuan Zou et al.\cite{ZOU2016372} in several meaningful ways: The agent's perception will be the environment around the machine rather than its internals, and its actions and goals will be more abstract, such as positioning the vehicle to achieve objectives. This project will simulate the environment, initially using a grid world and potentially incorporating more advanced environments from OpenAI's gym library\cite{gym}.
+  This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement learning, a form of machine learning, involves an agent that can perceive and perform actions in an environment while learning to make optimal decisions\cite{mitchell1997machine}. Its ability to handle delayed rewards sets it apart from other machine-learning approaches\cite{mitchell1997machine}, making it particularly well-suited for addressing this problem. In a similar problem, reinforcement learning has already proven to improve the efficiency of hybrid tracked vehicles over traditional dynamic-programming strategies\cite{ZOU2016372}. This project differs from the work by Yuan Zou et al.\cite{ZOU2016372} in several meaningful ways: The agent's perception will be the environment around the machine rather than its internals, and its actions and goals will be more abstract, such as positioning the vehicle to achieve objectives. This project will simulate the environment, initially using a grid world and potentially incorporating more advanced environments from OpenAI's gym library\cite{gym}.
   
   Reinforcement learning differs from supervised learning. In supervised learning, a model receives input and expected output data, usually supplied by a human\cite{sutton2018reinforcement}. In contrast, in reinforcement learning, the agent isn't given predefined correct actions; instead, it has to learn the right actions from exploring the environment\cite{sutton2018reinforcement}. This characteristic makes reinforcement learning well-suited for our problem since our agent can adapt to novel environments, just like in the real world, without needing external guidance. However, our agent will need a reward signal. For our problem, the definition is straightforward: the agent is rewarded for gathering resources and penalised for running out of energy. Importantly, our agent will perceive its energy capacity and the environment.  
   
@@ -112,8 +112,7 @@ Signature: {\calligra \LARGE \studentname}
     Unfortunately, the most widely used implementation of the Python compiler and interpreter, CPython,
   executes CPU-bound code in a single thread, and its multiprocessing packages come with other significant
   performance trade-offs.\cite{raschka2020machine}
-  \end{quotation}. 
-  
+  \end{quotation} 
   For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython or Pyjion. 
   
   To focus the program's development on its primary objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}. PyTorch is a Python library that provides the functionality for training Deep Neural networks with hardware (GPU) acceleration\cite{paszke2019pytorch}. PyTorch will enable this application to integrate deep learning with the Q-Learning agent without getting caught up in implementing efficient tensor algorithms such as for backpropagation \cite{paszke2019pytorch}. The application may also use other utility libraries, such as NumPy\cite{numpy} for efficient calculations or Pandas\cite{pandas} for data analysis. 
@@ -134,7 +133,7 @@ Signature: {\calligra \LARGE \studentname}
 \section{Term One}
 
 {
-  \renewcommand{\arraystretch}{1.5}
+  \renewcommand{\arraystretch}{1.4}
   
 \begin{longtable}{@{\,}p{.15\textwidth} <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{.35\textwidth} p{.4\textwidth}}
 \multicolumn{1}{@{\,}p{.15\textwidth}}{Week} & \multicolumn{1}{p{.35\textwidth}}{Goals} & \multicolumn{1}{p{.4\textwidth}}{Explanation/Motivation} \\ 
@@ -142,7 +141,7 @@ Signature: {\calligra \LARGE \studentname}
 \endhead
 18/09/2023-22/09/2023 & Study Reinforcement Learning chapter in Machine Learning\cite{mitchell1997machine} & This book has established a foundational understanding of reinforcement learning, which will serve as the basis for creating this project plan.\\
  25/09/2023-29/09/2023 & Create first project plan draft & Creating a project plan draft enables my supervisor to review and guide the final report in the right direction.\\
- 02/10/2023-06/10/2023 & Complete project plan and its formatting & Incorporate enhancements suggested by my supervisor, refine document formatting to enhance its visual appeal, and gain proficiency in LaTeX for future reports.\\
+ 02/10/2023-06/10/2023 & Complete project plan and its formatting & Incorporate enhancements suggested by my supervisor, refine document formatting to enhance its visual appeal, and gain proficiency in \LaTeX\ for future reports.\\
  09/10/2023-13/10/2023 & Research reinforcement learning: \begin{itemize}
   \item Read chapters 1,3 and 4 of Reinforcement Learning An Introduction \cite{sutton2018reinforcement}
   \item Create the first draft of Markov decision processes (MDPs) report
