@@ -1,4 +1,5 @@
-# reinforcement-learning-msci-project
+# Final Year Project (MSci): Reinforcement Learning
+
 The repository for holding all of the code and related documentation for my Msci final year project
 
 supervisor : Anand Subramoney anand.subramoney@rhul.ac.uk
