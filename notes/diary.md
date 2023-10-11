@@ -7,6 +7,7 @@
     - [Week 1 (18/09/23)](#week-1-180923)
     - [Week 2 (25/09/23)](#week-2-250923)
     - [Week 3 (02/10/23)](#week-3-021023)
+    - [Week 4 (09/10/23)](#week-4-091023)
 
 
 ## Weeks
@@ -37,4 +38,16 @@
  - (Tue 3) worked on project plan
    - Put together risks section 
    - put together timeline 
-   - submitted project to Anand
+ - (Wed 4) submitted project plan to Anand
+ - (Thu 5) Finished project plan
+   - Improved abstract
+   - improved bibliography
+
+### Week 4 (09/10/23)
+
+ - (Wed 11) Gitlab
+   - Attended lecture about gitlab
+   - Moved Code to GitLab 
+     - setup credentials
+     - updated remotes
+     - pushed code
