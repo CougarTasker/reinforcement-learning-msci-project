@@ -1,0 +1,15 @@
+{
+    "grammarly.config.documentDialect": "british",
+    "grammarly.config.documentDomain": "academic",
+    "grammarly.files.include": [
+        "**/readme.md",
+        "**/README.md",
+        "**/*.txt",
+        "**/*.tex"
+    ],
+    "cSpell.language": "en-GB",
+    "cSpell.words": [
+        "backpropagation",
+        "Kivy"
+    ]
+}

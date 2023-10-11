@@ -1,0 +1,321 @@
+\documentclass[]{final_report}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xltabular}
+\usepackage{longtable}
+\usepackage[utf8]{inputenc}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{array, booktabs}
+\usepackage{graphicx}
+\usepackage[x11names,table]{xcolor}
+\usepackage{calligra}
+
+\newcommand{\foo}{\makebox[0pt]{\textbullet}\hskip-0.5pt\vrule width 1pt\hspace{\labelsep}}
+
+
+\emergencystretch=0.1em
+\hfuzz=0.2pt
+\tolerance=10000
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Input project details
+\def\studentname{Cougar Tasker}
+\def\reportyear{2023-24}
+\def\projecttitle{Resourceful Robots}
+\def\supervisorname{Dr. Anand Subramoney}
+\def\degree{MSci (Hons) in Computer Science (Artificial Intelligence)}
+\def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
+\def\finalOrInterim{Project Plan} % indicate if this document is your Final Report or Interim Report
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Declaration
+
+\chapter*{Declaration}
+
+This report has been prepared on the basis of my own work. Where other published and unpublished source materials have been used, these have been acknowledged.
+
+\vskip3em
+
+Word Count: 2906
+
+\vskip3em
+
+Student Name: \studentname
+
+\vskip3em
+
+Date of Submission: 06/10/2023
+
+\vskip3em 
+
+Signature: {\calligra \LARGE \studentname}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+\tableofcontents\pdfbookmark[0]{Table of Contents}{toc}\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Your Abstract here
+
+\begin{abstract}
+
+  Autonomous robots such as Boston-dynamic's Spot are increasing in prevalence across a wide range of fields\cite{hagele2016robots}. Furthermore, these robots are increasingly integral in modern society, taking on ever more advanced tasks\cite{zaouter2020autonomous}. As autonomous robots take on increasingly complex and resource-intensive tasks, optimising their resource consumption while meeting objectives becomes an increasingly significant challenge.
+  These autonomous robots operate in diverse environments with varying objectives, so a singular algorithm will not perform optimally for all cases. 
+  
+  This project aims to explore how reinforcement learning can provide a solution for effectively prioritising these objectives and managing resources. Reinforcement learning, a form of machine learning, involves an agent that can perceive and perform actions in an environment while learning to make optimal decisions\cite{mitchell1997machine}. Its ability to handle delayed rewards sets it apart from other machine-learning approaches\cite{mitchell1997machine}, making it particularly well-suited for addressing this problem. In a similar problem, reinforcement learning has already proven to improve the efficiency of hybrid tracked vehicles over traditional dynamic-programming strategies\cite{ZOU2016372}. This project differs from the work by Yuan Zou et al.\cite{ZOU2016372} in several meaningful ways: The agent's perception will be the environment around the machine rather than its internals, and its actions and goals will be more abstract, such as positioning the vehicle to achieve objectives. This project will simulate the environment, initially using a grid world and potentially incorporating more advanced environments from OpenAI's gym library\cite{gym}.
+  
+  Reinforcement learning differs from supervised learning. In supervised learning, a model receives input and expected output data, usually supplied by a human\cite{sutton2018reinforcement}. In contrast, in reinforcement learning, the agent isn't given predefined correct actions; instead, it has to learn the right actions from exploring the environment\cite{sutton2018reinforcement}. This characteristic makes reinforcement learning well-suited for our problem since our agent can adapt to novel environments, just like in the real world, without needing external guidance. However, our agent will need a reward signal. For our problem, the definition is straightforward: the agent is rewarded for gathering resources and penalised for running out of energy. Importantly, our agent will perceive its energy capacity and the environment.  
+  
+ 
+  
+  \section*{Motivations}
+  \addcontentsline{toc}{section}{Motivations}
+
+  My inspiration for studying this degree in artificial intelligence comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
+
+  What is unique about this resource-gathering robot project is its structured progression of complexity, Starting from fundamental concepts and culminating in advanced techniques. This gradient makes the complex nature of reinforcement learning more approachable than it may be in industry. 
+  
+  This project interests me because of its generality and applicability to many different scenarios. Resource-gathering has the potential to incorporate many real-world constraints like energy, visibility and obstacles. I would like to see how this impacts different exploration strategies.
+  \newpage
+  Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. It is clear that AI is a clear focus for most companies, Ransbotham et al. said: 
+  \begin{quotation}
+    Almost 85\% believe AI will allow their companies to obtain or sustain a competitive advantage \cite{ransbotham2017reshaping}
+  \end{quotation}
+  
+  Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
+
+  \section*{Objectives}
+  \addcontentsline{toc}{section}{Objectives}
+
+  The primary objective is to develop and understand reinforcement learning agents. The project will include two parts: a report and a graphical program. In the report, I will describe the reinforcement learning concepts that are implemented by the program, such as Markov decision processes and finding optimal policies by the Bellman equations. The report will also cover the software engineering process of the program and the results of different parameter choices and exploration strategies. The program should achieve the following goals:
+  \begin{itemize}
+    \item Energy-Efficient Navigation: Create a robot that can autonomously navigate a grid world while making optimal decisions to conserve energy. The robot should learn to prioritise energy-efficient paths.
+    \item Resource Gathering Strategies: Design intelligent resource-gathering strategies for the robot, ensuring it collects essential resources while balancing energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
+    \item Dynamic Energy Management: The robot should monitor its energy reserves and adjust its actions accordingly. This includes learning when to engage in resource gathering and when to return to a charging station.
+    \item Effective Exploration: Develop exploration strategies that enable the robot to learn and adapt to different grid world scenarios.
+    \item Deep Reinforcement Learning: As an extension, the program should integrate deep neural networks (DNN) with Q-learning. The advantage of using a DNN instead of a table is the DNN's ability to generalise knowledge\cite{franccois2018introduction}. This unlocks working in environments with far more extensive observations and action spaces, allowing for added complexity to our existing environment or an extension of integrating a different environment, such as one from OpenAI's gym library\cite{gym}.
+  \end{itemize}
+
+  \newpage
+  \section*{Technology}
+  \addcontentsline{toc}{section}{Technology}
+
+  The program will be developed in Python\cite{python}; this is motivated by Python's strong ecosystem of tooling and community for data processing tasks. Performance is essential with machine learning tasks\cite{raschka2020machine}. Python enables the use of low-level libraries that can use the hardware efficiently with high-level APIs\cite{raschka2020machine}. These high-level APIs abstract over unimportant details, increasing productivity\cite{raschka2020machine}. However, Raschka et al. states:
+  
+  \begin{quotation}
+    Unfortunately, the most widely used implementation of the Python compiler and interpreter, CPython,
+  executes CPU-bound code in a single thread, and its multiprocessing packages come with other significant
+  performance trade-offs.\cite{raschka2020machine}
+  \end{quotation} 
+  For this reason, The project will start using PyPy. PyPy is a just-in-time (JIT) compiler that runs code four times faster according to PyPy's benchmarks\cite{pypy2023benchmarks}\cite{raschka2020machine}. Nevertheless, if the project runs into compatibility issues, the project may fall back to CPython or Pyjion. 
+  
+  To focus the program's development on its primary objectives, the application will use the libraries Kivy\cite{kivy} and PyTorch\cite{pytorch}. Kivy is a library that provides functionality to create natural user interfaces quickly\cite{virbel2011kivy}. PyTorch is a Python library that provides the functionality for training Deep Neural networks with hardware (GPU) acceleration\cite{paszke2019pytorch}. PyTorch will enable this application to integrate deep learning with the Q-Learning agent without getting caught up in implementing efficient tensor algorithms such as for backpropagation \cite{paszke2019pytorch}. The application may also use other utility libraries, such as NumPy\cite{numpy} for efficient calculations or Pandas\cite{pandas} for data analysis. 
+\end{abstract}
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Project Spec
+
+% \chapter*{Project Specification}
+% \addcontentsline{toc}{chapter}{Project Specification}
+% Your project specification goes here.
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Timeline
+\chapter{Timeline}
+
+\section{Term One}
+
+{
+  \renewcommand{\arraystretch}{1.4}
+  
+\begin{longtable}{@{\,}p{.15\textwidth} <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{.35\textwidth} p{.4\textwidth}}
+\multicolumn{1}{@{\,}p{.15\textwidth}}{Week} & \multicolumn{1}{p{.35\textwidth}}{Goals} & \multicolumn{1}{p{.4\textwidth}}{Explanation/Motivation} \\ 
+\hline
+\endhead
+18/09/2023-22/09/2023 & Study Reinforcement Learning chapter in Machine Learning\cite{mitchell1997machine} & This book has established a foundational understanding of reinforcement learning, which will serve as the basis for creating this project plan.\\
+ 25/09/2023-29/09/2023 & Create first project plan draft & Creating a project plan draft enables my supervisor to review and guide the final report in the right direction.\\
+ 02/10/2023-06/10/2023 & Complete project plan and its formatting & Incorporate enhancements suggested by my supervisor, refine document formatting to enhance its visual appeal, and gain proficiency in \LaTeX\ for future reports.\\
+ 09/10/2023-13/10/2023 & Research reinforcement learning: \begin{itemize}
+  \item Read chapters 1,3 and 4 of Reinforcement Learning An Introduction \cite{sutton2018reinforcement}
+  \item Create the first draft of Markov decision processes (MDPs) report
+  \item Create the first draft of policy and value function report 
+\end{itemize} & Starting with research on reinforcement learning provides a strong foundation for application development. Additionally, early report drafting allows for increased opportunities for feedback \\
+ 16/10/2023-20/10/2023 & Research reinforcement learning: \begin{itemize}
+ \item Read chapter 6 of Reinforcement Learning An Introduction \cite{sutton2018reinforcement}
+ \item Create the first draft of the Q-learning report
+ \item Create the first draft report about learning as incrementally optimising policy in an MDP \end{itemize} & This research helps deepen my understanding of reinforcement learning, and the reports serve the dual purpose of advancing toward the Interim submission while testing my knowledge.\\
+23/10/2023-27/10/2023 & Initialise project: \begin{itemize}
+ \item Configure development environment 
+ \item Project setup and configuration \end{itemize} & This setup will establish the essential groundwork for application development, ensuring the proper configuration of the environment and tools to facilitate the creation of a robust application while upholding high code standards and quality.\\
+ 30/10/2023-03/11/2023 & 
+ \begin{itemize}
+  \item Model simple state and reward function for grid world. 
+  \item Provide basic visualisation for a grid world state. 
+  \item Mock the AI with hard-coded actions to validate the visualisation \end{itemize} & The primary objective for this week is to create a vertical slice of the application, enabling rapid feedback and issue identification before committing to full-scale development.\\
+06/11/2023-10/11/2023 & Implementation of value iteration algorithm & As a planning algorithm, implementing this algorithm will efficiently generate optimal policies for our environment and grid world, providing a benchmark for our Q-learning implementation and assisting in the debugging process.\\
+13/11/2023-17/11/2023 & Implementation of Q-learning & The implementation of Q-learning will be an important focal point for the presentation. Initiating this process at an early stage will allow plenty of time to ensure its completion.\\
+20/11/2023-24/11/2023 & Finalise the report & As the Interim report deadline approaches, this week is dedicated to finalising the report, identifying errors, and making improvements wherever possible.\\
+27/11/2023-01/12/2023 & \begin{itemize}
+  \item Prepare for the presentation
+  \item Improve project graphics, add controls
+  \item Submit the interim report
+  \end{itemize} 
+ & Improving the graphics will help make the main functionality clear and appealing, and adding controls will provide interactivity that will help the program come across well for the presentation. \\
+04/12/2023-08/12/2023 & give the presentation  & \\
+\end{longtable}
+
+\section{Term Two}
+
+\begin{longtable}{@{\,}p{.15\textwidth} <{\hskip 2pt} !{\foo} >{\raggedright\arraybackslash}p{.35\textwidth} p{.4\textwidth}}
+  \multicolumn{1}{@{\,}p{.15\textwidth}}{Week} & \multicolumn{1}{p{.35\textwidth}}{Goals} & \multicolumn{1}{p{.4\textwidth}}{Explanation/Motivation} \\
+  \hline
+  \endhead
+08/01/2024-12/01/2024 & Make the first draft of the poster & As a precaution, given the absence of a specific deadline, I intend to start the poster at the start of the term.\\
+15/01/2024-19/01/2024 & Develop different exploration strategies & Implementing multiple exploration strategies is important for my final report, so I am prioritising it.\\
+22/01/2024-26/01/2024 & \begin{itemize}
+  \item  Record data from different exploration strategies and parameter choices
+  \item Analyse the exploration strategies' effectiveness \end{itemize}  & After creating the strategies, it is the ideal time to get their data and analyse it because I can iterate on the strategies to provide more in-depth research. However, I will need to be careful not to introduce data snooping.\\
+ 29/01/2024-02/02/2024 & Write a report on the effect of different parameter choices and exploration strategies & Following the recent data analysis, the report's writing follows naturally and benefits from the insights gained.\\
+05/02/2024-09/02/2024 and 12/02/2024-16/02/2024 & Implement deep learning  & While a two-week timeline for implementing deep learning may be ambitious, leveraging the PyTorch library will simplify the process\cite{paszke2019pytorch}. The remaining tasks would include integrating the model with the existing codebase and fine-tuning the model\\
+19/02/2024-23/02/2024 & Write the report on the software engineering process involved in generating this program & With the majority of development now complete, this is a good week to reflect on the whole engineering process and report on it.\\
+26/02/2024-01/03/2024 & Integrate agent with different environments from OpenAI's gym library\cite{gym} & As a further extension, it would be valuable to assess how well the agent generalises to entirely novel environments. However, if there are time constraints, this can be omitted without compromising the core objectives.\\
+04/03/2024-08/03/2024 & Report on the data from deep learning and how the agent generalised to new environments & The results obtained from deep learning will help elevate the section on different learning strategies, offering an additional perspective from a different type of environment.\\
+11/03/2024-15/03/2024 and 18/03/2024-22/03/2024 & Improve and Finalise report & Given that the report accounts for 30\% of the final grade, it is crucial to allocate time to enhance and refine it according to my supervisor's feedback.\\
+25/03/2024-29/03/2024 & Submit report & \\
+\end{longtable}
+}
+
+
+
+\chapter{Risks And Mitigations}
+
+\section{Hardware Issues}
+
+\begin{center}
+    \begin{tabular}{l l}
+    Likelihood: & Low \\
+    Importance: & High \\
+    \end{tabular}
+  \end{center}
+
+Hardware failures, such as a lost or malfunctioning laptop, could disrupt the project's progress. Project data should be regularly backed up externally to reduce this risk. The project will be stored under Git with a GitHub remote repository. Under this arrangement, frequent code pushes upstream can minimise potential data loss. The report will be written on the Google Docs platform, providing cloud backup and version control.
+
+
+\section{Time Management Issues}
+
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & Moderate \\
+    \end{tabular}
+  \end{center}
+
+Underestimating the time required for tasks could result in missing milestones or goals. Perfect time estimates are impossible; however, tasks can be subdivided appropriately to avoid significant surprises. Spreading out tasks evenly and leaving some buffer time can assist in avoiding work being cut short. 
+
+\section{Machine Learning Risks}
+
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & Low \\
+    \end{tabular}
+  \end{center}
+
+Machine learning can be a slow and computationally expensive task; this risks slowing the development or failing to train an effective model. The Q-learning table's complexity and size can be gradually increased and dynamically controlled to avoid computational bottlenecks. Manual fine-tuning of the system can be timely. Instead, the hyperparameters will be optimised with grid search. 
+
+\newpage
+\section{Software Development Challenges}
+
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & High \\
+    Importance: & Moderate \\
+    \end{tabular}
+  \end{center}
+
+Developing a complete graphical application can be complex, and unexpected software bugs may arise. Modern software engineering principles can minimise bugs and improve software quality. That is why this project will have version control, test-driven development, documentation, and static code analysis. 
+
+\section{GUI Development Challenges}
+
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & Low \\
+    \end{tabular}
+  \end{center}
+
+Designing and implementing the Graphical User Interface may be more time-consuming or challenging than anticipated. This project will use GUI development libraries or frameworks that streamline the process. Start GUI development early in the project to allow for iterative improvements.
+
+\section{Understanding of Reinforcement Concepts}
+
+\begin{center}
+    \begin{tabular}{l l  }
+    Likelihood: & Moderate \\
+    Importance: & High \\
+    \end{tabular}
+  \end{center}
+
+Reinforcement learning has several abstract concepts, such as MDPs, Bellman equations, dynamic programming, or Q-learning, which may lead to incorrect implementations or interpretations. Referencing textbooks and research papers to check results can validate findings. Thoroughly studying reinforcement learning concepts can avoid misinterpretations.
+
+\section{Optimistic time estimates}
+
+\begin{center}
+    \begin{tabular}{l l }
+    Likelihood: & Moderate \\
+    Importance: & Moderate \\
+    \end{tabular}
+  \end{center}
+
+While not setting pessimistic goals is key to creating a worthwhile project, setting optimistic goals may not be realistic, as there are likely unforeseen obstacles. To mitigate the risks of missing cascading deadlines, the project plan is ordered in importance to the core objectives. For example, in the second term, different exploration strategies are implemented at the beginning; however, integrating environments from OpenAI's gym library\cite{gym} is at the end as it can be removed without compromising on the main objectives.
+
+\chapter{Literature Review}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{xltabular}{\textwidth}{p{6cm} X}
+  Robots conquer the world [turning point]\cite{hagele2016robots} & This article shows the growing usage of autonomous robots in both household and industrial settings, demonstrating the growing value of their efficient operation \\
+  Autonomous systems in anaesthesia: where do we stand in 2020? A narrative review\cite{zaouter2020autonomous} & This article drives the potential value of this project further by showing how important and complex the tasks that autonomous agents are performing; it also shows how reinforcement learning approaches can improve effectiveness over conventional "proportional-integral-derivative" controllers \\
+  Machine Learning\cite{mitchell1997machine} & This book contains a chapter (13) that provides a fantastic overview of reinforcement learning with a succinct description of Q-learning \\
+Reinforcement learning-based real-time energy management for a hybrid tracked vehicle\cite{ZOU2016372} & This article details using reinforcement learning for an energy optimisation problem; although there are many differences with this project, it has enough similarities to provide a proof of concept for this project to build upon \\
+Reinforcement learning: An introduction\cite{sutton2018reinforcement} & This book provides an
+approachable but detailed explanation of reinforcement learning concepts and algorithms that will form the research foundation for this project. \\
+Reshaping business with artificial intelligence: Closing the gap between ambition and action\cite{ransbotham2017reshaping} & This article provides clear evidence for the business value that artificial intelligence can provide. To complete this project, I must develop my understanding of reinforcement learning and artificial intelligence. This article shows that "respondents overwhelmingly agree that AI will both require employees to learn new skills within the next five years and augment their existing skills." the understanding of artificial intelligence could be key to providing value as an employee.   \\
+An introduction to deep reinforcement learning\cite{franccois2018introduction} & This book provides an overview and explanation of deep reinforcement learning. Understanding deep reinforcement learning is key to extending our agent to handle environments with many more states. This increases the agent's capabilities, improving its potential in real-world operation   \\
+Machine learning in Python: Main developments and technology trends in data science, machine learning, and artificial intelligence\cite{raschka2020machine} & This article analyses building AI systems and processing data in Python and the libraries used to achieve this. This article is important to this project because it considers the challenges of training AI models and has helped inform my choice of technologies. It even touches upon deep reinforcement learning.\\
+PyPy performance benchmarks\cite{pypy2023benchmarks} & These benchmarks show a potential performance improvement to elevate some of the computational bottlenecks associated with CPython. As a straightforward swap, this could provide a boost for this project. \\
+Kivy--a framework for rapid creation of innovative user interfaces\cite{virbel2011kivy} & This article describes the advantages, motivations, architecture and disadvantages of Kivy. This article explains that Kivy should provide a developer-friendly interface to make a natural user interface easily by providing low-level functionality; this aligns with the goals of this project \\
+Pytorch: An imperative style, high-performance deep learning library\cite{paszke2019pytorch} & This article demonstrates how PyTorch improves developing deep learning models with its speed and interface. this project can benefit from the functionality that is exhibited in this paper\\
+\end{xltabular}
+
+\section{Documentation}
+I have cited the documentation for the technologies I intend to use, as this is the definitive source of information regarding their functionality and an excellent place to learn. These are the technologies mentioned: 
+
+\begin{itemize}
+  \item Gym Documentation\cite{gym}
+  \item Python Documentation\cite{python}
+  \item Kivy Documentation\cite{kivy}
+  \item PyTorch Documentation\cite{pytorch}
+  \item NumPy Documentation\cite{numpy}
+  \item Pandas Documentation\cite{pandas} 
+\end{itemize}
+
+
+%%%% ADD YOUR BIBLIOGRAPHY HERE
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{refrences}
+\addcontentsline{toc}{chapter}{Bibliography}
+\label{endpage}
+
+
+
+\end{document}
+
+\end{article}
