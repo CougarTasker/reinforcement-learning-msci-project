@@ -51,3 +51,5 @@
      - setup credentials
      - updated remotes
      - pushed code
+ - (Thu 12) Created Initial Interim report from template
+   - Finished chapter one from Sutton Barto book
