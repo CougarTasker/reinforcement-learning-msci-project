@@ -1,7 +1,7 @@
-reports/Interim/Interim_Report.aux
-reports/Interim/Interim_Report.fdb_latexmk
-reports/Interim/Interim_Report.fls
-reports/Interim/Interim_Report.log
-reports/Interim/Interim_Report.out
-reports/Interim/Interim_Report.synctex.gz
-reports/Interim/Interim_Report.toc
+**/*.aux
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+**/*.out
+**/*.synctex.gz
+**/*.toc
