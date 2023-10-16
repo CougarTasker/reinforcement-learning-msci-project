@@ -8,6 +8,7 @@
     - [Week 2 (25/09/23)](#week-2-250923)
     - [Week 3 (02/10/23)](#week-3-021023)
     - [Week 4 (09/10/23)](#week-4-091023)
+    - [Week 5 (16/10/23)](#week-5-161023)
 
 
 ## Weeks
@@ -53,3 +54,8 @@
      - pushed code
  - (Thu 12) Created Initial Interim report from template
    - Finished chapter one from Sutton Barto book
+
+### Week 5 (16/10/23)
+
+ - (Mon 16) Continued reading Sutton Barto book
+   - chapter 2 and some of chapter 3
