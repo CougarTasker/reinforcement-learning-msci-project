@@ -59,3 +59,6 @@
 
  - (Mon 16) Continued reading Sutton Barto book
    - chapter 2 and some of chapter 3
+ - (Wed 18) Continued reading
+   - finished Chapter 3
+   - attended lecture about testing

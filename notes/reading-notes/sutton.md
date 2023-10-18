@@ -53,8 +53,11 @@ picking over optimistic initial values encourages more exploration at the beginn
 
 ### exploration strategies
 
-$\epsilon$-greedy: randomly select actions a small fraction of the time 
-Upper Confidence Bound (UCB) slightly favour chose an action that has got the least samples at a given time
+
+ | strategy                   | description                                                                    |
+ | ---------------------------- | ------------------------------------------------------------------------------ |
+ | $\epsilon$-greedy            | randomly select actions a small fraction of the time                           |
+ | Upper Confidence Bound (UCB) | slightly favour chose an action that has got the least samples at a given time |
 
 
 
@@ -63,22 +66,42 @@ Upper Confidence Bound (UCB) slightly favour chose an action that has got the le
  - MDPs are a formalisation of sequential decision making
 
  - terms:
-   - the learner and decision maker: agent
-   - what the agent interacts with: the environment
+   - the learner and decision maker: **agent**
+   - what the agent interacts with: **the environment**
      - the agent environment barrier does not necessarily define the barrier of knowledge but is the barrier of where the agent can arbitrary change.
-   - finite MDP: the set of states actions and rewards have a finite set of values
-   - markov property: The state includes information about all aspects of the past agent–environment interaction that make a difference for the future
-   - dynamics: this is defined by the p function. this is the probability distribution of a given new state and reward given the current state and action 
-   - episodic: tasks that have an ending as opposed to continuous tasks
-     - an episodic task can be made continuous with resetting the rate at the end and providing a penalty
-> currently at 3.5 p 79
+   - **finite MDP**: the set of states actions and rewards have a finite set of values
+   - **markov property**: The state includes information about all aspects of the past agent–environment interaction that make a difference for the future
+   - **dynamics**: this is defined by the p function. this is the probability distribution of a given new state and reward given the current state and action 
+   - **episodic**: tasks that have an ending as opposed to **continuous** tasks
+     - an episodic task can be made continuous with resetting the state at the end and providing a penalty
+     - to unify episodic and non episodic terminology
+       - we omit the episode number when it is not relevant
+       - we consider the end state of the episodic task as an absorbing state of an continuous environment
+     - there are three other characterisations
+       - *finite-horizon tasks*: in which interaction terminates after a particular fixed number of time steps
+       - *indefinite-horizon tasks*: in which interaction can last arbitrarily long but must eventually terminate
+       - *infinite-horizon tasks*: in which interaction does not terminate
+   - **Value function**: this describes how desirable it is for an agent to be in a given state
+   - **Policy**: this is a mapping from states to the possibility of picking different actions
+   - **Bellman optimality equation**: expresses the fact that the value of a state under an optimal policy must equal the expected return for the best action from that state
+
 
 idea: the reward signal should be for demonstrating what should be archived not how it is supposed to be done.
 
 if you reward sub-goals or anything that is not the primary objective the agent may learn to exploit these "sub-goals" rather than actually learning
 
 
+the value function defines an ordering over the possible policies, this means there are one or more policies that are as good if not better than the rest. we denote this best policy (even if there are multiple) $\pi_*$. all of these optimal policies share the same optimal action value function $v_*$. this function gives the expected return for taking action a in states s if we follow an optimal policy
 
+> **self-consistency condition given by the Bellman equation**
+>
+> the bellman equation shows the value of a state is equal to the immediate reward you get in that state, plus the expected value of all future rewards you will receive as you follow the optimal policy from that state. this means that the value of each state must be consistent with all of the states that it can lead onto 
+
+
+if the dynamics function $p$ is known you can solve a system of simultaneous equations to compute the optimal-value function $v_*$ and with some non-linear methods you can solve $q_*$ 
+
+a greedy one step approach over $v_*$ or even $q_*$ is actually optimal because of how $v_*$ and $q_*$ encode the future value, however calculating this is not practical in many cases. for example the computational or memory constraints. However for many cases an approximation will suffice perhaps some of the state space is very unlikely to be visited so the optimal behaviour there will have a very little impact on cumulative reward
+  
 ## Chapter 4
 
 ## Chapter 6
