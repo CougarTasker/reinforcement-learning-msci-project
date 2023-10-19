@@ -62,3 +62,5 @@
  - (Wed 18) Continued reading
    - finished Chapter 3
    - attended lecture about testing
+ - (Thu 19)
+   - Second Meeting with Anand

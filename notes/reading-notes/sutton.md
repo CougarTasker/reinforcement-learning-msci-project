@@ -104,5 +104,12 @@ a greedy one step approach over $v_*$ or even $q_*$ is actually optimal because 
   
 ## Chapter 4
 
+> **iterative policy evaluation**: 
+>   the value of state s is picked arbitrarily to begin with, after each observation $k$ the the value is updated with the reward and the discounted value of the next state. 
+> This is shown to converge to the $v_\pi$ as $k \rightarrow \infty$
+
+
+page 98 section 4.2
+
 ## Chapter 6
 
