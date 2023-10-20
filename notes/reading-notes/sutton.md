@@ -16,6 +16,7 @@ topics:
     - [exploration strategies](#exploration-strategies)
   - [Chapter 3](#chapter-3)
   - [Chapter 4](#chapter-4)
+    - [Policy iteration](#policy-iteration)
   - [Chapter 6](#chapter-6)
 
 ## Chapter 1
@@ -104,12 +105,40 @@ a greedy one step approach over $v_*$ or even $q_*$ is actually optimal because 
   
 ## Chapter 4
 
+policy evaluation: finding the state-value function $v$ for a given policy
+
 > **iterative policy evaluation**: 
 >   the value of state s is picked arbitrarily to begin with, after each observation $k$ the the value is updated with the reward and the discounted value of the next state. 
 > This is shown to converge to the $v_\pi$ as $k \rightarrow \infty$
 
 
-page 98 section 4.2
+### Policy iteration
+
+A reason to compute the state-value function is to compute better policies, but how do we do this
+
+with the state value function $v()$ we know the value of a given state under a given action
+what happens if we consider a different action in some state but then go back to the original, we may observe a higher reward, 
+ - if this is the case then then under the markov principle it would always be better to pick this action, 
+   - therefore a new policy that picks this action instead would be better 
+   - this idea in general is called **policy improvement theorem**
+
+$$q_\pi(s,\pi'(s)) \ge v_\pi(s) \implies \pi' \ge \pi$$
+
+
+if you apply this theorem greedily by comparing all actions for a state under this above relation then you have **policy improvement**
+
+if this greedy improved policy is as good but not better than the original then the polices are all optimal
+
+
+policy iteration is this policy improvement process applied to all states, after each round of policy improvement we compute a new value function under this new policy, that itself can be used for the next policy iteration
+
+> note: when computing each new value function we start with the one from the previous policy, as it shouldn't have changed much this speeds up computation substantially
+
+because a finite MDP only has a finite number of policies this process must converge on an optimal policy in a finite time
+
+we know a policy has converged when it doesn't change after a policy improvement step
+
+page 104 section 4.4
 
 ## Chapter 6
 

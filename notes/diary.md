@@ -64,3 +64,4 @@
    - attended lecture about testing
  - (Thu 19)
    - Second Meeting with Anand
+ - (Fri 20) Continued reading read subsections on policy improvement
