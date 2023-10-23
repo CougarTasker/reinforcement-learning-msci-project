@@ -17,6 +17,9 @@ topics:
   - [Chapter 3](#chapter-3)
   - [Chapter 4](#chapter-4)
     - [Policy iteration](#policy-iteration)
+    - [Value Iteration](#value-iteration)
+    - [Async](#async)
+  - [Chapter 5](#chapter-5)
   - [Chapter 6](#chapter-6)
 
 ## Chapter 1
@@ -138,7 +141,59 @@ because a finite MDP only has a finite number of policies this process must conv
 
 we know a policy has converged when it doesn't change after a policy improvement step
 
-page 104 section 4.4
+**Downside**: each iteration may require multiple sweeps of the state space, although in practice if often doesn't need many iterations
+
+### Value Iteration
+
+in value iteration there is only one step, the policy is not explicitly defined and updated instead the policy updates implicitly as the value function converges, the policy is to pick whatever action produces the largest value. 
+
+finally the policy is extracted from the value table as the action that maximises the cumulative reward with the value table and the dynamics function 
+
+
+### Async 
+
+these above algorithms can be run as many sweeps as over the state space however another approach is to parallelise the updates, many independent threads can be updating the value table simultaneously and it should still converge correctly as long as no state is ever ignored.
+
+one other way these processes are made more asynchronous for policy improvment is by interleaving the policy improvement and value iteration states, for example changing one states actions before recomputing some of the actions
+
+Dynamic programming approaches are in the worst case polynomial time complexity in relation to their state space and actions
+
+linear programming can be faster in small state spaces but for large state spaces only dynamic programming solutions are feasible
+
+## Chapter 5 
+
+note: dynamic programming approaches and Q-learning update estimates based upon previous estimates this is called bootstrapping this makes them 
 
 ## Chapter 6
+
+temporal difference can learn directly from observations unlike the dynamic programming methods
+
+
+
+temporal difference updates the estimates as new data comes in unlike monte-carlo approaches TD is online and monte-carlo acts episodically
+
+In temporal difference there is a $\delta$ parameter that represents the difference (error) between the observed reward and estimated future reward and the estimated reward for the current state. 
+
+this difference is applied on the existing state controlled by the learning-rate parameter. this paramiter helps because we are sampling a model that might be noisy or changing. a low alpha will take a long time to converge however an alpha too high might diverge 
+
+they act like dynamic programming by bootstrapping each observation updates the value function like before but the $\alpha$ parameter (learning-rate) regulates how much the new value is changed from the previous value
+
+we must learn the action-value function $q$ rather than the state value function 
+
+Sarsa: all of the data from one state action update
+
+ - previous **S**tate
+ - previous **A**tion
+ - **R**eward
+ - current **S**tate
+ - current **A**tion
+
+we can use the Q function directly to find a optimal policy
+
+sarsa algorithm this is known as on-policy learning because it updates the policy as it uses the policy like in value iteration. its policy decided between exploitation and exploration randomly with the probability controlled by the $\epsilon$ parameter
+
+
+Q-learning is an off-policy learning because it learns the optimal Q-value independently of the current policy being followed
+
+Q-learning can be biased when picking actions based on the maximum Q-values overoptimistic estimates can lead to sub-optimal decision making
 
