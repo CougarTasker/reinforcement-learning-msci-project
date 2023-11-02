@@ -102,9 +102,33 @@ As a formal mathematical framework, MDPs allow us to derive and prove statements
 
 The standardisation of decision-making problems as MDPs allows for a uniform definition of optimality with the value functions. this gives a basis for assessing the performance of RL algorithms. Fascinating like-for-like comparisons for different RL approaches. 
 
-\section{Markov principle}
 
-\section{Markov chains} 
+\section{Markov Property}
+
+The Markov property is that the future state of a Markov system only depends on the current state of the system. In other words, if we have a system that follows the Markov property then the history preceding the current configuration of the system will not influence the following state, all of the information about the system is encoded in the system's current state. 
+
+The Markov property put formally:
+\begin{itemize}
+  \item $S_t$ represents the state at some time $t$,
+  \item $c$ is the current time, and $S_c$ is the current state
+\end{itemize}
+
+then the Markov property would hold if and only if:
+
+$$P(S_{c+1}\ |\ S_{c},\ S_{c-1},\ \dots,\ S_0) = P(S_{c+1}\ |\ S_{c})$$
+
+This definition demonstrates how the Markov property can hold in non-deterministic, stochastic processes. 
+
+\section{Markov chains}
+
+Markov Chains model a sequence of events.
+
+
+
+
+
+
+
 
 
 \section{Extending Markov Chains}
