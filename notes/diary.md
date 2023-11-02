@@ -9,6 +9,8 @@
     - [Week 3 (02/10/23)](#week-3-021023)
     - [Week 4 (09/10/23)](#week-4-091023)
     - [Week 5 (16/10/23)](#week-5-161023)
+    - [Week 6 (23/10/23)](#week-6-231023)
+    - [Week 7 (30/10/23)](#week-7-301023)
 
 
 ## Weeks
@@ -65,3 +67,15 @@
  - (Thu 19)
    - Second Meeting with Anand
  - (Fri 20) Continued reading read subsections on policy improvement
+
+### Week 6 (23/10/23)
+
+ - (Mon 23) 
+   - Continued reading Sutton Barto book
+     - read chapters 4,6 and skimmed 5
+   - Met Anand to discuss my project plan
+
+### Week 7 (30/10/23)
+
+ - (Thu) 
+   - 
