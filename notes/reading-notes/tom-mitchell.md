@@ -1,4 +1,7 @@
-# Research notes
+# Tom- Michel
+
+Chapter on reinforcement Learning in 'Machine Learning' by Tom Mitchell
+
 
 Reinforcement Learning is the overarching concept of an agent learning to make decisions through interaction with an environment.
 Markov Decision Process (MDP) provides a formal framework for modeling such decision-making scenarios.
@@ -75,13 +78,4 @@ Notes:
     - so far this has been done with one step lookahead (13.5) it can be done with more steps of lookahead
     - Sutton describes a general process of blending different levels of lookahead into one Q estimate
 
-## ideas
 
-[extension: car](https://gymnasium.farama.org/environments/box2d/car_racing/)
-
-## sources
-
- - Chapter on reinforcement Learning in 'Machine Learning' by Tom Mitchell
- - Reinforcement Learning An Introduction by Richard S. Sutton and Andrew G. Barto
-   - page: 24
-   - only read up to chaper 8: max 
