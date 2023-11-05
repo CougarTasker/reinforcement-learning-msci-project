@@ -118,7 +118,7 @@ This definition demonstrates how the Markov property can hold in non-determinist
 \newpage
 \section{Extending Markov Chains}
 
-Markov Decision Processes extend Markov Chain's in two important ways. Firstly MDPs introduce decision-making through actions. Each state in an MDP has a set of available actions in that state. In each state an action is required to transition to the next state, this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value this reward value is produced under each state and action simultaneously with the following state.
+Markov Decision Processes extend Markov Chain's in two important ways. Firstly MDPs introduce decision making through actions. Each state in an MDP has a set of available actions in that state. In each state an action is required to transition to the next state, this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value this reward value is produced under each state and action simultaneously with the following state.
 
 A formal definition of a Markov Decision Process is a tuple $(\mathcal{S},\mathcal{A}_s,p)$ where:
 \begin{itemize}
@@ -157,8 +157,37 @@ For learning agents we wish to improve the agent's behaviour over time for this 
 
 
 
-\chapter{Policy and value function}
-Report on notions of policy and value function; 
+\chapter{Policy and Value functions}
+
+At each time step a reward is received, it follows that the goal of an agent should be to maximise these reward signals received. following from the Markov principle and the definition of a MDP this reward only depends on the current state and the action chosen. The consequence is that being in certain states and performing certain actions are more valuable to the agent than others. We can define value functions: 
+\begin{itemize}
+  \item $v(s)$ function determines the value of being in a given state
+  \item $q(s,a)$ function determines the value of being in a given state and performing a specific action
+\end{itemize}
+ 
+
+% stateDiagram-v2
+%     a --> b : R = 0
+%     b --> b : R = 100
+\begin{figure}[h]
+  \centering
+  \fboxsep 2mm
+  \framebox{
+    \includegraphics[width=6cm]{reward-example} 
+  }
+  \caption{\label{fig:reward-example} An example of transitive value}
+\end{figure} 
+
+The value of being in a state is more than just its immediate reward that might be found from performing actions in that state, it is also related to the potential future reward that might be achieved in the reachable subsequent states. It can be thought about with two states $a$, and $b$ if there is a large reward at $b$ but the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However if like figure~\ref{fig:reward-example} despite the potential reward at $a$ being the same as $b$ it requires more actions. In this sense, $a$ is less valuable than state $b$. To account for this we want to discount future value with a parameter $\lambda$. 
+
+These value functions go hand in hand with the policy of an agent, A good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards which are determined by the actions selected and the dynamics of the MDP. 
+
+--- talk about policy 
+
+
+--- talk about the discount rate tuning and consequences
+
+
 
 \section{optimal policy/value function via the Bellman equation}
 
