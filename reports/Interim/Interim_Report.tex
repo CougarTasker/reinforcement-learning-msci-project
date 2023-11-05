@@ -1,6 +1,8 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{hyperref}
+\usepackage{amssymb}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -107,36 +109,55 @@ The standardisation of decision-making problems as MDPs allows for a uniform def
 
 The Markov property is that the future state of a Markov system only depends on the current state of the system. In other words, if we have a system that follows the Markov property then the history preceding the current configuration of the system will not influence the following state, all of the information about the system is encoded in the system's current state. 
 
-The Markov property put formally:
+To put the Markov property formally $S_t$ represents the state at some time $t$. $S_t$ represents the outcome of some random variable. Then the Markov property would hold if and only if:
+
+$$\Pr(S_{c+1}\ |\ S_{c},S_{c-1},\dots,S_0) = \Pr(S_{c+1}\ |\ S_{c})$$
+
+This definition demonstrates how the Markov property can hold in non-deterministic, stochastic processes. It also shows that predictions that are only based on the current state are just as good as those that record the history in a Markov process. The sequence of events in this definition, $S_t$, is called a Markov Chain\cite{meyn2012markov}.
+
+\newpage
+\section{Extending Markov Chains}
+
+Markov Decision Processes extend Markov Chain's in two important ways. Firstly MDPs introduce decision-making through actions. Each state in an MDP has a set of available actions in that state. In each state an action is required to transition to the next state, this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value this reward value is produced under each state and action simultaneously with the following state.
+
+A formal definition of a Markov Decision Process is a tuple $(\mathcal{S},\mathcal{A}_s,p)$ where:
 \begin{itemize}
-  \item $S_t$ represents the state at some time $t$,
-  \item $c$ is the current time, and $S_c$ is the current state
+  \item $\mathcal{S}$ defines the set of all states
+  \item $\mathcal{A}_s$ defines the set of available actions in state $s$
+  \item $p$ defines the relationship between states, actions and rewards: \\
+  $p(s',r\ |\ s,a) \doteq \Pr(S_{t+1} = s', R_{t+1} = r | S_t = s, A_t = a)\cite{sutton2018reinforcement}$
+  \begin{itemize}
+    \item $s, s' \in \mathcal{S}$, $a \in \mathcal{A}_s$ and $r \in \mathbb{R}$
+    \item $p: \mathcal{S} \times \mathbb{R} \times \mathcal{S} \times \mathcal{A} \rightarrow [0,1]$
+  \end{itemize}
 \end{itemize}
 
-then the Markov property would hold if and only if:
+the function $p$ is an important part of this definition it fully describes how the system will evolve, we call this function the dynamics of the MDP. what this definition does not describe is how actions are chosen. this decision-making is done by an entity called an agent. For our purposes, the agent will have full visibility as to the current state of the MDP however like most real-world situations our agent will not have any a priori knowledge of the dynamics. 
 
-$$P(S_{c+1}\ |\ S_{c},\ S_{c-1},\ \dots,\ S_0) = P(S_{c+1}\ |\ S_{c})$$
+\begin{figure}[h]
+  \centering
+  \fboxsep 2mm
+  \framebox{
+    \includegraphics[width=6cm]{agent-enviroment} 
+  }
+  \caption{\label{fig:agent-enviroment} The agent-environment interface}
+\end{figure} 
+% stateDiagram-v2
+%     direction LR
+%     a : Agent
+%     e : Enviroment
+    
+%     a --> e : Action
+%     e --> a : Reward
+%     e --> a : State
 
-This definition demonstrates how the Markov property can hold in non-deterministic, stochastic processes. 
+The agent comprises the entire decision-making entity in an MDP, anything that is unknown or not completely under the agent's control is referred to as the agent's environment. In the context of reinforcement learning the environment is essentially the dynamics of the MDP. Figure~\ref{fig:agent-enviroment} demonstrates how the agent and environments affect each other in an MDP. 
 
-\section{Markov chains}
-
-Markov Chains model a sequence of events.
-
-
-
-
-
-
-
-
-
-\section{Extending Markov Chains}
+For learning agents we wish to improve the agent's behaviour over time for this purpose we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state, this can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as with deep Q-learning. What is important about the policy is that we can update the policy based on the information the agent learns from the environment. 
 
 
 
 \chapter{Policy and value function}
-
 Report on notions of policy and value function; 
 
 \section{optimal policy/value function via the Bellman equation}
