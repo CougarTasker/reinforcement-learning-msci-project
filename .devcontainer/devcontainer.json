@@ -6,29 +6,42 @@
 	"image": "mcr.microsoft.com/devcontainers/base:jammy",
 	"features": {
 		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "texlive-full"
+			"packages": "texlive-full, python3"
 		}
 	},
-	"runArgs": ["--name", "FYP-Devcontainer"],
+	"runArgs": [
+		"--name",
+		"FYP-Devcontainer"
+	],
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
-
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
-
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
-
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
+			"grammarly.config.documentDialect": "british",
+			"grammarly.config.documentDomain": "academic",
+			"grammarly.files.include": [
+				"**/readme.md",
+				"**/README.md",
+				"**/*.txt",
+				"**/*.tex"
+			],
+			"cSpell.language": "en-GB",
+			"cSpell.words": [
+				"backpropagation",
+				"Kivy"
+			],
+			
 			"extensions": [
 				"James-Yu.latex-workshop",
 				"znck.grammarly",
 			]
 		}
 	},
-
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
 }

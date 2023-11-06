@@ -98,16 +98,16 @@ Before submission, remember to fill in the Declaration section fields.
 
 \chapter{Markov Decision Processes} 
 
-Markov Decision Processes (MDP) provide a mathematical formalisation of problems that involve decision-making. Markov Decision Processes provide the foundation that reinforcement learning (RL) is built upon. This is because MDPs distil the fundamental parts of decision-making allowing RL techniques that are built upon MDPs to generalise to learning in the real world and across different domains such as finance and robotics. 
+Markov Decision Processes (MDP) provide a mathematical formalisation of decision-making problems. Markov Decision Processes provide the foundation for reinforcement learning (RL). This is because MDPs distil the fundamental parts of decision-making, allowing RL techniques built upon MDPs to generalise to learning in the real world and across different domains such as finance and robotics. 
 
 As a formal mathematical framework, MDPs allow us to derive and prove statements about our RL methods built upon them. An important example of this is that we can prove that Q-learning (an RL technique explained in chapter~\ref{chap:q-learning}) will converge to the true Q-values as long as each Action-State pair is visited infinitely often. \cite{watkins1992q}. Furthermore, MDPs allow us to reason about problems with uncertainty allowing RL agents to account for randomness in their environment. 
 
-The standardisation of decision-making problems as MDPs allows for a uniform definition of optimality with the value functions. this gives a basis for assessing the performance of RL algorithms. Fascinating like-for-like comparisons for different RL approaches. 
+The standardisation of decision-making problems as MDPs allows for a uniform definition of optimality with the value functions. MDPs give a basis for assessing the performance of RL algorithms, facilitating like-for-like comparisons for different RL approaches. 
 
 
 \section{Markov Property}
 
-The Markov property is that the future state of a Markov system only depends on the current state of the system. In other words, if we have a system that follows the Markov property then the history preceding the current configuration of the system will not influence the following state, all of the information about the system is encoded in the system's current state. 
+The Markov property is that the future state of a Markov system only depends on the current state of the system. In other words, if we have a system that follows the Markov property, then the history preceding the current configuration of the system will not influence the following state.
 
 To put the Markov property formally $S_t$ represents the state at some time $t$. $S_t$ represents the outcome of some random variable. Then the Markov property would hold if and only if:
 
@@ -118,7 +118,7 @@ This definition demonstrates how the Markov property can hold in non-determinist
 \newpage
 \section{Extending Markov Chains}
 
-Markov Decision Processes extend Markov Chain's in two important ways. Firstly MDPs introduce decision making through actions. Each state in an MDP has a set of available actions in that state. In each state an action is required to transition to the next state, this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value this reward value is produced under each state and action simultaneously with the following state.
+Markov Decision Processes extend Markov Chain's in two important ways. Firstly MDPs introduce decision-making through actions. Each state in an MDP has a set of available actions in that state. In each state, an action is required to transition to the next state; this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value. The reward is determined from the current state and action; it is produced simultaneously with the following state.
 
 A formal definition of a Markov Decision Process is a tuple $(\mathcal{S},\mathcal{A}_s,p)$ where:
 \begin{itemize}
@@ -132,7 +132,7 @@ A formal definition of a Markov Decision Process is a tuple $(\mathcal{S},\mathc
   \end{itemize}
 \end{itemize}
 
-the function $p$ is an important part of this definition it fully describes how the system will evolve, we call this function the dynamics of the MDP. what this definition does not describe is how actions are chosen. this decision-making is done by an entity called an agent. For our purposes, the agent will have full visibility as to the current state of the MDP however like most real-world situations our agent will not have any a priori knowledge of the dynamics. 
+The function $p$ is an integral part of this definition; it fully describes how the system will evolve. We call this function the dynamics of the MDP. What this definition does not describe is how actions are chosen. This decision-making is done by an entity called an agent. For our purposes, the agent will have complete visibility as to the current state of the MDP. However, like most real-world situations, our agent will not have any a priori knowledge of the dynamics. 
 
 \begin{figure}[h]
   \centering
@@ -151,9 +151,9 @@ the function $p$ is an important part of this definition it fully describes how 
 %     e --> a : Reward
 %     e --> a : State
 
-The agent comprises the entire decision-making entity in an MDP, anything that is unknown or not completely under the agent's control is referred to as the agent's environment. In the context of reinforcement learning the environment is essentially the dynamics of the MDP. Figure~\ref{fig:agent-enviroment} demonstrates how the agent and environments affect each other in an MDP. 
+The agent comprises the entire decision-making entity in an MDP; anything unknown or not wholly under the agent's control is called the agent's environment. In the context of reinforcement learning, the environment is essentially the dynamics of the MDP. Figure~\ref{fig:agent-enviroment} demonstrates how the agent and environments affect each other in an MDP. 
 
-For learning agents we wish to improve the agent's behaviour over time for this purpose we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state, this can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as with deep Q-learning. What is important about the policy is that we can update the policy based on the information the agent learns from the environment. 
+For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as deep Q-learning. A Policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
 
 
 
@@ -178,18 +178,15 @@ At each time step a reward is received, it follows that the goal of an agent sho
   \caption{\label{fig:reward-example} An example of transitive value}
 \end{figure} 
 
-The value of being in a state is more than just its immediate reward that might be found from performing actions in that state, it is also related to the potential future reward that might be achieved in the reachable subsequent states. It can be thought about with two states $a$, and $b$ if there is a large reward at $b$ but the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However if like figure~\ref{fig:reward-example} despite the potential reward at $a$ being the same as $b$ it requires more actions. In this sense, $a$ is less valuable than state $b$. To account for this we want to discount future value with a parameter $\lambda$. 
+The value of being in a state is more than just its immediate reward that might be found from performing actions in that state, it is also related to the potential future reward that might be achieved in the reachable subsequent states. It can be thought about with two states $a$, and $b$ if there is a large reward at $b$ but the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However if like figure~\ref{fig:reward-example} despite the potential reward at $a$ being the same as $b$ it requires more actions. In this sense, $a$ is less valuable than state $b$. To account for this we want to discount future value with a parameter $\gamma$. 
 
-These value functions go hand in hand with the policy of an agent, A good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards which are determined by the actions selected and the dynamics of the MDP. 
+--- give formal defition for policy
 
---- talk about policy 
-
-
---- talk about the discount rate tuning and consequences
-
-
+These value functions go hand in hand with the policy of an agent, A good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards which are determined by the actions selected and the dynamics of the MDP. In on-policy learning the policy and value functions can compound on each other making the effect of the discount rate ($\gamma$) especially important. With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted ignoring the potential long-term benefits of certain actions.
 
 \section{optimal policy/value function via the Bellman equation}
+
+
 
 \section{Finding optimal policies by iteration}
 
