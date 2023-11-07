@@ -11,6 +11,7 @@
     - [Week 5 (16/10/23)](#week-5-161023)
     - [Week 6 (23/10/23)](#week-6-231023)
     - [Week 7 (30/10/23)](#week-7-301023)
+    - [Week 8 (6/10/23)](#week-8-61023)
 
 
 ## Weeks
@@ -77,6 +78,13 @@
 
 ### Week 7 (30/10/23)
 
- - (Thu) 
+ - (Thu 2) 
    - Started MDP Report
    - Third Meeting with Anand
+ - (Weekend 4-5)
+   - Completed MDP Report
+
+### Week 8 (6/10/23)
+
+ - (Mon 6) Started report on the policy and value functions
+ - (Tue 7) Completed policy and value report
