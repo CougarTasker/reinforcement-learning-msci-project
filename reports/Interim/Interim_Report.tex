@@ -3,7 +3,7 @@
 \graphicspath{ {./images/} }
 \usepackage{hyperref}
 \usepackage{amssymb}
-
+\usepackage{amsmath}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -193,7 +193,7 @@ Where $s \in \mathcal{S}$ and $a \in \mathcal{A}_s$. This definition shows how t
 With a known policy and dynamics, the future state can be wholly determined, allowing for a complete mathematical definition of the value functions under a given policy that describes our above intuitions. for the state-value function ($v$) and action-value function ($q$) under a policy $\pi$ we have the formulas:
 
 $$q_\pi(s,a) \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_\pi(s')]$$
-$$v_\pi(s) \doteq \sum_a \pi(a | s) q_\pi(s,a)$$
+$$v_\pi(s) \doteq \sum_a \pi(a\ |\ s) q_\pi(s,a)$$
 
 These value functions are defined recursively in terms of each other; these definitions can be unrolled to only be in terms of themselves. The unrolled form of the state-value function is known as the Bellman equation. These equations are named Richard Bellman, who, in the process of developing the field of dynamic programming, created them\cite{bellman1957}.   
 
@@ -204,16 +204,41 @@ $$q_\ast(s,a) \doteq \max_\pi q_\pi(s,a) $$
 
 
 
-\section{Finding optimal policies by iteration}
+\section{Finding optimal policies by iteration}\label{iteration-approaches}
 
--- on policy vs off policy
+Although optimal policies exist, finding them is another matter. The policy search space is potentially infinite so an intelligent method is required. An optimal policy can be extracted from an optimal value function and the dynamics of the MDP; the optimal policy would only select actions that result in the highest value. Finding the optimal value function with the optimal policy is straightforward, but this is a catch-22. The optimal value function must be self-consistent with the Bellman equations. One approach to solving these equations is iteration, for each step moving slightly closer to the optimal solution from an initial guess. 
+
+\subsection{Policy iteration}
+
+In policy iteration, we improve a policy over time until it is optimal. updating a policy like this is only possible because of the policy improvement theorem. This theorem considers if we have a policy $\pi_{\text{old}}$. We are at some state $s$, $\pi_{\text{old}}$ will pick the action $a$ under this state $\pi_{\text{old}}(a\ |\ s) = 1$ what happens if we consider some other action $a'$ but then continue to follow the original policy. Because we continue to follow the original policy, we can use the existing value function $v_{\pi_{\text{old}}}(S_{t+1})$ for the subsequent states. We call this slightly adjusted policy $\pi_{\text{new}}$. by applying the bellman equations and the existing value function then we can recalculate the value at $s$ of $\pi_{\text{new}}$ if this new value is better than the original policy then we know that $\pi_{\text{new}}$ must be as good if not better for all states $s \in \mathcal{S}$ than $\pi_{\text{old}}$ thus $\pi_{\text{new}}$ would be a better policy. 
+
+
+$$\sum_a \pi_{\text{new}}(a\ |\ s) q_{\pi_{\text{old}}}(s,a) \ge v_{\pi_{\text{old}}}(s) \Rightarrow  \pi_{\text{new}} \ge \pi_{\text{old}}$$
+
+For some policy $\pi$ you can apply this policy improvement theorem for every state and action in the MDP. This approach of comparing all actions over all states is called policy improvement. This policy improvement step can be applied iteratively until the policy stops improving. If the policy does not improve over this policy improvement step, then all of the actions are optimal, and this policy is optimal
+
+Although this policy improvement sounds computationally expensive, each state can be considered simultaneously and with a shared base policy, in each iteration, the state-value function is the same; caching this removes redundant calculations. Calculating the value function is improved by using an iterative approach and utilising the previous value function as a launching point.  
+
 
 \subsection{Value iteration}
-\subsection{Policy iteration}
+
+
+**Downside to policy**: each iteration may require multiple sweeps of the state space, although in practice if often doesn't need many iterations
+
+
+in value iteration there is only one step, the policy is not explicitly defined and updated instead the policy updates implicitly as the value function converges, the policy is to pick whatever action produces the largest value. 
+
+finally the policy is extracted from the value table as the action that maximises the cumulative reward with the value table and the dynamics function 
+
+
+
 
 
 \chapter{Q-learning}\label{chap:q-learning}
 
+-- the iteration approaches are great but they require knowledge of the dynamics that are not necessarily possible in all cases \ref{iteration-approaches}
+
+-- on policy vs off policy
 \chapter{Page Layout \& Size}
 
 The page size and margins have been set in this document. These should not be changed or adjusted. 
