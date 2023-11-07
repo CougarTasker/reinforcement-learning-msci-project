@@ -21,21 +21,7 @@
 	// "postCreateCommand": "uname -a",
 	// Configure tool-specific properties.
 	"customizations": {
-		"vscode": {
-			"grammarly.config.documentDialect": "british",
-			"grammarly.config.documentDomain": "academic",
-			"grammarly.files.include": [
-				"**/readme.md",
-				"**/README.md",
-				"**/*.txt",
-				"**/*.tex"
-			],
-			"cSpell.language": "en-GB",
-			"cSpell.words": [
-				"backpropagation",
-				"Kivy"
-			],
-			
+		"vscode": {			
 			"extensions": [
 				"James-Yu.latex-workshop",
 				"znck.grammarly",

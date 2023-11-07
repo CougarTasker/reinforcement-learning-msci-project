@@ -153,13 +153,14 @@ The function $p$ is an integral part of this definition; it fully describes how 
 
 The agent comprises the entire decision-making entity in an MDP; anything unknown or not wholly under the agent's control is called the agent's environment. In the context of reinforcement learning, the environment is essentially the dynamics of the MDP. Figure~\ref{fig:agent-enviroment} demonstrates how the agent and environments affect each other in an MDP. 
 
-For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as deep Q-learning. A Policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
+\label{policy-informal-definition}
+For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as deep Q-learning. A policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
 
 
 
 \chapter{Policy and Value functions}
 
-At each time step a reward is received, it follows that the goal of an agent should be to maximise these reward signals received. following from the Markov principle and the definition of a MDP this reward only depends on the current state and the action chosen. The consequence is that being in certain states and performing certain actions are more valuable to the agent than others. We can define value functions: 
+After each action, a reward is received. It follows that the goal of an agent should be to choose the actions to maximise these reward signals received. Following the Markov principle and the definition of an MDP, this reward only depends on the current state and the action chosen. Consequently, being in some states and performing some actions are more valuable to the agent than other states and actions. We can define value functions: 
 \begin{itemize}
   \item $v(s)$ function determines the value of being in a given state
   \item $q(s,a)$ function determines the value of being in a given state and performing a specific action
@@ -175,20 +176,37 @@ At each time step a reward is received, it follows that the goal of an agent sho
   \framebox{
     \includegraphics[width=6cm]{reward-example} 
   }
-  \caption{\label{fig:reward-example} An example of transitive value}
+  \caption{\label{fig:reward-example} An example of transitive value of states $v(b) > v(a) > v(c)$}
 \end{figure} 
 
-The value of being in a state is more than just its immediate reward that might be found from performing actions in that state, it is also related to the potential future reward that might be achieved in the reachable subsequent states. It can be thought about with two states $a$, and $b$ if there is a large reward at $b$ but the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However if like figure~\ref{fig:reward-example} despite the potential reward at $a$ being the same as $b$ it requires more actions. In this sense, $a$ is less valuable than state $b$. To account for this we want to discount future value with a parameter $\gamma$. 
+Intuitively, the value of being in a state is more than only its immediate reward that might be found from performing actions in that state. It is also related to the potential future reward that might be achieved in the reachable subsequent states. This can be demonstrated with two states $a$, and $b$, where there is a large reward at $b$ and the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However, $a$ can be considered less valuable than $b$, because it always requires more steps to achieve the reward from $a$ than at $b$. To account for preferring more immediate rewards, the value function should also discount future value with a parameter $\gamma$. 
 
---- give formal defition for policy
 
-These value functions go hand in hand with the policy of an agent, A good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards which are determined by the actions selected and the dynamics of the MDP. In on-policy learning the policy and value functions can compound on each other making the effect of the discount rate ($\gamma$) especially important. With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted ignoring the potential long-term benefits of certain actions.
+These value functions go hand in hand with an agent's policy; a good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards, which are in part determined by the actions the policy selects. Basing the policy on the value function gives the value function's definition impact over that agent's decision-making, in particular, the discount rate ($\gamma$). With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted, ignoring the potential long-term benefits of certain actions.
+
+While the policy is informally described at the end of chapter~\ref{policy-informal-definition}, a formal definition of a policy ($\pi$) is the probability distribution of an agent picking a given action in a given state:
+ $$\pi(a \ |\ s) \doteq \Pr(A_t = a | S_t = s)$$
+Where $s \in \mathcal{S}$ and $a \in \mathcal{A}_s$. This definition shows how the policy can be stochastic. A stochastic policy can be beneficial in many ways, such as breaking ties where multiple actions are equally good and choosing between when to explore more or seek rewards. 
 
 \section{optimal policy/value function via the Bellman equation}
+
+With a known policy and dynamics, the future state can be wholly determined, allowing for a complete mathematical definition of the value functions under a given policy that describes our above intuitions. for the state-value function ($v$) and action-value function ($q$) under a policy $\pi$ we have the formulas:
+
+$$q_\pi(s,a) \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_\pi(s')]$$
+$$v_\pi(s) \doteq \sum_a \pi(a | s) q_\pi(s,a)$$
+
+These value functions are defined recursively in terms of each other; these definitions can be unrolled to only be in terms of themselves. The unrolled form of the state-value function is known as the Bellman equation. These equations are named Richard Bellman, who, in the process of developing the field of dynamic programming, created them\cite{bellman1957}.   
+
+These functions demonstrate the intertwined relationships between the policy chosen and the value of that state if there is a particularly valuable action $a^\ast$ such that $q_\pi(s,a^\ast)$ is far better than for all other actions. A policy $\pi(a^\ast\ |\ s) = 0$ would hamper the potential value of $s$. Therefore, the value function can be used to compare how well different policies perform. If for policy $\pi_a$ there does not exist another policy $\pi_b$ such that $\pi_b$ has a better value $v_{\pi_b}(s) > v_{\pi_a}(s)$ for all states $s \in \mathcal{S}$ then we can consider this policy $\pi_a$ an optimal policy. There may be many optimal policies; however, we often do not need to distinguish them, so we often denote any optimal policy with $\pi_\ast$. This is because all optimal polices share the same state-value, and by definition action-value, function, we denote these $v_\ast$ and $q_\ast$. The optimal value function $v_\ast$ is known as Bellman optimality equation. These optimal equations can be written formally as:
+
+$$v_\ast(s) \doteq \max_\pi v_\pi(s) $$
+$$q_\ast(s,a) \doteq \max_\pi q_\pi(s,a) $$
 
 
 
 \section{Finding optimal policies by iteration}
+
+-- on policy vs off policy
 
 \subsection{Value iteration}
 \subsection{Policy iteration}
