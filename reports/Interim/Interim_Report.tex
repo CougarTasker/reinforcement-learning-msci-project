@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{dirtytalk}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -266,38 +267,16 @@ As this new update rule involves no explicit policy, a final step is required in
 
 Iteration approaches are effective at finding an optimal policy. However, these approaches make extensive use of the dynamics of the MDP. In most real-world problems, the dynamics are unknown or too complex to be represented accurately. Iteration approaches can be adapted to the agent-environment interface \ref{fig:agent-enviroment} by using samples. Samples are captured from the environment where the agent follows a deterministic policy to explore. However, these adapted approaches can require many samples from the environment. Monti-Carlo is another technique that uses samples to emulate the value functions more directly, but these approaches are inherently offline. While offline methods have many advantages, their shortcomings, such as the inability to adapt to changing environments, make them unsuitable for many applications. 
 
-Temporal difference (TD) algorithms are another class of RL algorithms. TD is an online process that improves the policy as new data becomes available. The goal of TD is to minimise the $\delta$ parameter that represents the difference (error) between the observed and predicted rewards. This difference $\delta$ is used to update the model like the iterative approaches we bootstrap our model over time. The magnitude of each update is controlled with the learning rate parameter, $\alpha$. $\alpha$ helps avoid overfitting to samples since observations made in the real world may be noisy and change over time. The learning rate and discount rate can affect the convergence rate for TD; however, these are distinct variables and have different purposes.
+Temporal difference (TD) algorithms are another class of RL algorithms. TD is an online process that improves the policy as new data becomes available. The goal of TD is to minimise the $\delta$ parameter that represents the difference (error) between the observed and predicted rewards. This difference $\delta$ is used to update the model like the iterative approaches we bootstrap our model over time. The magnitude of each update is controlled with the learning rate parameter, $\alpha$. $\alpha$ helps avoid overfitting to samples since observations made in the real world may be noisy and change over time. The learning rate and discount rate can affect the convergence rate for TD; however, these are distinct variables and have different purposes. When $\alpha$ is low, the process will take longer to converge however if $\alpha$ is too large the process may diverge
 
-Reinfomrnent learning algothi
+Reinforcement learning algorithms typically can learn in two fashions on-policy and off-policy. On-policy algorithms learn while the agent uses the policy being improved; an example is SARSA. Off-policy algorithms typically learn the value functions while the agent follows a different \say{behaviour} policy. While on-policy techniques can start exploiting their knowledge for reward quickly, they can get stuck in local minima. Off-policy techniques can provide more control over the exploration and exploitation. Q-learning is an off-policy TD reinforcement learning algorithm implemented in this project.
 
-
-Q-learning is a TD algorithm that is implemented as a part of this project
-
--- on policy vs off policy
+As the name suggests, Q-learning learns the optimal action-value function $q$ to find the optimal policy. TD techniques must learn the $q$ function directly the $v$ function requires knowledge of the dynamics to derive the optimal policy; however, with the $q$ alone, the optimal policy can be determined. 
 
 
 
 
-this difference is applied on the existing state controlled by the learning-rate parameter. this paramiter helps because we are sampling a model that might be noisy or changing. a low alpha will take a long time to converge however an alpha too high might diverge 
 
-they act like dynamic programming by bootstrapping each observation updates the value function like before but the $\alpha$ parameter (learning-rate) regulates how much the new value is changed from the previous value
-
-we must learn the action-value function $q$ rather than the state value function 
-
-Sarsa: all of the data from one state action update
-
- - previous **S**tate
- - previous **A**tion
- - **R**eward
- - current **S**tate
- - current **A**tion
-
-we can use the Q function directly to find a optimal policy
-
-sarsa algorithm this is known as on-policy learning because it updates the policy as it uses the policy like in value iteration. its policy decided between exploitation and exploration randomly with the probability controlled by the $\epsilon$ parameter
-
-
-Q-learning is an off-policy learning because it learns the optimal Q-value independently of the current policy being followed
 
 Q-learning can be biased when picking actions based on the maximum Q-values overoptimistic estimates can lead to sub-optimal decision making
 
