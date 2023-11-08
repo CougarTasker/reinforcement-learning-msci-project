@@ -111,7 +111,11 @@ The Markov property is that the future state of a Markov system only depends on 
 
 To put the Markov property formally $S_t$ represents the state at some time $t$. $S_t$ represents the outcome of some random variable. Then the Markov property would hold if and only if:
 
-$$\Pr(S_{c+1}\ |\ S_{c},S_{c-1},\dots,S_0) = \Pr(S_{c+1}\ |\ S_{c})$$
+
+\begin{equation}
+  \Pr(S_{c+1}\ |\ S_{c},S_{c-1},\dots,S_0) = \Pr(S_{c+1}\ |\ S_{c})
+  \label{eqn:markov-property}
+\end{equation}
 
 This definition demonstrates how the Markov property can hold in non-deterministic, stochastic processes. It also shows that predictions that are only based on the current state are just as good as those that record the history in a Markov process. The sequence of events in this definition, $S_t$, is called a Markov Chain\cite{meyn2012markov}.
 
@@ -185,22 +189,36 @@ Intuitively, the value of being in a state is more than only its immediate rewar
 These value functions go hand in hand with an agent's policy; a good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards, which are in part determined by the actions the policy selects. Basing the policy on the value function gives the value function's definition impact over that agent's decision-making, in particular, the discount rate ($\gamma$). With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted, ignoring the potential long-term benefits of certain actions.
 
 While the policy is informally described at the end of chapter~\ref{policy-informal-definition}, a formal definition of a policy ($\pi$) is the probability distribution of an agent picking a given action in a given state:
- $$\pi(a \ |\ s) \doteq \Pr(A_t = a | S_t = s)$$
+
+\begin{equation}
+  \pi(a \ |\ s) \doteq \Pr(A_t = a | S_t = s)
+  \label{eqn:policy-def}
+\end{equation}
+
+
+
 Where $s \in \mathcal{S}$ and $a \in \mathcal{A}_s$. This definition shows how the policy can be stochastic. A stochastic policy can be beneficial in many ways, such as breaking ties where multiple actions are equally good and choosing between when to explore more or seek rewards. 
 
 \section{optimal policy/value function via the Bellman equation}
 
 With a known policy and dynamics, the future state can be wholly determined, allowing for a complete mathematical definition of the value functions under a given policy that describes our above intuitions. for the state-value function ($v$) and action-value function ($q$) under a policy $\pi$ we have the formulas:
 
-$$q_\pi(s,a) \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_\pi(s')]$$
-$$v_\pi(s) \doteq \sum_a \pi(a\ |\ s) q_\pi(s,a)$$
+
+\begin{align}
+  q_\pi(s,a) &\doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_\pi(s')]\label{eqn:q-def} \\
+  v_\pi(s) &\doteq \sum_a \pi(a\ |\ s) q_\pi(s,a) \label{eqn:v-def}
+\end{align}
 
 These value functions are defined recursively in terms of each other; these definitions can be unrolled to only be in terms of themselves. The unrolled form of the state-value function is known as the Bellman equation. These equations are named Richard Bellman, who, in the process of developing the field of dynamic programming, created them\cite{bellman1957}.   
 
 These functions demonstrate the intertwined relationships between the policy chosen and the value of that state if there is a particularly valuable action $a^\ast$ such that $q_\pi(s,a^\ast)$ is far better than for all other actions. A policy $\pi(a^\ast\ |\ s) = 0$ would hamper the potential value of $s$. Therefore, the value function can be used to compare how well different policies perform. If for policy $\pi_a$ there does not exist another policy $\pi_b$ such that $\pi_b$ has a better value $v_{\pi_b}(s) > v_{\pi_a}(s)$ for all states $s \in \mathcal{S}$ then we can consider this policy $\pi_a$ an optimal policy. There may be many optimal policies; however, we often do not need to distinguish them, so we often denote any optimal policy with $\pi_\ast$. This is because all optimal polices share the same state-value, and by definition action-value, function, we denote these $v_\ast$ and $q_\ast$. The optimal value function $v_\ast$ is known as Bellman optimality equation. These optimal equations can be written formally as:
 
-$$v_\ast(s) \doteq \max_\pi v_\pi(s) $$
-$$q_\ast(s,a) \doteq \max_\pi q_\pi(s,a) $$
+
+\begin{align}
+  q_\ast(s,a) &\doteq \max_\pi q_\pi(s,a)\label{eqn:q-optimal-def} \\
+  v_\ast(s) &\doteq \max_\pi v_\pi(s) \label{eqn:v-optimal-def}
+\end{align}
+
 
 
 
@@ -213,23 +231,33 @@ Although optimal policies exist, finding them is another matter. The policy sear
 In policy iteration, we improve a policy over time until it is optimal. updating a policy like this is only possible because of the policy improvement theorem. This theorem considers if we have a policy $\pi_{\text{old}}$. We are at some state $s$, $\pi_{\text{old}}$ will pick the action $a$ under this state $\pi_{\text{old}}(a\ |\ s) = 1$ what happens if we consider some other action $a'$ but then continue to follow the original policy. Because we continue to follow the original policy, we can use the existing value function $v_{\pi_{\text{old}}}(S_{t+1})$ for the subsequent states. We call this slightly adjusted policy $\pi_{\text{new}}$. by applying the bellman equations and the existing value function then we can recalculate the value at $s$ of $\pi_{\text{new}}$ if this new value is better than the original policy then we know that $\pi_{\text{new}}$ must be as good if not better for all states $s \in \mathcal{S}$ than $\pi_{\text{old}}$ thus $\pi_{\text{new}}$ would be a better policy. 
 
 
-$$\sum_a \pi_{\text{new}}(a\ |\ s) q_{\pi_{\text{old}}}(s,a) \ge v_{\pi_{\text{old}}}(s) \Rightarrow  \pi_{\text{new}} \ge \pi_{\text{old}}$$
+\begin{equation}
+  \sum_a \pi_{\text{new}}(a\ |\ s) q_{\pi_{\text{old}}}(s,a) \ge v_{\pi_{\text{old}}}(s) \Rightarrow  \pi_{\text{new}} \ge \pi_{\text{old}} 
+  \label{eqn:policy-improvement-theorem}
+\end{equation}
 
 For some policy $\pi$ you can apply this policy improvement theorem for every state and action in the MDP. This approach of comparing all actions over all states is called policy improvement. This policy improvement step can be applied iteratively until the policy stops improving. If the policy does not improve over this policy improvement step, then all of the actions are optimal, and this policy is optimal
 
-Although this policy improvement sounds computationally expensive, each state can be considered simultaneously and with a shared base policy, in each iteration, the state-value function is the same; caching this removes redundant calculations. Calculating the value function is improved by using an iterative approach and utilising the previous value function as a launching point.  
+Although this policy improvement sounds computationally expensive, each state can be considered simultaneously and with a shared base policy; in each iteration, the state-value function is the same; caching this removes redundant calculations. Calculating the value function is improved by using an iterative approach and utilising the previous value function as a launching point.  
 
 
 \subsection{Value iteration}
 
+Policy iteration is a practical approach, for a finite MDP is guaranteed to finish in finite time. In practice, policy improvement does better and only takes a few iterations. However, in each iteration, multiple full sweeps of the state space are required. The idea of value iteration is to improve the policy within the value iteration step. This value iteration approach only requires one iteration. 
 
-**Downside to policy**: each iteration may require multiple sweeps of the state space, although in practice if often doesn't need many iterations
+The Bellman equation\ref{eqn:v-def} can be used as an update rule to compute the value function iteratively. A table of values is maintained for each state, initialised randomly. The value of each state can be updated based on the immediate reward and the current estimates of the subsequent states; this is guaranteed to reduce the error at that state because the $\gamma$ discount rate discounts the error at the subsequent state. This process is called bootstrapping; the smaller $\gamma$, the quicker the error rate will decrease, and the faster the process will converge. When the inconsistency at each state is suitable, the process will stop. 
 
 
-in value iteration there is only one step, the policy is not explicitly defined and updated instead the policy updates implicitly as the value function converges, the policy is to pick whatever action produces the largest value. 
+This standard approach uses the traditional value Bellman equation\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
 
-finally the policy is extracted from the value table as the action that maximises the cumulative reward with the value table and the dynamics function 
+\begin{align}
+  q_{\text{max}}(s,a) &\doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \tag{from \ref{eqn:q-def}} \\
+  v_{\text{max}}(s) &\leftarrow  \max_a q_{\text{max}}(s,a) \label{eqn:v-update}\\
+  \therefore v_{\text{max}}(s) &\leftarrow  \max_a \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \label{eqn:v-update}
+\end{align}
 
+
+As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\ast$ function.$q_\ast$, can be derived from the $v_\ast$ with the dynamics $p$ function. 
 
 
 
