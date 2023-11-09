@@ -88,3 +88,9 @@
 
  - (Mon 6) Started report on the policy and value functions
  - (Tue 7) Completed policy and value report
+ - (Wed 8) 
+   - Completed policy and value report
+   - Started Q-learning report
+ - (Thu 9) 
+   - Complted Q-learning report
+   - Started code setup
