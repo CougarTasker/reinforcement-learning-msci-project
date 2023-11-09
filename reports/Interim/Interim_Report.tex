@@ -248,7 +248,7 @@ Policy iteration is a practical approach, for a finite MDP is guaranteed to fini
 
 The Bellman equation\ref{eqn:v-def} can be used as an update rule to compute the value function iteratively. A table of values is maintained for each state, initialised randomly. The value of each state can be updated based on the immediate reward and the current estimates of the subsequent states; this is guaranteed to reduce the error at that state because the $\gamma$ discount rate discounts the error at the subsequent state. This process is called bootstrapping; the smaller $\gamma$, the quicker the error rate will decrease, and the faster the process will converge. When the inconsistency at each state is suitable, the process will stop. 
 
-
+\newpage
 This standard approach uses the traditional value Bellman equation\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
 
 \begin{align}
@@ -258,7 +258,9 @@ This standard approach uses the traditional value Bellman equation\ref{eqn:v-def
 \end{align}
 
 
-As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\ast$ function.$q_\ast$, can be derived from the $v_\ast$ with the dynamics $p$ function. 
+As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\ast$ function.$q_\ast$, can be derived from the $v_\ast$ with the dynamics $p$ function.
+
+
 
 
 
@@ -267,23 +269,40 @@ As this new update rule involves no explicit policy, a final step is required in
 
 Iteration approaches are effective at finding an optimal policy. However, these approaches make extensive use of the dynamics of the MDP. In most real-world problems, the dynamics are unknown or too complex to be represented accurately. Iteration approaches can be adapted to the agent-environment interface \ref{fig:agent-enviroment} by using samples. Samples are captured from the environment where the agent follows a deterministic policy to explore. However, these adapted approaches can require many samples from the environment. Monti-Carlo is another technique that uses samples to emulate the value functions more directly, but these approaches are inherently offline. While offline methods have many advantages, their shortcomings, such as the inability to adapt to changing environments, make them unsuitable for many applications. 
 
-Temporal difference (TD) algorithms are another class of RL algorithms. TD is an online process that improves the policy as new data becomes available. The goal of TD is to minimise the $\delta$ parameter that represents the difference (error) between the observed and predicted rewards. This difference $\delta$ is used to update the model like the iterative approaches we bootstrap our model over time. The magnitude of each update is controlled with the learning rate parameter, $\alpha$. $\alpha$ helps avoid overfitting to samples since observations made in the real world may be noisy and change over time. The learning rate and discount rate can affect the convergence rate for TD; however, these are distinct variables and have different purposes. When $\alpha$ is low, the process will take longer to converge however if $\alpha$ is too large the process may diverge
+Temporal difference (TD) algorithms are another class of RL algorithms. TD is an online process that improves the policy as new data becomes available. The goal of TD is to minimise the $\delta$ parameter that represents the difference (error) between the observed and predicted rewards. This difference $\delta$ is used to update the model like the iterative approaches we bootstrap our model over time. The magnitude of each update is controlled with the learning rate parameter, $\alpha$. $\alpha$ helps avoid overfitting to samples since observations made in the real world may be noisy and change over time. The learning rate and discount rate can affect the convergence rate for TD; however, these are distinct variables and have different purposes. When $\alpha$ is low, the process will take longer to converge; however, if $\alpha$ is too large, the process may diverge
 
-Reinforcement learning algorithms typically can learn in two fashions on-policy and off-policy. On-policy algorithms learn while the agent uses the policy being improved; an example is SARSA. Off-policy algorithms typically learn the value functions while the agent follows a different \say{behaviour} policy. While on-policy techniques can start exploiting their knowledge for reward quickly, they can get stuck in local minima. Off-policy techniques can provide more control over the exploration and exploitation. Q-learning is an off-policy TD reinforcement learning algorithm implemented in this project.
+Reinforcement learning algorithms typically can learn in two fashions: on-policy and off-policy. On-policy algorithms learn while the agent uses the policy being improved; an example is SARSA. Off-policy algorithms typically learn the value functions while the agent follows a different \say{behaviour} policy. While on-policy techniques can start exploiting their knowledge for reward quickly, they can get stuck in local minima. Off-policy techniques can provide more control over the exploration and exploitation. Q-learning is an off-policy TD reinforcement learning algorithm implemented in this project.
 
-As the name suggests, Q-learning learns the optimal action-value function $q$ to find the optimal policy. TD techniques must learn the $q$ function directly the $v$ function requires knowledge of the dynamics to derive the optimal policy; however, with the $q$ alone, the optimal policy can be determined. 
+As the name suggests, Q-learning learns the optimal action-value function $q$ to find the optimal policy. TD techniques must learn the $q$ function directly. The $v$ function requires knowledge of the dynamics to derive the optimal policy; however, with the $q$ alone, the optimal policy can be determined. For this purpose, Q-learning needs to maintain a table entry for each action in each state so these entries can be updated after each observed action. We will represent this estimate of $q$ with $Q$. There are five parts to each transition: 
+\begin{itemize}
+  \item $S_{t-1}$ the previous state before the transition
+  \item $A_{t-1}$ the action that was performed
+  \item $R_t$ the reward received
+  \item $S_t$ the new and now current state 
+\end{itemize}
+\newpage
+
+Q-learning uses these observations to update its estimates with this formula:
+
+\begin{equation}
+  Q(S_{t-1}, A_{t-1}) \leftarrow Q(S_{t-1}, A_{t-1}) +  \alpha [R_t + \gamma \max_a(Q(S_t,a)) - Q(S_{t-1}, A_{t-1})]
+  \label{eqn:q-learning-update-formula}
+\end{equation}
 
 
+This formula can be thought of as interpolating the old estimate at the old state $Q(S_{t-1}, A_{t-1})$ with this new observed Q-value $R_t + \gamma \max_a(Q(S_t, a))$. When $\alpha = 1$, this formula replaces the existing value with the new observed Q-value.  When $\alpha = 0$, the observation is ignored like it never happened. The formula $R_t + \gamma \max_a(Q(S_t, a))$ calculates the new observed Q-value based upon the same principle as value iteration; the implicit policy is to pick the best possible action. 
 
+Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal q values $q_\ast$ provided the behaviour function visits all state-action pairs infinitely often. In practice, these q-values do not need to be perfect to derive an optimal policy. However, it can still take many visits to converge enough. Many observations may be necessary to build up a picture of the probability distribution and isolate noise. However, another reason for repeated observations is that the behaviour policy moves the agent forward in time, but the Q-learning table updates the last state. This is conflicting as, information propagates in the opposite direction of the updates that spread it. For example, suppose a sequence of $n$ states-actions have no reward but lead to some large reward at the end. as the behaviour completes these actions. In that case, only the last action will be updated to reflect the potential value, and every time the sequence is repeated, some of the value will propagate back one step. Many Q-learning implementations like ours will replay recent observations in reverse order to improve this performance. This is called the action-replay process (ARP). Replaying observations can be particularly effective when getting new observations is costly or slow, allowing for quicker convergence.
 
+In \ref{eqn:q-learning-update-formula}, we can see how $\alpha$ controls the influence of each observation. But how do we tune this hyper-parameter? One option is to treat it like other hyperparameters where possible and use previous experimentation to find a practical value. However, one of the main reasons to use RL is that it does not require prior knowledge, so this is not always suitable. A fixed learning rate may not also be suitable. Some observations may be more important than others; It has been observed that a decaying learning rate has been more effective. It is believed that a decaying learning rate allows for learning algorithms to avoid local minima at the beginning with the large learning rate and then settle on a global minima as the learning rate decays\cite{decayingLearningRates}. The paper \say{Learning Rates for Q-learning}\cite{even2003learning} derives how polynomial learning rates such as $\alpha = 1/t^\omega$ converge much better than linear ($\alpha = 1/t$) rates.
 
+Picking the behavioural policy is important; it must balance exploring and gaining rewards (exploitation). For some policies, the $\epsilon$ parameter determines the ratio of exploration and exploitation, a high $\epsilon$ would result in more exploration. There are two common behaviour policies for this:
+\begin{itemize}
+  \item $\epsilon$-greedy: this policy randomly picks between (A) selecting the best action based on the current Q-table or (B) selecting another action. A or B is random with the ratio determined by $\epsilon$
+  \item $\epsilon$-soft: this policy assigns probabilities to all actions based upon their q-values, biased towards the higher Q-values by $\epsilon$. Then, random actions are chosen according to this probability distribution.
+\end{itemize}
 
-Q-learning can be biased when picking actions based on the maximum Q-values overoptimistic estimates can lead to sub-optimal decision making
-
-
-
-
-
+Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
 
 
 
