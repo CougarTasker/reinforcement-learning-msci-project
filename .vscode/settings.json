@@ -19,6 +19,14 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "**/__pycache__": true
-    }
+        "**/__pycache__": true,
+        "**/.pytest_cache":true,
+        "**/.coverage":false,
+        "**/.mypy_cache":true
+    },
+    "python.testing.pytestArgs": [
+        "code/tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

@@ -25,6 +25,8 @@
 				"znck.grammarly",
 				"ms-python.python",
 				"ms-python.black-formatter",
+				"ms-python.isort",
+				"ms-python.flake8",
 				"streetsidesoftware.code-spell-checker",
 				"njpwerner.autodocstring",
 				"LittleFoxTeam.vscode-python-test-adapter",
