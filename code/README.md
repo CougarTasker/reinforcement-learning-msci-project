@@ -15,6 +15,12 @@ To run the project run:
 poetry run start
 ```
 
+To view the documentation
+```Bash 
+python3 -m pydoc -p 3000 src
+```
+
+
 To run all linting and testing
 ```Bash
 pre-commit run --all-files
