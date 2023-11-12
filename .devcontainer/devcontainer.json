@@ -30,7 +30,8 @@
 				"streetsidesoftware.code-spell-checker",
 				"njpwerner.autodocstring",
 				"LittleFoxTeam.vscode-python-test-adapter",
-				"njqdev.vscode-python-typehint"
+				"njqdev.vscode-python-typehint",
+				"tamasfe.even-better-toml"
 			]
 		}
 	},

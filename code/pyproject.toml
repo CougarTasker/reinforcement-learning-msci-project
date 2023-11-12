@@ -6,12 +6,15 @@ authors = ["Cougar Tasker <cougartasker@outlook.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.10.*"
+python = ">= 3.10, < 3.12"
 numpy = "^1.26.1"
 kivy = "^2.2.1"
+toml = "^0.10.2"
+schema = "^0.7.5"
+
 
 [tool.poetry.scripts]
-main = "src.main:main"
+start = "src.main:main"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.11.0"
@@ -20,6 +23,7 @@ pytest-cov = "^4.1.0"
 flake8 = "^6.1.0"
 isort = "^5.12.0"
 mypy = "^1.6.1"
+pytest-mock = "^3.12.0"
 
 [tool.isort]
 profile = "black"
@@ -27,6 +31,8 @@ profile = "black"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.black]
+line-length = 80
 
 [build-system]
 requires = ["poetry-core"]

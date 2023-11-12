@@ -28,5 +28,11 @@
         "code/tests"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}/code/.venv/bin/python",
+    "python.pythonPath": "${workspaceFolder}/code/.venv/bin/python",
+    // "python.testing.cwd": "${workspaceFolder}/code",
+    "python.envFile": "${workspaceFolder}/code/.env",
+    "flake8.args": ["--config=${workspaceFolder}/code/setup.cfg"],
+    "flake8.cwd": "${workspaceFolder}/code"
 }

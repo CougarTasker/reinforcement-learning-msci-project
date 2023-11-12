@@ -12,7 +12,7 @@ poetry install
 To run the project run:
 
 ```Bash
-poetry run main
+poetry run start
 ```
 
 To run all linting and testing
