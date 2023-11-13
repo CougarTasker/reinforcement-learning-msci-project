@@ -1,10 +1,4 @@
-from kivy.app import App
-from kivy.uix.label import Label
-
-
-class ReinforcementLearningApp(App):
-    def build(self):
-        return Label(text="Hello world")
+from .view.App import ReinforcementLearningApp
 
 
 def main():
