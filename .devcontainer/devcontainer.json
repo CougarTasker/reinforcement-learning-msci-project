@@ -3,11 +3,8 @@
 {
 	"name": "FYP Devcontainer",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:jammy",
-	"features": {
-		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "texlive-full"
-		}
+	"build": {
+		"dockerfile": "Dockerfile"
 	},
 	"runArgs": ["--name", "FYP-Devcontainer"],
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -24,8 +21,17 @@
 		"vscode": {
 			"extensions": [
 				"James-Yu.latex-workshop",
+				"yzhang.markdown-all-in-one",
 				"znck.grammarly",
-				"yzhang.markdown-all-in-one"
+				"ms-python.python",
+				"ms-python.black-formatter",
+				"ms-python.isort",
+				"ms-python.flake8",
+				"streetsidesoftware.code-spell-checker",
+				"njpwerner.autodocstring",
+				"LittleFoxTeam.vscode-python-test-adapter",
+				"njqdev.vscode-python-typehint",
+				"tamasfe.even-better-toml"
 			]
 		}
 	},
