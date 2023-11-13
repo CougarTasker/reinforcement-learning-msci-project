@@ -10,6 +10,31 @@
     "cSpell.language": "en-GB",
     "cSpell.words": [
         "backpropagation",
-        "Kivy"
-    ]
+        "colors",
+        "kivy",
+        "kivymd"
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/__pycache__": true,
+        "**/.pytest_cache":true,
+        "**/.coverage":false,
+        "**/.mypy_cache":true
+    },
+    "python.testing.pytestArgs": [
+        "code/tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}/code/.venv/bin/python",
+    "python.pythonPath": "${workspaceFolder}/code/.venv/bin/python",
+    // "python.testing.cwd": "${workspaceFolder}/code",
+    "python.envFile": "${workspaceFolder}/code/.env",
+    "flake8.args": ["--config=${workspaceFolder}/code/setup.cfg"],
+    "flake8.cwd": "${workspaceFolder}/code"
 }
