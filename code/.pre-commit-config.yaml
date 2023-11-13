@@ -7,7 +7,7 @@ repos:
         name: isort
         stages: [commit]
         language: system
-        entry: bash -c "cd code; poetry run isort"
+        entry: bash -c "cd code; poetry run isort src"
         types: [python]
 
       - id: black

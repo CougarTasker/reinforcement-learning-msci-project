@@ -10,7 +10,9 @@
     "cSpell.language": "en-GB",
     "cSpell.words": [
         "backpropagation",
-        "Kivy"
+        "colors",
+        "kivy",
+        "kivymd"
     ],
     "files.exclude": {
         "**/.git": true,

@@ -9,8 +9,8 @@
             "type": "python",
             "request": "launch",
             "python": "${workspaceFolder}/code/.venv/bin/python",
-            "cwd": "${workspaceFolder}/code/src",
-            "module": "main",
+            "cwd": "${workspaceFolder}/code",
+            "module": "src.main",
             "justMyCode": true
         }
     ]
