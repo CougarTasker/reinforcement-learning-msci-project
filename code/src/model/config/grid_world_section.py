@@ -1,4 +1,5 @@
 from schema import Schema
+
 from .base_section import BaseConfigSection
 
 

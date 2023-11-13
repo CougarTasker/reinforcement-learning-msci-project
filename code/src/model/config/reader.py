@@ -1,6 +1,8 @@
-from typing import Any
-import toml
 from os import path
+from typing import Any
+
+import toml
+
 from .base_section import BaseConfigSection
 from .grid_world_section import GridWorldConfig
 
@@ -26,7 +28,9 @@ class ConfigReader:
     def load_config(self):
         """load or reload the configuration from the disk"""
         config_file_path = path.abspath(
-            path.join(path.dirname(__file__), "..", "..", self.config_file_name)
+            path.join(
+                path.dirname(__file__), "..", "..", "..", self.config_file_name
+            )
         )
 
         with open(config_file_path, "r") as config_file:

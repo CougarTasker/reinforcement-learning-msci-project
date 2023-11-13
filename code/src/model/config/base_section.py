@@ -1,5 +1,6 @@
-from schema import Schema
 from typing import Any
+
+from schema import Schema
 
 
 class BaseConfigSection:
