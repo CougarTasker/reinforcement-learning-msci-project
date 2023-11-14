@@ -4,7 +4,7 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.toolbar.toolbar import MDTopAppBar
 
 from ..model.config.reader import ConfigReader
-from .GridWorldView import GridWorldView
+from .grid_world_view import GridWorldView
 
 
 class ReinforcementLearningApp(MDApp):

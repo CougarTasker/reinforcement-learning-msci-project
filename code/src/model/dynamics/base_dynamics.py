@@ -1,8 +1,9 @@
 from ..state.state import StateInstance
+from ..state.state_pool import StatePool
 from .actions import Action
 
 
-class DynamicsBase(object):
+class BaseDynamics(object):
     """The abstract base class for dynamics classes.
 
     This class provides the basic methods a dynamics class is expected to
@@ -27,6 +28,7 @@ class DynamicsBase(object):
 
         self.width = width
         self.height = height
+        self.state_pool = StatePool
 
     def is_in_bounds(self, position: tuple[int, int]) -> bool:
         """Detect either a position is within the bounds of the grid.
@@ -54,16 +56,14 @@ class DynamicsBase(object):
             "This method must be overridden by concrete dynamics classes"
         )
 
-    def next(
-        self, current_state: StateInstance, action: Action
-    ) -> tuple[StateInstance, float]:
+    def next(self, current_state: int, action: Action) -> tuple[int, float]:
         """Compute the next state and reward.
 
         Must only compute the next reward and state based on only the provided
         current state and reward to obey the markov property.
 
         Args:
-            current_state (StateInstance): the state that the action is
+            current_state (int): the state that the action is
             performed in
             action (Action): the action the agent has chosen
 
@@ -72,8 +72,8 @@ class DynamicsBase(object):
             NotImplementedError: If this method has not been overridden
 
         Should Return:
-            tuple[StateInstance, float]: the resulting state after the action
-            has been performed and the reward from this action
+            tuple[int, float]: the resulting state after the action has been
+            performed and the reward from this action
         """
         raise NotImplementedError(
             "This method must be overridden by concrete dynamics classes"
