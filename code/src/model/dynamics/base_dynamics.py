@@ -1,4 +1,4 @@
-from ..state.state import StateInstance
+from ..state.state_instance import StateInstance
 from ..state.state_pool import StatePool
 from .actions import Action
 

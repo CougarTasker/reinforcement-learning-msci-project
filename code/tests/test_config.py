@@ -12,6 +12,9 @@ test_file = """
 width = 16
 height = 9
 entity_count = 5
+[grid_world.energy]
+energy_capacity=10
+initial_energy=10
 [grid_world.agent_location]
 x = 10
 y = 10
@@ -63,6 +66,9 @@ test_incorrect_data = """
 width = true
 height = false
 entity_count = 5
+[grid_world.energy]
+energy_capacity=10
+initial_energy=10
 [grid_world.agent_location]
 x = 10
 y = 10

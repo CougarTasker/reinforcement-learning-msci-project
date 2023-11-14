@@ -37,7 +37,7 @@ class GUIConfig(BaseConfigSection):
         Returns:
             str: The palate color.
         """
-        return self.configuration[self.theme_style_property]
+        return self.configuration[self.theme_palette_property]
 
     def grid_view_background_hue(self) -> int:
         """Get the hue for the background of the grid world view.

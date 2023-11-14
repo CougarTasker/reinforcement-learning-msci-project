@@ -8,10 +8,13 @@ class GridWorldConfig(BaseConfigSection):
 
     width_property = "width"
     height_property = "height"
-    location_property = "agent_location"
+    entity_count_property = "entity_count"
+    energy_section = "energy"
+    energy_capacity_property = "energy_capacity"
+    initial_energy_property = "initial_energy"
+    location_section = "agent_location"
     location_x_property = "x"
     location_y_property = "y"
-    entity_count_property = "entity_count"
 
     def __init__(self) -> None:
         """Instantiate Grid world section config."""
@@ -20,7 +23,11 @@ class GridWorldConfig(BaseConfigSection):
                 self.width_property: int,
                 self.height_property: int,
                 self.entity_count_property: int,
-                self.location_property: {
+                self.energy_section: {
+                    self.energy_capacity_property: int,
+                    self.initial_energy_property: int,
+                },
+                self.location_section: {
                     self.location_x_property: int,
                     self.location_y_property: int,
                 },
@@ -50,10 +57,10 @@ class GridWorldConfig(BaseConfigSection):
         Returns:
             tuple[int, int]: the agents location x,y
         """
-        pos_x = self.configuration[self.location_property][
+        pos_x = self.configuration[self.location_section][
             self.location_x_property
         ]
-        pos_y = self.configuration[self.location_property][
+        pos_y = self.configuration[self.location_section][
             self.location_y_property
         ]
         return pos_x, pos_y
@@ -65,3 +72,23 @@ class GridWorldConfig(BaseConfigSection):
             int: The default number of entities to be spawned
         """
         return self.configuration[self.entity_count_property]
+
+    def energy_capacity(self) -> int:
+        """Get the energy capacity.
+
+        Returns:
+            int: the default energy capacity
+        """
+        return self.configuration[self.energy_section][
+            self.energy_capacity_property
+        ]
+
+    def initial_energy(self) -> int:
+        """Get the initial energy for the agent.
+
+        Returns:
+            int: the default initial energy
+        """
+        return self.configuration[self.energy_section][
+            self.initial_energy_property
+        ]

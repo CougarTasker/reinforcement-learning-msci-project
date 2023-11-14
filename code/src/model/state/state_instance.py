@@ -23,9 +23,18 @@ class StateInstance(object):
             entities (Map[tuple[int, int], CellEntity]): _description_
             agent_energy (int): _description_
         """
-        self.agentLocation = agent_location
+        self.agent_location = agent_location
         self.entities = entities
         self.agent_energy = agent_energy
+
+    @classmethod
+    def get_blank_state(cls):
+        """Create a blank state.
+
+        Returns:
+            _type_: _description_
+        """
+        return StateInstance((0, 0), Map(), 10)
 
     def __hash__(self) -> int:
         """Generate a hash value for this state.
@@ -35,7 +44,7 @@ class StateInstance(object):
         Returns:
             int: the hash of this state
         """
-        return hash((self.agentLocation, self.entities, self.agent_energy))
+        return hash((self.agent_location, self.entities, self.agent_energy))
 
     def __eq__(self, other: object) -> bool:
         """Test for equality between two states.
@@ -49,7 +58,7 @@ class StateInstance(object):
         if not isinstance(other, StateInstance):
             return False
         return (
-            self.agentLocation == other.agentLocation
+            self.agent_location == other.agent_location
             and self.entities == other.entities
             and self.agent_energy == other.agent_energy
         )

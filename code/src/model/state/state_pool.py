@@ -1,6 +1,6 @@
 from typing import Dict
 
-from .state import StateInstance
+from .state_instance import StateInstance
 
 
 class StatePool(object):
