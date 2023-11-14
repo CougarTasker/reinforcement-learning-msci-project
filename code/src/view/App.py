@@ -3,19 +3,29 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCard
 from kivymd.uix.toolbar.toolbar import MDTopAppBar
 
-from . import primary_palette
+from ..model.config.reader import ConfigReader
 from .GridWorldView import GridWorldView
 
 
 class ReinforcementLearningApp(MDApp):
-    def build(self):
-        self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = primary_palette
+    """The root of the GUI.
 
+    The highest level widget of the GUI.
+    """
+
+    def build(self):
+        """Initialise the GUI.
+
+        Returns:
+            Widget: the widget tree to be rendered
+        """
+        config = ConfigReader().gui()
+        self.theme_cls.theme_style = config.theme_style()
+        self.theme_cls.primary_palette = config.theme_palette()
         return MDBoxLayout(
             MDTopAppBar(title="Reinforcement Learning Presentation"),
             MDBoxLayout(
-                MDCard(GridWorldView(), padding="10dp"), padding="10dp"
+                MDCard(GridWorldView(config), padding="10dp"), padding="10dp"
             ),
             orientation="vertical",
         )

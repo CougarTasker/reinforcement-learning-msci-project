@@ -11,6 +11,10 @@ test_file = """
 [grid_world]
 width = 16
 height = 9
+entity_count = 5
+[grid_world.agent_location]
+x = 10
+y = 10
 """
 
 
@@ -51,14 +55,17 @@ def test_validate_missing_data(mocker):
     )
     config = ConfigReader()
     with pytest.raises(Exception):
-        print(config.grid_world().width())
-        print(config.grid_world().height())
+        config.grid_world()
 
 
 test_incorrect_data = """
 [grid_world]
 width = true
 height = false
+entity_count = 5
+[grid_world.agent_location]
+x = 10
+y = 10
 """
 
 
