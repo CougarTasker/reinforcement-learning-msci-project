@@ -12,6 +12,7 @@
     - [Week 6 (23/10/23)](#week-6-231023)
     - [Week 7 (30/10/23)](#week-7-301023)
     - [Week 8 (6/10/23)](#week-8-61023)
+    - [Week 9 (13/11/23)](#week-9-131123)
 
 
 ## Weeks
@@ -94,3 +95,11 @@
  - (Thu 9) 
    - Complted Q-learning report
    - Started code setup
+ - (Weekend 10-11) continued setting up code
+
+### Week 9 (13/11/23)
+
+ - (Mon 13) 
+   - Completed code setup 
+ - (Tue 14) 
+   - Started vertical slice
