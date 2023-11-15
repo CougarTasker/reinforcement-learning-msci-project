@@ -1,4 +1,9 @@
 
+## Useful info  
+
+[we make python](https://readthedocs.org/projects/wemake-python-styleguide/) is the style guide that this project follows have a look at the [docs here](https://wemake-python-styleguide.readthedocs.io/en/latest/) for an explanation of their rules, some I have found to be contradictory with other tooling or excessively restrictive so I have disabled them
+
+
 
 ## Commands
 

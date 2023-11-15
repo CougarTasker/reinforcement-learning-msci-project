@@ -10,38 +10,9 @@ class BaseDynamics(object):
     implement and some common functionality
     """
 
-    def __init__(self, width: int, height: int) -> None:
-        """Instantiate a dynamics, provides the minimal required properties.
-
-        Raises:
-            TypeError: If the width or height are not integers
-            ValueError: if the width or height are not positive integer
-
-        Args:
-            width (int): The width of the grid world.
-            height (int): The height of the gird world.
-        """
-        if not isinstance(width, int) or not isinstance(height, int):
-            raise TypeError("width and height must be valid integers")
-        elif width < 1 or height < 1:
-            raise ValueError("width and height must be positive integers")
-
-        self.width = width
-        self.height = height
-        self.state_pool = StatePool
-
-    def is_in_bounds(self, position: tuple[int, int]) -> bool:
-        """Detect either a position is within the bounds of the grid.
-
-        Args:
-            position (tuple[int, int]): the position to test
-
-        Returns:
-            bool: true where the position is within the bounds of the grid
-            world.
-        """
-        x_pos, y_pos = position
-        return 0 <= x_pos < self.width and 0 <= y_pos < self.height
+    def __init__(self) -> None:
+        """Instantiate a dynamics, provides the minimal required properties."""
+        self.state_pool = StatePool()
 
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.
