@@ -1,3 +1,4 @@
+import random
 from typing import Any, Optional
 
 import numpy as np
@@ -5,7 +6,7 @@ import numpy as np
 from ...dynamics.actions import Action
 from ...dynamics.base_dynamics import BaseDynamics
 from ..base_agent import BaseAgent
-from .dynamics_distribution import DynamicsDistribution
+from .dynamics_distribution import DynamicsDistribution, distribution_result
 
 value_table_type = np.ndarray[Any, np.dtype[np.float64]]
 
@@ -17,16 +18,23 @@ class ValueIterationAgent(BaseAgent):
     """
 
     distribution_sample_count = 100
-    stopping_epsilon = float(np.finfo(float).eps) * 10
+    default_stopping_epsilon = float(np.finfo(float).eps) * 10
 
-    def __init__(self, discount_rate: float, dynamics: BaseDynamics) -> None:
+    def __init__(
+        self,
+        discount_rate: float,
+        dynamics: BaseDynamics,
+        stopping_epsilon: Optional[float] = None,
+    ) -> None:
         """Initialise the agent.
 
         Args:
             discount_rate (float): the rate future rewards should be discounted
-            by.
             dynamics (BaseDynamics): the dynamics function used to build the
             value table and pick optimal actions
+            stopping_epsilon (Optional[float]): the maximum amount of
+            inconsistency allowed in the value table, the smaller this value is
+            the larger the table will take to converge.
         """
         super().__init__(discount_rate)
         self.dynamics = dynamics
@@ -34,32 +42,11 @@ class ValueIterationAgent(BaseAgent):
             self.distribution_sample_count, dynamics
         )
         self.value_table: Optional[value_table_type] = None
-
-    def compute_updated_value(self, state: int) -> float:
-        """Compute the new value of the state based upon the latest value table.
-
-        Args:
-            state (int): the state to get the value for
-
-        Raises:
-            RuntimeError: if the value_table has not been populated.
-
-        Returns:
-            float: the new value for this state.
-        """
-        state_observations = self.dynamics_distribution.observations[state]
-        if self.value_table is None:
-            raise RuntimeError()
-        state_value = 0
-        for action in Action:
-            resulting_states = state_observations[action]
-            state_action_value = 0
-            for next_state, (reward, frequency) in resulting_states.items():
-                state_action_value += frequency * (
-                    reward + self.discount_rate * self.value_table[next_state]
-                )
-            state_value = max(state_value, state_action_value)
-        return state_value
+        self.stopping_epsilon: float = (
+            stopping_epsilon
+            if stopping_epsilon is not None
+            else self.default_stopping_epsilon
+        )
 
     def get_value_table(self) -> value_table_type:
         """Get the value table for the provided dynamics.
@@ -77,37 +64,123 @@ class ValueIterationAgent(BaseAgent):
         if not self.dynamics_distribution.has_compiled():
             self.dynamics_distribution.compile()
 
-        self.value_table = np.random.rand(
-            self.dynamics_distribution.get_state_count()
-        )
-
-        state_list = self.dynamics_distribution.list_states()
-
-        maximum_epsilon: float = self.stopping_epsilon + 1
-        while maximum_epsilon > self.stopping_epsilon:
-            maximum_epsilon = 0
-            for state in state_list:
-                new_value = self.compute_updated_value(state)
-                epsilon = abs(self.value_table[state] - new_value)
-                self.value_table[state] = new_value
-                maximum_epsilon = max(epsilon, maximum_epsilon)
+        self.value_table = self.compute_value_table()
 
         return self.value_table
+
+    def compute_value_table(
+        self,
+    ) -> value_table_type:
+        """Compute the optimal value table with value iteration.
+
+        Returns:
+            value_table_type: the value table for the dynamics
+        """
+        state_list = self.dynamics_distribution.list_states()
+        value_table = np.random.rand(len(state_list))
+        stopping_epsilon = self.stopping_epsilon
+        maximum_epsilon: float = 1
+        while maximum_epsilon > stopping_epsilon:
+            maximum_epsilon = 0
+            for state in state_list:
+                new_value = self.compute_updated_value(value_table, state)
+                epsilon = abs(value_table[state] - new_value)
+                value_table[state] = new_value
+                maximum_epsilon = max(epsilon, maximum_epsilon)
+        return value_table
+
+    def compute_updated_value(
+        self,
+        value_table: value_table_type,
+        state: int,
+    ) -> float:
+        """Compute the new value of the state based upon the latest value table.
+
+        Args:
+            value_table (value_table_type): our current expectation of value in
+            future states to base our estimate.
+            state (int): the state to calculate the value for.
+
+
+        Returns:
+            float: the new value for this state.
+        """
+        action_observations = self.dynamics_distribution.observations[state]
+        state_value = float(0)
+        for action in Action:
+            state_value = max(
+                state_value,
+                self.distribution_value(
+                    action_observations[action.value],
+                    value_table,
+                ),
+            )
+        return state_value
+
+    def distribution_value(
+        self,
+        distribution: distribution_result,
+        value_table: value_table_type,
+    ) -> float:
+        """Compute the expected action-value from its distribution.
+
+        Args:
+            distribution (distribution_result): the distribution of
+            results to weight the rewards
+            value_table (value_table_type): our current expectation of value in
+            future states to base our estimate.
+
+        Returns:
+            float: the expected value for this state and action
+        """
+        expected_value = 0
+        discount_rate = self.discount_rate
+        for next_state, (reward, frequency) in distribution.items():
+            expected_value += frequency * (
+                reward + discount_rate * value_table[next_state]
+            )
+        return expected_value
+
+    def action_value(self, state: int, action: Action):
+        """Compute the expected action-value of a given state.
+
+        Args:
+            state (int): the state the action is performed in
+            action (Action): the action to get the value of
+
+        Returns:
+            float: the expected value for this state and action
+        """
+        value_table = self.get_value_table()
+        return self.distribution_value(
+            self.dynamics_distribution.observations[state][action.value],
+            value_table,
+        )
 
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.
 
+        picks the best action based upon the value table.
+
         Args:
             state (int): the state the agent is performing this action
 
-        Raises:
-            NotImplementedError: If this method has not been overridden by
-            concrete agent.
 
-        Should return:
+        Returns:
             Action: the action to take in this state
         """
-        raise NotImplementedError()
+        best_action = random.choice(list(Action))
+        best_value = self.action_value(state, best_action)
+        # random default action to help break ties evenly
+        for action in Action:
+            if action is best_action:
+                continue
+            action_value = self.action_value(state, action)
+            if action_value > best_value:
+                best_value = action_value
+                best_action = action
+
+        return best_action
 
     def record_transition(
         self,

@@ -13,7 +13,6 @@ toml = "^0.10.2"
 schema = "^0.7.5"
 kivymd = "^1.1.1"
 immutables = "^0.20"
-numba = "^0.58.1"
 
 
 [tool.poetry.scripts]

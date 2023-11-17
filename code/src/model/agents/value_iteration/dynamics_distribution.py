@@ -8,6 +8,11 @@ from ...dynamics.base_dynamics import BaseDynamics
 
 # the new state with its expected reward and frequency for getting there
 distribution_result = Dict[int, Tuple[float, float]]
+observations_type = Dict[int, Dict[int, distribution_result]]
+
+
+# 2d array -_ state action to index
+# states index to
 
 
 class DynamicsDistribution(object):
@@ -29,7 +34,7 @@ class DynamicsDistribution(object):
         self.dynamics = dynamics
 
         # state, action, new_state -> reward, freq
-        self.observations: Dict[int, Dict[Action, distribution_result]] = {}
+        self.observations: observations_type = {}
 
     def compute_state_action_distribution(
         self, state: int, action: Action
@@ -58,7 +63,14 @@ class DynamicsDistribution(object):
         return reduced_output
 
     def compile(self):
-        """Compile the dynamics state distribution for analysis."""
+        """Compile the dynamics state distribution for analysis.
+
+        for some dynamics certain states are not reachable from the initial
+        state. if the initial state was changed to be one of these unreachable
+        states the distribution would need to be recalculated, and thus the
+        value table. The existing value table and distributions could be reused
+        but this is not within scope.
+        """
         frontier: List[int] = [self.dynamics.initial_state_id()]
         seen_states: Set[int] = set(frontier)
 
@@ -79,7 +91,7 @@ class DynamicsDistribution(object):
                 distribution = self.compute_state_action_distribution(
                     current_state, action
                 )
-                current_state_observations[action] = distribution
+                current_state_observations[action.value] = distribution
                 add_states(distribution.keys())
 
     def has_compiled(self) -> bool:

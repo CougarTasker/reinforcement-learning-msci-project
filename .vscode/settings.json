@@ -16,7 +16,6 @@
         "kivy",
         "kivymd",
         "ndarray",
-        "numba"
     ],
     "files.exclude": {
         "**/.git": true,
