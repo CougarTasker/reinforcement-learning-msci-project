@@ -103,3 +103,12 @@
    - Completed code setup 
  - (Tue 14) 
    - Started vertical slice
+ - (Wed 15)
+   - Started writing collection dynamics method
+ - (Thu 16)
+   - Completed collection dynamics
+   - Started implementing value iteration
+   - Fourth meeting with Anand
+ - (Fri 17)
+   - completed value iteration agent
+
