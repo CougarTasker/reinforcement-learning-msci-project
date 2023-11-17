@@ -12,8 +12,11 @@
         "astype",
         "backpropagation",
         "colors",
+        "dtype",
         "kivy",
-        "kivymd"
+        "kivymd",
+        "ndarray",
+        "numba"
     ],
     "files.exclude": {
         "**/.git": true,

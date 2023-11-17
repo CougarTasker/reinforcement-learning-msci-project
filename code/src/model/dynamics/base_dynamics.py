@@ -23,6 +23,23 @@ class BaseDynamics(object):
         self.config = config
         self.grid_world = GridWorld(config.width(), config.height())
 
+    def is_stochastic(self) -> bool:
+        """Determine weather the dynamics behave stochastically.
+
+        If stochastic then there is random variability in the output of `next`.
+        However variability distribution must still be markovian.
+
+        Raises:
+            NotImplementedError: If this method has not been overridden
+
+        Should Return:
+            bool: weather this dynamics behaves stochastically.
+
+        """
+        raise NotImplementedError(
+            "This method must be overridden by concrete dynamics classes"
+        )
+
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.
 

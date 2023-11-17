@@ -13,10 +13,13 @@ toml = "^0.10.2"
 schema = "^0.7.5"
 kivymd = "^1.1.1"
 immutables = "^0.20"
+numba = "^0.58.1"
 
 
 [tool.poetry.scripts]
 start = "src.main:main"
+profile = "src.profile:main"
+
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.11.0"
@@ -29,6 +32,7 @@ pytest-mock = "^3.12.0"
 types-toml = "^0.10.8.7"
 pep8-naming = "^0.13.3"
 wemake-python-styleguide = "^0.18.0"
+snakeviz = "^2.2.0"
 
 [tool.isort]
 profile = "black"

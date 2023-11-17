@@ -10,12 +10,28 @@ from .base_dynamics import BaseDynamics
 class CollectionDynamics(BaseDynamics):
     """Simple Dynamics where the agent can move to cells to collect goals."""
 
+    def is_stochastic(self) -> bool:
+        """Determine weather the dynamics behave stochastically.
+
+        Returns:
+            bool: false, this dynamics is deterministic
+        """
+        return False
+
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.
 
+        Raises:
+            ValueError: if the config specifies an invalid state. such as the
+            agent location being outside the bounds of the grid.
+
         Returns:
             StateInstance: the starting state.
+
         """
+        if not self.grid_world.is_in_bounds(self.config.agent_location()):
+            raise ValueError("config agent location outside of map bounds")
+
         initial_state_builder = (
             StateBuilder()
             .set_agent_location(self.config.agent_location())
@@ -24,7 +40,9 @@ class CollectionDynamics(BaseDynamics):
 
         goal_locations: Set[tuple[int, int]] = set()
         while len(goal_locations) < self.config.entity_count():
-            goal_locations.add(self.grid_world.random_in_bounds_cell())
+            location = self.grid_world.random_in_bounds_cell()
+            if location != initial_state_builder.agent_location:
+                goal_locations.add(location)
 
         for goal in goal_locations:
             initial_state_builder.set_entity(goal, CellEntity.goal)

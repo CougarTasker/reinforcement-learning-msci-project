@@ -3,6 +3,8 @@ from pytest import fixture
 from src.model.dynamics.grid_world import GridWorld
 from src.model.dynamics.collection_dynamics import CollectionDynamics
 from src.model.dynamics.actions import Action
+import numpy as np
+from itertools import cycle
 
 """
 Test Grid Initially:
@@ -19,13 +21,12 @@ test_goal_b = (0, 0)
 @fixture
 def dynamics(mocker):
     locations_mock = mocker.patch.object(GridWorld, "random_in_bounds_cell")
-    locations_mock.side_effect = [
-        test_goal_a,
-        test_goal_b,
-        (0, 0),
-        (0, 0),
-        (0, 0),
-    ]
+    locations_mock.side_effect = cycle(
+        [
+            test_goal_a,
+            test_goal_b,
+        ]
+    )
     return CollectionDynamics(TestConfig())
 
 
@@ -103,3 +104,62 @@ def test_dynamics(dynamics: CollectionDynamics):
     absorbing_right = dynamics.next(goal_b_state[0], Action.right)
     assert absorbing_right[0] == goal_b_state[0]
     assert absorbing_right[1] == 0
+
+
+def expected_state_count():
+    state_grid = 3 * 3
+    # positions without collecting + collect a first + collect b first +
+    # both collected accumulating states
+    return state_grid - 2 + (state_grid - 1) * 2 + 2
+
+
+def test_state_count(dynamics: CollectionDynamics):
+    state = dynamics.initial_state_id()
+
+    states_to_visit = [state]
+    seen_states = set(states_to_visit)
+    sections = []
+    while states_to_visit:
+        cur = states_to_visit.pop(0)
+        for action in Action:
+            next_state, r = dynamics.next_state_id(cur, action)
+            sections.append((cur, next_state, action, r))
+            if next_state not in seen_states:
+                seen_states.add(next_state)
+                states_to_visit.append(next_state)
+
+    paths = []
+
+    # mutual_pairs = set()
+    # for a in sections:
+    #     for b in sections:
+    #         if a[0] == b[1] and b[0] == a[1] and a[0] != a[1]:
+    #             mutual_pairs.add((a[0], b[0]))
+    #             paths.append(
+    #                 f"{a[0]} <-> {a[1]}: {a[2].name}/{b[2].name}, {a[3]}"
+    #             )
+
+    for cur, next_state, action, r in sections:
+        # if (cur, next_state) in mutual_pairs or (
+        #     next_state,
+        #     cur,
+        # ) in mutual_pairs:
+        #     continue
+        # if cur == next_state:
+        #     continue
+        paths.append(f"{cur} -> {next_state} [label=\"{action.name}, {r}\"];")
+    print("\n".join(paths))
+    assert len(seen_states) == expected_state_count()
+
+
+def simple_state_grid_to_array(si):
+    grid = np.zeros((3, 3))
+
+    def set_gird_location(pos, value):
+        x, y = pos
+        y_f = 2 - y
+        grid[y_f, x] = grid[y_f, x] + value
+
+    set_gird_location(si.agent_location, 2)
+    for entity in si.entities.keys():
+        set_gird_location(entity, 1)

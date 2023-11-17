@@ -7,7 +7,7 @@ energy_capacity=10
 initial_energy=10
 [grid_world.agent_location]
 x = 10
-y = 10
+y = 5
 
 
 [gui]
