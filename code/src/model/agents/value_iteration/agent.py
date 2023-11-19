@@ -3,6 +3,7 @@ from typing import Any, Optional
 
 import numpy as np
 
+from ...config.agent_section import AgentConfig
 from ...dynamics.actions import Action
 from ...dynamics.base_dynamics import BaseDynamics
 from ..base_agent import BaseAgent
@@ -17,36 +18,26 @@ class ValueIterationAgent(BaseAgent):
     This agent uses that table with the dynamics to pick optimal actions.
     """
 
-    distribution_sample_count = 100
-    default_stopping_epsilon = float(np.finfo(float).eps) * 10
-
     def __init__(
         self,
-        discount_rate: float,
+        config: AgentConfig,
         dynamics: BaseDynamics,
-        stopping_epsilon: Optional[float] = None,
     ) -> None:
         """Initialise the agent.
 
         Args:
-            discount_rate (float): the rate future rewards should be discounted
+            config (AgentConfig): the configuration for the agent.
             dynamics (BaseDynamics): the dynamics function used to build the
             value table and pick optimal actions
-            stopping_epsilon (Optional[float]): the maximum amount of
-            inconsistency allowed in the value table, the smaller this value is
-            the larger the table will take to converge.
         """
-        super().__init__(discount_rate)
+        super().__init__(config)
         self.dynamics = dynamics
         self.dynamics_distribution = DynamicsDistribution(
-            self.distribution_sample_count, dynamics
+            config.sample_count(), dynamics
         )
+        self.stopping_epsilon = config.stopping_epsilon()
+        self.discount_rate = config.discount_rate()
         self.value_table: Optional[value_table_type] = None
-        self.stopping_epsilon: float = (
-            stopping_epsilon
-            if stopping_epsilon is not None
-            else self.default_stopping_epsilon
-        )
 
     def get_value_table(self) -> value_table_type:
         """Get the value table for the provided dynamics.

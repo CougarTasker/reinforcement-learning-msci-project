@@ -13,9 +13,10 @@
         "backpropagation",
         "colors",
         "dtype",
+        "finfo",
         "kivy",
         "kivymd",
-        "ndarray",
+        "ndarray"
     ],
     "files.exclude": {
         "**/.git": true,

@@ -1,17 +1,17 @@
+from ..config.agent_section import AgentConfig
 from ..dynamics.actions import Action
 
 
 class BaseAgent(object):
     """Provides the common base for different learning agents."""
 
-    def __init__(self, discount_rate: float) -> None:
+    def __init__(self, config: AgentConfig) -> None:
         """Initialise an agent.
 
         Args:
-            discount_rate (float): the rate future rewards should be discounted
-            by.
+            config (AgentConfig): the configuration for the agent.
         """
-        self.discount_rate = discount_rate
+        self.config = config
 
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.

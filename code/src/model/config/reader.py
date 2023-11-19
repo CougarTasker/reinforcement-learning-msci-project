@@ -3,6 +3,7 @@ from typing import Any
 
 import toml
 
+from .agent_section import AgentConfig
 from .base_section import BaseConfigSection
 from .grid_world_section import GridWorldConfig
 from .gui_section import GUIConfig
@@ -63,6 +64,15 @@ class ConfigReader(object):
             configuration
         """
         return self.__initialise_section(GUIConfig())
+
+    def agent(self) -> AgentConfig:
+        """Get the configuration for agents.
+
+        Returns:
+            AgentConfig: an object that describes the agent
+            configuration
+        """
+        return self.__initialise_section(AgentConfig())
 
     def __initialise_section(self, section: BaseConfigSection) -> Any:
         """Populate a section object with data.
