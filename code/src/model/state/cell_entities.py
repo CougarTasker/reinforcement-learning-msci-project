@@ -6,3 +6,4 @@ class CellEntity(Enum):
 
     agent = 1
     goal = 2
+    empty = 3

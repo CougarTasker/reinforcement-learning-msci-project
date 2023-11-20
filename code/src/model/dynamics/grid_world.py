@@ -1,3 +1,5 @@
+from typing import Generator
+
 import numpy as np
 
 from .actions import Action
@@ -88,3 +90,12 @@ class GridWorld(object):
                 raise ValueError(
                     f"Action {action.name} is not a known movement action"
                 )
+
+    def list_cells(self) -> Generator[tuple[int, int], None, None]:
+        """Generate all cells in the grid world.
+
+        Yields:
+            Generator[tuple[int, int], None, None]: each cell location
+        """
+        for y_pos in range(self.height):
+            yield from ((x_pos, y_pos) for x_pos in range(self.width))
