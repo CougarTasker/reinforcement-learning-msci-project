@@ -9,7 +9,7 @@ from src.model.config.reader import ConfigReader
 
 from ..controller.learning_instance_controller import InstanceController
 from ..controller.options import AgentOptions, DynamicsOptions
-from .grid_world_view.view import GridPadding
+from .grid_world_view.display_state.display import DisplayState
 
 
 class ReinforcementLearningApp(CTk):
@@ -29,7 +29,7 @@ class ReinforcementLearningApp(CTk):
         self.controller = InstanceController(
             AgentOptions.value_iteration, DynamicsOptions.collection
         )
-        GridPadding(self, self.controller.get_current_state()).grid(
+        DisplayState(self, self.controller.get_current_state()).grid(
             row=1, column=0, columnspan=2, sticky="nsew"
         )
 

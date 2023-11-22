@@ -12,11 +12,10 @@
         "astype",
         "backpropagation",
         "colors",
+        "columnspan",
         "dtype",
         "finfo",
         "fromarray",
-        "kivy",
-        "kivymd",
         "ndarray",
         "RHUL"
     ],

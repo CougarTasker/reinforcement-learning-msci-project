@@ -1,1 +1,1 @@
-"""This package sets up the view for a grid world."""
+"""This package allows you to display and interact with a grid world."""
