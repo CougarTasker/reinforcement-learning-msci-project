@@ -1,11 +1,13 @@
-from .test_collection_dynamics import dynamics
-from src.model.dynamics.base_dynamics import BaseDynamics
+from timeit import timeit
+
+import numpy as np
+
 from src.model.agents.value_iteration.dynamics_distribution import (
     DynamicsDistribution,
 )
-from timeit import timeit
-import numpy as np
-from .test_collection_dynamics import expected_state_count
+from src.model.dynamics.base_dynamics import BaseDynamics
+
+from .test_collection_dynamics import dynamics, expected_state_count
 
 
 def test_sequential_integers(dynamics: BaseDynamics):

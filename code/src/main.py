@@ -6,7 +6,7 @@ def main():
 
     The main entry point into the application.
     """
-    ReinforcementLearningApp().run()
+    ReinforcementLearningApp().mainloop()
 
 
 if __name__ == "__main__":

@@ -47,8 +47,9 @@ class GridWorld(object):
             tuple[int, int]: the cell position within the grid.
         """
         dimensions = np.array([self.width, self.height])
-        position = np.random.rand(2) * dimensions
-        return tuple(np.floor(position).astype(int))
+        position_float = np.random.rand(2) * dimensions
+        position_integer = np.floor(position_float).astype(int)
+        return (position_integer[0], position_integer[1])
 
     def movement_action(
         self,

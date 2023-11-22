@@ -1,6 +1,8 @@
-from src.model.dynamics.actions import Action
 from enum import Enum
+
 import numpy as np
+
+from src.model.dynamics.actions import Action
 
 
 class VacuumStates(Enum):

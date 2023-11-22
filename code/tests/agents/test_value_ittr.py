@@ -1,11 +1,13 @@
-from .agent_dynamics_mock import VacuumDynamics, TestAgentConfig, VacuumStates
-from src.model.dynamics.actions import Action
+import numpy as np
+from numpy import testing
+
 from src.model.agents.value_iteration.agent import ValueIterationAgent
 from src.model.agents.value_iteration.dynamics_distribution import (
     DynamicsDistribution,
 )
-from numpy import testing
-import numpy as np
+from src.model.dynamics.actions import Action
+
+from .agent_dynamics_mock import TestAgentConfig, VacuumDynamics, VacuumStates
 
 
 def test_get_table():

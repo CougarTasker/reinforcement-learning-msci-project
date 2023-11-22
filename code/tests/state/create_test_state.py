@@ -1,6 +1,7 @@
-from src.model.state.state_instance import StateInstance
-from src.model.state.cell_entities import CellEntity
 from immutables import Map
+
+from src.model.state.cell_entities import CellEntity
+from src.model.state.state_instance import StateInstance
 
 
 def create_test_state(sku: int) -> StateInstance:

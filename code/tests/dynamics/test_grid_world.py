@@ -1,7 +1,8 @@
-from src.model.dynamics.grid_world import GridWorld
-from src.model.dynamics.actions import Action
-from pytest import raises
 import numpy as np
+from pytest import raises
+
+from src.model.dynamics.actions import Action
+from src.model.dynamics.grid_world import GridWorld
 
 
 def test_grid_world():

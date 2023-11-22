@@ -9,8 +9,12 @@ initial_energy=10
 x = 10
 y = 5
 
+[agent]
+discount_rate = 0.9
+stopping_epsilon = 0.000000000000000001
+learning_rate = 0.001
+sample_count = 100
 
 [gui]
-theme_style = "Dark"
-primary_palette = "DeepPurple"
-grid_view_background_hue=800
+appearance_mode = "dark"
+color_theme = "blue"

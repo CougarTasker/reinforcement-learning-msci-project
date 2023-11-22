@@ -1,5 +1,6 @@
-from .create_test_state import create_test_state
 from src.model.state.state_pool import StatePool
+
+from .create_test_state import create_test_state
 
 
 def test_state_pool_get():

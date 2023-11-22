@@ -1,5 +1,6 @@
-from src.model.config.reader import ConfigReader
 import pytest
+
+from src.model.config.reader import ConfigReader
 
 
 @pytest.fixture(autouse=True)

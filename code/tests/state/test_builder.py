@@ -1,6 +1,6 @@
+from src.model.state.cell_entities import CellEntity
 from src.model.state.state_builder import StateBuilder
 from src.model.state.state_instance import StateInstance
-from src.model.state.cell_entities import CellEntity
 
 
 def test_default_state():

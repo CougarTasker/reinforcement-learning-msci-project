@@ -1,10 +1,13 @@
-from .mini_config import TestConfig
-from pytest import fixture
-from src.model.dynamics.grid_world import GridWorld
-from src.model.dynamics.collection_dynamics import CollectionDynamics
-from src.model.dynamics.actions import Action
-import numpy as np
 from itertools import cycle
+
+import numpy as np
+from pytest import fixture
+
+from src.model.dynamics.actions import Action
+from src.model.dynamics.collection_dynamics import CollectionDynamics
+from src.model.dynamics.grid_world import GridWorld
+
+from .mini_config import TestConfig
 
 """
 Test Grid Initially:
