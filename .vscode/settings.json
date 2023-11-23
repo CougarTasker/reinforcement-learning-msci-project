@@ -9,10 +9,15 @@
     ],
     "cSpell.language": "en-GB",
     "cSpell.words": [
+        "astype",
         "backpropagation",
         "colors",
-        "kivy",
-        "kivymd"
+        "columnspan",
+        "dtype",
+        "finfo",
+        "fromarray",
+        "ndarray",
+        "RHUL"
     ],
     "files.exclude": {
         "**/.git": true,
@@ -36,5 +41,7 @@
     // "python.testing.cwd": "${workspaceFolder}/code",
     "python.envFile": "${workspaceFolder}/code/.env",
     "flake8.args": ["--config=${workspaceFolder}/code/setup.cfg"],
-    "flake8.cwd": "${workspaceFolder}/code"
+    "flake8.cwd": "${workspaceFolder}/code",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic"
 }

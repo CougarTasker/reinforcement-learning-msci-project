@@ -1,21 +1,40 @@
-from kivymd.app import MDApp
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.card import MDCard
-from kivymd.uix.toolbar.toolbar import MDTopAppBar
+from customtkinter import (
+    CTk,
+    CTkLabel,
+    set_appearance_mode,
+    set_default_color_theme,
+)
 
-from . import primary_palette
-from .GridWorldView import GridWorldView
+from src.model.config.reader import ConfigReader
+
+from ..controller.learning_instance_controller import InstanceController
+from ..controller.options import AgentOptions, DynamicsOptions
+from .grid_world_view.grid_world import GridWorld
 
 
-class ReinforcementLearningApp(MDApp):
-    def build(self):
-        self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = primary_palette
+class ReinforcementLearningApp(CTk):
+    """Root of the application's view."""
 
-        return MDBoxLayout(
-            MDTopAppBar(title="Reinforcement Learning Presentation"),
-            MDBoxLayout(
-                MDCard(GridWorldView(), padding="10dp"), padding="10dp"
-            ),
-            orientation="vertical",
+    def __init__(self):
+        """Initialise the custom tkinter app."""
+        super().__init__()
+        self.title("RHUL MSci FYP - Reinforcement Learning App")
+        self.setup_config()
+
+        self.grid_columnconfigure((0, 1), weight=1)
+        self.grid_rowconfigure(1, weight=1, minsize=0)
+
+        controller = InstanceController(
+            AgentOptions.value_iteration, DynamicsOptions.collection
         )
+
+        CTkLabel(self, text="Reinforcement Learning App").grid(row=0, column=0)
+        GridWorld(self, controller).grid(
+            row=1, column=0, columnspan=2, sticky="nsew"
+        )
+
+    def setup_config(self):
+        """Set app properties from config."""
+        config = ConfigReader().gui()
+        set_appearance_mode(config.appearance_mode())
+        set_default_color_theme(config.color_theme())
