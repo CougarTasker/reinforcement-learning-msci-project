@@ -1,4 +1,6 @@
-from typing import Set
+from typing import Optional, Set, Tuple
+
+from src.model.config.grid_world_section import GridWorldConfig
 
 from ..state.cell_entities import CellEntity
 from ..state.state_builder import StateBuilder
@@ -6,9 +8,20 @@ from ..state.state_instance import StateInstance
 from .actions import Action
 from .base_dynamics import BaseDynamics
 
+spawn_positions_type = Set[Tuple[int, int]]
+
 
 class CollectionDynamics(BaseDynamics):
     """Simple Dynamics where the agent can move to cells to collect goals."""
+
+    def __init__(self, config: GridWorldConfig) -> None:
+        """Initialise collection dynamics.
+
+        Args:
+            config (GridWorldConfig): the configuration used by this dynamics.
+        """
+        super().__init__(config)
+        self.spawn_positions: Optional[spawn_positions_type] = None
 
     def is_stochastic(self) -> bool:
         """Determine weather the dynamics behave stochastically.
@@ -17,6 +30,26 @@ class CollectionDynamics(BaseDynamics):
             bool: false, this dynamics is deterministic
         """
         return False
+
+    def get_spawn_positions(self) -> spawn_positions_type:
+        """Get the positions where flags can be spawned.
+
+        these will be a number of unique positions in the grid world bounds.
+        Initially chosen at random but then fixed for subsequent calls
+
+        Returns:
+            spawn_positions_type: the set of positions where goals can be
+            spawned.
+        """
+        if self.spawn_positions is not None:
+            return self.spawn_positions
+        agent_location = self.config.agent_location()
+        self.spawn_positions = set()
+        while len(self.spawn_positions) < self.config.entity_count():
+            location = self.grid_world.random_in_bounds_cell()
+            if location != agent_location:
+                self.spawn_positions.add(location)
+        return self.spawn_positions
 
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.
@@ -38,13 +71,7 @@ class CollectionDynamics(BaseDynamics):
             .set_energy(self.config.initial_energy())
         )
 
-        goal_locations: Set[tuple[int, int]] = set()
-        while len(goal_locations) < self.config.entity_count():
-            location = self.grid_world.random_in_bounds_cell()
-            if location != initial_state_builder.agent_location:
-                goal_locations.add(location)
-
-        for goal in goal_locations:
+        for goal in self.get_spawn_positions():
             initial_state_builder.set_entity(goal, CellEntity.goal)
 
         return initial_state_builder.build()

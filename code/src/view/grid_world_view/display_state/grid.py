@@ -1,3 +1,5 @@
+from typing import Dict, Tuple
+
 from customtkinter import CTkFrame
 
 from ....controller.state_description import StateDescription
@@ -19,7 +21,9 @@ class InnerGrid(CTkFrame):
         """
         super().__init__(master, fg_color="transparent", width=0, height=0)
         self.grid_propagate(False)
-        self.set_state(state)
+        self.cells: Dict[Tuple[int, int], Cell] = {}
+        self.state = state
+        self.__populate_cells()
         self.bind(
             "<Configure>",
             command=self.resize,
@@ -53,11 +57,31 @@ class InnerGrid(CTkFrame):
         Args:
             state (StateDescription): the state to display
         """
+        previous_grid = self.state.grid_world
         self.state = state
+        if previous_grid is not state.grid_world:
+            self.__populate_cells()
+            return
 
-        for cell in state.grid_world.list_cells():
-            column, row = cell
-            Cell(self, state.cell_entity(cell)).grid(
+        for cell in self.state.grid_world.list_cells():
+            self.cells[cell].set_entity(state.cell_entity(cell))
+
+    def __populate_cells(self):
+        """Create new grid of cells.
+
+        Removes existing cells and creates a new grid according to the current
+        state description.
+        """
+        for cell_widget in self.cells.values():
+            cell_widget.destroy()
+
+        self.cells = {}
+        for cell_location in self.state.grid_world.list_cells():
+            column, row = cell_location
+            self.cells[cell_location] = Cell(
+                self, self.state.cell_entity(cell_location)
+            )
+            self.cells[cell_location].grid(
                 row=row,
                 column=column,
                 sticky="nsew",

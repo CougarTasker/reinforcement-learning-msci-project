@@ -9,7 +9,7 @@ from src.model.config.reader import ConfigReader
 
 from ..controller.learning_instance_controller import InstanceController
 from ..controller.options import AgentOptions, DynamicsOptions
-from .grid_world_view.display_state.display import DisplayState
+from .grid_world_view.grid_world import GridWorld
 
 
 class ReinforcementLearningApp(CTk):
@@ -24,12 +24,12 @@ class ReinforcementLearningApp(CTk):
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(1, weight=1, minsize=0)
 
-        CTkLabel(self, text="Reinforcement Learning App").grid(row=0, column=0)
-
-        self.controller = InstanceController(
+        controller = InstanceController(
             AgentOptions.value_iteration, DynamicsOptions.collection
         )
-        DisplayState(self, self.controller.get_current_state()).grid(
+
+        CTkLabel(self, text="Reinforcement Learning App").grid(row=0, column=0)
+        GridWorld(self, controller).grid(
             row=1, column=0, columnspan=2, sticky="nsew"
         )
 

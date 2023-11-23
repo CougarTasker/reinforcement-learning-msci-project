@@ -1,4 +1,10 @@
-class TestConfig:
+from src.model.config.grid_world_section import GridWorldConfig
+
+
+class TestConfig(GridWorldConfig):
+    def __init__(self) -> None:
+        pass
+
     def width(self) -> int:
         return 3
 

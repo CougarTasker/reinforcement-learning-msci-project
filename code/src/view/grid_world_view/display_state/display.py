@@ -11,7 +11,7 @@ class DisplayState(CTkFrame):
     the correct aspect ratio and centring the content
     """
 
-    default_size = 800
+    default_size = 0
 
     def __init__(self, master, state: StateDescription):
         """Initialise the padding widget.

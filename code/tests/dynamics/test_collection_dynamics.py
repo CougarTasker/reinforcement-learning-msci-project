@@ -133,36 +133,18 @@ def test_state_count(dynamics: CollectionDynamics):
 
     paths = []
 
-    # mutual_pairs = set()
-    # for a in sections:
-    #     for b in sections:
-    #         if a[0] == b[1] and b[0] == a[1] and a[0] != a[1]:
-    #             mutual_pairs.add((a[0], b[0]))
-    #             paths.append(
-    #                 f"{a[0]} <-> {a[1]}: {a[2].name}/{b[2].name}, {a[3]}"
-    #             )
-
     for cur, next_state, action, r in sections:
-        # if (cur, next_state) in mutual_pairs or (
-        #     next_state,
-        #     cur,
-        # ) in mutual_pairs:
-        #     continue
-        # if cur == next_state:
-        #     continue
-        paths.append(f"{cur} -> {next_state} [label=\"{action.name}, {r}\"];")
+        paths.append(f'{cur} -> {next_state} [label="{action.name}, {r}"];')
     print("\n".join(paths))
     assert len(seen_states) == expected_state_count()
 
 
-def simple_state_grid_to_array(si):
-    grid = np.zeros((3, 3))
+def test_consistent_initial_state(dynamics: CollectionDynamics):
+    state_a = dynamics.initial_state()
+    state_b = dynamics.initial_state()
+    assert state_a == state_b
 
-    def set_gird_location(pos, value):
-        x, y = pos
-        y_f = 2 - y
-        grid[y_f, x] = grid[y_f, x] + value
+    id_a = dynamics.initial_state_id()
+    id_b = dynamics.initial_state_id()
 
-    set_gird_location(si.agent_location, 2)
-    for entity in si.entities.keys():
-        set_gird_location(entity, 1)
+    assert id_a == id_b
