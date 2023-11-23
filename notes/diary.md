@@ -13,6 +13,7 @@
     - [Week 7 (30/10/23)](#week-7-301023)
     - [Week 8 (6/10/23)](#week-8-61023)
     - [Week 9 (13/11/23)](#week-9-131123)
+    - [Week 10 (20/11/23)](#week-10-201123)
 
 
 ## Weeks
@@ -93,7 +94,7 @@
    - Completed policy and value report
    - Started Q-learning report
  - (Thu 9) 
-   - Complted Q-learning report
+   - Completed Q-learning report
    - Started code setup
  - (Weekend 10-11) continued setting up code
 
@@ -112,3 +113,20 @@
  - (Fri 17)
    - completed value iteration agent
 
+### Week 10 (20/11/23)
+
+ - (Mon 20) 
+   - Created controllers to tie view and model together.
+   - Tried to display grid with canvas approach
+     - ran into rendering limitations, with many rectangles rectangles kivy started to have issues with rendering the icons.
+ - (Tue 21) tried widget based approach
+   - Tried using kivy's layout widgets to display the grid
+   - while the icons were no longer an issue positioning the grid became impossible 
+   - investigated kivy alternatives
+ - (Wed 22) Pivoted to using tkinter 
+   - remade exiting UI in tkinter and updated tooling for working with tkinter
+   - completed grid world display widget
+ - (Thu 23)
+   - Added button that progresses the state over time.
+   - Created methods to provide the value information to the view, allowing for visualisation.
+   - 
