@@ -1,6 +1,10 @@
+from typing import Tuple
+
 from immutables import Map
 
 from .cell_entities import CellEntity
+
+entities_type = Map[tuple[int, int], CellEntity]
 
 
 class StateInstance(object):
@@ -8,8 +12,8 @@ class StateInstance(object):
 
     def __init__(
         self,
-        agent_location: tuple[int, int],
-        entities: Map[tuple[int, int], CellEntity],
+        agent_location: Tuple[int, int],
+        entities: entities_type,
         agent_energy: int,
     ) -> None:
         """Initialise a new state.
@@ -20,7 +24,7 @@ class StateInstance(object):
 
         Args:
             agent_location (tuple[int, int]): _description_
-            entities (Map[tuple[int, int], CellEntity]): _description_
+            entities (entities_type): _description_
             agent_energy (int): _description_
         """
         self.agent_location = agent_location

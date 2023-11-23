@@ -76,8 +76,8 @@ class Cell(CTkFrame):
         image_size = int(
             min(
                 self.icon_relative_size * cell_size,
-                cell_size - self.icon_padding,
-            )
+                max(cell_size - self.icon_padding, 0),
+            ),
         )
 
         self.icon.configure(size=(image_size, image_size))

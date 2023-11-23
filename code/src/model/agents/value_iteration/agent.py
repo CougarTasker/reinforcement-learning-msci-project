@@ -132,7 +132,7 @@ class ValueIterationAgent(BaseAgent):
             )
         return expected_value
 
-    def action_value(self, state: int, action: Action):
+    def get_state_action_value(self, state: int, action: Action):
         """Compute the expected action-value of a given state.
 
         Args:
@@ -148,6 +148,17 @@ class ValueIterationAgent(BaseAgent):
             value_table,
         )
 
+    def get_state_value(self, state: int) -> float:
+        """Get the agents interpretation of the value of this state.
+
+        Args:
+            state (int): the state to evaluate
+
+        Returns:
+            float: the agents interpretation of the value of this state
+        """
+        return self.get_value_table()[state]
+
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.
 
@@ -161,12 +172,12 @@ class ValueIterationAgent(BaseAgent):
             Action: the action to take in this state
         """
         best_action = random.choice(list(Action))
-        best_value = self.action_value(state, best_action)
+        best_value = self.get_state_action_value(state, best_action)
         # random default action to help break ties evenly
         for action in Action:
             if action is best_action:
                 continue
-            action_value = self.action_value(state, action)
+            action_value = self.get_state_action_value(state, action)
             if action_value > best_value:
                 best_value = action_value
                 best_action = action

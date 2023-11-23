@@ -1,5 +1,8 @@
 from typing import Optional
 
+from src.model.state_value.normaliser import StateValueNormaliser
+from src.model.state_value.normaliser_factory import NormaliserFactory
+
 from ..model.agents.base_agent import BaseAgent
 from ..model.agents.value_iteration.agent import ValueIterationAgent
 from ..model.config.reader import ConfigReader
@@ -33,6 +36,7 @@ class InstanceController(object):
         self.agent: Optional[BaseAgent] = None
         self.dynamics: Optional[BaseDynamics] = None
         self.current_state: Optional[int] = None
+        self.value_normalisation_factory: Optional[NormaliserFactory] = None
 
     def get_dynamics(self) -> BaseDynamics:
         """Get the dynamics.
@@ -126,6 +130,21 @@ class InstanceController(object):
             reward,
         )
 
+    def get_normaliser(self, state_id: int) -> StateValueNormaliser:
+        """Get the normaliser for a given state.
+
+        Args:
+            state_id (int): the state to base the normaliser on
+
+        Returns:
+            StateValueNormaliser: the normaliser for this state
+        """
+        if self.value_normalisation_factory is None:
+            self.value_normalisation_factory = NormaliserFactory(
+                self.get_agent(), self.get_dynamics()
+            )
+        return self.value_normalisation_factory.create_normaliser(state_id)
+
     def __get_current_state_id(self) -> int:
         if self.current_state is not None:
             return self.current_state
@@ -133,4 +152,6 @@ class InstanceController(object):
         return self.current_state
 
     def __state_id_to_description(self, state_id: int) -> StateDescription:
-        return StateDescription(self.get_dynamics(), state_id)
+        return StateDescription(
+            self.get_dynamics(), state_id, self.get_normaliser(state_id)
+        )

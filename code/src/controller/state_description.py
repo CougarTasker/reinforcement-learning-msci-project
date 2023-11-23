@@ -1,19 +1,28 @@
-from src.model.dynamics.base_dynamics import BaseDynamics
-from src.model.state.cell_entities import CellEntity
+from ..model.dynamics.base_dynamics import BaseDynamics
+from ..model.state.cell_entities import CellEntity
+from ..model.state_value.normaliser import StateValueNormaliser
 
 
 class StateDescription(object):
     """Compile together the dynamic static state information."""
 
-    def __init__(self, dynamics: BaseDynamics, state: int) -> None:
+    def __init__(
+        self,
+        dynamics: BaseDynamics,
+        state: int,
+        normaliser: StateValueNormaliser,
+    ) -> None:
         """Initiate this state description.
 
         Args:
             dynamics (BaseDynamics): the dynamics this state is a part of
             state (int): the state to describe
+            normaliser (StateValueNormaliser): the state value normaliser
+            allowing for visualisations of the current state value table.
         """
         self.grid_world = dynamics.grid_world
         self.state = dynamics.state_pool.get_state_from_id(state)
+        self.normaliser = normaliser
 
     def cell_entity(self, cell: tuple[int, int]) -> CellEntity:
         """Get the cell entity at a given location.
