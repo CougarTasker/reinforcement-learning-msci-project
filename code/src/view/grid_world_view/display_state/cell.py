@@ -1,5 +1,6 @@
 from typing import Optional
 
+from colour import Color
 from customtkinter import CTkFrame, CTkImage, CTkLabel
 
 from src.model.state.cell_entities import CellEntity
@@ -12,8 +13,9 @@ class Cell(CTkFrame):
 
     icon_padding = 5
     icon_relative_size = 0.7
+    default_background_color = "grey30"
 
-    def __init__(self, master, entity: CellEntity):
+    def __init__(self, master, entity: CellEntity, cell_value: Optional[float]):
         """Initialise the cell.
 
         displays the cell as a rounded rectangle with an icon if the cell is not
@@ -22,13 +24,19 @@ class Cell(CTkFrame):
         Args:
             master (_type_): the parent grid to draw this cell into
             entity (CellEntity): the entity that is in this cell.
+            cell_value (Optional[float]): the value of this cell corresponds
+            with the color to draw this cell.
         """
-        super().__init__(master, fg_color="grey30", width=0, height=0)
+        super().__init__(
+            master, fg_color=self.default_background_color, width=0, height=0
+        )
 
         self.grid_propagate(False)
+        self.cell_value: Optional[float] = None
         self.entity: Optional[CellEntity] = None
         self.label: Optional[CTkLabel] = None
         self.icon: Optional[CTkImage] = None
+        self.set_value(cell_value)
         self.set_entity(entity)
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -36,6 +44,15 @@ class Cell(CTkFrame):
             "<Configure>",
             command=self.resize,
         )
+
+    def set_value(self, cell_value: Optional[float]):
+        """Set the value of this state.
+
+        Args:
+            cell_value (Optional[float]): The new cell value, None for default.
+        """
+        self.cell_value = cell_value
+        self.configure(fg_color=self.__cell_color())
 
     def set_entity(self, entity: CellEntity):
         """Update the current entity.
@@ -52,7 +69,7 @@ class Cell(CTkFrame):
             self.label = None
             self.icon = None
             return
-        self.icon = IconLoader().get_icon(self.icon_type())
+        self.icon = IconLoader().get_icon(self.__icon_type())
         self.label = CTkLabel(self, image=self.icon, text="")
         self.label.grid(
             row=0,
@@ -83,7 +100,7 @@ class Cell(CTkFrame):
         self.icon.configure(size=(image_size, image_size))
         self.label.configure(image=self.icon)
 
-    def icon_type(self) -> Icon:
+    def __icon_type(self) -> Icon:
         """Get the icon that represents each type of cell entity.
 
         Raises:
@@ -105,3 +122,22 @@ class Cell(CTkFrame):
                 raise ValueError(
                     f"entry {self.entity.name} is not valid for display"
                 )
+
+    def __cell_color(self) -> str:
+        """Get the color the cell should be based upon the value.
+
+        red represents a low value and green represents a good value
+
+        Returns:
+            str: _description_
+        """
+        if self.cell_value is None:
+            return self.default_background_color
+
+        # I know red is zero but this allows for more configuration
+        start = Color("red").get_hue()
+        end = Color("green").get_hue()
+
+        hue = self.cell_value * (end - start) + start
+
+        return Color(hsl=(hue, 1, 0.5)).hex_l

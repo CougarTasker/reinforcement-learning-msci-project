@@ -7,7 +7,6 @@ from src.model.state.cell_entities import CellEntity
 from src.model.state.state_builder import StateBuilder
 from src.model.state.state_instance import StateInstance
 
-
 # four states left and right, any action will move to the other state
 # up action will cause an entity to be added if it was not already
 
