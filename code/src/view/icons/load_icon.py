@@ -7,6 +7,8 @@ from customtkinter import CTkImage
 from PIL import Image as Pillow
 from PIL.Image import Image
 
+from src.model.dynamics.actions import Action
+
 
 class Icon(Enum):
     """Enumerates all possible icons available."""
@@ -14,6 +16,10 @@ class Icon(Enum):
     robot = "robot"
     flag = "flag"
     no_entry = "do-not-enter"
+    up_arrow = "up-arrow"
+    down_arrow = "down-arrow"
+    right_arrow = "right-arrow"
+    left_arrow = "left-arrow"
 
 
 class IconLoader(object):
@@ -71,6 +77,24 @@ class IconLoader(object):
         rgb[non_transparent_pixels] = [255, 255, 255]
 
         return Pillow.fromarray(img_array)
+
+    action_mapping: Dict[Action, Icon] = {
+        Action.up: Icon.up_arrow,
+        Action.down: Icon.down_arrow,
+        Action.left: Icon.left_arrow,
+        Action.right: Icon.right_arrow,
+    }
+
+    def get_action_icon(self, action: Action) -> CTkImage:
+        """Get the appropriate arrow icon for a given action.
+
+        Args:
+            action (Action): the action to represent
+
+        Returns:
+            CTkImage: the image pointing in that actions direction.
+        """
+        return self.get_icon(self.action_mapping[action])
 
     def get_icon(self, icon: Icon) -> CTkImage:
         """Get the custom tkinter image object for a given icon.
