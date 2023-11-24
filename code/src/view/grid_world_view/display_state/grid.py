@@ -65,9 +65,8 @@ class InnerGrid(CTkFrame):
 
         for cell_location in self.state.grid_world.list_cells():
             cell_widget = self.cells[cell_location]
-            cell_widget.set_entity(state.cell_entity(cell_location))
-            cell_widget.set_value(
-                state.normaliser.get_state_value(cell_location)
+            cell_widget.set_cell_configuration(
+                state.cell_configuration(cell_location)
             )
 
     def __populate_cells(self):
@@ -84,8 +83,7 @@ class InnerGrid(CTkFrame):
             column, row = cell_location
             self.cells[cell_location] = Cell(
                 self,
-                self.state.cell_entity(cell_location),
-                self.state.normaliser.get_state_value(cell_location),
+                self.state.cell_configuration(cell_location),
             )
             self.cells[cell_location].grid(
                 row=row,

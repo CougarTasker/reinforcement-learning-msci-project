@@ -1,7 +1,7 @@
 from src.model.config.grid_world_section import GridWorldConfig
 
 
-class TestConfig(GridWorldConfig):
+class MockGridWorldConfig(GridWorldConfig):
     def __init__(self) -> None:
         pass
 

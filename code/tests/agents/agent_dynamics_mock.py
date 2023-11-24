@@ -5,7 +5,7 @@ from src.model.config.grid_world_section import GridWorldConfig
 
 from src.model.dynamics.actions import Action
 from src.model.dynamics.base_dynamics import BaseDynamics
-from tests.dynamics.mini_config import TestConfig
+from tests.dynamics.mini_config import MockGridWorldConfig
 
 
 class VacuumStates(Enum):
@@ -20,7 +20,7 @@ class VacuumStates(Enum):
 
 class VacuumDynamics(BaseDynamics):
     def __init__(self) -> None:
-        super().__init__(TestConfig())
+        super().__init__(MockGridWorldConfig())
 
     transitions = {
         # dd left right

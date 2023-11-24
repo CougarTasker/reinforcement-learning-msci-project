@@ -1,3 +1,8 @@
+from typing import Dict, Optional
+
+from src.controller.cell_configuration import CellConfiguration
+from src.model.dynamics.actions import Action
+
 from ..model.dynamics.base_dynamics import BaseDynamics
 from ..model.state.cell_entities import CellEntity
 from ..model.state_value.normaliser import StateValueNormaliser
@@ -23,6 +28,39 @@ class StateDescription(object):
         self.grid_world = dynamics.grid_world
         self.state = dynamics.state_pool.get_state_from_id(state)
         self.normaliser = normaliser
+
+    def cell_configuration(self, cell: tuple[int, int]) -> CellConfiguration:
+        """Get the configuration of a cell in a given state.
+
+        Args:
+            cell (tuple[int, int]): the cell to check.
+
+        Returns:
+            CellConfiguration: the cell's configuration
+        """
+        return CellConfiguration(
+            self.normaliser.get_state_value(cell),
+            self.cell_action_values(cell),
+            self.cell_entity(cell),
+        )
+
+    def cell_action_values(
+        self, cell: tuple[int, int]
+    ) -> Dict[Action, Optional[float]]:
+        """Get the value of actions in this given cell.
+
+        Args:
+            cell (tuple[int, int]): the location of the cell to check.
+
+        Returns:
+            Dict[Action, float]: mapping from the action to its value
+        """
+        action_values: Dict[Action, Optional[float]] = {}
+        for action in Action:
+            action_values[action] = self.normaliser.get_state_action_value(
+                cell, action
+            )
+        return action_values
 
     def cell_entity(self, cell: tuple[int, int]) -> CellEntity:
         """Get the cell entity at a given location.

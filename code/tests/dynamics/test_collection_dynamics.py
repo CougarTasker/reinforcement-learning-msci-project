@@ -7,7 +7,7 @@ from src.model.dynamics.actions import Action
 from src.model.dynamics.collection_dynamics import CollectionDynamics
 from src.model.dynamics.grid_world import GridWorld
 
-from .mini_config import TestConfig
+from .mini_config import MockGridWorldConfig
 
 """
 Test Grid Initially:
@@ -30,12 +30,12 @@ def dynamics(mocker):
             test_goal_b,
         ]
     )
-    return CollectionDynamics(TestConfig())
+    return CollectionDynamics(MockGridWorldConfig())
 
 
 def test_fixture(dynamics: CollectionDynamics):
-    assert dynamics.grid_world.width == TestConfig().width()
-    assert dynamics.grid_world.height == TestConfig().height()
+    assert dynamics.grid_world.width == MockGridWorldConfig().width()
+    assert dynamics.grid_world.height == MockGridWorldConfig().height()
     test_gw = GridWorld(1, 1)
     assert test_gw.random_in_bounds_cell() == test_goal_a
     assert test_gw.random_in_bounds_cell() == test_goal_b
@@ -44,9 +44,9 @@ def test_fixture(dynamics: CollectionDynamics):
 def test_initial_state(dynamics: CollectionDynamics):
     start = dynamics.initial_state()
 
-    assert start.agent_location == TestConfig().agent_location()
-    assert start.agent_energy == TestConfig().initial_energy()
-    assert len(start.entities) == TestConfig().entity_count()
+    assert start.agent_location == MockGridWorldConfig().agent_location()
+    assert start.agent_energy == MockGridWorldConfig().initial_energy()
+    assert len(start.entities) == MockGridWorldConfig().entity_count()
 
 
 def test_dynamics(dynamics: CollectionDynamics):

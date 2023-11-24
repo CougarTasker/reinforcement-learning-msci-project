@@ -8,6 +8,7 @@ from PIL import Image as Pillow
 from PIL.Image import Image
 
 from src.model.dynamics.actions import Action
+from src.model.state.cell_entities import CellEntity
 
 
 class Icon(Enum):
@@ -95,6 +96,23 @@ class IconLoader(object):
             CTkImage: the image pointing in that actions direction.
         """
         return self.get_icon(self.action_mapping[action])
+
+    cell_entity_mapping = {
+        CellEntity.agent: Icon.robot,
+        CellEntity.goal: Icon.flag,
+        CellEntity.blocked: Icon.no_entry,
+    }
+
+    def get_cell_entity_icon(self, entity: CellEntity) -> CTkImage:
+        """Get the appropriate icon for a given cell entity.
+
+        Args:
+            entity (CellEntity): the entity to represent
+
+        Returns:
+            CTkImage: the image of this cell entity
+        """
+        return self.get_icon(self.cell_entity_mapping[entity])
 
     def get_icon(self, icon: Icon) -> CTkImage:
         """Get the custom tkinter image object for a given icon.
