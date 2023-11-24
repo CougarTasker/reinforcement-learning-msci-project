@@ -11,8 +11,13 @@ distribution_result = Dict[int, Tuple[float, float]]
 observations_type = Dict[int, Dict[int, distribution_result]]
 
 
-# 2d array -_ state action to index
-# states index to
+numpy_float = np.ndarray[Any, np.dtype[np.float64]]
+numpy_int = np.ndarray[Any, np.dtype[np.int64]]
+
+
+numpy_distribution_information_type = Tuple[
+    numpy_int, numpy_int, numpy_float, numpy_float
+]
 
 
 class DynamicsDistribution(object):
@@ -128,3 +133,62 @@ class DynamicsDistribution(object):
             array.
         """
         return np.array(list(self.observations.keys()))
+
+    def get_array_representation(
+        self,
+    ) -> numpy_distribution_information_type:
+        """Convert the observations data to an array representation.
+
+        lookup table -> maps a state and action to a range of observations
+
+        the lookup table provides the start and end of a range of observed
+        subsequent states.
+
+        next state -> the observed next state
+        expected_reward -> the expected reward for transitioning to this state
+        frequency -> how often under these state and action do we perform this
+        transition
+
+        Returns:
+            numpy_distribution_information_type: lookup_table, next_state,
+            expected_reward, frequency
+        """
+        # 3d array state action to index the start and end of the observations
+        # states index to ranges in the corresponding arrays
+
+        empty_list_item = [None]
+
+        lookup_table: List[Any] = empty_list_item * len(self.observations)
+
+        next_state: List[Any] = []
+        expected_reward: List[Any] = []
+        frequency: List[Any] = []
+
+        for state, actions in self.observations.items():
+            state_lookup_table: List[Any] = empty_list_item * len(actions)
+            for action, observations in actions.items():
+                start = len(next_state)
+                end = start + len(observations)
+                state_lookup_table[action - 1] = [start, end]
+
+                next_state.extend(empty_list_item * len(observations))
+                expected_reward.extend(empty_list_item * len(observations))
+                frequency.extend(empty_list_item * len(observations))
+
+                for raw_index, observation in enumerate(observations.items()):
+                    (
+                        next_state_observation,
+                        (reward_observation, frequency_observation),
+                    ) = observation
+                    index = start + raw_index
+                    next_state[index] = next_state_observation
+                    expected_reward[index] = reward_observation
+                    frequency[index] = frequency_observation
+            lookup_table[state] = state_lookup_table
+
+        return (
+            np.array(lookup_table, dtype=np.int64),
+            np.array(next_state, dtype=np.int64),
+            np.array(expected_reward, dtype=np.float64),
+            np.array(frequency, dtype=np.float64),
+        )

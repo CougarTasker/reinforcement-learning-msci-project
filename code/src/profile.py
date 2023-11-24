@@ -1,7 +1,8 @@
 import cProfile
 import pstats
 
-import pytest
+from .controller.learning_instance_controller import InstanceController
+from .controller.options import AgentOptions, DynamicsOptions
 
 
 def profiled_code():
@@ -9,13 +10,10 @@ def profiled_code():
 
     The code in this method will be profiled by the application.
     """
-    pytest.main(
-        [
-            "tests/dynamics/test_dynamics_distribution.py",
-            "-k",
-            "test_duration",
-        ]
+    cont = InstanceController(
+        AgentOptions.value_iteration, DynamicsOptions.collection
     )
+    cont.get_agent()
 
 
 def main():

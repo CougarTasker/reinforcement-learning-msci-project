@@ -1,5 +1,5 @@
 import random
-from typing import Any, Optional
+from typing import Optional
 
 import numpy as np
 
@@ -8,8 +8,8 @@ from ...dynamics.actions import Action
 from ...dynamics.base_dynamics import BaseDynamics
 from ..base_agent import BaseAgent
 from .dynamics_distribution import DynamicsDistribution, distribution_result
-
-value_table_type = np.ndarray[Any, np.dtype[np.float64]]
+from .numba import compute_value_table
+from .types import value_table_type
 
 
 class ValueIterationAgent(BaseAgent):
@@ -55,13 +55,34 @@ class ValueIterationAgent(BaseAgent):
         if not self.dynamics_distribution.has_compiled():
             self.dynamics_distribution.compile()
 
-        self.value_table = self.compute_value_table()
+        self.value_table = self.compute_value_table_numba()
 
         return self.value_table
 
-    def compute_value_table(
-        self,
-    ) -> value_table_type:
+    def compute_value_table_numba(self) -> value_table_type:
+        """Compute the optimal value table with value iteration.
+
+        Uses numba to improve performance
+
+        Returns:
+            value_table_type: the value table for the dynamics
+        """
+        (
+            lookup_table,
+            next_state,
+            expected_reward,
+            frequency,
+        ) = self.dynamics_distribution.get_array_representation()
+        return compute_value_table(
+            self.discount_rate,
+            self.stopping_epsilon,
+            lookup_table,
+            next_state,
+            expected_reward,
+            frequency,
+        )
+
+    def compute_value_table(self) -> value_table_type:
         """Compute the optimal value table with value iteration.
 
         Returns:

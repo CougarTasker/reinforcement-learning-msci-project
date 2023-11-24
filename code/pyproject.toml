@@ -14,6 +14,7 @@ immutables = "^0.20"
 customtkinter = "^5.2.1"
 pillow = "^10.1.0"
 colour = "^0.1.5"
+numba = "^0.58.1"
 
 
 [tool.poetry.scripts]

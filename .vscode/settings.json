@@ -17,6 +17,8 @@
         "finfo",
         "fromarray",
         "ndarray",
+        "njit",
+        "numba",
         "RHUL"
     ],
     "files.exclude": {

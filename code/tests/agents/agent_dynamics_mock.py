@@ -1,8 +1,11 @@
 from enum import Enum
 
 import numpy as np
+from src.model.config.grid_world_section import GridWorldConfig
 
 from src.model.dynamics.actions import Action
+from src.model.dynamics.base_dynamics import BaseDynamics
+from tests.dynamics.mini_config import TestConfig
 
 
 class VacuumStates(Enum):
@@ -15,7 +18,10 @@ class VacuumStates(Enum):
     cc = 6
 
 
-class VacuumDynamics(object):
+class VacuumDynamics(BaseDynamics):
+    def __init__(self) -> None:
+        super().__init__(TestConfig())
+
     transitions = {
         # dd left right
         (VacuumStates.ddl.value, Action.right): (VacuumStates.ddr.value, 0),

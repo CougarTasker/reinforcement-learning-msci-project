@@ -1,7 +1,7 @@
 [grid_world]
 width = 16
 height = 9
-entity_count = 8
+entity_count = 4
 [grid_world.energy]
 energy_capacity=10
 initial_energy=10
@@ -11,8 +11,8 @@ y = 5
 
 [agent]
 discount_rate = 0.9
-stopping_epsilon = 0.001
-learning_rate = 0.001
+stopping_epsilon = 0.1
+learning_rate = 0.0000001
 sample_count = 100
 
 [gui]
