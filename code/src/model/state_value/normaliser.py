@@ -1,4 +1,4 @@
-from typing import Dict, Tuple, Union
+from typing import Dict, Optional, Tuple, Union
 
 from src.model.state_value.value_range import ValueRange, ValueType
 
@@ -39,12 +39,12 @@ class StateValueNormaliser(object):
         self.state_value_cache: Dict[Tuple[int, int], float] = {}
         self.action_value_cache: Dict[action_value_tuple, float] = {}
 
-    def get_state_action_value(
+    def get_state_action_value_normalised(
         self,
         new_agent_location: Tuple[int, int],
         action: Action,
     ) -> Union[float, None]:
-        """Get the normalised value of the agent being in this state.
+        """Get the normalised value of a given agent location and action.
 
         Args:
             new_agent_location (Tuple[int, int]): the new agents location
@@ -68,10 +68,10 @@ class StateValueNormaliser(object):
         self.action_value_cache[cache_key] = action_value
         return action_value
 
-    def get_state_value(
+    def get_state_value_normalised(
         self, new_agent_location: Tuple[int, int]
     ) -> Union[float, None]:
-        """Get the normalised value of the agent being in this state.
+        """Get the normalised value of the agent being in this location.
 
         Args:
             new_agent_location (Tuple[int, int]): the new agents location
@@ -94,6 +94,41 @@ class StateValueNormaliser(object):
         self.state_value_cache[new_agent_location] = state_value
 
         return state_value
+
+    def get_state_action_value_raw(
+        self, new_agent_location: Tuple[int, int], action: Action
+    ) -> Optional[float]:
+        """Get the un-normalised value of a given agent location and action.
+
+        Args:
+            new_agent_location (Tuple[int, int]): the location the agent is in
+            action (Action): the action to perform.
+
+        Returns:
+            Optional[float]: the raw value of this action state combination
+            according to the agent.
+        """
+        state = self.__get_agent_state(new_agent_location)
+        if state is None:
+            return None
+        return self.agent.get_state_action_value(state, action)
+
+    def get_state_value_raw(
+        self, new_agent_location: Tuple[int, int]
+    ) -> Optional[float]:
+        """Get the un-normalised value of the agent being in this location.
+
+        Args:
+            new_agent_location (Tuple[int, int]): _description_
+
+        Returns:
+            Optional[float]: the the raw value of the agent being in this
+            location according to the agent.
+        """
+        state = self.__get_agent_state(new_agent_location)
+        if state is None:
+            return None
+        return self.agent.get_state_value(state)
 
     def __get_agent_state(
         self, new_agent_location: Tuple[int, int]

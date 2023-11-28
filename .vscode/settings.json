@@ -19,7 +19,12 @@
         "ndarray",
         "njit",
         "numba",
-        "RHUL"
+        "padx",
+        "pady",
+        "relx",
+        "RHUL",
+        "softmax",
+        "tktooltip"
     ],
     "files.exclude": {
         "**/.git": true,

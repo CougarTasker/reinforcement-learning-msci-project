@@ -52,13 +52,13 @@ def test_initial_state(dynamics: CollectionDynamics):
 def test_dynamics(dynamics: CollectionDynamics):
     start = dynamics.initial_state()
 
-    start_up = dynamics.next(start, Action.up)
-    assert start_up[0].agent_location == (2, 2)
-    assert start_up[1] == 0
-
     start_down = dynamics.next(start, Action.down)
-    assert start_down[0].agent_location == (2, 0)
+    assert start_down[0].agent_location == (2, 2)
     assert start_down[1] == 0
+
+    start_up = dynamics.next(start, Action.up)
+    assert start_up[0].agent_location == (2, 0)
+    assert start_up[1] == 0
 
     start_left = dynamics.next(start, Action.left)
     assert start_left[0].agent_location == (1, 1)
@@ -70,7 +70,7 @@ def test_dynamics(dynamics: CollectionDynamics):
 
     # goal a
 
-    goal_a_state = dynamics.next(start_left[0], Action.up)
+    goal_a_state = dynamics.next(start_left[0], Action.down)
     assert goal_a_state[0].agent_location == test_goal_a
     assert len(goal_a_state[0].entities) == 1
     assert goal_a_state[1] == 1
@@ -78,11 +78,11 @@ def test_dynamics(dynamics: CollectionDynamics):
     # test loop
 
     top_right_with_goal = dynamics.next(goal_a_state[0], Action.right)[0]
-    assert top_right_with_goal != start_up[0]
-    assert top_right_with_goal.agent_location == start_up[0].agent_location
+    assert top_right_with_goal != start_down[0]
+    assert top_right_with_goal.agent_location == start_down[0].agent_location
 
     # get to goal b
-    start_left_with_goal = dynamics.next(goal_a_state[0], Action.down)
+    start_left_with_goal = dynamics.next(goal_a_state[0], Action.up)
 
     assert start_left_with_goal[0] != start_left[0]
     assert (
@@ -91,7 +91,7 @@ def test_dynamics(dynamics: CollectionDynamics):
     assert start_left_with_goal[1] == 0
 
     goal_b_state = dynamics.next(
-        dynamics.next(start_left_with_goal[0], Action.left)[0], Action.down
+        dynamics.next(start_left_with_goal[0], Action.left)[0], Action.up
     )
 
     assert goal_b_state[0].agent_location == test_goal_b
@@ -100,7 +100,7 @@ def test_dynamics(dynamics: CollectionDynamics):
 
     # test absorbing
 
-    absorbing_up = dynamics.next(goal_b_state[0], Action.up)
+    absorbing_up = dynamics.next(goal_b_state[0], Action.down)
     assert absorbing_up[0] == goal_b_state[0]
     assert absorbing_up[1] == 0
 

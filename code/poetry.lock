@@ -1240,6 +1240,21 @@ files = [
 pbr = ">=2.0.0,<2.1.0 || >2.1.0"
 
 [[package]]
+name = "tkinter-tooltip"
+version = "2.1.0"
+description = "An easy and customisable ToolTip implementation for Tkinter"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tkinter-tooltip-2.1.0.tar.gz", hash = "sha256:4b3f93145a8c9cf3fd19bbedc5db2f94007b4d069f39a41468c0b3ccbda60de6"},
+    {file = "tkinter_tooltip-2.1.0-py3-none-any.whl", hash = "sha256:fbcef705c942791225f4491660d9eb96d720ff0ef3a55de76e4fe79f2684c626"},
+]
+
+[package.extras]
+dev = ["black", "isort", "pytest (>=5.4.3)", "pytest-cov (>=2.12.1)"]
+docs = ["docutils", "myst-parser", "sphinx", "sphinx-autodoc-typehints", "sphinx-rtd-theme", "sphinxprettysearchresults"]
+
+[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -1339,4 +1354,4 @@ typing_extensions = ">=4.0,<5.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">= 3.10, < 3.12"
-content-hash = "d0c21c23a131060e2168e332e7cb65d641886c3e0d06557b19be0e2537260af9"
+content-hash = "864dd8a62d367eba63072ab2b9393fe102c6ad48f9dcb873568fe15522539aa0"

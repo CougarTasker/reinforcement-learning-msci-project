@@ -119,7 +119,7 @@ class TestAgentConfig(AgentConfig):
         return 100
 
 
-class TestAgent(BaseAgent):
+class MockAgent(BaseAgent):
     """Provides the common base for different learning agents."""
 
     def __init__(

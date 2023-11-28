@@ -1,6 +1,10 @@
-from typing import Dict, Optional
+from typing import Tuple
 
-from src.controller.cell_configuration import CellConfiguration
+from src.controller.cell_configuration import (
+    CellConfiguration,
+    DisplayMode,
+    action_value_description,
+)
 from src.model.dynamics.actions import Action
 
 from ..model.dynamics.base_dynamics import BaseDynamics
@@ -16,6 +20,7 @@ class StateDescription(object):
         dynamics: BaseDynamics,
         state: int,
         normaliser: StateValueNormaliser,
+        display_mode: DisplayMode,
     ) -> None:
         """Initiate this state description.
 
@@ -24,10 +29,12 @@ class StateDescription(object):
             state (int): the state to describe
             normaliser (StateValueNormaliser): the state value normaliser
             allowing for visualisations of the current state value table.
+            display_mode (DisplayMode): how to display this state.
         """
         self.grid_world = dynamics.grid_world
         self.state = dynamics.state_pool.get_state_from_id(state)
         self.normaliser = normaliser
+        self.display_mode = display_mode
 
     def cell_configuration(self, cell: tuple[int, int]) -> CellConfiguration:
         """Get the configuration of a cell in a given state.
@@ -38,15 +45,23 @@ class StateDescription(object):
         Returns:
             CellConfiguration: the cell's configuration
         """
+        normalised_action_values, raw_action_values = self.cell_action_values(
+            cell
+        )
+
         return CellConfiguration(
-            self.normaliser.get_state_value(cell),
-            self.cell_action_values(cell),
+            self.normaliser.get_state_value_normalised(cell),
+            normalised_action_values,
+            self.normaliser.get_state_value_raw(cell),
+            raw_action_values,
+            cell,
             self.cell_entity(cell),
+            self.display_mode,
         )
 
     def cell_action_values(
         self, cell: tuple[int, int]
-    ) -> Dict[Action, Optional[float]]:
+    ) -> Tuple[action_value_description, action_value_description]:
         """Get the value of actions in this given cell.
 
         Args:
@@ -55,12 +70,17 @@ class StateDescription(object):
         Returns:
             Dict[Action, float]: mapping from the action to its value
         """
-        action_values: Dict[Action, Optional[float]] = {}
+        action_values_normalised: action_value_description = {}
+        action_values_raw: action_value_description = {}
         for action in Action:
-            action_values[action] = self.normaliser.get_state_action_value(
-                cell, action
-            )
-        return action_values
+            action_values_normalised[
+                action
+            ] = self.normaliser.get_state_action_value_normalised(cell, action)
+            action_values_raw[
+                action
+            ] = self.normaliser.get_state_action_value_raw(cell, action)
+
+        return action_values_normalised, action_values_raw
 
     def cell_entity(self, cell: tuple[int, int]) -> CellEntity:
         """Get the cell entity at a given location.
