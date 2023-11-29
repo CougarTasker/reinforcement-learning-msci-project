@@ -8,6 +8,7 @@ class GUIConfig(BaseConfigSection):
 
     appearance_mode_property = "appearance_mode"
     color_theme_property = "color_theme"
+    initial_size_property = "initial_size"
 
     def __init__(self) -> None:
         """Instantiate Grid world section config."""
@@ -15,6 +16,7 @@ class GUIConfig(BaseConfigSection):
             {
                 self.appearance_mode_property: str,
                 self.color_theme_property: str,
+                self.initial_size_property: str,
             }
         )
         super().__init__("gui", data_schema)
@@ -37,3 +39,11 @@ class GUIConfig(BaseConfigSection):
             str: The palate color.
         """
         return self.configuration[self.color_theme_property]
+
+    def initial_size(self) -> str:
+        """Get the initial size of the window.
+
+        Returns:
+            str: the width and hight formatted as "100x100"
+        """
+        return self.configuration[self.initial_size_property]

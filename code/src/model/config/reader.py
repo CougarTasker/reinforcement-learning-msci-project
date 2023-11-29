@@ -39,9 +39,7 @@ class ConfigReader(object):
     def load_config(self):
         """Load or reload the configuration from the disk."""
         config_file_path = path.abspath(
-            path.join(
-                path.dirname(__file__), "..", "..", "..", self.config_file_name
-            )
+            path.join(path.dirname(__file__), "..", "..", self.config_file_name)
         )
 
         with open(config_file_path, "r") as config_file:

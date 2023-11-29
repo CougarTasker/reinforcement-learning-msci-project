@@ -132,6 +132,16 @@ class InstanceController(object):
             reward,
         )
 
+    def reset_state(self) -> StateDescription:
+        """Reset the current state to the initial state.
+
+        Returns:
+            StateDescription: the initial state description and new current
+            state.
+        """
+        self._current_state = self.get_dynamics().initial_state_id()
+        return self.__state_id_to_description(self._current_state)
+
     def set_display_mode(self, display_mode: DisplayMode):
         """Set the learning instance's display mode.
 

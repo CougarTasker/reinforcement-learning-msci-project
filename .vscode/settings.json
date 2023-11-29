@@ -15,16 +15,20 @@
         "columnspan",
         "dtype",
         "finfo",
+        "Flaticon",
         "fromarray",
         "ndarray",
         "njit",
         "numba",
         "padx",
         "pady",
+        "pipx",
         "relx",
         "RHUL",
         "softmax",
-        "tktooltip"
+        "Tkinter",
+        "tktooltip",
+        "venv"
     ],
     "files.exclude": {
         "**/.git": true,

@@ -38,3 +38,4 @@ class ReinforcementLearningApp(CTk):
         config = ConfigReader().gui()
         set_appearance_mode(config.appearance_mode())
         set_default_color_theme(config.color_theme())
+        self.geometry(config.initial_size())

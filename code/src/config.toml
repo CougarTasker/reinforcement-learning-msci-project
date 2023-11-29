@@ -18,3 +18,4 @@ sample_count = 100
 [gui]
 appearance_mode = "dark"
 color_theme = "blue"
+initial_size = "800x600"
