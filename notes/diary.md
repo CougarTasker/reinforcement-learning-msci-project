@@ -1,30 +1,30 @@
+<!-- omit in toc -->
 # Project Diary
 
+<!-- omit in toc -->
 ## Contents
-- [Project Diary](#project-diary)
-  - [Contents](#contents)
-  - [Weeks](#weeks)
-    - [Week 1 (18/09/23)](#week-1-180923)
-    - [Week 2 (25/09/23)](#week-2-250923)
-    - [Week 3 (02/10/23)](#week-3-021023)
-    - [Week 4 (09/10/23)](#week-4-091023)
-    - [Week 5 (16/10/23)](#week-5-161023)
-    - [Week 6 (23/10/23)](#week-6-231023)
-    - [Week 7 (30/10/23)](#week-7-301023)
-    - [Week 8 (6/10/23)](#week-8-61023)
-    - [Week 9 (13/11/23)](#week-9-131123)
-    - [Week 10 (20/11/23)](#week-10-201123)
+- [Week 01 (18/09/23)](#week-01-180923)
+- [Week 02 (25/09/23)](#week-02-250923)
+- [Week 03 (02/10/23)](#week-03-021023)
+- [Week 04 (09/10/23)](#week-04-091023)
+- [Week 05 (16/10/23)](#week-05-161023)
+- [Week 06 (23/10/23)](#week-06-231023)
+- [Week 07 (30/10/23)](#week-07-301023)
+- [Week 08 (6/10/23)](#week-08-61023)
+- [Week 09 (13/11/23)](#week-09-131123)
+- [Week 10 (20/11/23)](#week-10-201123)
+- [Week 11 (27/11/23)](#week-11-271123)
 
-
+<!-- omit in toc -->
 ## Weeks
 
-### Week 1 (18/09/23)
+### Week 01 (18/09/23)
 
  - (Tue 19) Attended first lecture 
  - (Thu 21) Started reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
  - (Fri 22) Finished reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
 
-### Week 2 (25/09/23)
+### Week 02 (25/09/23)
 
  - (Mon 25) Decided on project idea 
    - Started draft project plan 
@@ -39,7 +39,7 @@
  - (Thu 28) Worked on project plan report 
    - improved bibliography
 
-### Week 3 (02/10/23)
+### Week 03 (02/10/23)
 
  - (Tue 3) worked on project plan
    - Put together risks section 
@@ -49,7 +49,7 @@
    - Improved abstract
    - improved bibliography
 
-### Week 4 (09/10/23)
+### Week 04 (09/10/23)
 
  - (Wed 11) Gitlab
    - Attended lecture about gitlab
@@ -60,7 +60,7 @@
  - (Thu 12) Created Initial Interim report from template
    - Finished chapter one from Sutton Barto book
 
-### Week 5 (16/10/23)
+### Week 05 (16/10/23)
 
  - (Mon 16) Continued reading Sutton Barto book
    - chapter 2 and some of chapter 3
@@ -71,14 +71,14 @@
    - Second Meeting with Anand
  - (Fri 20) Continued reading read subsections on policy improvement
 
-### Week 6 (23/10/23)
+### Week 06 (23/10/23)
 
  - (Mon 23) 
    - Continued reading Sutton Barto book
      - read chapters 4,6 and skimmed 5
    - Met Anand to discuss my project plan
 
-### Week 7 (30/10/23)
+### Week 07 (30/10/23)
 
  - (Thu 2) 
    - Started MDP Report
@@ -86,7 +86,7 @@
  - (Weekend 4-5)
    - Completed MDP Report
 
-### Week 8 (6/10/23)
+### Week 08 (6/10/23)
 
  - (Mon 6) Started report on the policy and value functions
  - (Tue 7) Completed policy and value report
@@ -98,7 +98,7 @@
    - Started code setup
  - (Weekend 10-11) continued setting up code
 
-### Week 9 (13/11/23)
+### Week 09 (13/11/23)
 
  - (Mon 13) 
    - Completed code setup 
@@ -128,5 +128,18 @@
    - completed grid world display widget
  - (Thu 23)
    - Added button that progresses the state over time.
-   - Created methods to provide the value information to the view, allowing for visualisation.
-   - 
+   - Created methods to provide the Q-value information to the view, allowing for visualisation.
+ - (Fri 24)
+   - Started adding Q-value visualisation code, 
+   - Optimised value iteration code with numba
+   - Reworked how cells are provided their information
+
+### Week 11 (27/11/23)
+
+ - (Mon 27) Created tooltip to provide state value information and fixed origin inconsistency from the move to tkinter.
+ - (Tue 28) Completed system for allowing the user to select between different types of displays
+ - (Wed 29)
+   - Improved code `README` and improved usability 
+   - Implemented the Q-learning agent with 
+   - Added simultaneous agents to speed up learning
+   - Added opening to project report

@@ -12,7 +12,9 @@
         "backpropagation",
         "colors",
         "kivy",
-        "kivymd"
+        "kivymd",
+        "numba",
+        "tkinter"
     ],
     "files.exclude": {
         "**/.git": true,
