@@ -27,6 +27,7 @@ class ReinforcementLearningApp(CTk):
         controller = InstanceController(
             AgentOptions.q_learning, DynamicsOptions.collection
         )
+        controller.add_simultaneous_agents(100)
 
         CTkLabel(self, text="Reinforcement Learning App").grid(row=0, column=0)
         GridWorld(self, controller).grid(

@@ -59,7 +59,7 @@ class ValueRange(object):
     def __get_state_value_range(self) -> Tuple[float, float]:
         if self.state_range is not None:
             return self.state_range
-        maximum_state_value = float(0)
+        maximum_state_value = float("-inf")
         minimum_state_value = float("inf")
         for state in self.state_pool.state_to_id.values():
             state_value = self.agent.get_state_value(state)
@@ -73,7 +73,7 @@ class ValueRange(object):
         if self.action_range is not None:
             return self.action_range
 
-        maximum_action_value = float(0)
+        maximum_action_value = float("-inf")
         minimum_action_value = float("inf")
 
         for state in self.state_pool.state_to_id.values():

@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Optional, Set
 
 from src.controller.cell_configuration import DisplayMode
+from src.controller.learning_instance import LearningInstance
 from src.model.state_value.normaliser import StateValueNormaliser
 from src.model.state_value.normaliser_factory import NormaliserFactory
 
@@ -35,7 +36,9 @@ class InstanceController(object):
         self._dynamics_option = dynamics
         self._agent: Optional[BaseAgent] = None
         self._dynamics: Optional[BaseDynamics] = None
-        self._current_state: Optional[int] = None
+
+        self._main_learning_instance: Optional[LearningInstance] = None
+        self._simultaneous_learning_instances: Set[LearningInstance] = set()
         self._value_normalisation_factory: Optional[NormaliserFactory] = None
         self._display_mode = DisplayMode.default
 
@@ -106,7 +109,8 @@ class InstanceController(object):
         Returns:
             StateDescription: the current state instance
         """
-        return self.__state_id_to_description(self.__get_current_state_id())
+        instance = self.__get_main_learning_instance()
+        return self.__state_id_to_description(instance.get_current_state())
 
     def perform_action(
         self,
@@ -118,14 +122,15 @@ class InstanceController(object):
             transition information, the last state, the action chosen, the next
             state, the reward received for this action.
         """
-        last_state = self.__get_current_state_id()
-        agent = self.get_agent()
-        dynamics = self.get_dynamics()
+        for simultaneous in self._simultaneous_learning_instances:
+            simultaneous.perform_action()
 
-        action = agent.evaluate_policy(last_state)
-        next_state, reward = dynamics.next_state_id(last_state, action)
-        agent.record_transition(last_state, action, next_state, reward)
-        self._current_state = next_state
+        (
+            last_state,
+            action,
+            next_state,
+            reward,
+        ) = self.__get_main_learning_instance().perform_action()
         return (
             self.__state_id_to_description(last_state),
             action,
@@ -140,8 +145,8 @@ class InstanceController(object):
             StateDescription: the initial state description and new current
             state.
         """
-        self._current_state = self.get_dynamics().initial_state_id()
-        return self.__state_id_to_description(self._current_state)
+        instance = self.__get_main_learning_instance()
+        return self.__state_id_to_description(instance.reset_state())
 
     def set_display_mode(self, display_mode: DisplayMode):
         """Set the learning instance's display mode.
@@ -162,15 +167,24 @@ class InstanceController(object):
         """
         if self._value_normalisation_factory is None:
             self._value_normalisation_factory = NormaliserFactory(
-                self.get_agent(), self.get_dynamics()
+                self.get_agent(),
+                self.get_dynamics(),
+                self._agent_option == AgentOptions.value_iteration,
             )
         return self._value_normalisation_factory.create_normaliser(state_id)
 
-    def __get_current_state_id(self) -> int:
-        if self._current_state is not None:
-            return self._current_state
-        self._current_state = self.get_dynamics().initial_state_id()
-        return self._current_state
+    def add_simultaneous_agents(self, count: int):
+        """Add a number of agents to be run in parallel with the main agent.
+
+        this speeds up q-learning otherwise it can be very slow.
+
+        Args:
+            count (int): the number of simultaneous agents to add
+        """
+        for _ in range(count):
+            self._simultaneous_learning_instances.add(
+                LearningInstance(self.get_agent(), self.get_dynamics())
+            )
 
     def __state_id_to_description(self, state_id: int) -> StateDescription:
         return StateDescription(
@@ -179,3 +193,11 @@ class InstanceController(object):
             self.get_normaliser(state_id),
             self._display_mode,
         )
+
+    def __get_main_learning_instance(self):
+        if self._main_learning_instance is not None:
+            return self._main_learning_instance
+        self._main_learning_instance = LearningInstance(
+            self.get_agent(), self.get_dynamics()
+        )
+        return self._main_learning_instance

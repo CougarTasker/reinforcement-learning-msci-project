@@ -14,9 +14,7 @@ class NormaliserFactory(object):
     """Factory class for creating value normalisers."""
 
     def __init__(
-        self,
-        agent: BaseAgent,
-        dynamics: BaseDynamics,
+        self, agent: BaseAgent, dynamics: BaseDynamics, enable_cache: bool
     ) -> None:
         """Initialise the normaliser factory.
 
@@ -26,12 +24,15 @@ class NormaliserFactory(object):
         Args:
             agent (BaseAgent): the agent to generate normalisers for
             dynamics (BaseDynamics): the dynamics to generate normalisers for
+            enable_cache: weather the cache can be enabled (if the value table
+            changes like for q-learning then caching must be disabled)
         """
         self.agent = agent
         self.dynamics = dynamics
         self.has_generated_all_states: bool = False
         self.cache: Dict[entities_type, StateValueNormaliser] = {}
         self.value_range: Optional[ValueRange] = None
+        self.enable_cache = enable_cache
 
     def create_normaliser(self, base_state: int) -> StateValueNormaliser:
         """Get the appropriate state normaliser for the given base state.
@@ -47,7 +48,7 @@ class NormaliserFactory(object):
             base_state
         ).entities
         cached_normaliser = self.cache.get(entities, None)
-        if cached_normaliser is not None:
+        if cached_normaliser is not None and self.enable_cache:
             return cached_normaliser
 
         normaliser = StateValueNormaliser(
@@ -79,7 +80,7 @@ class NormaliserFactory(object):
         Returns:
             ValueRange: the range of values to provide a consistent scale
         """
-        if self.value_range is not None:
+        if self.value_range is not None and self.enable_cache:
             return self.value_range
 
         self.value_range = ValueRange(self.__get_state_pool(), self.agent)
