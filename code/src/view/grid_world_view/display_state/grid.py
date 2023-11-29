@@ -63,8 +63,11 @@ class InnerGrid(CTkFrame):
             self.__populate_cells()
             return
 
-        for cell in self.state.grid_world.list_cells():
-            self.cells[cell].set_entity(state.cell_entity(cell))
+        for cell_location in self.state.grid_world.list_cells():
+            cell_widget = self.cells[cell_location]
+            cell_widget.set_cell_configuration(
+                state.cell_configuration(cell_location)
+            )
 
     def __populate_cells(self):
         """Create new grid of cells.
@@ -79,7 +82,8 @@ class InnerGrid(CTkFrame):
         for cell_location in self.state.grid_world.list_cells():
             column, row = cell_location
             self.cells[cell_location] = Cell(
-                self, self.state.cell_entity(cell_location)
+                self,
+                self.state.cell_configuration(cell_location),
             )
             self.cells[cell_location].grid(
                 row=row,

@@ -60,7 +60,7 @@ class GridWorld(object):
         """Calculate the adjacent cell in a given direction.
 
         The direction is provided from the up,down,left and right actions. This
-        method calculates the next position assuming the origin is at the bottom
+        method calculates the next position assuming the origin is at the top
         left of the grid.
 
         note this may compute a cell that is out of bounds, to check and handel
@@ -80,9 +80,9 @@ class GridWorld(object):
         x_pos, y_pos = current_position
         match action:
             case Action.up:
-                return (x_pos, y_pos + distance)
-            case Action.down:
                 return (x_pos, y_pos - distance)
+            case Action.down:
+                return (x_pos, y_pos + distance)
             case Action.left:
                 return (x_pos - distance, y_pos)
             case Action.right:

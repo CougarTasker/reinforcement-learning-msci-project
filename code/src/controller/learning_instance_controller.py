@@ -1,5 +1,9 @@
 from typing import Optional
 
+from src.controller.cell_configuration import DisplayMode
+from src.model.state_value.normaliser import StateValueNormaliser
+from src.model.state_value.normaliser_factory import NormaliserFactory
+
 from ..model.agents.base_agent import BaseAgent
 from ..model.agents.value_iteration.agent import ValueIterationAgent
 from ..model.config.reader import ConfigReader
@@ -28,11 +32,13 @@ class InstanceController(object):
             agent (AgentOptions): which agent to create
             dynamics (DynamicsOptions): which dynamics to create
         """
-        self.agent_option = agent
-        self.dynamics_option = dynamics
-        self.agent: Optional[BaseAgent] = None
-        self.dynamics: Optional[BaseDynamics] = None
-        self.current_state: Optional[int] = None
+        self._agent_option = agent
+        self._dynamics_option = dynamics
+        self._agent: Optional[BaseAgent] = None
+        self._dynamics: Optional[BaseDynamics] = None
+        self._current_state: Optional[int] = None
+        self._value_normalisation_factory: Optional[NormaliserFactory] = None
+        self._display_mode = DisplayMode.default
 
     def get_dynamics(self) -> BaseDynamics:
         """Get the dynamics.
@@ -44,21 +50,21 @@ class InstanceController(object):
             BaseDynamics: the dynamics instance, the returned class will be a
             concrete instance that extends `BaseDynamics`
         """
-        if self.dynamics is not None:
+        if self._dynamics is not None:
             # reuse existing dynamics to avoid inconsistencies
-            return self.dynamics
+            return self._dynamics
 
         dynamics_config = ConfigReader().grid_world()
 
-        match self.dynamics_option:
+        match self._dynamics_option:
             case DynamicsOptions.collection:
-                self.dynamics = CollectionDynamics(dynamics_config)
+                self._dynamics = CollectionDynamics(dynamics_config)
             case _:
                 raise ValueError(
-                    f"unknown dynamics {self.dynamics_option.name}"
+                    f"unknown dynamics {self._dynamics_option.name}"
                 )
 
-        return self.dynamics
+        return self._dynamics
 
     def get_agent(self) -> BaseAgent:
         """Get the agent.
@@ -73,25 +79,25 @@ class InstanceController(object):
             BaseAgent: the agent to instance. this agent is to be used with the
             dynamics provided to avoid inconsistencies.
         """
-        if self.agent is not None:
-            return self.agent
+        if self._agent is not None:
+            return self._agent
 
         agent_config = ConfigReader().agent()
 
-        match self.agent_option:
+        match self._agent_option:
             case AgentOptions.value_iteration:
-                self.agent = ValueIterationAgent(
+                self._agent = ValueIterationAgent(
                     agent_config, self.get_dynamics()
                 )
 
                 # take the value table hit now rather than on the first
                 # iteration allows us to add a loading bar for it etc keep the
                 # application more interactive
-                self.agent.get_value_table()
+                self._agent.get_value_table()
             case _:
-                raise ValueError(f"unknown agent {self.agent_option.name}")
+                raise ValueError(f"unknown agent {self._agent_option.name}")
 
-        return self.agent
+        return self._agent
 
     def get_current_state(self) -> StateDescription:
         """Get the current state of the learning instance.
@@ -118,7 +124,7 @@ class InstanceController(object):
         action = agent.evaluate_policy(last_state)
         next_state, reward = dynamics.next_state_id(last_state, action)
         agent.record_transition(last_state, action, next_state, reward)
-        self.current_state = next_state
+        self._current_state = next_state
         return (
             self.__state_id_to_description(last_state),
             action,
@@ -126,11 +132,49 @@ class InstanceController(object):
             reward,
         )
 
+    def reset_state(self) -> StateDescription:
+        """Reset the current state to the initial state.
+
+        Returns:
+            StateDescription: the initial state description and new current
+            state.
+        """
+        self._current_state = self.get_dynamics().initial_state_id()
+        return self.__state_id_to_description(self._current_state)
+
+    def set_display_mode(self, display_mode: DisplayMode):
+        """Set the learning instance's display mode.
+
+        Args:
+            display_mode (DisplayMode): how to display the learning instance
+        """
+        self._display_mode = display_mode
+
+    def get_normaliser(self, state_id: int) -> StateValueNormaliser:
+        """Get the normaliser for a given state.
+
+        Args:
+            state_id (int): the state to base the normaliser on
+
+        Returns:
+            StateValueNormaliser: the normaliser for this state
+        """
+        if self._value_normalisation_factory is None:
+            self._value_normalisation_factory = NormaliserFactory(
+                self.get_agent(), self.get_dynamics()
+            )
+        return self._value_normalisation_factory.create_normaliser(state_id)
+
     def __get_current_state_id(self) -> int:
-        if self.current_state is not None:
-            return self.current_state
-        self.current_state = self.get_dynamics().initial_state_id()
-        return self.current_state
+        if self._current_state is not None:
+            return self._current_state
+        self._current_state = self.get_dynamics().initial_state_id()
+        return self._current_state
 
     def __state_id_to_description(self, state_id: int) -> StateDescription:
-        return StateDescription(self.get_dynamics(), state_id)
+        return StateDescription(
+            self.get_dynamics(),
+            state_id,
+            self.get_normaliser(state_id),
+            self._display_mode,
+        )

@@ -48,17 +48,18 @@ def test_random_gen(mocker):
     max_pos = test.random_in_bounds_cell()
 
     assert max_pos == (2, 2)
-    
+
+
 def test_move():
     test = GridWorld(3, 3)
 
-    assert test.movement_action((0, 0), Action.up) == (0, 1)
-    assert test.movement_action((0, 0), Action.up, 5) == (0, 5)
-    assert test.movement_action((2, 3), Action.up, 5) == (2, 8)
+    assert test.movement_action((0, 0), Action.down) == (0, 1)
+    assert test.movement_action((0, 0), Action.down, 5) == (0, 5)
+    assert test.movement_action((2, 3), Action.down, 5) == (2, 8)
 
-    assert test.movement_action((0, 0), Action.down) == (0, -1)
-    assert test.movement_action((0, 0), Action.down, 4) == (0, -4)
-    assert test.movement_action((2, 3), Action.down, 4) == (2, -1)
+    assert test.movement_action((0, 0), Action.up) == (0, -1)
+    assert test.movement_action((0, 0), Action.up, 4) == (0, -4)
+    assert test.movement_action((2, 3), Action.up, 4) == (2, -1)
 
     assert test.movement_action((0, 0), Action.left) == (-1, 0)
     assert test.movement_action((0, 0), Action.left, 7) == (-7, 0)
