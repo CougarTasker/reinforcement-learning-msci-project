@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 from numba import jit
 
@@ -78,7 +80,7 @@ def compute_updated_value(  # noqa: WPS211
     Returns:
         float: the new value for this state.
     """
-    state_value = float(0)
+    state_value = -math.inf
     for observation_range in lookup_table[state]:
         start = observation_range[0]
         end = observation_range[1]

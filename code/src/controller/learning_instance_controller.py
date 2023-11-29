@@ -4,8 +4,7 @@ from src.controller.cell_configuration import DisplayMode
 from src.model.state_value.normaliser import StateValueNormaliser
 from src.model.state_value.normaliser_factory import NormaliserFactory
 
-from ..model.agents.base_agent import BaseAgent
-from ..model.agents.value_iteration.agent import ValueIterationAgent
+from ..model.agents import BaseAgent, QLearningAgent, ValueIterationAgent
 from ..model.config.reader import ConfigReader
 from ..model.dynamics.actions import Action
 from ..model.dynamics.base_dynamics import BaseDynamics
@@ -94,6 +93,8 @@ class InstanceController(object):
                 # iteration allows us to add a loading bar for it etc keep the
                 # application more interactive
                 self._agent.get_value_table()
+            case AgentOptions.q_learning:
+                self._agent = QLearningAgent(agent_config)
             case _:
                 raise ValueError(f"unknown agent {self._agent_option.name}")
 

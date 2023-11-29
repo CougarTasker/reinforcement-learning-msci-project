@@ -25,7 +25,7 @@ class ReinforcementLearningApp(CTk):
         self.grid_rowconfigure(1, weight=1, minsize=0)
 
         controller = InstanceController(
-            AgentOptions.value_iteration, DynamicsOptions.collection
+            AgentOptions.q_learning, DynamicsOptions.collection
         )
 
         CTkLabel(self, text="Reinforcement Learning App").grid(row=0, column=0)

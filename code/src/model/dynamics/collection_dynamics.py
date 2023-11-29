@@ -94,11 +94,6 @@ class CollectionDynamics(BaseDynamics):
             tuple[StateInstance, float]: the resulting state after the action
             has been performed and the reward from this action
         """
-        if not current_state.entities:
-            # Terminal state all goals have been collected, this should be an
-            # absorbing state
-            return current_state, 0
-
         next_state_builder = StateBuilder(current_state)
         next_agent_location = self.grid_world.movement_action(
             current_state.agent_location, action
@@ -112,4 +107,9 @@ class CollectionDynamics(BaseDynamics):
             return next_state_builder.build(), 0
 
         next_state_builder.remove_entity(next_agent_location)
+
+        if not next_state_builder.entities:
+            # Terminal state all goals have been collected, loop to beginning to
+            # make task continuous
+            return self.initial_state(), 1
         return next_state_builder.build(), 1

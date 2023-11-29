@@ -68,5 +68,23 @@ class DynamicQTable(object):
         self.table[key] = new_value
         return new_value
 
+    def calculate_state_value(self, state: int) -> float:
+        """Calculate a state value.
+
+        based upon the current action value table and a policy that picks the
+        most valuable action.
+
+        Args:
+            state (int): the state to get the value for
+
+        Returns:
+            float: the value of the state.
+        """
+        best_action_value = float("-inf")
+        for action in Action:
+            action_value = self.get_value(state, action)
+            best_action_value = max(best_action_value, action_value)
+        return best_action_value
+
     def __default_value(self) -> float:
-        return np.random.rand()
+        return np.random.rand() * self.learning_rate
