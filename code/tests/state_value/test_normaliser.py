@@ -1,5 +1,7 @@
 from src.model.dynamics.actions import Action
-from src.model.state_value.normaliser_factory import NormaliserFactory
+from src.model.learning_system.value_range_normaliser.normaliser_factory import (
+    NormaliserFactory,
+)
 from tests.state_value.mocks import SimpleTestDynamics, MockAgent
 
 

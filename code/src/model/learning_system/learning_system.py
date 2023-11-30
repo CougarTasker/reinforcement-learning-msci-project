@@ -1,21 +1,20 @@
 from typing import Optional, Set
 
-from src.controller.cell_configuration import DisplayMode
-from src.controller.learning_instance import LearningInstance
-from src.model.state_value.normaliser import StateValueNormaliser
-from src.model.state_value.normaliser_factory import NormaliserFactory
-
-from ..model.agents import BaseAgent, QLearningAgent, ValueIterationAgent
-from ..model.config.reader import ConfigReader
-from ..model.dynamics.actions import Action
-from ..model.dynamics.base_dynamics import BaseDynamics
-from ..model.dynamics.collection_dynamics import CollectionDynamics
+from ..agents import BaseAgent, QLearningAgent, ValueIterationAgent
+from ..config.reader import ConfigReader
+from ..dynamics.actions import Action
+from ..dynamics.base_dynamics import BaseDynamics
+from ..dynamics.collection_dynamics import CollectionDynamics
+from .cell_configuration import DisplayMode
+from .learning_instance import LearningInstance
 from .options import AgentOptions, DynamicsOptions
 from .state_description import StateDescription
+from .value_range_normaliser.normaliser import StateValueNormaliser
+from .value_range_normaliser.normaliser_factory import NormaliserFactory
 
 
-class InstanceController(object):
-    """Controller for managing one instance of a learning agent."""
+class LearningSystem(object):
+    """Controller for managing one pair of agent and dynamics."""
 
     def __init__(
         self,

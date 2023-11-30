@@ -1,9 +1,9 @@
 from enum import Enum
 from typing import Optional, Tuple
 
-from ..agents.base_agent import BaseAgent
-from ..dynamics.actions import Action
-from ..state.state_pool import StatePool
+from ...agents.base_agent import BaseAgent
+from ...dynamics.actions import Action
+from ...state.state_pool import StatePool
 
 
 class ValueType(Enum):

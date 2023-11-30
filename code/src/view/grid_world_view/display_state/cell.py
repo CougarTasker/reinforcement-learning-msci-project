@@ -5,14 +5,14 @@ from colour import Color
 from customtkinter import CTkFrame, CTkImage, CTkLabel
 from tktooltip import ToolTip
 
-from src.controller.cell_configuration import (
+from src.model.dynamics.actions import Action
+from src.model.state.cell_entities import CellEntity
+
+from ....model.learning_system.cell_configuration import (
     CellConfiguration,
     DisplayMode,
     action_value_description,
 )
-from src.model.dynamics.actions import Action
-from src.model.state.cell_entities import CellEntity
-
 from ...icons.load_icon import Icon, IconLoader
 
 

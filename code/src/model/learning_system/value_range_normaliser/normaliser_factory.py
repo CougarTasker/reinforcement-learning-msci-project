@@ -1,13 +1,13 @@
 from typing import Dict, Optional
 
 from src.model.state.state_pool import StatePool
-from src.model.state_value.value_range import ValueRange
 
-from ..agents.base_agent import BaseAgent
-from ..agents.value_iteration.dynamics_distribution import DynamicsDistribution
-from ..dynamics.base_dynamics import BaseDynamics
-from ..state.state_instance import entities_type
+from ...agents.base_agent import BaseAgent
+from ...agents.value_iteration.dynamics_distribution import DynamicsDistribution
+from ...dynamics.base_dynamics import BaseDynamics
+from ...state.state_instance import entities_type
 from .normaliser import StateValueNormaliser
+from .value_range import ValueRange
 
 
 class NormaliserFactory(object):

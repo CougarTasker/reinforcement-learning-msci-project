@@ -1,6 +1,6 @@
 from customtkinter import CTkFrame
 
-from ....controller.state_description import StateDescription
+from ....model.learning_system.state_description import StateDescription
 from .grid import InnerGrid
 
 
