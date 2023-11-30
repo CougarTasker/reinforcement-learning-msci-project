@@ -54,13 +54,11 @@ Signature:
 
 \begin{abstract}
 
-  To complete many objectives robotic agents need to adapt and learn to new environments, therefore providing supervised training is not always feasible. This report investigates Reinforcement Learning (RL) techniques as a solution for this class of problem. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent's decision. This distinction makes RL agents suitable for our problem. 
+  To complete many objectives robotic agents need to adapt and learn new environments. This presents a problem for traditional supervised learning approaches that operate under the (IID) assumption\cite{bagnell2005robust}, training data may not apply to the new environment. This report investigates reinforcement learning (RL) techniques as an alternative for this class of robotics. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent's decision. This distinction makes RL agents suitable for our problem. 
   
-  For this report, our agents will be challenged with a resource-gathering objective. Resource gathering is widely applicable to many real-world autonomous robots such as smart vacuum cleaners. for consistency, the agents will operate in a simulated environment, such as a grid world for tabular approaches or an environment from the gymnasium library to evaluate deep reinforcement algorithms.
+  In this project, the goal is to understand and implement reinforcement learning. The secondary aim is to assess these agents and whether they would be effective for autonomous robots. For this purpose agents will be challenged with a resource-gathering objective. Resource gathering is widely applicable to many real-world autonomous robots such as smart vacuum cleaners. for consistency, the agents will operate in a simulated environment, such as a grid world for tabular approaches or an environment from the gymnasium library to evaluate deep reinforcement algorithms.
   
-  needs more
 \end{abstract}
-\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Introduction
@@ -68,11 +66,35 @@ Signature:
 
 \section{The Challenge}
 
-\section{Objectives}
+\section{Aims and Objectives}
+
+goals:
+\begin{itemize}
+  \item Efficient Navigation: The agent must autonomously navigate a grid world while making decisions to optimise rewards. The robot should learn to prioritise efficient paths.
+  \item Balancing Constraints: The agent must balance collecting resources with constraints such as energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
+  \item General Approach: The agent must not use any environment-specific techniques. It should learn from and function in any Markov environment.
+  \item Deep Reinforcement Learning: The program should integrate deep neural networks (DNN) with Q-learning.
+  \item Visualisation: The program should provide a GUI that visualises the operation of these agents interactively.
+\end{itemize}
+
 
 \section{Motivation}
 
-\section{Literature Review}
+My inspiration for studying for this degree, specialising in artificial intelligence, comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
+
+What is unique about this resource-gathering robot project is its structured progression of complexity, Starting from fundamental concepts and culminating in advanced techniques. This gradient makes the complex nature of reinforcement learning more approachable than it may be in industry. 
+
+This project interests me because of its generality and applicability to many different scenarios. Resource-gathering has the potential to incorporate many real-world constraints like energy, visibility and obstacles. I would like to see how this impacts different exploration strategies.
+
+Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. It is clear that AI is a clear focus for most companies, Ransbotham et al. said: 
+\begin{quote}
+  Almost 85\% believe AI will allow their companies to obtain or sustain a competitive advantage \cite{ransbotham2017reshaping}
+\end{quote}
+
+Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
+
+
+\section{Literature Survey}
 
 \chapter{Software Engineering}
 
@@ -84,6 +106,8 @@ Signature:
 
 \chapter{Timeline}
 
+planning and time-scale; use project plan and compare with reality
+
 \chapter{Fundamental Concepts}
 \section{Markov Decision Processes}
 
@@ -94,7 +118,7 @@ As a formal mathematical framework, MDPs allow us to derive and prove statements
 The standardisation of decision-making problems as MDPs allows for a uniform definition of optimality with the value functions. MDPs give a basis for assessing the performance of RL algorithms, facilitating like-for-like comparisons for different RL approaches. 
 
 
-\section{Markov Property}
+\subsection{Markov Property}
 
 The Markov property is that the future state of a Markov system only depends on the current state of the system. In other words, if we have a system that follows the Markov property, then the history preceding the current configuration of the system will not influence the following state.
 
@@ -147,7 +171,6 @@ The agent comprises the entire decision-making entity in an MDP; anything unknow
 
 \label{policy-informal-definition}
 For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as deep Q-learning. A policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
-
 
 
 \section{Policy and Value functions}
@@ -214,7 +237,7 @@ These functions demonstrate the intertwined relationships between the policy cho
 
 Although optimal policies exist, finding them is another matter. The policy search space is potentially infinite so an intelligent method is required. An optimal policy can be extracted from an optimal value function and the dynamics of the MDP; the optimal policy would only select actions that result in the highest value. Finding the optimal value function with the optimal policy is straightforward, but this is a catch-22. The optimal value function must be self-consistent with the Bellman equations. One approach to solving these equations is iteration, for each step moving slightly closer to the optimal solution from an initial guess. 
 
-\subsubsection{Policy iteration}
+\subsubsection{Policy Iteration}
 
 In policy iteration, we improve a policy over time until it is optimal. updating a policy like this is only possible because of the policy improvement theorem. This theorem considers if we have a policy $\pi_{\text{old}}$. We are at some state $s$, $\pi_{\text{old}}$ will pick the action $a$ under this state $\pi_{\text{old}}(a\ |\ s) = 1$ what happens if we consider some other action $a'$ but then continue to follow the original policy. Because we continue to follow the original policy, we can use the existing value function $v_{\pi_{\text{old}}}(S_{t+1})$ for the subsequent states. We call this slightly adjusted policy $\pi_{\text{new}}$. by applying the bellman equations and the existing value function then we can recalculate the value at $s$ of $\pi_{\text{new}}$ if this new value is better than the original policy then we know that $\pi_{\text{new}}$ must be as good if not better for all states $s \in \mathcal{S}$ than $\pi_{\text{old}}$ thus $\pi_{\text{new}}$ would be a better policy. 
 
@@ -229,7 +252,7 @@ For some policy $\pi$ you can apply this policy improvement theorem for every st
 Although this policy improvement sounds computationally expensive, each state can be considered simultaneously and with a shared base policy; in each iteration, the state-value function is the same; caching this removes redundant calculations. Calculating the value function is improved by using an iterative approach and utilising the previous value function as a launching point.  
 
 
-\subsubsection{Value iteration}
+\subsubsection{Value Iteration}
 
 Policy iteration is a practical approach, for a finite MDP is guaranteed to finish in finite time. In practice, policy improvement does better and only takes a few iterations. However, in each iteration, multiple full sweeps of the state space are required. The idea of value iteration is to improve the policy within the value iteration step. This value iteration approach only requires one iteration. 
 
@@ -247,7 +270,11 @@ This standard approach uses the traditional value Bellman equation\ref{eqn:v-def
 As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\ast$ function.$q_\ast$, can be derived from the $v_\ast$ with the dynamics $p$ function.
 
 
+\section{Learning as incrementally optimising policy in a MDP}
 
+Learning is the process of acquiring new information and skills. There are many different ways organisms can learn, In psychology one of the methods is called Operant Conditioning. In Operant Conditioning the learner receives feedback from the environment as either a reward or punishment for completing different actions\cite{staddon2003operant}. In an experiment this could be some food for opening a door, this feedback influences the learner's future actions. This is an equivalent mechanism that reinforcement learning operates under. It is, for this reason, that RL is considered the dominant theoretical framework for operant learning \cite{shteingart2014reinforcement}. 
+
+To demonstrate learning as policy optimisation consider an agent that is introduced to a new Markov environment. This agent has no prior knowledge therefore its initial policy is independent of the environment's features. eventually, the agent will pick some action in a state and receive some reward from the environment. This information can be used to update the policy to prioritise that one successful action. since the environment obeys the Markov property repeating this successful action will continue to reward. If the agent continues to optimise its policy as it finds rewards then it can improve its average reward. through incrementally optimising its policy this agent has learnt what are the successful actions and improved its behaviour.
 
 
 
