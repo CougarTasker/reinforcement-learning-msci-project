@@ -17,7 +17,7 @@ class ReinforcementLearningApp(CTk):
     """Root of the application's view."""
 
     tab_definitions = {
-        "Value Iteration": AgentOptions.value_iteration,
+        "Value Iteration": AgentOptions.value_iteration_optimised,
         "Q Learning": AgentOptions.q_learning,
     }
 

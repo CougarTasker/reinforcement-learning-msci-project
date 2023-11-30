@@ -1,6 +1,11 @@
 from typing import Optional, Set
 
-from ..agents import BaseAgent, QLearningAgent, ValueIterationAgent
+from ..agents import (
+    BaseAgent,
+    QLearningAgent,
+    ValueIterationAgent,
+    ValueIterationAgentOptimised,
+)
 from ..config.reader import ConfigReader
 from ..dynamics.actions import Action
 from ..dynamics.base_dynamics import BaseDynamics
@@ -90,11 +95,10 @@ class LearningSystem(object):
                 self._agent = ValueIterationAgent(
                     agent_config, self.get_dynamics()
                 )
-
-                # take the value table hit now rather than on the first
-                # iteration allows us to add a loading bar for it etc keep the
-                # application more interactive
-                self._agent.get_value_table()
+            case AgentOptions.value_iteration_optimised:
+                self._agent = ValueIterationAgentOptimised(
+                    agent_config, self.get_dynamics()
+                )
             case AgentOptions.q_learning:
                 self._agent = QLearningAgent(agent_config)
             case _:
