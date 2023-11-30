@@ -10,6 +10,8 @@ class AgentConfig(BaseConfigSection):
     stopping_epsilon_property = "stopping_epsilon"
     learning_rate_property = "learning_rate"
     sample_count_property = "sample_count"
+    exploration_ratio_property = "exploration_ratio"
+    simultaneous_agents_property = "simultaneous_agents"
 
     def __init__(self) -> None:
         """Instantiate Grid world section config."""
@@ -19,6 +21,8 @@ class AgentConfig(BaseConfigSection):
                 self.stopping_epsilon_property: float,
                 self.learning_rate_property: float,
                 self.sample_count_property: int,
+                self.exploration_ratio_property: float,
+                self.simultaneous_agents_property: int,
             }
         )
         super().__init__("agent", data_schema)
@@ -54,3 +58,24 @@ class AgentConfig(BaseConfigSection):
             int: the number of samples to use for distribution analysis.
         """
         return self.configuration[self.sample_count_property]
+
+    def exploration_ratio(self) -> float:
+        """Get the ratio the agent should explore vs exploit.
+
+        also known as epsilon in epsilon greedy and soft strategies
+
+        Returns:
+            float: the ratio for exploring, 1 represents always exploring. 0
+            never exploring.
+        """
+        return self.configuration[self.exploration_ratio_property]
+
+    def get_simultaneous_agents(self) -> int:
+        """Get the number of agents to run in parallel with the main agent.
+
+        This speeds up training for Q-learning
+
+        Returns:
+            int: The number of agents.
+        """
+        return self.configuration[self.simultaneous_agents_property]

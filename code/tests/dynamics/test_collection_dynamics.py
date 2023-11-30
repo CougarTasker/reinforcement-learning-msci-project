@@ -94,26 +94,18 @@ def test_dynamics(dynamics: CollectionDynamics):
         dynamics.next(start_left_with_goal[0], Action.left)[0], Action.up
     )
 
-    assert goal_b_state[0].agent_location == test_goal_b
-    assert len(goal_b_state[0].entities) == 0
+    # test final loops to beginning
+    assert goal_b_state[0] == start
     assert goal_b_state[1] == 1
 
-    # test absorbing
 
-    absorbing_up = dynamics.next(goal_b_state[0], Action.down)
-    assert absorbing_up[0] == goal_b_state[0]
-    assert absorbing_up[1] == 0
 
-    absorbing_right = dynamics.next(goal_b_state[0], Action.right)
-    assert absorbing_right[0] == goal_b_state[0]
-    assert absorbing_right[1] == 0
-
+    
 
 def expected_state_count():
     state_grid = 3 * 3
-    # positions without collecting + collect a first + collect b first +
-    # both collected accumulating states
-    return state_grid - 2 + (state_grid - 1) * 2 + 2
+    # positions without collecting + collect a first + collect b first
+    return state_grid - 2 + (state_grid - 1) * 2
 
 
 def test_state_count(dynamics: CollectionDynamics):

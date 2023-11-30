@@ -1,8 +1,42 @@
+import math
+
 import numpy as np
 from numba import jit
 
+from src.model.agents.value_iteration.agent import ValueIterationAgent
+
 from .dynamics_distribution import numpy_float, numpy_int
 from .types import value_table_type
+
+
+class ValueIterationAgentOptimised(ValueIterationAgent):
+    """Computes the optimal value table for a given dynamics.
+
+    This agent uses that table with the dynamics to pick optimal actions.
+    """
+
+    def compute_value_table(self) -> value_table_type:
+        """Compute the optimal value table with value iteration.
+
+        Uses numba to improve performance
+
+        Returns:
+            value_table_type: the value table for the dynamics
+        """
+        (
+            lookup_table,
+            next_state,
+            expected_reward,
+            frequency,
+        ) = self.dynamics_distribution.get_array_representation()
+        return compute_value_table(
+            self.discount_rate,
+            self.stopping_epsilon,
+            lookup_table,
+            next_state,
+            expected_reward,
+            frequency,
+        )
 
 
 @jit(nopython=True, cache=True, fastmath=True)
@@ -78,7 +112,7 @@ def compute_updated_value(  # noqa: WPS211
     Returns:
         float: the new value for this state.
     """
-    state_value = float(0)
+    state_value = -math.inf
     for observation_range in lookup_table[state]:
         start = observation_range[0]
         end = observation_range[1]

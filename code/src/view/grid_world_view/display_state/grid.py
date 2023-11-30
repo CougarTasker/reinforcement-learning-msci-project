@@ -2,7 +2,8 @@ from typing import Dict, Tuple
 
 from customtkinter import CTkFrame
 
-from ....controller.state_description import StateDescription
+from src.model.learning_system.state_description import StateDescription
+
 from .cell import Cell
 
 

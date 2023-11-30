@@ -1,15 +1,15 @@
 from typing import Tuple
 
-from src.controller.cell_configuration import (
+from src.model.dynamics.actions import Action
+
+from ..dynamics.base_dynamics import BaseDynamics
+from ..state.cell_entities import CellEntity
+from .cell_configuration import (
     CellConfiguration,
     DisplayMode,
     action_value_description,
 )
-from src.model.dynamics.actions import Action
-
-from ..model.dynamics.base_dynamics import BaseDynamics
-from ..model.state.cell_entities import CellEntity
-from ..model.state_value.normaliser import StateValueNormaliser
+from .value_range_normaliser.normaliser import StateValueNormaliser
 
 
 class StateDescription(object):
