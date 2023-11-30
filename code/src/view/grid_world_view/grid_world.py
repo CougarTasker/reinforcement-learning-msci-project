@@ -1,3 +1,4 @@
+from tkinter import Widget
 from typing import Any
 
 from customtkinter import (
@@ -106,22 +107,25 @@ class GridWorld(CTkFrame):
             values=list(self.display_mode_options.keys()),
             command=self.display_mode_changed,
         )
-        self._display_mode.grid(row=2, column=0)
+        self.__place_control(self._display_mode, 0)
 
         self._reset_button = CTkButton(
             self, text="reset", command=self.reset_button_pressed
         )
-        self._reset_button.grid(row=2, column=1)
+        self.__place_control(self._reset_button, 1)
 
         self._auto_progress = CTkSwitch(
             self, text="auto", command=self.toggle_auto
         )
-        self._auto_progress.grid(row=2, column=2)
+        self.__place_control(self._auto_progress, 2)
 
         self._next_button = CTkButton(
             self, text="next", command=self.next_button_pressed
         )
-        self._next_button.grid(row=2, column=3)
+        self.__place_control(self._next_button, 3)
+
+    def __place_control(self, control: Widget, column: int):
+        control.grid(row=2, column=column, pady=10)
 
     def __run_auto(self):
         if self.auto:

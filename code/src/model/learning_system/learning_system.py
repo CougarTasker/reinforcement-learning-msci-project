@@ -46,6 +46,11 @@ class LearningSystem(object):
         self._value_normalisation_factory: Optional[NormaliserFactory] = None
         self._display_mode = DisplayMode.default
 
+        self._agent_config = ConfigReader().agent()
+        self.set_simultaneous_agents(
+            self._agent_config.get_simultaneous_agents()
+        )
+
     def get_dynamics(self) -> BaseDynamics:
         """Get the dynamics.
 
@@ -88,19 +93,17 @@ class LearningSystem(object):
         if self._agent is not None:
             return self._agent
 
-        agent_config = ConfigReader().agent()
-
         match self._agent_option:
             case AgentOptions.value_iteration:
                 self._agent = ValueIterationAgent(
-                    agent_config, self.get_dynamics()
+                    self._agent_config, self.get_dynamics()
                 )
             case AgentOptions.value_iteration_optimised:
                 self._agent = ValueIterationAgentOptimised(
-                    agent_config, self.get_dynamics()
+                    self._agent_config, self.get_dynamics()
                 )
             case AgentOptions.q_learning:
-                self._agent = QLearningAgent(agent_config)
+                self._agent = QLearningAgent(self._agent_config)
             case _:
                 raise ValueError(f"unknown agent {self._agent_option.name}")
 
@@ -176,18 +179,28 @@ class LearningSystem(object):
             )
         return self._value_normalisation_factory.create_normaliser(state_id)
 
-    def add_simultaneous_agents(self, count: int):
-        """Add a number of agents to be run in parallel with the main agent.
+    def set_simultaneous_agents(self, count: int):
+        """Set the number of agents to be run in parallel with the main agent.
 
-        this speeds up q-learning otherwise it can be very slow.
+        this speeds up q-learning otherwise it can be very slow. will not apply
+        to other types of agents
 
         Args:
             count (int): the number of simultaneous agents to add
         """
-        for _ in range(count):
-            self._simultaneous_learning_instances.add(
-                LearningInstance(self.get_agent(), self.get_dynamics())
-            )
+        if self._agent_option is not AgentOptions.q_learning:
+            return
+
+        diff = max(int(count), 0) - len(self._simultaneous_learning_instances)
+        if diff > 0:
+            for _ in range(diff):
+                self._simultaneous_learning_instances.add(
+                    LearningInstance(self.get_agent(), self.get_dynamics())
+                )
+        elif diff < 0:
+            for _ in range(-diff):
+                self._simultaneous_learning_instances.pop()
+        assert len(self._simultaneous_learning_instances) == count
 
     def __state_id_to_description(self, state_id: int) -> StateDescription:
         return StateDescription(
