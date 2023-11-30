@@ -21,7 +21,7 @@ repos:
         name: flake8
         stages: [commit]
         language: system
-        entry: bash -c "cd code; poetry run flake8"
+        entry: bash -c "cd code; poetry run flake8 src"
         types: [python]
         exclude: setup.py
 

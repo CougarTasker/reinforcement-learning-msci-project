@@ -9,12 +9,26 @@
     ],
     "cSpell.language": "en-GB",
     "cSpell.words": [
+        "astype",
         "backpropagation",
         "colors",
-        "kivy",
-        "kivymd",
+        "columnspan",
+        "dtype",
+        "finfo",
+        "flaticon",
+        "fromarray",
+        "ndarray",
+        "njit",
         "numba",
-        "tkinter"
+        "padx",
+        "pady",
+        "pipx",
+        "relx",
+        "RHUL",
+        "softmax",
+        "tkinter",
+        "tktooltip",
+        "venv"
     ],
     "files.exclude": {
         "**/.git": true,
@@ -38,5 +52,7 @@
     // "python.testing.cwd": "${workspaceFolder}/code",
     "python.envFile": "${workspaceFolder}/code/.env",
     "flake8.args": ["--config=${workspaceFolder}/code/setup.cfg"],
-    "flake8.cwd": "${workspaceFolder}/code"
+    "flake8.cwd": "${workspaceFolder}/code",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic"
 }

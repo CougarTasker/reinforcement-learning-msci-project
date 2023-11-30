@@ -8,14 +8,21 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">= 3.10, < 3.12"
 numpy = "^1.26.1"
-kivy = "^2.2.1"
 toml = "^0.10.2"
 schema = "^0.7.5"
-kivymd = "^1.1.1"
+immutables = "^0.20"
+customtkinter = "^5.2.1"
+pillow = "^10.1.0"
+colour = "^0.1.5"
+numba = "^0.58.1"
+tkinter-tooltip = "^2.1.0"
+packaging = "^23.2"
 
 
 [tool.poetry.scripts]
 start = "src.main:main"
+profile = "src.profile:main"
+
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.11.0"
@@ -26,9 +33,14 @@ isort = "^5.12.0"
 mypy = "^1.6.1"
 pytest-mock = "^3.12.0"
 types-toml = "^0.10.8.7"
+pep8-naming = "^0.13.3"
+wemake-python-styleguide = "^0.18.0"
+snakeviz = "^2.2.0"
 
 [tool.isort]
 profile = "black"
+multi_line_output = 3
+line_length = 80
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -39,5 +51,3 @@ line-length = 80
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-

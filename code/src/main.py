@@ -1,8 +1,12 @@
-from .view.App import ReinforcementLearningApp
+from src.controller.controller import Controller
 
 
 def main():
-    ReinforcementLearningApp().run()
+    """Start the application.
+
+    The main entry point into the application.
+    """
+    Controller().start()
 
 
 if __name__ == "__main__":
