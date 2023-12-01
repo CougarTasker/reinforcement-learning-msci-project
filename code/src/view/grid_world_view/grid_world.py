@@ -1,13 +1,22 @@
+from enum import Enum
 from tkinter import Widget
-from typing import Any
+from typing import Any, Dict
 
-from customtkinter import CTkButton, CTkFrame, CTkOptionMenu, CTkSwitch
+from customtkinter import CTkButton, CTkFrame, CTkOptionMenu, CTkSegmentedButton
 
 from src.controller.learning_system_controller import LearningSystemController
 from src.controller.user_action_bridge import UserAction
 
 from ...model.learning_system.cell_configuration import DisplayMode
 from .display_state.display import DisplayState
+
+
+class AutoSpeed(Enum):
+    """Enumerates all possible auto speeds."""
+
+    manual = 0  # one step at a time
+    auto_local = 1  # step as fast as the states can be rendered
+    auto_full = 2  # full speed just show what states we can
 
 
 class GridWorld(CTkFrame):
@@ -28,6 +37,7 @@ class GridWorld(CTkFrame):
 
         self.action_bridge = system.user_action_bridge
         self.update_bridge = system.state_update_bridge
+        self.auto_mode = AutoSpeed.manual
 
         columns = (0, 1, 2, 3)
         self.grid_columnconfigure(columns, weight=1)
@@ -41,7 +51,7 @@ class GridWorld(CTkFrame):
         self.__setup_controls()
 
         # setup initial state
-        self.__auto_loop()
+        self.__start_update_loop()
         self.action_bridge.submit_action(UserAction.fetch_current_state)
 
     def next_button_pressed(self):
@@ -71,12 +81,32 @@ class GridWorld(CTkFrame):
             UserAction.set_display_mode, display_mode
         )
 
-    def toggle_auto(self):
+    auto_mode_options = {
+        "manual": AutoSpeed.manual,
+        "auto": AutoSpeed.auto_local,
+        "fast": AutoSpeed.auto_full,
+    }
+
+    def toggle_auto(self, key: str):
         """When the auto button has been pressed.
 
         automatically press the next button
+
+        Args:
+            key (str): the mode selected.
         """
-        # going to replace
+        last_mode = self.auto_mode
+        self.auto_mode = self.auto_mode_options[key]
+        if last_mode is self.auto_mode:
+            return
+        self._next_button.configure(
+            state="normal" if self.auto_mode is AutoSpeed.manual else "disabled"
+        )
+
+        if self.auto_mode is AutoSpeed.auto_full:
+            self.action_bridge.submit_action(UserAction.start_auto)
+        elif last_mode is AutoSpeed.auto_full:
+            self.action_bridge.submit_action(UserAction.stop_auto)
 
     def __setup_controls(self):
         self._display_mode = CTkOptionMenu(
@@ -84,6 +114,10 @@ class GridWorld(CTkFrame):
             values=list(self.display_mode_options.keys()),
             command=self.display_mode_changed,
         )
+        default_display_mode = self.__invert_dict_search(
+            self.display_mode_options, DisplayMode.default
+        )
+        self._display_mode.set(default_display_mode)
         self.__place_control(self._display_mode, 0)
 
         self._reset_button = CTkButton(
@@ -91,9 +125,15 @@ class GridWorld(CTkFrame):
         )
         self.__place_control(self._reset_button, 1)
 
-        self._auto_progress = CTkSwitch(
-            self, text="auto", command=self.toggle_auto
+        self._auto_progress = CTkSegmentedButton(
+            self,
+            values=list(self.auto_mode_options.keys()),
+            command=self.toggle_auto,
         )
+        default_auto_mode = self.__invert_dict_search(
+            self.auto_mode_options, self.auto_mode
+        )
+        self._auto_progress.set(default_auto_mode)
         self.__place_control(self._auto_progress, 2)
 
         self._next_button = CTkButton(
@@ -104,13 +144,21 @@ class GridWorld(CTkFrame):
     def __place_control(self, control: Widget, column: int):
         control.grid(row=2, column=column, pady=10)
 
-    def __start_update_loop(self):
-        self.after_idle(self.__auto_loop)
+    def __invert_dict_search(self, dictionary: Dict, default: Any) -> Any:
+        return {enum_value: key for key, enum_value in dictionary.items()}[
+            default
+        ]
 
-    def __auto_loop(self):
+    def __start_update_loop(self):
+        self.after_idle(self.__update_loop)
+
+    def __update_loop(self):
         # when not busy update the state if available
         state = self.update_bridge.get_latest_state()
         if state is not None:
             self._display.set_state(state)
-
-        self.after(10, self.__auto_loop)
+        if self.auto_mode is AutoSpeed.auto_local:
+            # ready for next state
+            self.next_button_pressed()
+        self.update()
+        self.after(100, self.__update_loop)
