@@ -1,7 +1,9 @@
-from customtkinter import CTkFrame
+from customtkinter import CTkFrame, CTkLabel
+
+from src.model.dynamics.actions import Action
+from src.view.icons.load_icon import IconLoader
 
 from ....model.learning_system.state_description import StateDescription
-from .grid import InnerGrid
 
 
 class DisplayState(CTkFrame):
@@ -22,10 +24,10 @@ class DisplayState(CTkFrame):
         super().__init__(
             master, width=self.default_size, height=self.default_size
         )
-        self.grid_propagate(False)
-        self.inner_grid = InnerGrid(self)
-        self.aspect_ratio = 1
-        self.inner_grid.grid(row=1, column=1, sticky="nsew")
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.image_label = CTkLabel(self, text="")
+        self.image_label.grid(row=1, column=0, sticky="nsew")
         self.bind(
             "<Configure>",
             command=self.resize,
@@ -37,9 +39,7 @@ class DisplayState(CTkFrame):
         Args:
             state (StateDescription): the state to be displayed
         """
-        self.aspect_ratio = state.grid_world.width / state.grid_world.height
         self.__configure_grid(self.winfo_width(), self.winfo_height())
-        self.inner_grid.set_state(state)
 
     def resize(self, event):
         """Handle resize event.
@@ -52,20 +52,5 @@ class DisplayState(CTkFrame):
         self.__configure_grid(event.width, event.height)
 
     def __configure_grid(self, width: int, height: int):
-        outer_aspect_ratio = width / height
-        if outer_aspect_ratio < self.aspect_ratio:
-            self.grid_columnconfigure((1), weight=1)
-            self.grid_columnconfigure((0, 2), weight=0)
-
-            inner_height = int(width / self.aspect_ratio)
-
-            self.grid_rowconfigure((1), weight=0, minsize=inner_height)
-            self.grid_rowconfigure((0, 2), weight=1)
-        else:
-            self.grid_rowconfigure((1), weight=1)
-            self.grid_rowconfigure((0, 2), weight=0)
-
-            inner_width = int(height * self.aspect_ratio)
-
-            self.grid_columnconfigure((1), weight=0, minsize=inner_width)
-            self.grid_columnconfigure((0, 2), weight=1)
+        image = IconLoader().get_action_icon(Action.up, max(width // 2, 1))
+        self.image_label.configure(image=image)

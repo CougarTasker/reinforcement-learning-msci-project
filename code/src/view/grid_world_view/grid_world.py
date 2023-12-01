@@ -153,12 +153,13 @@ class GridWorld(CTkFrame):
         self.after_idle(self.__update_loop)
 
     def __update_loop(self):
-        # when not busy update the state if available
+        self.update()  # force tkinter to complete all work before starting on
+        # new work
         state = self.update_bridge.get_latest_state()
         if state is not None:
             self._display.set_state(state)
         if self.auto_mode is AutoSpeed.auto_local:
             # ready for next state
             self.next_button_pressed()
-        self.update()
+
         self.after(100, self.__update_loop)
