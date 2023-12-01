@@ -1,4 +1,4 @@
-from typing import Dict, Tuple
+from typing import Dict, Optional, Tuple
 
 from customtkinter import CTkFrame
 
@@ -10,7 +10,7 @@ from .cell import Cell
 class InnerGrid(CTkFrame):
     """Positions the grid of cells."""
 
-    def __init__(self, master, state: StateDescription):
+    def __init__(self, master):
         """Initialise the Grid World View.
 
         creates and positions each cell in a state.
@@ -18,12 +18,11 @@ class InnerGrid(CTkFrame):
         Args:
             master (_type_): the component to draw this in. use the
             `GridPadding` to maintain the correct aspect ratio.
-            state (StateDescription): the state to display
         """
         super().__init__(master, fg_color="transparent", width=0, height=0)
+        self.state: Optional[StateDescription] = None
         self.grid_propagate(False)
         self.cells: Dict[Tuple[int, int], Cell] = {}
-        self.state = state
         self.__populate_cells()
         self.bind(
             "<Configure>",
@@ -40,6 +39,8 @@ class InnerGrid(CTkFrame):
         Args:
             event (Any): the resize event, providing the new size of the grid.
         """
+        if self.state is None:
+            return
         number_of_columns = self.state.grid_world.width
         number_of_rows = self.state.grid_world.height
         cell_width = event.width // number_of_columns
@@ -58,7 +59,9 @@ class InnerGrid(CTkFrame):
         Args:
             state (StateDescription): the state to display
         """
-        previous_grid = self.state.grid_world
+        previous_grid = (
+            self.state.grid_world if self.state is not None else None
+        )
         self.state = state
         if previous_grid is not state.grid_world:
             self.__populate_cells()
@@ -76,6 +79,8 @@ class InnerGrid(CTkFrame):
         Removes existing cells and creates a new grid according to the current
         state description.
         """
+        if self.state is None:
+            return
         for cell_widget in self.cells.values():
             cell_widget.destroy()
 

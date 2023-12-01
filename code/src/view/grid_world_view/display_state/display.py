@@ -13,20 +13,18 @@ class DisplayState(CTkFrame):
 
     default_size = 0
 
-    def __init__(self, master, state: StateDescription):
+    def __init__(self, master):
         """Initialise the padding widget.
 
         Args:
             master (Any): the widget to render this grid into
-            state (StateDescription): the current state to display
         """
         super().__init__(
             master, width=self.default_size, height=self.default_size
         )
         self.grid_propagate(False)
-        self.inner_grid = InnerGrid(self, state)
-
-        self.set_state(state)
+        self.inner_grid = InnerGrid(self)
+        self.aspect_ratio = 1
         self.inner_grid.grid(row=1, column=1, sticky="nsew")
         self.bind(
             "<Configure>",

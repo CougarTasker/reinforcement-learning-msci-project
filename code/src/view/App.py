@@ -6,8 +6,10 @@ from customtkinter import (
     set_default_color_theme,
 )
 
+from src.controller.learning_system_controller_factory import (
+    LearningSystemControllerFactory,
+)
 from src.model.config.reader import ConfigReader
-from src.model.learning_system.learning_system import LearningSystem
 
 from ..model.learning_system.options import AgentOptions, DynamicsOptions
 from .grid_world_view.grid_world import GridWorld
@@ -21,9 +23,16 @@ class ReinforcementLearningApp(CTk):
         "Q Learning": AgentOptions.q_learning,
     }
 
-    def __init__(self):
-        """Initialise the custom tkinter app."""
+    def __init__(self, controller: LearningSystemControllerFactory):
+        """Initialise the custom tkinter app.
+
+        Args:
+            controller (LearningSystemControllerFactory): The factory to make
+            system controllers.
+        """
         super().__init__()
+        self.controller = controller
+
         self.title("RHUL MSci FYP - Reinforcement Learning App")
         self.setup_config()
 
@@ -52,5 +61,7 @@ class ReinforcementLearningApp(CTk):
             tab_frame.grid_rowconfigure(0, weight=1)
             GridWorld(
                 tab_frame,
-                LearningSystem(agent, DynamicsOptions.collection),
+                self.controller.create_controller(
+                    agent, DynamicsOptions.collection
+                ),
             ).grid(row=0, column=0, sticky="nsew")

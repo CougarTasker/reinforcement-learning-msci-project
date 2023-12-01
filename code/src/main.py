@@ -1,4 +1,7 @@
-from src.controller.controller import Controller
+from .controller.learning_system_controller_factory import (
+    LearningSystemControllerFactory,
+)
+from .view.App import ReinforcementLearningApp
 
 
 def main():
@@ -6,7 +9,9 @@ def main():
 
     The main entry point into the application.
     """
-    Controller().start()
+    controller = LearningSystemControllerFactory()
+    app = ReinforcementLearningApp(controller)
+    app.mainloop()
 
 
 if __name__ == "__main__":
