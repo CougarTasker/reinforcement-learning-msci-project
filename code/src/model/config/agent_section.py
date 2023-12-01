@@ -11,7 +11,6 @@ class AgentConfig(BaseConfigSection):
     learning_rate_property = "learning_rate"
     sample_count_property = "sample_count"
     exploration_ratio_property = "exploration_ratio"
-    simultaneous_agents_property = "simultaneous_agents"
 
     def __init__(self) -> None:
         """Instantiate Grid world section config."""
@@ -22,7 +21,6 @@ class AgentConfig(BaseConfigSection):
                 self.learning_rate_property: float,
                 self.sample_count_property: int,
                 self.exploration_ratio_property: float,
-                self.simultaneous_agents_property: int,
             }
         )
         super().__init__("agent", data_schema)
@@ -69,13 +67,3 @@ class AgentConfig(BaseConfigSection):
             never exploring.
         """
         return self.configuration[self.exploration_ratio_property]
-
-    def get_simultaneous_agents(self) -> int:
-        """Get the number of agents to run in parallel with the main agent.
-
-        This speeds up training for Q-learning
-
-        Returns:
-            int: The number of agents.
-        """
-        return self.configuration[self.simultaneous_agents_property]

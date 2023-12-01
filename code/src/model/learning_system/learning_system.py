@@ -1,4 +1,4 @@
-from typing import Optional, Set
+from typing import Optional
 
 from ..agents import (
     BaseAgent,
@@ -42,14 +42,10 @@ class LearningSystem(object):
         self._dynamics: Optional[BaseDynamics] = None
 
         self._main_learning_instance: Optional[LearningInstance] = None
-        self._simultaneous_learning_instances: Set[LearningInstance] = set()
         self._value_normalisation_factory: Optional[NormaliserFactory] = None
         self._display_mode = DisplayMode.default
 
         self._agent_config = ConfigReader().agent()
-        self.set_simultaneous_agents(
-            self._agent_config.get_simultaneous_agents()
-        )
 
     def get_dynamics(self) -> BaseDynamics:
         """Get the dynamics.
@@ -115,7 +111,7 @@ class LearningSystem(object):
         Returns:
             StateDescription: the current state instance
         """
-        instance = self.__get_main_learning_instance()
+        instance = self.__get_learning_instance()
         return self.__state_id_to_description(instance.get_current_state())
 
     def perform_action(
@@ -128,15 +124,12 @@ class LearningSystem(object):
             transition information, the last state, the action chosen, the next
             state, the reward received for this action.
         """
-        for simultaneous in self._simultaneous_learning_instances:
-            simultaneous.perform_action()
-
         (
             last_state,
             action,
             next_state,
             reward,
-        ) = self.__get_main_learning_instance().perform_action()
+        ) = self.__get_learning_instance().perform_action()
         return (
             self.__state_id_to_description(last_state),
             action,
@@ -151,7 +144,7 @@ class LearningSystem(object):
             StateDescription: the initial state description and new current
             state.
         """
-        instance = self.__get_main_learning_instance()
+        instance = self.__get_learning_instance()
         return self.__state_id_to_description(instance.reset_state())
 
     def set_display_mode(self, display_mode: DisplayMode):
@@ -179,29 +172,6 @@ class LearningSystem(object):
             )
         return self._value_normalisation_factory.create_normaliser(state_id)
 
-    def set_simultaneous_agents(self, count: int):
-        """Set the number of agents to be run in parallel with the main agent.
-
-        this speeds up q-learning otherwise it can be very slow. will not apply
-        to other types of agents
-
-        Args:
-            count (int): the number of simultaneous agents to add
-        """
-        if self._agent_option is not AgentOptions.q_learning:
-            return
-
-        diff = max(int(count), 0) - len(self._simultaneous_learning_instances)
-        if diff > 0:
-            for _ in range(diff):
-                self._simultaneous_learning_instances.add(
-                    LearningInstance(self.get_agent(), self.get_dynamics())
-                )
-        elif diff < 0:
-            for _ in range(-diff):
-                self._simultaneous_learning_instances.pop()
-        assert len(self._simultaneous_learning_instances) == count
-
     def __state_id_to_description(self, state_id: int) -> StateDescription:
         return StateDescription(
             self.get_dynamics(),
@@ -210,7 +180,7 @@ class LearningSystem(object):
             self._display_mode,
         )
 
-    def __get_main_learning_instance(self):
+    def __get_learning_instance(self):
         if self._main_learning_instance is not None:
             return self._main_learning_instance
         self._main_learning_instance = LearningInstance(
