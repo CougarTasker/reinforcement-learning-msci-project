@@ -3,7 +3,7 @@ from typing import Dict, Optional, Tuple
 from customtkinter import CTkFrame, CTkImage, CTkLabel
 from PIL import Image, ImageDraw
 
-from src.model.learning_system.cell_configuration import CellConfiguration
+from src.view.grid_world_view.display_state.cell_new import Cell
 
 from ....model.learning_system.state_description import StateDescription
 
@@ -100,37 +100,3 @@ class DisplayState(CTkFrame):
 
         image_tkinter = CTkImage(light_image=image, size=(width, height))
         self.image_label.configure(image=image_tkinter)
-
-
-class Cell(object):
-    """Widget to display an individual cell."""
-
-    padding = 8
-
-    def __init__(
-        self,
-        config: CellConfiguration,
-        bounding_box: Tuple[int, int, int, int],
-    ) -> None:
-        """Initialise the cell.
-
-        displays the cell as a rounded rectangle with icons.
-
-        Args:
-            config (CellConfiguration): the configuration of how this cell
-            should present.
-            bounding_box (Tuple[int, int, int, int]): the position and size of
-            this cell on the canvas.
-        """
-        self.config = config
-        self.bounding_box = bounding_box
-
-    def draw(self, image_draw: ImageDraw.ImageDraw):
-        """Draw the cell to the canvas.
-
-        Args:
-            image_draw (ImageDraw.ImageDraw): the drawing context
-        """
-        image_draw.rounded_rectangle(
-            self.bounding_box, self.padding, fill="red"
-        )
