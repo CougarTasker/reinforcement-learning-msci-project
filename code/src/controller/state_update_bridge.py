@@ -14,7 +14,7 @@ class StateUpdateBridge(BaseBridge):
         Args:
             state (StateDescription): The new state.
         """
-        self.queue.put_nowait(state)
+        self.add_item(state)
 
     def get_latest_state(self) -> Optional[StateDescription]:
         """Get the last (most recent) new state.
@@ -22,7 +22,4 @@ class StateUpdateBridge(BaseBridge):
         Returns:
             Optional[StateDescription]: the new state, none if none has been set
         """
-        last_state: Optional[StateDescription] = None
-        while not self.queue.empty():
-            last_state = self.queue.get_nowait()
-        return last_state
+        return self.get_latest_item()

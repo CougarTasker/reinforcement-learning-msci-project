@@ -158,8 +158,11 @@ class GridWorld(CTkFrame):
         state = self.update_bridge.get_latest_state()
         if state is not None:
             self._display.set_state(state)
-        if self.auto_mode is AutoSpeed.auto_local:
-            # ready for next state
+
+        should_auto_next = self.auto_mode is AutoSpeed.auto_local
+        queue_is_available = not self.action_bridge.has_new_action()
+        ui_is_idle = state is None
+        if should_auto_next and queue_is_available and ui_is_idle:
             self.next_button_pressed()
 
         self.after(100, self.__update_loop)

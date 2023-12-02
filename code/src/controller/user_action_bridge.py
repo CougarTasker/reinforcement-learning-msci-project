@@ -39,7 +39,7 @@ class UserActionBridge(BaseBridge):
             action (UserAction): the action the user has performed.
             payload (Any): the data to send, defaults to None.
         """
-        self.queue.put_nowait(UserActionMessage(action, payload))
+        self.add_item(UserActionMessage(action, payload))
 
     def has_new_action(self) -> bool:
         """Is there a new action to process.
@@ -47,7 +47,7 @@ class UserActionBridge(BaseBridge):
         Returns:
             bool: true when there is another action to consider.
         """
-        return not self.queue.empty()
+        return self.get_count() > 0
 
     def get_action(self) -> UserActionMessage:
         """Get the latest action the user has performed.
@@ -57,4 +57,4 @@ class UserActionBridge(BaseBridge):
         Returns:
             UserActionMessage: the action that has been performed
         """
-        return self.queue.get()
+        return self.get_item_blocking()

@@ -60,10 +60,17 @@ class LearningSystemController(object):
                 case _:
                     raise RuntimeError("Unknown action performed.")
 
-            while self.auto and not user_action_bridge.has_new_action():
+            while self.__can_auto_step():
                 self.one_step()
 
     def one_step(self):
         """Perform one step."""
         current_state = self.system.perform_action()[2]
         self.state_update_bridge.update_state(current_state)
+
+    def __can_auto_step(self) -> bool:
+        return (
+            self.auto
+            and not self.user_action_bridge.has_new_action()
+            and self.state_update_bridge.has_capacity()
+        )
