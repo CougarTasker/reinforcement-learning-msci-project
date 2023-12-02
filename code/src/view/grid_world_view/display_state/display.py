@@ -74,7 +74,7 @@ class DisplayState(CTkFrame):
                 bounding_box,
             ) = cell_position
             self.cells[cell_coordinate] = Cell(
-                state.cell_configuration(cell_coordinate), bounding_box
+                state.cell_config[cell_coordinate], bounding_box
             )
 
     def __configure_grid(self, width: int, height: int):

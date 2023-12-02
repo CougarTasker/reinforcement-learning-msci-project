@@ -39,24 +39,22 @@ class LearningSystemController(object):
             match action:
                 case UserActionMessage(action=UserAction.one_step):
                     self.one_step()
-
+                    self.send_current_state()
                 case UserActionMessage(action=UserAction.start_auto):
                     self.auto = True
 
                 case UserActionMessage(action=UserAction.stop_auto):
                     self.auto = False
                 case UserActionMessage(action=UserAction.reset):
-                    current_state = self.system.reset_state()
-                    self.state_update_bridge.update_state(current_state)
+                    self.system.reset_state()
+                    self.send_current_state()
                 case UserActionMessage(action=UserAction.fetch_current_state):
-                    current_state = self.system.get_current_state()
-                    self.state_update_bridge.update_state(current_state)
+                    self.send_current_state()
                 case UserActionMessage(
                     action=UserAction.set_display_mode, payload=display_mode
                 ):
                     self.system.set_display_mode(display_mode)
-                    current_state = self.system.get_current_state()
-                    self.state_update_bridge.update_state(current_state)
+                    self.send_current_state()
                 case _:
                     raise RuntimeError("Unknown action performed.")
 
@@ -65,7 +63,12 @@ class LearningSystemController(object):
 
     def one_step(self):
         """Perform one step."""
-        current_state = self.system.perform_action()[2]
+        self.system.perform_action()
+        self.send_current_state()
+
+    def send_current_state(self):
+        """Send the current state to the view."""
+        current_state = self.system.get_current_state()
         self.state_update_bridge.update_state(current_state)
 
     def __can_auto_step(self) -> bool:
