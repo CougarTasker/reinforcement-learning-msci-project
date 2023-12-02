@@ -1,4 +1,4 @@
-from typing import Generator, Tuple
+from typing import Dict, Generator, Tuple
 
 import numpy as np
 
@@ -57,6 +57,13 @@ class GridWorld(object):
         position_integer = np.floor(position_float).astype(int)
         return (position_integer[0], position_integer[1])
 
+    action_direction: Dict[Action, Tuple[int, int]] = {
+        Action.up: (0, -1),
+        Action.down: (0, 1),
+        Action.right: (1, 0),
+        Action.left: (-1, 0),
+    }
+
     def movement_action(
         self,
         current_position: integer_position,
@@ -83,20 +90,13 @@ class GridWorld(object):
         Returns:
             integer_position: The position after moving.
         """
+        if action not in self.action_direction:
+            raise ValueError(
+                f"Action {action.name} is not a known movement action"
+            )
         x_pos, y_pos = current_position
-        match action:
-            case Action.up:
-                return (x_pos, y_pos - distance)
-            case Action.down:
-                return (x_pos, y_pos + distance)
-            case Action.left:
-                return (x_pos - distance, y_pos)
-            case Action.right:
-                return (x_pos + distance, y_pos)
-            case _:
-                raise ValueError(
-                    f"Action {action.name} is not a known movement action"
-                )
+        dir_x, dir_y = self.action_direction[action]
+        return (x_pos + dir_x * distance, y_pos + dir_y * distance)
 
     def list_cells(self) -> Generator[integer_position, None, None]:
         """Generate all cells in the grid world.

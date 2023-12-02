@@ -3,7 +3,7 @@ from typing import Dict, Optional, Tuple
 from customtkinter import CTkFrame, CTkImage, CTkLabel
 from PIL import Image, ImageDraw
 
-from src.view.grid_world_view.display_state.cell_new import Cell
+from src.view.grid_world_view.display_state.cell.cell import Cell
 
 from ....model.learning_system.state_description import StateDescription
 
@@ -96,7 +96,7 @@ class DisplayState(CTkFrame):
         image_draw = ImageDraw.Draw(image, image_mode)
 
         for cell in self.cells.values():
-            cell.draw(image_draw)
+            cell.draw(image, image_draw)
 
         image_tkinter = CTkImage(light_image=image, size=(width, height))
         self.image_label.configure(image=image_tkinter)

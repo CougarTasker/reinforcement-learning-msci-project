@@ -80,7 +80,7 @@ class IconLoader(object):
         """
         rgb_float = np.array(Color(color).get_rgb())
 
-        np_color = (np.floor(rgb_float) * self.rgb_component_max).astype(int)
+        np_color = np.floor(rgb_float * self.rgb_component_max).astype(int)
 
         img_array = np.array(image.convert("RGBA"))
 
@@ -147,6 +147,7 @@ class IconLoader(object):
         Returns:
             Image: the image representing this icon
         """
+        size = max(size, 1)
         cache_key = (icon, size, color)
         existing_image = self.color_size_cache.get(cache_key, None)
         if existing_image is not None:
@@ -154,13 +155,13 @@ class IconLoader(object):
 
         image_raw = self.__get_icon_raw_files(icon)
 
-        image_copy = image_raw.copy()
+        coloured_icon = self.get_coloured_icon(image_raw, color)
         # resize image
-        image_copy.thumbnail((size, size))
+        coloured_icon.thumbnail((size, size))
 
-        self.color_size_cache[cache_key] = image_copy
+        self.color_size_cache[cache_key] = coloured_icon
 
-        return image_copy
+        return coloured_icon
 
     def __get_icon_raw_files(self, icon: Icon) -> Image:
         cached_file = self.bitmap_cache.get(icon, None)
