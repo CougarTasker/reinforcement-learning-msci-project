@@ -15,7 +15,7 @@
         "columnspan",
         "dtype",
         "finfo",
-        "Flaticon",
+        "flaticon",
         "fromarray",
         "ndarray",
         "njit",
@@ -26,7 +26,7 @@
         "relx",
         "RHUL",
         "softmax",
-        "Tkinter",
+        "tkinter",
         "tktooltip",
         "venv"
     ],

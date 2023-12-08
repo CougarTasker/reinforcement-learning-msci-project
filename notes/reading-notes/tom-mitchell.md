@@ -20,7 +20,7 @@ Important notes:
 - **Unlike other MDP's in RL the agent does not have perfect knowledge of the state and reward functions**
   - this means no background knowledge of the task
   - delayed reward: the reward is not known until the action is made
-- the agent influences the distribution of training examples by the action sequence it chooses. which experimentation strategy produces most effective learning? The tradeoff in choosing whether to favor exploration of unknown states and actions (to gather new information), or exploitation of states and actions that it has already learned will yield high reward (to maximize its cumulative reward)
+- the agent influences the distribution of training examples by the action sequence it chooses. which experimentation strategy produces most effective learning? The tradeoff in choosing whether to favour exploration of unknown states and actions (to gather new information), or exploitation of states and actions that it has already learned will yield high reward (to maximize its cumulative reward)
 - Partially observations, the agent may not observe the entire state with its sensors, may need to include previous sensor data to get a fuller picture
 
 ### Markov Decision Process (MDP):

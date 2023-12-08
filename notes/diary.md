@@ -1,27 +1,30 @@
+<!-- omit in toc -->
 # Project Diary
 
+<!-- omit in toc -->
 ## Contents
-- [Project Diary](#project-diary)
-  - [Contents](#contents)
-  - [Weeks](#weeks)
-    - [Week 1 (18/09/23)](#week-1-180923)
-    - [Week 2 (25/09/23)](#week-2-250923)
-    - [Week 3 (02/10/23)](#week-3-021023)
-    - [Week 4 (09/10/23)](#week-4-091023)
-    - [Week 5 (16/10/23)](#week-5-161023)
-    - [Week 6 (23/10/23)](#week-6-231023)
-    - [Week 7 (30/10/23)](#week-7-301023)
+- [Week 01 (18/09/23)](#week-01-180923)
+- [Week 02 (25/09/23)](#week-02-250923)
+- [Week 03 (02/10/23)](#week-03-021023)
+- [Week 04 (09/10/23)](#week-04-091023)
+- [Week 05 (16/10/23)](#week-05-161023)
+- [Week 06 (23/10/23)](#week-06-231023)
+- [Week 07 (30/10/23)](#week-07-301023)
+- [Week 08 (6/10/23)](#week-08-61023)
+- [Week 09 (13/11/23)](#week-09-131123)
+- [Week 10 (20/11/23)](#week-10-201123)
+- [Week 11 (27/11/23)](#week-11-271123)
 
-
+<!-- omit in toc -->
 ## Weeks
 
-### Week 1 (18/09/23)
+### Week 01 (18/09/23)
 
  - (Tue 19) Attended first lecture 
  - (Thu 21) Started reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
  - (Fri 22) Finished reading Reinforcement Learning in 'Machine Learning' by Tom Mitchell
 
-### Week 2 (25/09/23)
+### Week 02 (25/09/23)
 
  - (Mon 25) Decided on project idea 
    - Started draft project plan 
@@ -36,7 +39,7 @@
  - (Thu 28) Worked on project plan report 
    - improved bibliography
 
-### Week 3 (02/10/23)
+### Week 03 (02/10/23)
 
  - (Tue 3) worked on project plan
    - Put together risks section 
@@ -46,7 +49,7 @@
    - Improved abstract
    - improved bibliography
 
-### Week 4 (09/10/23)
+### Week 04 (09/10/23)
 
  - (Wed 11) Gitlab
    - Attended lecture about gitlab
@@ -57,7 +60,7 @@
  - (Thu 12) Created Initial Interim report from template
    - Finished chapter one from Sutton Barto book
 
-### Week 5 (16/10/23)
+### Week 05 (16/10/23)
 
  - (Mon 16) Continued reading Sutton Barto book
    - chapter 2 and some of chapter 3
@@ -68,14 +71,75 @@
    - Second Meeting with Anand
  - (Fri 20) Continued reading read subsections on policy improvement
 
-### Week 6 (23/10/23)
+### Week 06 (23/10/23)
 
  - (Mon 23) 
    - Continued reading Sutton Barto book
      - read chapters 4,6 and skimmed 5
    - Met Anand to discuss my project plan
 
-### Week 7 (30/10/23)
+### Week 07 (30/10/23)
 
- - (Thu) 
-   - 
+ - (Thu 2) 
+   - Started MDP Report
+   - Third Meeting with Anand
+ - (Weekend 4-5)
+   - Completed MDP Report
+
+### Week 08 (6/10/23)
+
+ - (Mon 6) Started report on the policy and value functions
+ - (Tue 7) Completed policy and value report
+ - (Wed 8) 
+   - Completed policy and value report
+   - Started Q-learning report
+ - (Thu 9) 
+   - Completed Q-learning report
+   - Started code setup
+ - (Weekend 10-11) continued setting up code
+
+### Week 09 (13/11/23)
+
+ - (Mon 13) 
+   - Completed code setup 
+ - (Tue 14) 
+   - Started vertical slice
+ - (Wed 15)
+   - Started writing collection dynamics method
+ - (Thu 16)
+   - Completed collection dynamics
+   - Started implementing value iteration
+   - Fourth meeting with Anand
+ - (Fri 17)
+   - completed value iteration agent
+
+### Week 10 (20/11/23)
+
+ - (Mon 20) 
+   - Created controllers to tie view and model together.
+   - Tried to display grid with canvas approach
+     - ran into rendering limitations, with many rectangles rectangles kivy started to have issues with rendering the icons.
+ - (Tue 21) tried widget based approach
+   - Tried using kivy's layout widgets to display the grid
+   - while the icons were no longer an issue positioning the grid became impossible 
+   - investigated kivy alternatives
+ - (Wed 22) Pivoted to using tkinter 
+   - remade exiting UI in tkinter and updated tooling for working with tkinter
+   - completed grid world display widget
+ - (Thu 23)
+   - Added button that progresses the state over time.
+   - Created methods to provide the Q-value information to the view, allowing for visualisation.
+ - (Fri 24)
+   - Started adding Q-value visualisation code, 
+   - Optimised value iteration code with numba
+   - Reworked how cells are provided their information
+
+### Week 11 (27/11/23)
+
+ - (Mon 27) Created tooltip to provide state value information and fixed origin inconsistency from the move to tkinter.
+ - (Tue 28) Completed system for allowing the user to select between different types of displays
+ - (Wed 29)
+   - Improved code `README` and improved usability 
+   - Implemented the Q-learning agent with 
+   - Added simultaneous agents to speed up learning
+   - Added opening to project report
