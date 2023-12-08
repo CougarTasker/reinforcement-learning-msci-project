@@ -1,11 +1,10 @@
 from typing import Dict, Optional, Tuple, Union
 
-from src.model.state_value.value_range import ValueRange, ValueType
-
-from ..agents.base_agent import BaseAgent
-from ..dynamics.actions import Action
-from ..state.state_instance import entities_type
-from ..state.state_pool import StatePool
+from ...agents.base_agent import BaseAgent
+from ...dynamics.actions import Action
+from ...state.state_instance import entities_type
+from ...state.state_pool import StatePool
+from ..value_range_normaliser.value_range import ValueRange, ValueType
 
 action_value_tuple = Tuple[Tuple[int, int], Action]
 
