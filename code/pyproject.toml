@@ -36,6 +36,9 @@ types-toml = "^0.10.8.7"
 pep8-naming = "^0.13.3"
 wemake-python-styleguide = "^0.18.0"
 snakeviz = "^2.2.0"
+mkdocs-material = "^9.5.0"
+pytz = "^2023.3.post1"
+mkdocstrings = "^0.24.0"
 
 [tool.isort]
 profile = "black"

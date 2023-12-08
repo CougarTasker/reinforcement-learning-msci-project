@@ -32,7 +32,8 @@
 				"njpwerner.autodocstring",
 				"LittleFoxTeam.vscode-python-test-adapter",
 				"njqdev.vscode-python-typehint",
-				"tamasfe.even-better-toml"
+				"tamasfe.even-better-toml",
+				"redhat.vscode-yaml"
 			]
 		}
 	}
