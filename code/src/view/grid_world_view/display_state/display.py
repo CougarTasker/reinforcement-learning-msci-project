@@ -1,7 +1,11 @@
-from customtkinter import CTkFrame
+from typing import Dict, Optional, Tuple
+
+from customtkinter import CTkFrame, CTkImage, CTkLabel
+from PIL import Image, ImageDraw
+
+from src.view.grid_world_view.display_state.cell.cell import Cell
 
 from ....model.learning_system.state_description import StateDescription
-from .grid import InnerGrid
 
 
 class DisplayState(CTkFrame):
@@ -13,21 +17,23 @@ class DisplayState(CTkFrame):
 
     default_size = 0
 
-    def __init__(self, master, state: StateDescription):
+    cell_margins = 0.1
+
+    def __init__(self, master):
         """Initialise the padding widget.
 
         Args:
             master (Any): the widget to render this grid into
-            state (StateDescription): the current state to display
         """
         super().__init__(
             master, width=self.default_size, height=self.default_size
         )
-        self.grid_propagate(False)
-        self.inner_grid = InnerGrid(self, state)
-
-        self.set_state(state)
-        self.inner_grid.grid(row=1, column=1, sticky="nsew")
+        self.state: Optional[StateDescription] = None
+        self.cells: Dict[Tuple[int, int], Cell] = {}
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure(1, weight=1)
+        self.image_label = CTkLabel(self, text="")
+        self.image_label.grid(row=1, column=0, sticky="nsew")
         self.bind(
             "<Configure>",
             command=self.resize,
@@ -39,9 +45,9 @@ class DisplayState(CTkFrame):
         Args:
             state (StateDescription): the state to be displayed
         """
-        self.aspect_ratio = state.grid_world.width / state.grid_world.height
-        self.__configure_grid(self.winfo_width(), self.winfo_height())
-        self.inner_grid.set_state(state)
+        self.state = state
+        width, height = self.winfo_width(), self.winfo_height()
+        self.__configure_grid(width, height)
 
     def resize(self, event):
         """Handle resize event.
@@ -53,21 +59,44 @@ class DisplayState(CTkFrame):
         """
         self.__configure_grid(event.width, event.height)
 
+    def __populate_cells(
+        self, state: StateDescription, width: int, height: int
+    ):
+        self.cells = {}
+
+        cell_positions = state.grid_world.list_cell_positions(
+            width, height, self.cell_margins
+        )
+
+        for cell_position in cell_positions:
+            (
+                cell_coordinate,
+                bounding_box,
+            ) = cell_position
+            self.cells[cell_coordinate] = Cell(
+                state.cell_config[cell_coordinate], bounding_box
+            )
+
     def __configure_grid(self, width: int, height: int):
-        outer_aspect_ratio = width / height
-        if outer_aspect_ratio < self.aspect_ratio:
-            self.grid_columnconfigure((1), weight=1)
-            self.grid_columnconfigure((0, 2), weight=0)
+        if self.state is None:
+            return
+        (
+            expected_cell_size,
+            _marin_size,
+        ) = self.state.grid_world.get_cell_sizing(
+            width, height, self.cell_margins
+        )
+        if expected_cell_size < 10:
+            # cells are too small
+            return
+        self.__populate_cells(self.state, width, height)
+        transparent = (255, 255, 255, 0)
+        image_mode = "RGBA"
+        image = Image.new(image_mode, (width, height), transparent)
+        image_draw = ImageDraw.Draw(image, image_mode)
 
-            inner_height = int(width / self.aspect_ratio)
+        for cell in self.cells.values():
+            cell.draw(image, image_draw)
 
-            self.grid_rowconfigure((1), weight=0, minsize=inner_height)
-            self.grid_rowconfigure((0, 2), weight=1)
-        else:
-            self.grid_rowconfigure((1), weight=1)
-            self.grid_rowconfigure((0, 2), weight=0)
-
-            inner_width = int(height * self.aspect_ratio)
-
-            self.grid_columnconfigure((1), weight=0, minsize=inner_width)
-            self.grid_columnconfigure((0, 2), weight=1)
+        image_tkinter = CTkImage(light_image=image, size=(width, height))
+        self.image_label.configure(image=image_tkinter)
