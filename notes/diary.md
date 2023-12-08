@@ -41,11 +41,11 @@
 
 ### Week 03 (02/10/23)
 
- - (Tue 3) worked on project plan
+ - (Tue 03) worked on project plan
    - Put together risks section 
    - put together timeline 
- - (Wed 4) submitted project plan to Anand
- - (Thu 5) Finished project plan
+ - (Wed 04) submitted project plan to Anand
+ - (Thu 05) Finished project plan
    - Improved abstract
    - improved bibliography
 
@@ -80,20 +80,20 @@
 
 ### Week 07 (30/10/23)
 
- - (Thu 2) 
+ - (Thu 02) 
    - Started MDP Report
    - Third Meeting with Anand
  - (Weekend 4-5)
    - Completed MDP Report
 
-### Week 08 (6/10/23)
+### Week 08 (06/10/23)
 
- - (Mon 6) Started report on the policy and value functions
- - (Tue 7) Completed policy and value report
- - (Wed 8) 
+ - (Mon 06) Started report on the policy and value functions
+ - (Tue 07) Completed policy and value report
+ - (Wed 08) 
    - Completed policy and value report
    - Started Q-learning report
- - (Thu 9) 
+ - (Thu 09) 
    - Completed Q-learning report
    - Started code setup
  - (Weekend 10-11) continued setting up code
@@ -143,3 +143,23 @@
    - Implemented the Q-learning agent with 
    - Added simultaneous agents to speed up learning
    - Added opening to project report
+ - (Thu 30)
+   - Improved Interim Report
+   - Fifth meeting with Anand
+     - Anand noticed how the simultaneous agents deviated for the literature
+ - (Fri 01) Refactor
+   - Removed the simultaneous agents feature
+   - focused on Improving performance in other ways:
+     - Split MVC across different processes to avoid the GIL
+     - Improved rendering approach with Pillow no more odd layout and widgets
+   - Started making presentation
+ - (Sat 02)
+   - Completed presentation slides
+   - Practised presentation
+
+## Week 12 (08/12/23)
+ - (Mon 04)
+   - Practised presentation
+   - Gave presentation
+ - (Fri 08)
+   - Prepared work for Interim submission 
