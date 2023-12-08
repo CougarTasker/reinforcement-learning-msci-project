@@ -3,6 +3,8 @@
 
 This application implements reinforcement learning agents in a grid world. 
 
+![Q Learning](../media/images/q_learning_state_table.png)
+![Value Iteration](../media/images/action_value.png)
 
 <!-- omit in toc -->
 ## Table Of Contents

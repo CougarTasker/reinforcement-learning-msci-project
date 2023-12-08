@@ -1,10 +1,15 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
-\graphicspath{ {./images/} }
+\graphicspath{ {./images/}{../../media/images} }
 \usepackage{hyperref}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{dirtytalk}
+\usepackage{calligra}
+\usepackage{subcaption}
+\usepackage{float}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -37,11 +42,11 @@ Student Name: \studentname
 
 \vskip3em
 
-Date of Submission: 
+Date of Submission: 08/12/2023
 
 \vskip3em
 
-Signature:
+Signature: {\calligra \LARGE \studentname}
 
 \newpage
 
@@ -54,21 +59,23 @@ Signature:
 
 \begin{abstract}
 
-  To complete many objectives robotic agents need to adapt and learn new environments. This presents a problem for traditional supervised learning approaches that operate under the (IID) assumption\cite{bagnell2005robust}, training data may not apply to the new environment. This report investigates reinforcement learning (RL) techniques as an alternative for this class of robotics. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent's decision. This distinction makes RL agents suitable for our problem. 
+  To complete many objectives robotic agents need to adapt and learn new environments. This presents a problem for traditional supervised learning approaches that operate under the (IID) assumption\cite{bagnell2005robust}, training data may not apply to new environments. This report investigates reinforcement learning (RL) techniques as an alternative for this class of robotics. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent decides on the consequences of their actions. this is unlike supervised learning; there is no need for training in RL the agent will continuously learn from their successes and failures. Although RL does not need training data it is also unlike unsupervised learning, since RL agents learn to achieve more reward from within the system rather than observing underlying patterns.
   
-  In this project, the goal is to understand and implement reinforcement learning. The secondary aim is to assess these agents and whether they would be effective for autonomous robots. For this purpose agents will be challenged with a resource-gathering objective. Resource gathering is widely applicable to many real-world autonomous robots such as smart vacuum cleaners. for consistency, the agents will operate in a simulated environment, such as a grid world for tabular approaches or an environment from the gymnasium library to evaluate deep reinforcement algorithms.
+  These unique benefits of reinforcement learning make this field applicable to many real-world problems. RL is built upon a strong mathematical foundation that allows us to make strong guarantees about solutions in the reinforcement learning domain. Furthermore, RL spans widely uniting together many important and diverse areas of study such as Economics, Optimisation, Game Theory, robotics and Cognitive Science.
+  
+  It follows that the primary goal of this project is to understand and implement reinforcement learning. As this project develops the secondary aim is to frame these solutions from the perspective of autonomous robotic agents to aid in decision-making. This robotics background fits well with this project's other requirements: such as implementing a grid world environment and Q-learning agents. Resource-gathering robots from autonomous vacuum cleaners to industrial warehouse robots can be modelled in these grid world environments and this project aims to create reinforcement learning agents that are successful in these environments. Although the project is not limited to these technologies we will also evaluate more advanced techniques such as deep reinforcement learning agents and diverse RL environments from the gymnasium library.
   
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Introduction
-\chapter{Introduction}
+% \chapter{Introduction}
 
-\section{The Challenge}
+% \section{The Challenge}
 
 \section{Aims and Objectives}
 
-goals:
+
 \begin{itemize}
   \item Efficient Navigation: The agent must autonomously navigate a grid world while making decisions to optimise rewards. The robot should learn to prioritise efficient paths.
   \item Balancing Constraints: The agent must balance collecting resources with constraints such as energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
@@ -94,17 +101,40 @@ Last year, I completed my year-long internship at Zing Dev (Zing), a digital com
 Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
 
 
-\section{Literature Survey}
+% \section{Literature Survey}
 
 \chapter{Software Engineering}
 
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{state_value}
+    \caption[width=0.5\linewidth]{\label{fig:screenshot:state-value-table} The V (state-value) table}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{action_value}
+    \caption[width=0.5\linewidth]{\label{fig:screenshot:action-value-table} The Q (action-value) table}
+  \end{subfigure}
+  \caption{Two of the application's visualisations}
+  \label{fig:app-ui}
+\end{figure}
+
+This application is has been written in Python with The model-view-controller architecture. The application has been written with in a Object Oriented fashion with modern software engineering principles in mind\cite{van2008software}. This application uses Pytest to guarantee all all core, complex, and important functionality. I made this choice based upon my experience from my year in industry that testing can be incredibly valuable in many places 100\% coverage or TDD can be counter productive with, diminishing returns for trivial code, increased baggage with refactoring and sometimes the tests become more complex and bug prone than the code they are testing.
+
+
+% Python challanges + solutions interfaces. wighter perfomrance
+
 \section{Workflow}
 
-\section{System Design}
+This application has been packaged with poetry for dependency management and ease of installation. the code quality is maintained in this repository with a number of strict liners that: enforce a consistent code style, check for static typing errors ensure documentation is written. All files are stored under version control, and with pre-commit hooks all linters and tests are run before code is committed.
 
-\section{Functionality and Usage}
+% \section{System Design}
 
-\chapter{Timeline}
+% \section{Functionality and Usage}
+
+% \chapter{Timeline}
 
 planning and time-scale; use project plan and compare with reality
 
@@ -150,7 +180,7 @@ A formal definition of a Markov Decision Process is a tuple $(\mathcal{S},\mathc
 
 The function $p$ is an integral part of this definition; it fully describes how the system will evolve. We call this function the dynamics of the MDP. What this definition does not describe is how actions are chosen. This decision-making is done by an entity called an agent. For our purposes, the agent will have complete visibility as to the current state of the MDP. However, like most real-world situations, our agent will not have any a priori knowledge of the dynamics. 
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \fboxsep 2mm
   \framebox{
@@ -185,7 +215,7 @@ After each action, a reward is received. It follows that the goal of an agent sh
 % stateDiagram-v2
 %     a --> b : R = 0
 %     b --> b : R = 100
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \fboxsep 2mm
   \framebox{
@@ -261,9 +291,9 @@ The Bellman equation\ref{eqn:v-def} can be used as an update rule to compute the
 This standard approach uses the traditional value Bellman equation\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
 
 \begin{align}
-  q_{\text{max}}(s,a)          & \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \tag{from \ref{eqn:q-def}}       \\
-  v_{\text{max}}(s)            & \leftarrow  \max_a q_{\text{max}}(s,a) \label{eqn:v-update}                                        \\
-  \therefore v_{\text{max}}(s) & \leftarrow  \max_a \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \label{eqn:v-update}
+  q_{\text{max}}(s,a)          & \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \tag{from \ref{eqn:q-def}} \\
+  v_{\text{max}}(s)            & \leftarrow  \max_a q_{\text{max}}(s,a) \label{eqn:v-update}                                  \\
+  \therefore v_{\text{max}}(s) & \leftarrow  \max_a \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')]
 \end{align}
 
 
@@ -326,12 +356,22 @@ Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ valu
 
 
 
+
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
 
 \bibliographystyle{IEEEtran}
 \bibliography{refrences}
 \addcontentsline{toc}{chapter}{Bibliography}
+
+\appendix
+
+\chapter{Diary}
+
+  \input{diary}
+
+
+
 \label{endpage}
 
 
