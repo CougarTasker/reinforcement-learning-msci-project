@@ -2,6 +2,7 @@ from customtkinter import (
     CTk,
     CTkLabel,
     CTkTabview,
+    deactivate_automatic_dpi_awareness,
     set_appearance_mode,
     set_default_color_theme,
 )
@@ -52,6 +53,7 @@ class ReinforcementLearningApp(CTk):
         set_appearance_mode(config.appearance_mode())
         set_default_color_theme(config.color_theme())
         self.geometry(config.initial_size())
+        deactivate_automatic_dpi_awareness()
 
     def __populate_tabs(self):
         """Create the tabs for each agent."""
