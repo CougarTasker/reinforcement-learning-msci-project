@@ -55,13 +55,17 @@ UIcons by [Flaticon](https://www.flaticon.com/uicons)
 
 ## Documentation
 
-The code is documented with docstrings, In the Google docstring format. this documentation can be viewed in a web browser with `pydoc`
+Documentation is written alongside the code with doc-strings, in the Google docstring format. This can be built into a complete documentation site. a package called `mkdocs` has been configured for building this site.
 
-To view the documentation run the following command in the code folder.
+To view the documentation you can view the latest build at 
+
+
+or use the run the following command in the code folder to start a local server to view these files in your browser.
 ```Bash 
-python3 -m pydoc -p 3000
+poetry run mkdocs serve -a localhost:3000
 ```
-Then open [http://localhost:3000/src.html](http://localhost:3000/src.html) in your browser to view the documentation
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser to view the documentation
 
 
 ## Development

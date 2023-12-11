@@ -13,7 +13,7 @@ class DynamicQTable(object):
 
         Args:
             learning_rate (float): the rate at which to change the value with
-            each update.
+                each update.
         """
         self.table: Dict[Tuple[int, Action], float] = {}
         self.learning_rate = learning_rate

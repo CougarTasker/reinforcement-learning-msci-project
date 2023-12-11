@@ -34,6 +34,6 @@ class BaseConfigSection(object):
 
         Args:
             configuration (Any): the raw configuration data to be used thought
-            the application
+                the application
         """
         self.configuration = self.schema.validate(configuration)

@@ -1,6 +1,7 @@
 from typing import Tuple
 
 from immutables import Map
+from typing_extensions import Self
 
 from .cell_entities import CellEntity
 
@@ -32,13 +33,13 @@ class StateInstance(object):
         self.agent_energy = agent_energy
 
     @classmethod
-    def get_blank_state(cls):
+    def get_blank_state(cls) -> Self:
         """Create a blank state.
 
         Returns:
-            _type_: _description_
+            Self: a state with no particular features.
         """
-        return StateInstance((0, 0), Map(), 10)
+        return cls((0, 0), Map(), 10)
 
     def __hash__(self) -> int:
         """Generate a hash value for this state.

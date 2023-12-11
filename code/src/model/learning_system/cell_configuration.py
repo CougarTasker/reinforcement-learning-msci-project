@@ -35,17 +35,18 @@ class CellConfiguration(object):  # noqa: WPS230 TODO refactor this
 
         Args:
             cell_value_normalised (float): the value the cell should represent
-            in its background.
+                in its background.
             action_values_normalised (action_value_description): the value of
-            different actions in this cell. normalised globally 0-1
+                different actions in this cell. normalised globally 0-1
             cell_value_raw (Optional[float]): the value the cell should report
-            in the tooltip.
+                in the tooltip.
             action_values_raw (action_value_description): the value of
-            different actions in this cell. un-normalised for use in the tooltip
+                different actions in this cell. un-normalised for use in the
+                tooltip.
             location (Tuple[int, int]): where the cell is in the grid.
             cell_entity (CellEntity): the entity to display in this cell
             display_mode (DisplayMode): how the cell should display its
-            information.
+                information.
         """
         self.cell_value_normalised = cell_value_normalised
         self.action_values_normalised = action_values_normalised

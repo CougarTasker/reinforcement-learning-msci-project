@@ -1,8 +1,7 @@
 import cProfile
 import pstats
 
-from .controller.learning_instance_controller import InstanceController
-from .controller.options import AgentOptions, DynamicsOptions
+from .main import main
 
 
 def profiled_code():
@@ -10,13 +9,10 @@ def profiled_code():
 
     The code in this method will be profiled by the application.
     """
-    cont = InstanceController(
-        AgentOptions.value_iteration, DynamicsOptions.collection
-    )
-    cont.get_agent()
+    main()
 
 
-def main():
+def profile():
     """Entry point for profiling the application."""
     profiler = cProfile.Profile()
     profiler.enable()
@@ -27,4 +23,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    profile()

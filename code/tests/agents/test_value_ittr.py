@@ -2,9 +2,6 @@ import numpy as np
 from numpy import testing
 
 from src.model.agents.value_iteration.agent import ValueIterationAgent
-from src.model.agents.value_iteration.dynamics_distribution import (
-    DynamicsDistribution,
-)
 from src.model.dynamics.actions import Action
 
 from .agent_dynamics_mock import TestAgentConfig, VacuumDynamics, VacuumStates

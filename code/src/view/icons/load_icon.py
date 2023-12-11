@@ -6,6 +6,7 @@ import numpy as np
 from colour import Color
 from PIL import Image as Pillow
 from PIL.Image import Image
+from typing_extensions import Self
 
 from src.model.dynamics.actions import Action
 from src.model.state.cell_entities import CellEntity
@@ -36,7 +37,7 @@ class IconLoader(object):
     # cache icon size and color because they will likely be used a lot
     color_size_cache: Dict[Tuple[Icon, int, str], Image] = {}
 
-    def __new__(cls):
+    def __new__(cls) -> Self:
         """Create a config object.
 
         Overridden to provide the singleton patten, there must only be one
@@ -44,7 +45,7 @@ class IconLoader(object):
         for more than one loader
 
         Returns:
-            IconLoader: The config object with the loaded data
+            Self: The config object with the loaded data
         """
         # https://python-patterns.guide/gang-of-four/singleton/
         if cls._instance is None:

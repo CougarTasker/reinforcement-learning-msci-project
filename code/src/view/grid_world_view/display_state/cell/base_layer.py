@@ -27,8 +27,9 @@ class BaseLayer(object):
             canvas (Image): the canvas to draw on
             drawing_context (ImageDraw): the drawing context of this canvas
             bounding_box (Tuple[int, int, int, int]): the area of the canvas
-            this layer should be drawn in.
+                this layer should be drawn in.
             cell_layout (CellLayout): the layout of the entire cell.
+
         """
         self.config = config
         self.canvas = canvas
@@ -59,7 +60,7 @@ class BaseLayer(object):
             icon (Image): the icon to display
             size (int): the size of the icon to display
             rel_pos (Tuple[float, float], optional): the position in the cell.
-            Defaults to the centre.
+                Defaults to the centre.
         """
         min_x, min_y, max_x, _max_y = self.bounding_box
         rel_x, rel_y = rel_pos

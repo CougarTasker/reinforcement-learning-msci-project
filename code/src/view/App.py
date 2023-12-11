@@ -29,7 +29,7 @@ class ReinforcementLearningApp(CTk):
 
         Args:
             controller (LearningSystemControllerFactory): The factory to make
-            system controllers.
+                system controllers.
         """
         super().__init__()
         self.controller = controller

@@ -30,7 +30,7 @@ class DynamicsDistribution(object):
 
         Args:
             per_state_sample_count (int): the number of samples to collect from
-            each state, for deterministic dynamics only one is needed.
+                each state, for deterministic dynamics only one is needed.
             dynamics (BaseDynamics): the dynamics to get the distribution for.
         """
         self.sample_count = (

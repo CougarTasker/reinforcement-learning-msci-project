@@ -56,7 +56,7 @@ class CollectionDynamics(BaseDynamics):
 
         Raises:
             ValueError: if the config specifies an invalid state. such as the
-            agent location being outside the bounds of the grid.
+                agent location being outside the bounds of the grid.
 
         Returns:
             StateInstance: the starting state.
@@ -86,7 +86,7 @@ class CollectionDynamics(BaseDynamics):
 
         Args:
             current_state (StateInstance): the state that the action is
-            performed in
+                performed in
             action (Action): the action the agent has chosen
 
 

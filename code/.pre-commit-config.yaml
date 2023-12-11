@@ -47,3 +47,11 @@ repos:
         entry: bash -c "cd code; poetry run pytest --cov -cov-fail-under=80"
         types: [python]
         pass_filenames: false
+      
+      - id: gen-docs
+        name: "generate docs"
+        stages: [push]
+        language: system
+        entry: bash -c "cd code; poetry run mkdocs build"
+        types: [python]
+        pass_filenames: false

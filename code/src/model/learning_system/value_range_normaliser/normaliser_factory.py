@@ -25,7 +25,7 @@ class NormaliserFactory(object):
             agent (BaseAgent): the agent to generate normalisers for
             dynamics (BaseDynamics): the dynamics to generate normalisers for
             enable_cache: weather the cache can be enabled (if the value table
-            changes like for q-learning then caching must be disabled)
+                changes like for q-learning then caching must be disabled)
         """
         self.agent = agent
         self.dynamics = dynamics
@@ -39,7 +39,7 @@ class NormaliserFactory(object):
 
         Args:
             base_state (int): the state the defines the possible entities that
-            the normaliser should consider.
+                the normaliser should consider.
 
         Returns:
             StateValueNormaliser: _description_

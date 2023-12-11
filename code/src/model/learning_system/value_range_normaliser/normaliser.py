@@ -29,7 +29,7 @@ class StateValueNormaliser(object):
             state_pool (StatePool): a state pool with all possible states.
             entities (entities_type): the entity space to consider.
             value_range (ValueRange): the range of possible values for this
-            agent and dynamics
+                agent and dynamics
         """
         self.agent = agent
         self.state_pool = state_pool

@@ -31,7 +31,7 @@ class GridWorld(CTkFrame):
         Args:
             master (Any): the widget to draw this view into
             system (LearningSystemController): the controller to send actions
-            to.
+                to.
         """
         super().__init__(master)
 

@@ -51,7 +51,7 @@ class ArrowLayer(BaseLayer):
 
         Args:
             action_values (action_value_description): the action values of this
-            cell.
+                cell.
 
         Returns:
             action_value_description: the scaled action values in the range 0-1

@@ -1,7 +1,7 @@
 from .controller.learning_system_controller_factory import (
     LearningSystemControllerFactory,
 )
-from .view.App import ReinforcementLearningApp
+from .view.view_root import ReinforcementLearningApp
 
 
 def main():

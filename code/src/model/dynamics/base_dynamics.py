@@ -17,7 +17,7 @@ class BaseDynamics(object):
 
         Args:
             config (GridWorldConfig): the config used by this dynamics such as
-            the size of the grid world.
+                the size of the grid world.
         """
         self.state_pool = StatePool()
         self.config = config
@@ -63,7 +63,7 @@ class BaseDynamics(object):
 
         Args:
             current_state (StateInstance): the state that the action is
-            performed in
+                performed in
             action (Action): the action the agent has chosen
 
 
@@ -99,7 +99,7 @@ class BaseDynamics(object):
 
         Args:
             current_state_id (int): the state that the action is
-            performed in
+                performed in
             action (Action): the action the agent has chosen
 
 

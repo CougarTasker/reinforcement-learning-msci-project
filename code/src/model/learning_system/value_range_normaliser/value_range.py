@@ -21,8 +21,9 @@ class ValueRange(object):
 
         Args:
             state_pool (StatePool): the populated set of all possible states to
-            find the range of values.
+                find the range of values.
             agent (BaseAgent): the agent to decide on values
+
         """
         self.state_pool = state_pool
         self.agent = agent

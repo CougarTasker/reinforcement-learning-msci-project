@@ -28,9 +28,9 @@ class Cell(object):
 
         Args:
             config (CellConfiguration): the configuration of how this cell
-            should present.
+                should present.
             bounding_box (Tuple[int, int, int, int]): the position and size of
-            this cell on the canvas.
+                this cell on the canvas.
         """
         self.config = config
         self.cell_layout = CellLayout(bounding_box)

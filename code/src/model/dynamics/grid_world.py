@@ -116,7 +116,7 @@ class GridWorld(object):
             width (int): the width of the containing rectangle
             height (int): the hight of the containing rectangle
             relative_margins (float): how large should the gap between cells be.
-            relative to the size of a cell with no margins
+                relative to the size of a cell with no margins
 
         Returns:
             Tuple[int, int]: the cell size and the margin size
@@ -152,7 +152,7 @@ class GridWorld(object):
             width (int): the width of the containing rectangle
             height (int): the hight of the containing rectangle
             relative_margins (float): how large should the gap between cells be.
-            relative to the size of a cell with no margins
+                relative to the size of a cell with no margins
 
         Yields:
             Iterator[location_generator]: the coordinates

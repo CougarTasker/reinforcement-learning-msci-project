@@ -24,8 +24,8 @@ class StateDescription(object):
             grid_world (GridWorld): the grid world of this state.
             state (StateInstance): the state to describe.
             cell_config (cell_config_listing): the configuration for cells in
-            the view.
-            allowing for visualisations of the current state value table.
+                the view. allowing for visualisations of the current state
+                value table.
             display_mode (DisplayMode): how to display this state.
         """
         self.grid_world = grid_world
