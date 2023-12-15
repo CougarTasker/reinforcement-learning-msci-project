@@ -13,11 +13,11 @@ def main():
 
     The main entry point into the application.
     """
-    controller = LearningSystemControllerFactory()
-    qt = QApplication(sys.argv)
-    app = ReinforcementLearningApp(controller)
-    app.show()
-    qt.exec()
+    with LearningSystemControllerFactory() as controller:
+        qt = QApplication(sys.argv)
+        app = ReinforcementLearningApp(controller)
+        app.show()
+        qt.exec()
 
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@ from os import path
 from typing import Dict, Tuple
 
 import numpy as np
-from colour import Color
 from PIL import Image as Pillow
 from PIL.Image import Image
 from typing_extensions import Self
@@ -35,7 +34,9 @@ class IconLoader(object):
     bitmap_cache: Dict[Icon, Image] = {}
 
     # cache icon size and color because they will likely be used a lot
-    color_size_cache: Dict[Tuple[Icon, int, str], Image] = {}
+    color_size_cache: Dict[Tuple[Icon, int, Tuple[int, int, int]], Image] = {}
+
+    default_color = (255, 255, 255)
 
     def __new__(cls) -> Self:
         """Create a config object.
@@ -67,7 +68,9 @@ class IconLoader(object):
 
     rgb_component_max = 255
 
-    def get_coloured_icon(self, image: Image, color: str) -> Image:
+    def get_coloured_icon(
+        self, image: Image, color: Tuple[int, int, int]
+    ) -> Image:
         """Convert a black icon to a specific color.
 
         sets all non-transparent pixels to the color.
@@ -79,9 +82,7 @@ class IconLoader(object):
         Returns:
             Image: the image with a white foreground
         """
-        rgb_float = np.array(Color(color).get_rgb())
-
-        np_color = np.floor(rgb_float * self.rgb_component_max).astype(int)
+        np_color = np.array(color, dtype=int)
 
         img_array = np.array(image.convert("RGBA"))
 
@@ -101,7 +102,10 @@ class IconLoader(object):
     }
 
     def get_action_icon(
-        self, action: Action, size: int, color: str = "#fff"
+        self,
+        action: Action,
+        size: int,
+        color: Tuple[int, int, int] = default_color,
     ) -> Image:
         """Get the appropriate arrow icon for a given action.
 
@@ -123,7 +127,10 @@ class IconLoader(object):
     }
 
     def get_cell_entity_icon(
-        self, entity: CellEntity, size: int, color: str = "#fff"
+        self,
+        entity: CellEntity,
+        size: int,
+        color: Tuple[int, int, int] = default_color,
     ) -> Image:
         """Get the appropriate icon for a given cell entity.
 
@@ -137,7 +144,12 @@ class IconLoader(object):
         """
         return self.get_icon(self.cell_entity_mapping[entity], size, color)
 
-    def get_icon(self, icon: Icon, size: int, color: str = "#fff") -> Image:
+    def get_icon(
+        self,
+        icon: Icon,
+        size: int,
+        color: Tuple[int, int, int] = default_color,
+    ) -> Image:
         """Get the custom tkinter image object for a given icon.
 
         Args:

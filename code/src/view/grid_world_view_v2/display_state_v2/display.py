@@ -14,13 +14,14 @@ from src.view.grid_world_view.display_state.cell.cell import Cell
 
 class DisplayState(QWidget):
     cell_margins = 0.1
-    background_color = (200, 200, 200)
+    background_color = (200, 200, 200, 0)
 
     def __init__(self, parent: QWidget) -> None:
         super().__init__(parent)
 
         self.image_label = QLabel(self)
         self.image_label.setContentsMargins(0, 0, 0, 0)
+        self.image_label.setStyleSheet("border: 0;")
         self.setContentsMargins(0, 0, 0, 0)
         layout = QGridLayout(self)
         layout.setSpacing(0)
@@ -50,7 +51,7 @@ class DisplayState(QWidget):
 
     def __make_blank_image(self):
         size = self.__get_current_size()
-        image_mode = "RGB"
+        image_mode = "RGBA"
         image = Image.new(image_mode, size, self.background_color)
         image_draw = ImageDraw.Draw(image, image_mode)
         return image, image_draw

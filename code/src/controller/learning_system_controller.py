@@ -37,6 +37,8 @@ class LearningSystemController(object):
         while True:
             action = user_action_bridge.get_action()
             match action:
+                case UserActionMessage(action=UserAction.end):
+                    break
                 case UserActionMessage(action=UserAction.one_step):
                     self.one_step()
                     self.send_current_state()

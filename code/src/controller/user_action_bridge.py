@@ -13,6 +13,7 @@ class UserAction(Enum):
     reset = 3
     fetch_current_state = 4
     set_display_mode = 5
+    end = 6
 
 
 class UserActionMessage(object):

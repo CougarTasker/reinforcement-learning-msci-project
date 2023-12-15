@@ -1,6 +1,6 @@
+from colorsys import hls_to_rgb, hsv_to_rgb
 from typing import Tuple
 
-from colour import Color
 from PIL.Image import Image
 from PIL.ImageDraw import ImageDraw
 
@@ -74,7 +74,7 @@ class BaseLayer(object):
         icon_alpha = icon.split()[3]
         self.canvas.paste(icon, location, icon_alpha)
 
-    def value_to_color(self, worth: float) -> str:
+    def value_to_color(self, worth: float) -> Tuple[int, int, int]:
         """Convert a floating point value to a color.
 
         Args:
@@ -83,10 +83,11 @@ class BaseLayer(object):
         Returns:
             str: the color in a hexadecimal string representation
         """
-        # I know red is zero but this allows for more configuration
-        start = Color("red").get_hue()
-        end = Color("green").get_hue()
 
-        hue = worth * (end - start) + start
+        hue = worth / 3  # Range from red to green
+        saturation = 1.0
+        lightness = 0.5
+        color_range = 255
 
-        return Color(hsl=(hue, 1, 0.5)).hex_l
+        color_float = hls_to_rgb(hue, lightness, saturation)
+        return tuple(int(color * color_range) for color in color_float)

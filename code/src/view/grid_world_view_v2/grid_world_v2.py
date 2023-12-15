@@ -18,8 +18,8 @@ class GridWorld(QWidget):
 
         self.display = DisplayState(self)
         layout = QGridLayout(self)
-
         layout.addWidget(self.display, 0, 0)
+        layout.setRowStretch(0, 1)
 
         self.controls = Controls(self, self.action_bridge)
         layout.addWidget(self.controls, 1, 0)

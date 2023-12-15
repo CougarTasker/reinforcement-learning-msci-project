@@ -1,5 +1,6 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QWidget
+from qdarktheme import setup_theme
 
 from src.controller.learning_system_controller_factory import (
     LearningSystemControllerFactory,
@@ -29,7 +30,7 @@ class ReinforcementLearningApp(QWidget):
     def setup_config(self):
         """Set app properties from config."""
         config = ConfigReader().gui()
-        # set_appearance_mode(config.appearance_mode())
+        setup_theme(config.appearance_mode())
         # set_default_color_theme(config.color_theme())
         width, height = config.initial_size().split("x")
         self.resize(int(width), int(height))
