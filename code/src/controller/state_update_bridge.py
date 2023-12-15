@@ -1,6 +1,8 @@
 from typing import Optional
 
-from src.model.learning_system.state_description import StateDescription
+from src.model.learning_system.state_description.state_description import (
+    StateDescription,
+)
 
 from .base_bridge import BaseBridge
 

@@ -3,15 +3,18 @@ from typing import Tuple
 from src.model.agents.base_agent import BaseAgent
 from src.model.agents.value_iteration.agent import ValueIterationAgent
 from src.model.dynamics.actions import Action
-from src.model.state.cell_entities import CellEntity
-from src.model.state.state_instance import StateInstance
-
-from ..dynamics.base_dynamics import BaseDynamics
-from .cell_configuration import (
+from src.model.dynamics.base_dynamics import BaseDynamics
+from src.model.learning_system.cell_configuration import (
     CellConfiguration,
     DisplayMode,
     action_value_description,
 )
+from src.model.learning_system.state_description.cell_state_lookup import (
+    CellStateLookup,
+)
+from src.model.state.cell_entities import CellEntity
+from src.model.state.state_instance import StateInstance
+
 from .state_description import StateDescription
 from .value_range_normaliser.normaliser import StateValueNormaliser
 from .value_range_normaliser.normaliser_factory import NormaliserFactory
@@ -36,6 +39,7 @@ class StateDescriptionFactory(object):
         self.agent = agent
         self.dynamics = dynamics
         self.grid_world = dynamics.grid_world
+        self.cell_state_lookup = CellStateLookup(dynamics)
         self.value_normalisation_factory = NormaliserFactory(
             self.agent,
             self.dynamics,
@@ -67,7 +71,7 @@ class StateDescriptionFactory(object):
 
     def __cell_configuration(
         self,
-        state: StateInstance,
+        reference_state: StateInstance,
         normaliser: StateValueNormaliser,
         cell: Tuple[int, int],
     ) -> CellConfiguration:
@@ -83,21 +87,40 @@ class StateDescriptionFactory(object):
         """
         action_values_normalised: action_value_description = {}
         action_values_raw: action_value_description = {}
+
+        cell_state = self.cell_state_lookup.get_state(reference_state, cell)
+
+        if cell_state is None:
+            for action in Action:
+                action_values_normalised[action] = None
+                action_values_raw[action] = None
+
+            return CellConfiguration(
+                None,
+                action_values_normalised,
+                None,
+                action_values_raw,
+                cell,
+                self.__cell_entity(reference_state, cell),
+                self.display_mode,
+            )
+
+        cell_state_id = self.dynamics.state_pool.get_state_id(cell_state)
         for action in Action:
             action_values_normalised[
                 action
-            ] = normaliser.get_state_action_value_normalised(cell, action)
-            action_values_raw[action] = normaliser.get_state_action_value_raw(
-                cell, action
+            ] = normaliser.get_state_action_value_normalised(cell_state, action)
+            action_values_raw[action] = self.agent.get_state_action_value(
+                cell_state_id, action
             )
 
         return CellConfiguration(
-            normaliser.get_state_value_normalised(cell),
+            normaliser.get_state_value_normalised(cell_state),
             action_values_normalised,
-            normaliser.get_state_value_raw(cell),
+            self.agent.get_state_value(cell_state_id),
             action_values_raw,
             cell,
-            self.__cell_entity(state, cell),
+            self.__cell_entity(reference_state, cell),
             self.display_mode,
         )
 

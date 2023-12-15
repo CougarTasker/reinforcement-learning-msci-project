@@ -1,6 +1,8 @@
 from typing import Dict, Optional, Tuple
 
-from customtkinter import CTkFrame, CTkImage, CTkLabel
+from customtkinter import CTkFrame
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
 from PIL import Image, ImageDraw
 
 from src.view.grid_world_view.display_state.cell.cell import Cell
@@ -31,9 +33,14 @@ class DisplayState(CTkFrame):
         self.state: Optional[StateDescription] = None
         self.cells: Dict[Tuple[int, int], Cell] = {}
         self.grid_columnconfigure(0, weight=1)
-        self.grid_rowconfigure(1, weight=1)
-        self.image_label = CTkLabel(self, text="")
-        self.image_label.grid(row=1, column=0, sticky="nsew")
+        self.grid_rowconfigure(0, weight=1)
+
+        self.figure = Figure(figsize=(5, 5), dpi=100)
+        self.plot = self.figure.add_subplot()
+
+        self.canvas = FigureCanvasTkAgg(self.figure, self)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
         self.bind(
             "<Configure>",
             command=self.resize,
@@ -77,6 +84,14 @@ class DisplayState(CTkFrame):
                 state.cell_config[cell_coordinate], bounding_box
             )
 
+    background_color = (255, 5, 50)
+
+    def __make_blank_image(self, width: int, height: int):
+        image_mode = "RGB"
+        image = Image.new(image_mode, (width, height), self.background_color)
+        image_draw = ImageDraw.Draw(image, image_mode)
+        return image, image_draw
+
     def __configure_grid(self, width: int, height: int):
         if self.state is None:
             return
@@ -90,13 +105,10 @@ class DisplayState(CTkFrame):
             # cells are too small
             return
         self.__populate_cells(self.state, width, height)
-        transparent = (255, 255, 255, 0)
-        image_mode = "RGBA"
-        image = Image.new(image_mode, (width, height), transparent)
-        image_draw = ImageDraw.Draw(image, image_mode)
+        image, image_draw = self.__make_blank_image(width, height)
 
         for cell in self.cells.values():
             cell.draw(image, image_draw)
 
-        image_tkinter = CTkImage(light_image=image, size=(width, height))
-        self.image_label.configure(image=image_tkinter)
+        self.plot.imshow(image)
+        self.canvas.draw()

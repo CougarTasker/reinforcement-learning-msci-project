@@ -17,11 +17,12 @@ colour = "^0.1.5"
 numba = "^0.58.1"
 tkinter-tooltip = "^2.1.0"
 packaging = "^23.2"
+pyside6 = "^6.6.1"
 
 
 [tool.poetry.scripts]
 start = "src.main:main"
-profile = "src.profile:main"
+profile = "src.profile:profile"
 
 
 [tool.poetry.group.dev.dependencies]

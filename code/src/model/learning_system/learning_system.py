@@ -1,9 +1,5 @@
 from typing import Optional
 
-from src.model.learning_system.state_description_factory import (
-    StateDescriptionFactory,
-)
-
 from ..agents import (
     BaseAgent,
     QLearningAgent,
@@ -16,7 +12,8 @@ from ..dynamics.collection_dynamics import CollectionDynamics
 from .cell_configuration import DisplayMode
 from .learning_instance import LearningInstance
 from .options import AgentOptions, DynamicsOptions
-from .state_description import StateDescription
+from .state_description.state_description import StateDescription
+from .state_description.state_description_factory import StateDescriptionFactory
 
 
 class LearningSystem(object):

@@ -1,0 +1,98 @@
+from typing import Optional
+
+from PIL import Image, ImageDraw
+from PIL.ImageQt import ImageQt
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QImage, QPixmap
+from PySide6.QtWidgets import QGridLayout, QLabel, QWidget
+
+from src.model.learning_system.state_description.state_description import (
+    StateDescription,
+)
+from src.view.grid_world_view.display_state.cell.cell import Cell
+
+
+class DisplayState(QWidget):
+    cell_margins = 0.1
+    background_color = (200, 200, 200)
+
+    def __init__(self, parent: QWidget) -> None:
+        super().__init__(parent)
+
+        self.image_label = QLabel(self)
+        self.image_label.setContentsMargins(0, 0, 0, 0)
+        self.setContentsMargins(0, 0, 0, 0)
+        layout = QGridLayout(self)
+        layout.setSpacing(0)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.addWidget(self.image_label, 0, 0)
+
+        self.state: Optional[StateDescription] = None
+
+    def set_state(self, state: StateDescription):
+        """Set the state to be displayed.
+
+        Args:
+            state (StateDescription): the state to be displayed
+        """
+        self.state = state
+        self.__configure_grid()
+
+    def resizeEvent(self, event):
+        """Handle resize event.
+
+        resize the inner grid based upon the updated dimensions.
+
+        Args:
+            event (Any): the resize event
+        """
+        self.__configure_grid()
+
+    def __make_blank_image(self):
+        size = self.__get_current_size()
+        image_mode = "RGB"
+        image = Image.new(image_mode, size, self.background_color)
+        image_draw = ImageDraw.Draw(image, image_mode)
+        return image, image_draw
+
+    def __configure_grid(self):
+        if self.state is None:
+            return
+        width, height = self.__get_current_size()
+        expected_cell_size = self.state.grid_world.get_cell_sizing(
+            width, height, self.cell_margins
+        )[0]
+        if expected_cell_size < 10:
+            # cells are too small
+            return
+        self.__populate_cells(self.state)
+        image, image_draw = self.__make_blank_image()
+
+        for cell in self.cells.values():
+            cell.draw(image, image_draw)
+
+        self.image_label.setPixmap(QPixmap.fromImage(ImageQt(image)))
+
+    def __populate_cells(
+        self,
+        state: StateDescription,
+    ):
+        self.cells = {}
+        width, height = self.__get_current_size()
+        cell_positions = state.grid_world.list_cell_positions(
+            width, height, self.cell_margins
+        )
+
+        for cell_position in cell_positions:
+            (
+                cell_coordinate,
+                bounding_box,
+            ) = cell_position
+            self.cells[cell_coordinate] = Cell(
+                state.cell_config[cell_coordinate], bounding_box
+            )
+
+    def __get_current_size(self):
+        width = self.contentsRect().width()
+        height = self.contentsRect().height()
+        return width, height

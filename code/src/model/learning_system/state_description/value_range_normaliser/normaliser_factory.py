@@ -1,11 +1,12 @@
-from typing import Dict, Optional
+from typing import Optional
 
+from src.model.agents.base_agent import BaseAgent
+from src.model.agents.value_iteration.dynamics_distribution import (
+    DynamicsDistribution,
+)
+from src.model.dynamics.base_dynamics import BaseDynamics
 from src.model.state.state_pool import StatePool
 
-from ...agents.base_agent import BaseAgent
-from ...agents.value_iteration.dynamics_distribution import DynamicsDistribution
-from ...dynamics.base_dynamics import BaseDynamics
-from ...state.state_instance import entities_type
 from .normaliser import StateValueNormaliser
 from .value_range import ValueRange
 
@@ -30,7 +31,7 @@ class NormaliserFactory(object):
         self.agent = agent
         self.dynamics = dynamics
         self.has_generated_all_states: bool = False
-        self.cache: Dict[entities_type, StateValueNormaliser] = {}
+        self.cache: Optional[StateValueNormaliser] = None
         self.value_range: Optional[ValueRange] = None
         self.enable_cache = enable_cache
 
@@ -47,17 +48,15 @@ class NormaliserFactory(object):
         entities = self.dynamics.state_pool.get_state_from_id(
             base_state
         ).entities
-        cached_normaliser = self.cache.get(entities, None)
-        if cached_normaliser is not None and self.enable_cache:
-            return cached_normaliser
+        if self.cache is not None and self.enable_cache:
+            return self.cache
 
         normaliser = StateValueNormaliser(
             self.agent,
             self.__get_state_pool(),
-            entities,
             self.__get_value_range(),
         )
-        self.cache[entities] = normaliser
+        self.cache = normaliser
         return normaliser
 
     def __get_state_pool(self) -> StatePool:

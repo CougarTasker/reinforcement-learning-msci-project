@@ -3,7 +3,7 @@ from typing import Dict
 from src.model.dynamics.grid_world import GridWorld, integer_position
 from src.model.state.state_instance import StateInstance
 
-from .cell_configuration import CellConfiguration, DisplayMode
+from ..cell_configuration import CellConfiguration, DisplayMode
 
 cell_config_listing = Dict[integer_position, CellConfiguration]
 
