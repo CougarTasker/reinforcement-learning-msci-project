@@ -4,12 +4,16 @@ from PIL.Image import Image
 from PIL.ImageDraw import ImageDraw
 
 from src.model.learning_system.cell_configuration import CellConfiguration
-from src.view.grid_world_view.display_state.cell.arrow_layer import ArrowLayer
-from src.view.grid_world_view.display_state.cell.background_layer import (
+from src.view.grid_world_view_v2.display_state_v2.cell.arrow_layer import (
+    ArrowLayer,
+)
+from src.view.grid_world_view_v2.display_state_v2.cell.background_layer import (
     BackgroundLayer,
 )
-from src.view.grid_world_view.display_state.cell.cell_layout import CellLayout
-from src.view.grid_world_view.display_state.cell.main_icon_layer import (
+from src.view.grid_world_view_v2.display_state_v2.cell.cell_layout import (
+    CellLayout,
+)
+from src.view.grid_world_view_v2.display_state_v2.cell.main_icon_layer import (
     MainIconLayer,
 )
 

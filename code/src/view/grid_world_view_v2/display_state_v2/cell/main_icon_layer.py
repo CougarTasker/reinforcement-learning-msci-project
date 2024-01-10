@@ -5,7 +5,9 @@ from PIL.Image import Image
 from src.model.dynamics.actions import Action
 from src.model.learning_system.cell_configuration import DisplayMode
 from src.model.state.cell_entities import CellEntity
-from src.view.grid_world_view.display_state.cell.base_layer import BaseLayer
+from src.view.grid_world_view_v2.display_state_v2.cell.base_layer import (
+    BaseLayer,
+)
 
 
 class MainIconLayer(BaseLayer):

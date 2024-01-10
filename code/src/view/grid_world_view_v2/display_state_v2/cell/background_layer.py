@@ -2,7 +2,7 @@ from typing import Tuple
 
 from src.model.learning_system.cell_configuration import DisplayMode
 from src.model.state.cell_entities import CellEntity
-from src.view.grid_world_view.display_state.cell.base_layer import (
+from src.view.grid_world_view_v2.display_state_v2.cell.base_layer import (
     BaseLayer,
     rgb_type,
 )

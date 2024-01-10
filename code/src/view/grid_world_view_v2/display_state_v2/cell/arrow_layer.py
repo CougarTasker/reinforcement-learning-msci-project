@@ -4,7 +4,9 @@ from src.model.learning_system.cell_configuration import (
     DisplayMode,
     action_value_description,
 )
-from src.view.grid_world_view.display_state.cell.base_layer import BaseLayer
+from src.view.grid_world_view_v2.display_state_v2.cell.base_layer import (
+    BaseLayer,
+)
 
 
 class ArrowLayer(BaseLayer):

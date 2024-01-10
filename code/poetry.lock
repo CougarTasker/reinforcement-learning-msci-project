@@ -1040,6 +1040,17 @@ files = [
 ]
 
 [[package]]
+name = "mkdocs-no-sitemap-plugin"
+version = "0.0.1"
+description = "Mkdocs plugin disable the generation."
+optional = false
+python-versions = "*"
+files = [
+    {file = "mkdocs-no-sitemap-plugin-0.0.1.tar.gz", hash = "sha256:4691fd57e51277547b1426ae14c568d2951ad4ce0016bb5a9757e6b0ebd58680"},
+    {file = "mkdocs_no_sitemap_plugin-0.0.1-py2.py3-none-any.whl", hash = "sha256:dd10727beccfea0274984e74f2fe184a63154a2444bbbd7bc7c6fb1cb19d41ce"},
+]
+
+[[package]]
 name = "mkdocs-section-index"
 version = "0.3.8"
 description = "MkDocs plugin to allow clickable sections that lead to an index page"
@@ -2085,4 +2096,4 @@ typing_extensions = ">=4.0,<5.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">= 3.10, < 3.12"
-content-hash = "3a5101395623f7bc27677f0c8799087458d6f9bfe85da2b7669a3d961f6aab72"
+content-hash = "0c57eee5de2535670e16815ae018432ebf959a4aa10b61e0de9948983f6dd745"

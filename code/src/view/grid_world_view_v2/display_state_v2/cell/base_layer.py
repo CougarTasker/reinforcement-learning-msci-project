@@ -5,7 +5,9 @@ from PIL.Image import Image
 from PIL.ImageDraw import ImageDraw
 
 from src.model.learning_system.cell_configuration import CellConfiguration
-from src.view.grid_world_view.display_state.cell.cell_layout import CellLayout
+from src.view.grid_world_view_v2.display_state_v2.cell.cell_layout import (
+    CellLayout,
+)
 from src.view.icons.load_icon import IconLoader, rgb_type
 
 

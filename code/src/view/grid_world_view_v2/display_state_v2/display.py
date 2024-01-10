@@ -8,7 +8,7 @@ from PySide6.QtWidgets import QGridLayout, QLabel, QWidget
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )
-from src.view.grid_world_view.display_state.cell.cell import Cell
+from src.view.grid_world_view_v2.display_state_v2.cell.cell import Cell
 
 
 class DisplayState(QWidget):

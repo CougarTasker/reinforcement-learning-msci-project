@@ -4,6 +4,7 @@ theme:
 docs_dir: scripts/static_docs
 site_dir: docs
 plugins:
+- no-sitemap
 - search
 - gen-files:
     scripts:
