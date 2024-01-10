@@ -1,4 +1,4 @@
-from colorsys import hls_to_rgb, hsv_to_rgb
+from colorsys import hls_to_rgb
 from typing import Tuple
 
 from PIL.Image import Image
@@ -6,7 +6,7 @@ from PIL.ImageDraw import ImageDraw
 
 from src.model.learning_system.cell_configuration import CellConfiguration
 from src.view.grid_world_view.display_state.cell.cell_layout import CellLayout
-from src.view.icons.load_icon import IconLoader
+from src.view.icons.load_icon import IconLoader, rgb_type
 
 
 class BaseLayer(object):
@@ -74,20 +74,23 @@ class BaseLayer(object):
         icon_alpha = icon.split()[3]
         self.canvas.paste(icon, location, icon_alpha)
 
-    def value_to_color(self, worth: float) -> Tuple[int, int, int]:
+    def value_to_color(self, worth: float) -> rgb_type:
         """Convert a floating point value to a color.
 
         Args:
             worth (float): the value to represent in the range 0 to 1.
 
         Returns:
-            str: the color in a hexadecimal string representation
+            rgb_type: the color as rgb values in the range 0-255
         """
-
         hue = worth / 3  # Range from red to green
         saturation = 1.0
         lightness = 0.5
         color_range = 255
 
-        color_float = hls_to_rgb(hue, lightness, saturation)
-        return tuple(int(color * color_range) for color in color_float)
+        red, green, blue = hls_to_rgb(hue, lightness, saturation)
+        return (
+            int(color_range * red),
+            int(color_range * green),
+            int(color_range * blue),
+        )

@@ -1,6 +1,8 @@
 from multiprocessing import Process
 from typing import List
 
+from typing_extensions import Self
+
 from src.controller.learning_system_controller import LearningSystemController
 from src.controller.user_action_bridge import UserAction
 from src.model.learning_system.learning_system import LearningSystem
@@ -11,6 +13,7 @@ class LearningSystemControllerFactory(object):
     """Factory method for creating LearningSystemControllers."""
 
     def __init__(self) -> None:
+        """Instantiate the factory."""
         self.processes: List[Process] = []
         self.controllers: List[LearningSystemController] = []
 
@@ -35,10 +38,24 @@ class LearningSystemControllerFactory(object):
         self.controllers.append(controller)
         return controller
 
-    def __enter__(self):
+    def __enter__(self) -> Self:
+        """Enter the context manager.
+
+        the context manager is used for cleaning up processes gracefully.
+
+        Returns:
+            Self: the factory.
+        """
         return self
 
-    def __exit__(self, exc_type, exc_value, exc_tb):
+    def __exit__(self, exc_type, exc_value, exc_tb) -> None:
+        """Exit the context, clean up the resources.
+
+        Args:
+            exc_type (Any): Not used.
+            exc_value (Any): Not used.
+            exc_tb (Any): Not used.
+        """
         for controller in self.controllers:
             controller.user_action_bridge.submit_action(UserAction.end)
 

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, Optional, Tuple
 
@@ -18,40 +19,31 @@ class DisplayMode(Enum):
 action_value_description = Dict[Action, Optional[float]]
 
 
-class CellConfiguration(object):  # noqa: WPS230 TODO refactor this
+@dataclass(frozen=True)
+class CellConfiguration(object):
     """Class to represent the configuration of a cell in a given state."""
 
-    def __init__(  # noqa: WPS211 TODO refactor this
-        self,
-        cell_value_normalised: Optional[float],
-        action_values_normalised: action_value_description,
-        cell_value_raw: Optional[float],
-        action_values_raw: action_value_description,
-        location: Tuple[int, int],
-        cell_entity: CellEntity,
-        display_mode: DisplayMode,
-    ) -> None:
-        """Create cell configuration.
+    action_values_normalised: action_value_description
+    action_values_raw: action_value_description
+    location: Tuple[int, int]
+    cell_entity: CellEntity
+    display_mode: DisplayMode
+    cell_value_normalised: Optional[float] = None
+    cell_value_raw: Optional[float] = None
 
-        Args:
-            cell_value_normalised (float): the value the cell should represent
-                in its background.
-            action_values_normalised (action_value_description): the value of
-                different actions in this cell. normalised globally 0-1
-            cell_value_raw (Optional[float]): the value the cell should report
-                in the tooltip.
-            action_values_raw (action_value_description): the value of
-                different actions in this cell. un-normalised for use in the
-                tooltip.
-            location (Tuple[int, int]): where the cell is in the grid.
-            cell_entity (CellEntity): the entity to display in this cell
-            display_mode (DisplayMode): how the cell should display its
-                information.
+    @property
+    def tooltip_text(self) -> str:
+        """Gets the text for a tooltip on hovering over the cell.
+
+        Returns:
+            str: the text to display to the user for extra information
         """
-        self.cell_value_normalised = cell_value_normalised
-        self.action_values_normalised = action_values_normalised
-        self.cell_value_raw = cell_value_raw
-        self.action_values_raw = action_values_raw
-        self.location = location
-        self.cell_entity = cell_entity
-        self.display_mode = display_mode
+        text = f"cell={self.location}"
+        if self.cell_value_raw is not None:
+            text += f"\ncell value={self.cell_value_raw:.4f}"
+
+        for action in Action:
+            action_value = self.action_values_raw[action]
+            if action_value is not None:
+                text += f"\n{action.name} value = {action_value:.4f}"
+        return text

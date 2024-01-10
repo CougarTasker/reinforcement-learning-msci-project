@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 from os import path
 from typing import Dict, Tuple
@@ -24,6 +25,18 @@ class Icon(Enum):
     empty = "empty"
 
 
+rgb_type = Tuple[int, int, int]
+
+
+@dataclass(frozen=True)
+class IconVariantSpecification(object):
+    """Specifies a particular variant of an icon for cacheing purposes."""
+
+    icon_type: Icon
+    size: int
+    color: rgb_type
+
+
 class IconLoader(object):
     """Load Icon images into the application."""
 
@@ -34,7 +47,7 @@ class IconLoader(object):
     bitmap_cache: Dict[Icon, Image] = {}
 
     # cache icon size and color because they will likely be used a lot
-    color_size_cache: Dict[Tuple[Icon, int, Tuple[int, int, int]], Image] = {}
+    variant_cache: Dict[IconVariantSpecification, Image] = {}
 
     default_color = (255, 255, 255)
 
@@ -161,8 +174,8 @@ class IconLoader(object):
             Image: the image representing this icon
         """
         size = max(size, 1)
-        cache_key = (icon, size, color)
-        existing_image = self.color_size_cache.get(cache_key, None)
+        cache_key = IconVariantSpecification(icon, size, color)
+        existing_image = self.variant_cache.get(cache_key, None)
         if existing_image is not None:
             return existing_image
 
@@ -172,7 +185,7 @@ class IconLoader(object):
         # resize image
         coloured_icon.thumbnail((size, size))
 
-        self.color_size_cache[cache_key] = coloured_icon
+        self.variant_cache[cache_key] = coloured_icon
 
         return coloured_icon
 

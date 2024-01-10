@@ -8,16 +8,28 @@ from src.view.grid_world_view_v2.display_state_v2.display import DisplayState
 
 
 class GridWorld(QWidget):
+    """This component combines a display with its controls.
+
+    this widget represents a complete interface grid based agents.
+    """
+
     def __init__(
         self, parent: QWidget, system: LearningSystemController
     ) -> None:
+        """Initialise the grid world agent.
+
+        Args:
+            parent (QWidget): the parent this view should be mounted within.
+            system (LearningSystemController): the controller for handling the
+                user's interactions.
+        """
         super().__init__(parent)
 
         self.update_bridge = system.state_update_bridge
         self.action_bridge = system.user_action_bridge
+        layout = QGridLayout(self)
 
         self.display = DisplayState(self)
-        layout = QGridLayout(self)
         layout.addWidget(self.display, 0, 0)
         layout.setRowStretch(0, 1)
 
@@ -31,6 +43,7 @@ class GridWorld(QWidget):
         self.action_bridge.submit_action(UserAction.fetch_current_state)
 
     def check_for_work(self):
+        """Check if any updates to the UI are requested."""
         state = self.update_bridge.get_latest_state()
         if state is not None:
             self.display.set_state(state)

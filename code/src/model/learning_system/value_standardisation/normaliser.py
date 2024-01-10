@@ -1,11 +1,11 @@
-from typing import Dict, Tuple, Union
+from typing import Dict, Tuple
 
 from src.model.agents.base_agent import BaseAgent
 from src.model.dynamics.actions import Action
 from src.model.state.state_instance import StateInstance
 from src.model.state.state_pool import StatePool
 
-from ..value_range_normaliser.value_range import ValueRange, ValueType
+from ..value_standardisation.value_range import ValueRange, ValueType
 
 action_value_tuple = Tuple[StateInstance, Action]
 
@@ -25,9 +25,8 @@ class StateValueNormaliser(object):
 
 
         Args:
-            agent (BaseAgent): the agent to decide the value
+            agent (BaseAgent): the agent to decide the value.
             state_pool (StatePool): a state pool with all possible states.
-            entities (entities_type): the entity space to consider.
             value_range (ValueRange): the range of possible values for this
                 agent and dynamics
         """
@@ -41,15 +40,15 @@ class StateValueNormaliser(object):
         self,
         state: StateInstance,
         action: Action,
-    ) -> Union[float, None]:
-        """Get the normalised value of a given agent location and action.
+    ) -> float:
+        """Get the normalised value of a state and action.
 
         Args:
-            new_agent_location (Tuple[int, int]): the new agents location
-            action (Action): the action to perform
+            state (StateInstance): the state to check.
+            action (Action): the action to check.
 
         Returns:
-            Union[float, None]: the value if one can be found.
+            float: the value if one can be found.
         """
         cache_key = (state, action)
         cached_value = self.action_value_cache.get(cache_key, None)
@@ -65,16 +64,14 @@ class StateValueNormaliser(object):
         self.action_value_cache[cache_key] = action_value
         return action_value
 
-    def get_state_value_normalised(
-        self, state: StateInstance
-    ) -> Union[float, None]:
-        """Get the normalised value of the agent being in this location.
+    def get_state_value_normalised(self, state: StateInstance) -> float:
+        """Get the normalised value of this state.
 
         Args:
-            new_agent_location (Tuple[int, int]): the new agents location
+            state (StateInstance): the state to check.
 
         Returns:
-            Union[float, None]: the value if one can be found.
+            float: the value of the state normalised.
         """
         cached_value = self.state_value_cache.get(state, None)
         if cached_value is not None:

@@ -11,7 +11,15 @@ from src.view.grid_world_view_v2.grid_world_v2 import GridWorld
 
 
 class ReinforcementLearningApp(QWidget):
+    """This is the root of the applications main UI."""
+
     def __init__(self, controller: LearningSystemControllerFactory) -> None:
+        """Instantiate the applications user interface.
+
+        Args:
+            controller (LearningSystemControllerFactory): the controller
+            responsible for managing user actions.
+        """
         super().__init__(parent=None, f=Qt.WindowType.Window)
         self.controller = controller
         self.setWindowTitle("RHUL MSci FYP - Reinforcement Learning App")
@@ -31,6 +39,5 @@ class ReinforcementLearningApp(QWidget):
         """Set app properties from config."""
         config = ConfigReader().gui()
         setup_theme(config.appearance_mode())
-        # set_default_color_theme(config.color_theme())
         width, height = config.initial_size().split("x")
         self.resize(int(width), int(height))

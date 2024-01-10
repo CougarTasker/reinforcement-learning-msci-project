@@ -12,12 +12,17 @@ from src.model.learning_system.cell_configuration import (
 from src.model.learning_system.state_description.cell_state_lookup import (
     CellStateLookup,
 )
+from src.model.learning_system.state_description.state_description import (
+    StateDescription,
+)
+from src.model.learning_system.value_standardisation.normaliser import (
+    StateValueNormaliser,
+)
+from src.model.learning_system.value_standardisation.normaliser_factory import (
+    NormaliserFactory,
+)
 from src.model.state.cell_entities import CellEntity
 from src.model.state.state_instance import StateInstance
-
-from .state_description import StateDescription
-from .value_range_normaliser.normaliser import StateValueNormaliser
-from .value_range_normaliser.normaliser_factory import NormaliserFactory
 
 
 class StateDescriptionFactory(object):
@@ -78,7 +83,8 @@ class StateDescriptionFactory(object):
         """Get the configuration of a cell in a given state.
 
         Args:
-            state (StateInstance): the state that this cell is in.
+            reference_state (StateInstance): the state that this cell is
+                compared against.
             normaliser (StateValueNormaliser): normaliser to get value
             cell (tuple[int, int]): the cell to check.
 
@@ -96,13 +102,13 @@ class StateDescriptionFactory(object):
                 action_values_raw[action] = None
 
             return CellConfiguration(
-                None,
                 action_values_normalised,
-                None,
                 action_values_raw,
                 cell,
                 self.__cell_entity(reference_state, cell),
                 self.display_mode,
+                None,
+                None,
             )
 
         cell_state_id = self.dynamics.state_pool.get_state_id(cell_state)
@@ -115,13 +121,13 @@ class StateDescriptionFactory(object):
             )
 
         return CellConfiguration(
-            normaliser.get_state_value_normalised(cell_state),
             action_values_normalised,
-            self.agent.get_state_value(cell_state_id),
             action_values_raw,
             cell,
             self.__cell_entity(reference_state, cell),
             self.display_mode,
+            normaliser.get_state_value_normalised(cell_state),
+            self.agent.get_state_value(cell_state_id),
         )
 
     def __cell_entity(

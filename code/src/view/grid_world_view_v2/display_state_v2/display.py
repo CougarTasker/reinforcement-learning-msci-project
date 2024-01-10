@@ -2,8 +2,7 @@ from typing import Optional
 
 from PIL import Image, ImageDraw
 from PIL.ImageQt import ImageQt
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QImage, QPixmap
+from PySide6.QtGui import QPixmap, QResizeEvent
 from PySide6.QtWidgets import QGridLayout, QLabel, QWidget
 
 from src.model.learning_system.state_description.state_description import (
@@ -13,16 +12,26 @@ from src.view.grid_world_view.display_state.cell.cell import Cell
 
 
 class DisplayState(QWidget):
+    """Widget for displaying a given grid world state."""
+
     cell_margins = 0.1
     background_color = (200, 200, 200, 0)
 
-    def __init__(self, parent: QWidget) -> None:
+    def __init__(self, parent: Optional[QWidget]) -> None:
+        """Initialise the state display.
+
+        this widget will display a given state and update it on request.
+
+        Args:
+            parent (QWidget): the parent of this widget.
+        """
         super().__init__(parent)
 
         self.image_label = QLabel(self)
         self.image_label.setContentsMargins(0, 0, 0, 0)
         self.image_label.setStyleSheet("border: 0;")
         self.setContentsMargins(0, 0, 0, 0)
+
         layout = QGridLayout(self)
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
@@ -39,13 +48,15 @@ class DisplayState(QWidget):
         self.state = state
         self.__configure_grid()
 
-    def resizeEvent(self, event):
+    def resizeEvent(  # noqa: N802 built in method to base class
+        self, event: QResizeEvent
+    ):
         """Handle resize event.
 
         resize the inner grid based upon the updated dimensions.
 
         Args:
-            event (Any): the resize event
+            event (QResizeEvent): the resize event
         """
         self.__configure_grid()
 

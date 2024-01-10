@@ -39,6 +39,21 @@ class CellLayout(object):
 
         return min(max_x - min_x, max_y - min_y)
 
+    def contains_point(self, pos: Tuple[int, int]) -> bool:
+        """Determine weather this cell contains a point.
+
+        Checks its bounding box.
+
+        Args:
+            pos (Tuple[int, int]): the position to check
+
+        Returns:
+            bool: True if this point is in the bounding box
+        """
+        pos_x, pos_y = pos
+        min_x, min_y, max_x, max_y = self.bounding_box
+        return min_x <= pos_x <= max_x and min_y <= pos_y <= max_y
+
     def inset_bounding_box(
         self, inset_amount: int
     ) -> Tuple[int, int, int, int]:

@@ -7,7 +7,9 @@ from PIL import Image, ImageDraw
 
 from src.view.grid_world_view.display_state.cell.cell import Cell
 
-from ....model.learning_system.state_description import StateDescription
+from ....model.learning_system.state_description.state_description import (
+    StateDescription,
+)
 
 
 class DisplayState(CTkFrame):

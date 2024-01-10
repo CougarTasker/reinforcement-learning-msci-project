@@ -38,13 +38,23 @@ class SimpleTestDynamics(BaseDynamics):
     def __init__(self) -> None:
         super().__init__(TestGridWorldConfig())
 
-        l = self.initial_state()
-        r = self.next(l, action=Action.right)[0]
-        le = self.next(r, Action.up)[0]
-        re = self.next(l, Action.up)[0]
+        self.left = self.initial_state()
+        self.right = self.next(self.left, action=Action.right)[0]
+        self.left_entity = self.next(self.right, Action.up)[0]
+        self.right_entity = self.next(self.left, Action.up)[0]
 
-        self.state_pool.id_to_state = {0: l, 1: le, 2: re, 3: r}
-        self.state_pool.state_to_id = {l: 0, le: 1, re: 2, r: 3}
+        self.state_pool.id_to_state = {
+            0: self.left,
+            1: self.right,
+            2: self.left_entity,
+            3: self.right_entity,
+        }
+        self.state_pool.state_to_id = {
+            self.left: 0,
+            self.right: 1,
+            self.left_entity: 2,
+            self.right_entity: 3,
+        }
 
     def is_stochastic(self) -> bool:
         """Determine weather the dynamics behave stochastically.
@@ -132,9 +142,9 @@ class MockAgent(BaseAgent):
         super().__init__(TestAgentConfig())
         self.state_values = {
             0: min_state,
-            1: max_state,
+            1: (min_state + max_state) / 2,
             2: max_state,
-            3: (min_state + max_state) / 2,
+            3: max_state,
         }
         self.state_action_values = {
             Action.up: min_action,
