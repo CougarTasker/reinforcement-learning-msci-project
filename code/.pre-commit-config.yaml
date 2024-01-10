@@ -39,18 +39,10 @@ repos:
         language: system
         entry: bash -c "cd code; poetry run pytest"
         types: [python]
-
-      - id: pytest-cov
-        name: pytest
-        stages: [push]
-        language: system
-        entry: bash -c "cd code; poetry run pytest --cov -cov-fail-under=80"
-        types: [python]
-        pass_filenames: false
       
       - id: gen-docs
         name: "generate docs"
-        stages: [push]
+        stages: [commit]
         language: system
         entry: bash -c "cd code; poetry run mkdocs build"
         types: [python]

@@ -18,7 +18,7 @@ This application implements reinforcement learning agents in a grid world.
 
 ## Running the Program
 
-> Note: This guide is for thoes only interested in using the application, see [Development](#development) for a development workflow.
+> Note: This guide is for those only interested in using the application, see [Development](#development) for a development workflow.
 
 This project requires Python 3.10 and with Tkinter. Most distributions of Python include tkinter although it may need to be enabled in the installer. Python installers can be found [here](https://www.python.org/downloads/).
 
@@ -61,15 +61,12 @@ The last build of the docs is at `code/docs` you can open these files directly o
 
 To start a local server of the last build you can run.
 ```Bash
-python -m http.server --directory docs 3000
+python3 -m http.server --directory docs 3000
 ```
 Alternatively use the following command to get the latest docs as a local server.
 ```Bash 
 poetry run mkdocs serve -a localhost:3000
 ```
-
-
-
 
 ## Development
 
