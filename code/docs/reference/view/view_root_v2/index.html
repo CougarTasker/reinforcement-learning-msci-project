@@ -1711,6 +1711,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../grid_world_view_v2/auto_speed_state_manager/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Auto Speed State Manager
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../grid_world_view_v2/controls/" class="md-nav__link">
         
   
@@ -1741,7 +1762,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3" >
         
           
           
@@ -1757,14 +1778,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_5_1_2" id="__nav_1_5_1_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_1_3" id="__nav_1_5_1_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_1_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_5_1_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_1_3">
             <span class="md-nav__icon md-icon"></span>
             Display State V2
           </label>
@@ -1786,7 +1807,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3_1" >
         
           
           
@@ -1802,14 +1823,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_5_1_2_1" id="__nav_1_5_1_2_1_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_1_3_1" id="__nav_1_5_1_3_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_5_1_2_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_5_1_2_1">
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_5_1_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_1_3_1">
             <span class="md-nav__icon md-icon"></span>
             Cell
           </label>
@@ -2347,30 +2368,42 @@
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReinforcementLearningApp</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReinforcementLearningApp</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This is the root of the applications main UI.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">:</span> <span class="n">LearningSystemControllerFactory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">tab_labels</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">:</span> <span class="s2">&quot;Value Iteration&quot;</span><span class="p">,</span>
+        <span class="n">AgentOptions</span><span class="o">.</span><span class="n">q_learning</span><span class="p">:</span> <span class="s2">&quot;Q-Learning&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">controller_factory</span><span class="p">:</span> <span class="n">LearningSystemControllerFactory</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate the applications user interface.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            controller (LearningSystemControllerFactory): the controller</span>
+<span class="sd">            controller_factory (LearningSystemControllerFactory): the controller</span>
 <span class="sd">            responsible for managing user actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowType</span><span class="o">.</span><span class="n">Window</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">controller</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;RHUL MSci FYP - Reinforcement Learning App&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_config</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">grid_world</span> <span class="o">=</span> <span class="n">GridWorld</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">controller</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span>
-                <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration</span><span class="p">,</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span>
-            <span class="p">),</span>
-        <span class="p">)</span>
-
+        <span class="n">tabs</span> <span class="o">=</span> <span class="n">QTabWidget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">agent</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">controller</span> <span class="o">=</span> <span class="n">controller_factory</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span>
+                <span class="n">agent</span><span class="p">,</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span>
+            <span class="p">)</span>
+            <span class="n">grid_world</span> <span class="o">=</span> <span class="n">GridWorld</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+            <span class="n">tabs</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">grid_world</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_world</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tabs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">setup_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set app properties from config.&quot;&quot;&quot;</span>
@@ -2400,7 +2433,7 @@
 
 
 <h3 id="src.view.view_root_v2.ReinforcementLearningApp.__init__" class="doc doc-heading">
-          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">controller_factory</span><span class="p">)</span></code>
 
 </h3>
 
@@ -2423,7 +2456,7 @@
     </thead>
     <tbody>
         <tr>
-          <td><code>controller</code></td>
+          <td><code>controller_factory</code></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="src.controller.learning_system_controller_factory.LearningSystemControllerFactory" href="../../controller/learning_system_controller_factory/#src.controller.learning_system_controller_factory.LearningSystemControllerFactory">LearningSystemControllerFactory</a></code>
           </td>
@@ -2441,12 +2474,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/view_root_v2.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
@@ -2461,27 +2489,34 @@
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">controller</span><span class="p">:</span> <span class="n">LearningSystemControllerFactory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">controller_factory</span><span class="p">:</span> <span class="n">LearningSystemControllerFactory</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate the applications user interface.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        controller (LearningSystemControllerFactory): the controller</span>
+<span class="sd">        controller_factory (LearningSystemControllerFactory): the controller</span>
 <span class="sd">        responsible for managing user actions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowType</span><span class="o">.</span><span class="n">Window</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">controller</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s2">&quot;RHUL MSci FYP - Reinforcement Learning App&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setup_config</span><span class="p">()</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">grid_world</span> <span class="o">=</span> <span class="n">GridWorld</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">controller</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span>
-            <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration</span><span class="p">,</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span>
-        <span class="p">),</span>
-    <span class="p">)</span>
-
+    <span class="n">tabs</span> <span class="o">=</span> <span class="n">QTabWidget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">agent</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">controller</span> <span class="o">=</span> <span class="n">controller_factory</span><span class="o">.</span><span class="n">create_controller</span><span class="p">(</span>
+            <span class="n">agent</span><span class="p">,</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span>
+        <span class="p">)</span>
+        <span class="n">grid_world</span> <span class="o">=</span> <span class="n">GridWorld</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">controller</span><span class="p">)</span>
+        <span class="n">tabs</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">grid_world</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_world</span><span class="p">)</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">tabs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -2506,12 +2541,12 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/view_root_v2.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">setup_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">setup_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set app properties from config.&quot;&quot;&quot;</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">()</span><span class="o">.</span><span class="n">gui</span><span class="p">()</span>
     <span class="n">setup_theme</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">appearance_mode</span><span class="p">())</span>

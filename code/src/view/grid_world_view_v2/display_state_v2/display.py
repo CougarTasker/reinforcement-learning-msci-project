@@ -105,6 +105,6 @@ class DisplayState(QWidget):
             )
 
     def __get_current_size(self):
-        width = self.contentsRect().width()
-        height = self.contentsRect().height()
+        width = self.image_label.contentsRect().width() - 2
+        height = self.image_label.contentsRect().height() - 2
         return width, height

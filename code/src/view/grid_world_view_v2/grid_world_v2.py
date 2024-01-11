@@ -1,3 +1,5 @@
+from typing import Optional
+
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QGridLayout, QWidget
 
@@ -14,17 +16,17 @@ class GridWorld(QWidget):
     """
 
     def __init__(
-        self, parent: QWidget, system: LearningSystemController
+        self, parent: Optional[QWidget], system: LearningSystemController
     ) -> None:
         """Initialise the grid world agent.
 
         Args:
-            parent (QWidget): the parent this view should be mounted within.
+            parent (Optional[QWidget]): the parent widget this view should be
+                mounted within.
             system (LearningSystemController): the controller for handling the
                 user's interactions.
         """
         super().__init__(parent)
-
         self.update_bridge = system.state_update_bridge
         self.action_bridge = system.user_action_bridge
         layout = QGridLayout(self)

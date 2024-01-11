@@ -1715,6 +1715,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../auto_speed_state_manager/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Auto Speed State Manager
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../controls/" class="md-nav__link">
         
   
@@ -1745,7 +1766,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3" >
         
           
           
@@ -1761,14 +1782,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_5_1_2" id="__nav_1_5_1_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_1_3" id="__nav_1_5_1_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_1_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_5_1_2">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_1_3">
             <span class="md-nav__icon md-icon"></span>
             Display State V2
           </label>
@@ -1790,7 +1811,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3_1" >
         
           
           
@@ -1806,14 +1827,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_5_1_2_1" id="__nav_1_5_1_2_1_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_1_3_1" id="__nav_1_5_1_3_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_5_1_2_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_5_1_2_1">
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_5_1_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_1_3_1">
             <span class="md-nav__icon md-icon"></span>
             Cell
           </label>
@@ -2322,9 +2343,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/view/grid_world_view_v2/grid_world_v2.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
@@ -2361,24 +2380,26 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">GridWorld</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">GridWorld</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This component combines a display with its controls.</span>
 
 <span class="sd">    this widget represents a complete interface grid based agents.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">LearningSystemController</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QWidget</span><span class="p">],</span> <span class="n">system</span><span class="p">:</span> <span class="n">LearningSystemController</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the grid world agent.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            parent (QWidget): the parent this view should be mounted within.</span>
+<span class="sd">            parent (Optional[QWidget]): the parent widget this view should be</span>
+<span class="sd">                mounted within.</span>
 <span class="sd">            system (LearningSystemController): the controller for handling the</span>
 <span class="sd">                user&#39;s interactions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">update_bridge</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">state_update_bridge</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">action_bridge</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">user_action_bridge</span>
         <span class="n">layout</span> <span class="o">=</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -2448,11 +2469,12 @@
         <tr>
           <td><code>parent</code></td>
           <td>
-                <code><span title="PySide6.QtWidgets.QWidget">QWidget</span></code>
+                <code><span title="typing.Optional">Optional</span>[<span title="PySide6.QtWidgets.QWidget">QWidget</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>the parent this view should be mounted within.</p>
+              <p>the parent widget this view should be
+mounted within.</p>
             </div>
           </td>
           <td>
@@ -2479,9 +2501,7 @@ user's interactions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/grid_world_view_v2/grid_world_v2.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
@@ -2506,18 +2526,20 @@ user's interactions.</p>
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">LearningSystemController</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QWidget</span><span class="p">],</span> <span class="n">system</span><span class="p">:</span> <span class="n">LearningSystemController</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the grid world agent.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        parent (QWidget): the parent this view should be mounted within.</span>
+<span class="sd">        parent (Optional[QWidget]): the parent widget this view should be</span>
+<span class="sd">            mounted within.</span>
 <span class="sd">        system (LearningSystemController): the controller for handling the</span>
 <span class="sd">            user&#39;s interactions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-
     <span class="bp">self</span><span class="o">.</span><span class="n">update_bridge</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">state_update_bridge</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">action_bridge</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">user_action_bridge</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -2558,11 +2580,11 @@ user's interactions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/grid_world_view_v2/grid_world_v2.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_for_work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">check_for_work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if any updates to the UI are requested.&quot;&quot;&quot;</span>
     <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_bridge</span><span class="o">.</span><span class="n">get_latest_state</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

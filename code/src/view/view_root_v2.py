@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QGridLayout, QWidget
+from PySide6.QtWidgets import QGridLayout, QTabWidget, QWidget
 from qdarktheme import setup_theme
 
 from src.controller.learning_system_controller_factory import (
@@ -13,27 +13,33 @@ from src.view.grid_world_view_v2.grid_world_v2 import GridWorld
 class ReinforcementLearningApp(QWidget):
     """This is the root of the applications main UI."""
 
-    def __init__(self, controller: LearningSystemControllerFactory) -> None:
+    tab_labels = {
+        AgentOptions.value_iteration_optimised: "Value Iteration",
+        AgentOptions.q_learning: "Q-Learning",
+    }
+
+    def __init__(
+        self, controller_factory: LearningSystemControllerFactory
+    ) -> None:
         """Instantiate the applications user interface.
 
         Args:
-            controller (LearningSystemControllerFactory): the controller
+            controller_factory (LearningSystemControllerFactory): the controller
             responsible for managing user actions.
         """
         super().__init__(parent=None, f=Qt.WindowType.Window)
-        self.controller = controller
         self.setWindowTitle("RHUL MSci FYP - Reinforcement Learning App")
         self.setup_config()
 
-        self.grid_world = GridWorld(
-            self,
-            controller.create_controller(
-                AgentOptions.value_iteration, DynamicsOptions.collection
-            ),
-        )
-
+        tabs = QTabWidget(self)
+        for agent, label in self.tab_labels.items():
+            controller = controller_factory.create_controller(
+                agent, DynamicsOptions.collection
+            )
+            grid_world = GridWorld(None, controller)
+            tabs.addTab(grid_world, label)
         layout = QGridLayout(self)
-        layout.addWidget(self.grid_world)
+        layout.addWidget(tabs)
 
     def setup_config(self):
         """Set app properties from config."""
