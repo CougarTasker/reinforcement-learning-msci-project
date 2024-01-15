@@ -2528,7 +2528,7 @@
             <span class="n">min_y</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_y</span> <span class="o">*</span> <span class="n">space</span><span class="p">),</span>
         <span class="p">)</span>
 
-        <span class="n">icon_alpha</span> <span class="o">=</span> <span class="n">icon</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">icon_alpha</span> <span class="o">=</span> <span class="n">icon</span><span class="o">.</span><span class="n">getchannel</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">icon_alpha</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">value_to_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">worth</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">rgb_type</span><span class="p">:</span>
@@ -2916,7 +2916,7 @@ Defaults to the centre.</p>
         <span class="n">min_y</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">rel_y</span> <span class="o">*</span> <span class="n">space</span><span class="p">),</span>
     <span class="p">)</span>
 
-    <span class="n">icon_alpha</span> <span class="o">=</span> <span class="n">icon</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">icon_alpha</span> <span class="o">=</span> <span class="n">icon</span><span class="o">.</span><span class="n">getchannel</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">icon_alpha</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>

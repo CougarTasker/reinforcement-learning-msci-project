@@ -73,7 +73,7 @@ class BaseLayer(object):
             min_y + int(rel_y * space),
         )
 
-        icon_alpha = icon.split()[3]
+        icon_alpha = icon.getchannel("A")
         self.canvas.paste(icon, location, icon_alpha)
 
     def value_to_color(self, worth: float) -> rgb_type:
