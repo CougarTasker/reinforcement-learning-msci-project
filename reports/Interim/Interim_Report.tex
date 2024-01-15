@@ -121,14 +121,25 @@ Through this project, I aim to improve my understanding of autonomous agents' be
   \label{fig:app-ui}
 \end{figure}
 
-This application is has been written in Python with The model-view-controller architecture. The application has been written with in a Object Oriented fashion with modern software engineering principles in mind\cite{van2008software}. This application uses Pytest to guarantee all all core, complex, and important functionality. I made this choice based upon my experience from my year in industry that testing can be incredibly valuable in many places 100\% coverage or TDD can be counter productive with, diminishing returns for trivial code, increased baggage with refactoring and sometimes the tests become more complex and bug prone than the code they are testing.
+This application has been written in Python with The model-view-controller architecture. The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. This application uses Pytest to guarantee all core, complex, and important functionality. I made this choice based upon my experience from my year in industry that testing can be incredibly valuable in many places 100\% coverage or TDD can be counterproductive with, diminishing returns for trivial code, increased baggage with refactoring and sometimes the tests become more complex and bug-prone than the code they are testing.
 
 
 % Python challanges + solutions interfaces. wighter perfomrance
 
 \section{Workflow}
 
-This application has been packaged with poetry for dependency management and ease of installation. the code quality is maintained in this repository with a number of strict liners that: enforce a consistent code style, check for static typing errors ensure documentation is written. All files are stored under version control, and with pre-commit hooks all linters and tests are run before code is committed.
+
+All aspects of this project are stored under the Git version control system, and changes made on this project are grouped into small units called commits. Each commit belongs to a branch and has a message summarising the changes. As this project has a single author I have used branches to group together related work, the main branch represents the project after each stage of work is completed. 
+
+One key part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes firstly the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code ensuring 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command and most editors also integrate docstrings so they are accessible during development. Importantly this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date and covers all of the code. 
+
+The development environment is the system of programs where this workflow takes place. This project is configured to work well with a particular Integrated development environment (IDE), for instance, the IDE will be able to start the application with a debugger attached allowing the user to step through the code in the editor. Code quality is maintained in this repository with several automated tools. Static code analysis tools enforce a consistent code style and check for typing errors. I have configured these tools to integrate with the IDE giving immediate feedback so issues can be addressed quickly. Furthermore, Git is configured with pre-commit hooks so these tools must run and validate the code before every commit is made.
+
+While all of the tooling for this project improves many aspects of development this may be difficult to set up and provides many opportunities for discrepancies to emerge between different setups. For this reason, I have created a development container, This container fully specifies every tool and its version to be installed. this containerised environment makes it easy to set up the environment and consistent each time. For the sake of consistency, the application itself has been configured with a dependency management and packaging tool. All of the libraries the application relies upon are specified in the standard `pyproject.toml` and the tool manages their installation in an isolated virtual environment. This process makes it easy to distribute this application and avoids inconsistencies on different computers.
+
+
+
+
 
 % \section{System Design}
 
@@ -368,7 +379,7 @@ Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ valu
 
 \chapter{Diary}
 
-  \input{diary}
+\input{diary}
 
 
 
