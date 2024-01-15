@@ -17,6 +17,7 @@ packaging = "^23.2"
 pyside6 = "^6.6.1"
 pyqtdarktheme = "^2.1.0"
 typing-extensions = "^4.9.0"
+pyzmq = "^25.1.2"
 
 
 [tool.poetry.scripts]

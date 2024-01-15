@@ -40,7 +40,7 @@ class GridWorld(QWidget):
 
         timer = QTimer(self)
         timer.timeout.connect(self.check_for_work)
-        timer.start(100)
+        timer.start(1)
 
         self.action_bridge.submit_action(UserAction.fetch_current_state)
 

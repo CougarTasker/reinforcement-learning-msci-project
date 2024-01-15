@@ -35,7 +35,14 @@ class LearningSystemController(object):
         """
         user_action_bridge = self.user_action_bridge
         while True:
-            action = user_action_bridge.get_action()
+            action = None
+            if self.auto:
+                while action is None:
+                    action = user_action_bridge.get_action_non_blocking()
+                    self.one_step()
+            else:
+                action = user_action_bridge.get_action()
+
             match action:
                 case UserActionMessage(action=UserAction.end):
                     break
@@ -44,7 +51,6 @@ class LearningSystemController(object):
                     self.send_current_state()
                 case UserActionMessage(action=UserAction.start_auto):
                     self.auto = True
-
                 case UserActionMessage(action=UserAction.stop_auto):
                     self.auto = False
                 case UserActionMessage(action=UserAction.reset):
@@ -60,9 +66,6 @@ class LearningSystemController(object):
                 case _:
                     raise RuntimeError("Unknown action performed.")
 
-            while self.__can_auto_step():
-                self.one_step()
-
     def one_step(self):
         """Perform one step."""
         self.system.perform_action()
@@ -72,10 +75,3 @@ class LearningSystemController(object):
         """Send the current state to the view."""
         current_state = self.system.get_current_state()
         self.state_update_bridge.update_state(current_state)
-
-    def __can_auto_step(self) -> bool:
-        return (
-            self.auto
-            and not self.user_action_bridge.has_new_action()
-            and self.state_update_bridge.has_capacity()
-        )

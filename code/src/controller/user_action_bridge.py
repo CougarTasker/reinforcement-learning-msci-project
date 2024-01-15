@@ -42,14 +42,6 @@ class UserActionBridge(BaseBridge):
         """
         self.add_item(UserActionMessage(action, payload))
 
-    def has_new_action(self) -> bool:
-        """Is there a new action to process.
-
-        Returns:
-            bool: true when there is another action to consider.
-        """
-        return self.get_count() > 0
-
     def get_action(self) -> UserActionMessage:
         """Get the latest action the user has performed.
 
@@ -59,3 +51,13 @@ class UserActionBridge(BaseBridge):
             UserActionMessage: the action that has been performed
         """
         return self.get_item_blocking()
+
+    def get_action_non_blocking(self) -> UserActionMessage:
+        """Get the latest action the user has performed.
+
+        This is blocking.
+
+        Returns:
+            UserActionMessage: the action that has been performed
+        """
+        return self.get_item_non_blocking()

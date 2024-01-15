@@ -1,34 +1,28 @@
+from enum import Enum
 from multiprocessing import Manager
 from typing import Any
+
+from zmq import NOBLOCK, PAIR, Again, Context
+
+
+class BridgeState(Enum):
+    """Enumerates the possible connection states of the bridge."""
+
+    none = 0
+    port_bound = 1
+    connected = 2
 
 
 class BaseBridge(object):
     """Bases class that represents a bridge between two processes."""
 
-    capacity = 1000
-
     def __init__(self) -> None:
         """Initialise a bridge."""
         manager = Manager()
-        self.queue = manager.Queue(self.capacity)
-        self.count_lock = manager.Lock()
-        self.count = manager.Value(int, 0)
-
-    def get_count(self) -> int:
-        """Get the current count of items in the queue.
-
-        Returns:
-            int: the number of items on the queue
-        """
-        return self.count.get()
-
-    def has_capacity(self) -> bool:
-        """Check the queue has capacity to add more items.
-
-        Returns:
-            bool: true if it is safe to add more to the queue.
-        """
-        return self.get_count() < self.capacity
+        self.state_lock = manager.Lock()
+        self.port = manager.Value(int, 0)
+        self.state = manager.Value(BridgeState, BridgeState.none)
+        self.socket = None
 
     def add_item(self, queue_item: Any):
         """Add item to the queue, not blocking.
@@ -36,9 +30,7 @@ class BaseBridge(object):
         Args:
             queue_item (Any): The item to be added.
         """
-        with self.count_lock:
-            self.count.set(self.count.get() + 1)
-            self.queue.put_nowait(queue_item)
+        self.__get_socket().send_pyobj(queue_item)
 
     def get_item_blocking(self) -> Any:
         """Get the next item in the queue while blocking.
@@ -46,25 +38,35 @@ class BaseBridge(object):
         Returns:
             Any: the next item.
         """
-        queue_item = self.queue.get()
-        with self.count_lock:
-            self.count.set(self.count.get() - 1)
-        return queue_item
+        return self.__get_socket().recv_pyobj()
 
-    def get_latest_item(self) -> Any:
+    def get_item_non_blocking(self) -> Any:
         """Get the latest item on the queue.
 
         Returns:
             Any: the latest item. None if the queue is empty
         """
-        if self.get_count() == 0:
+        try:
+            return self.__get_socket().recv_pyobj(NOBLOCK)
+        except Again:
             return None
-        last_queue_item = None
-        # hold onto the lock so not competing with other end to add states
-        with self.count_lock:
-            count = self.count.get()
-            while count > 0:
-                last_queue_item = self.queue.get_nowait()
-                count -= 1
-            self.count.set(count)
-        return last_queue_item
+
+    def __get_socket(self):
+        if self.socket is not None:
+            return self.socket
+
+        with self.state_lock:
+            match self.state.get():
+                case BridgeState.none:
+                    self.socket = Context().socket(PAIR)
+                    port = self.socket.bind_to_random_port("tcp://*")
+                    self.port.set(port)
+                    self.state.set(BridgeState.port_bound)
+                case BridgeState.port_bound:
+                    self.socket = Context().socket(PAIR)
+                    self.socket.connect(f"tcp://localhost:{self.port.get()}")
+                    self.state.set(BridgeState.connected)
+                case BridgeState.connected:
+                    raise RuntimeError("connected while missing bridge end")
+
+        return self.socket

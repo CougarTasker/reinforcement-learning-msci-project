@@ -450,9 +450,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.controller.user_action_bridge.UserActionBridge.has_new_action" class="md-nav__link">
+  <a href="#src.controller.user_action_bridge.UserActionBridge.get_action_non_blocking" class="md-nav__link">
     <span class="md-ellipsis">
-      has_new_action()
+      get_action_non_blocking()
     </span>
   </a>
   
@@ -2322,9 +2322,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.controller.user_action_bridge.UserActionBridge.has_new_action" class="md-nav__link">
+  <a href="#src.controller.user_action_bridge.UserActionBridge.get_action_non_blocking" class="md-nav__link">
     <span class="md-ellipsis">
-      has_new_action()
+      get_action_non_blocking()
     </span>
   </a>
   
@@ -2515,7 +2515,9 @@
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">UserActionBridge</span><span class="p">(</span><span class="n">BaseBridge</span><span class="p">):</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">UserActionBridge</span><span class="p">(</span><span class="n">BaseBridge</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Bridge for passing the user actions from the view to the model.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">submit_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">UserAction</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -2527,14 +2529,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">UserActionMessage</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">payload</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">has_new_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Is there a new action to process.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            bool: true when there is another action to consider.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span>
-
     <span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserActionMessage</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the latest action the user has performed.</span>
 
@@ -2544,6 +2538,16 @@
 <span class="sd">            UserActionMessage: the action that has been performed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_blocking</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_action_non_blocking</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserActionMessage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the latest action the user has performed.</span>
+
+<span class="sd">        This is blocking.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            UserActionMessage: the action that has been performed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_non_blocking</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -2602,15 +2606,15 @@
 
           <details class="quote">
             <summary>Source code in <code>src/controller/user_action_bridge.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserActionMessage</span><span class="p">:</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserActionMessage</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the latest action the user has performed.</span>
 
 <span class="sd">    This is blocking.</span>
@@ -2631,15 +2635,16 @@
 
 
 
-<h3 id="src.controller.user_action_bridge.UserActionBridge.has_new_action" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">has_new_action</span><span class="p">()</span></code>
+<h3 id="src.controller.user_action_bridge.UserActionBridge.get_action_non_blocking" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">get_action_non_blocking</span><span class="p">()</span></code>
 
 </h3>
 
 
   <div class="doc doc-contents ">
   
-      <p>Is there a new action to process.</p>
+      <p>Get the latest action the user has performed.</p>
+<p>This is blocking.</p>
 
 
 
@@ -2653,12 +2658,12 @@
     </thead>
     <tbody>
         <tr>
-<td><code>bool</code></td>          <td>
-                <code>bool</code>
+<td><code>UserActionMessage</code></td>          <td>
+                <code><a class="autorefs autorefs-internal" title="src.controller.user_action_bridge.UserActionMessage" href="#src.controller.user_action_bridge.UserActionMessage">UserActionMessage</a></code>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>true when there is another action to consider.</p>
+              <p>the action that has been performed</p>
             </div>
           </td>
         </tr>
@@ -2667,19 +2672,23 @@
 
           <details class="quote">
             <summary>Source code in <code>src/controller/user_action_bridge.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">has_new_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Is there a new action to process.</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_action_non_blocking</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserActionMessage</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the latest action the user has performed.</span>
+
+<span class="sd">    This is blocking.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        bool: true when there is another action to consider.</span>
+<span class="sd">        UserActionMessage: the action that has been performed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_non_blocking</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
