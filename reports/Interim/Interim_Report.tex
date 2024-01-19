@@ -146,6 +146,28 @@ While all of the tooling for this project improves many aspects of development t
 
 \section{Functionality and Usage}
 
+When starting the application you will be greeted by a window that is largely broken into three parts. At the top there is a section which has the main controls for selecting the major options such as the agent and dynamics. 
+
+In the middle there is the main display, it will initially look like a gird of squares with some icons and colors. the display represents as single state in the dynamics initially this is the grid world dynamics. The icons can represent entities in the state. The robot is the agent's location, Arrows typically represent actions. The gird may be coloured to represent the agents interpretation of value with reds representing the agents lowest values states and greens representing the most valuable states.
+
+At the bottom are specific controls specific to the current learning setup,Generally there are controls that affect the visualisation and allow the user to step thought the simulation. 
+
+\subsection{Getting Started}
+
+The project is set up as a standard distribution package, poetry is the build backend. While you may also use poetry as the build frontend if you have it installed however it may be excessive if you are only interested in starting the application.
+
+Pipx is simple build frontend that should be familiar if you have experience with pip. You can find instructions on how to \href{https://pipx.pypa.io/stable/installation/}{install pipx for your platform here}
+
+If you have installed pipx you can run the application with the following command
+
+\begin{verbatim*}
+  python3 -m pipx run --spec . start
+\end{verbatim*}
+
+You can find more information about this application and how to start it in the readme file in the code folder.
+
+\subsection{Controls and Operation}
+
 
 
 % \chapter{Timeline}
