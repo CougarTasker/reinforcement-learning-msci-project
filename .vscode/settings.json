@@ -11,6 +11,7 @@
     "cSpell.words": [
         "astype",
         "backpropagation",
+        "color",
         "colors",
         "columnspan",
         "docstrings",
@@ -24,6 +25,7 @@
         "njit",
         "nopython",
         "numba",
+        "numpy",
         "padx",
         "pady",
         "pipx",
