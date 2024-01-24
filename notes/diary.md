@@ -10,10 +10,15 @@
 - [Week 05 (16/10/23)](#week-05-161023)
 - [Week 06 (23/10/23)](#week-06-231023)
 - [Week 07 (30/10/23)](#week-07-301023)
-- [Week 08 (6/10/23)](#week-08-61023)
+- [Week 08 (06/10/23)](#week-08-061023)
 - [Week 09 (13/11/23)](#week-09-131123)
 - [Week 10 (20/11/23)](#week-10-201123)
 - [Week 11 (27/11/23)](#week-11-271123)
+- [Week 12 (04/12/23)](#week-12-041223)
+- [Christmas Break](#christmas-break)
+- [Week 17 (8/1/24) first week of term](#week-17-8124-first-week-of-term)
+- [Week 18 (15/1/24)](#week-18-15124)
+- [Week 19 (22/1/24)](#week-19-22124)
 
 <!-- omit in toc -->
 ## Weeks
@@ -157,9 +162,35 @@
    - Completed presentation slides
    - Practised presentation
 
-## Week 12 (08/12/23)
+### Week 12 (04/12/23)
  - (Mon 04)
    - Practised presentation
    - Gave presentation
  - (Fri 08)
    - Prepared work for Interim submission 
+
+
+### Christmas Break 
+
+ - (Mon 11) Documentation Improvements
+   - Setup static documentation site generation
+   - Improved readme
+ - (Fri 15) Quality of life improvements
+   - Improved application lifecycle
+   - Investigated graphics performance bottleneck
+   - Tested different GUI framework
+
+### Week 17 (8/1/24) first week of term
+
+ - (Wed 10) Completed migration to new GUI framework
+
+### Week 18 (15/1/24)
+
+ - (Mon 15) Updated IPC method to reduce overhead and latency 
+ - (Fri 19) Improved Software Engineering section of the report
+
+### Week 19 (22/1/24)
+
+ - (Wed 24) 
+   - Implemented different exploration strategies for Q-learning
+   - Added more detail to report
