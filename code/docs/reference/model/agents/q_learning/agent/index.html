@@ -2632,7 +2632,7 @@
 <span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningAgent</span><span class="p">(</span><span class="n">BaseAgent</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Agent that learns q-value table to make decisions.&quot;&quot;&quot;</span>
 
-    <span class="n">replay_queue_length</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">replay_queue_length</span> <span class="o">=</span> <span class="mi">10</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">AgentConfig</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="n">ExplorationStrategyOptions</span>

@@ -13,7 +13,7 @@ from .reward_replay_queue import RewardReplayQueue
 class QLearningAgent(BaseAgent):
     """Agent that learns q-value table to make decisions."""
 
-    replay_queue_length = 100
+    replay_queue_length = 10
 
     def __init__(
         self, config: AgentConfig, strategy: ExplorationStrategyOptions

@@ -2549,7 +2549,10 @@
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ValueRange</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ValueRange</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Maintains the range of all possible values for mapping from 0 to 1.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_pool</span><span class="p">:</span> <span class="n">StatePool</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">BaseAgent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -2584,6 +2587,9 @@
 <span class="sd">            float: _description_</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_value_range</span><span class="p">(</span><span class="n">value_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">min_value</span> <span class="o">==</span> <span class="n">max_value</span><span class="p">:</span>
+            <span class="c1"># all values are identical place value in the middle</span>
+            <span class="k">return</span> <span class="mf">0.5</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">absolute_value</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_value</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__get_value_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_type</span><span class="p">:</span> <span class="n">ValueType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
@@ -2838,7 +2844,10 @@ value of this type would get a 1.</p>
 <span class="normal">48</span>
 <span class="normal">49</span>
 <span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rescale_value</span><span class="p">(</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rescale_value</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">value_type</span><span class="p">:</span> <span class="n">ValueType</span><span class="p">,</span> <span class="n">absolute_value</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Rescale a value from a value type into the range 0-1.</span>
@@ -2854,6 +2863,9 @@ value of this type would get a 1.</p>
 <span class="sd">        float: _description_</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_value_range</span><span class="p">(</span><span class="n">value_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">min_value</span> <span class="o">==</span> <span class="n">max_value</span><span class="p">:</span>
+        <span class="c1"># all values are identical place value in the middle</span>
+        <span class="k">return</span> <span class="mf">0.5</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">absolute_value</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_value</span> <span class="o">-</span> <span class="n">min_value</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>

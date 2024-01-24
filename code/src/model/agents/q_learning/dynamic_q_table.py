@@ -87,4 +87,5 @@ class DynamicQTable(object):
         return best_action_value
 
     def __default_value(self) -> float:
-        return np.random.rand() * self.learning_rate
+        # optimistic value shown to reduce bias
+        return np.random.rand() * self.learning_rate + 1

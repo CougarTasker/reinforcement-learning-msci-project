@@ -48,6 +48,9 @@ class ValueRange(object):
             float: _description_
         """
         min_value, max_value = self.__get_value_range(value_type)
+        if min_value == max_value:
+            # all values are identical place value in the middle
+            return 0.5
         return (absolute_value - min_value) / (max_value - min_value)
 
     def __get_value_range(self, value_type: ValueType) -> Tuple[float, float]:
