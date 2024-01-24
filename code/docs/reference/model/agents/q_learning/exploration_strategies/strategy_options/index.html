@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../epsilon_greedy_strategy/">
       
       
-        <link rel="next" href="arrow_layer/">
+        <link rel="next" href="../../reward_replay_queue/">
       
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
-        <title>Cell - Reinforcement Learning App</title>
+        <title>Strategy Options - Reinforcement Learning App</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.50c56a3b.min.css">
       
       
 
@@ -43,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#src.view.grid_world_view_v2.display_state_v2.cell" class="md-skip">
+        <a href="#src.model.agents.q_learning.exploration_strategies.strategy_options" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cell
+              Strategy Options
             
           </span>
         </div>
@@ -175,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -209,7 +209,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../" class="md-nav__link ">
+            <a href="../../../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -254,7 +254,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../controller/" class="md-nav__link ">
+            <a href="../../../../../controller/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -285,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../controller/base_bridge/" class="md-nav__link">
+      <a href="../../../../../controller/base_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -306,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../controller/learning_system_controller/" class="md-nav__link">
+      <a href="../../../../../controller/learning_system_controller/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -327,7 +327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../controller/learning_system_controller_factory/" class="md-nav__link">
+      <a href="../../../../../controller/learning_system_controller_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -348,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../controller/state_update_bridge/" class="md-nav__link">
+      <a href="../../../../../controller/state_update_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -369,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../controller/user_action_bridge/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -398,7 +398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../main/" class="md-nav__link">
+      <a href="../../../../../main/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -416,24 +416,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/" class="md-nav__link ">
+            <a href="../../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -450,7 +452,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3">
             <span class="md-nav__icon md-icon"></span>
             Model
@@ -461,24 +463,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/agents/" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -495,7 +499,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_1">
             <span class="md-nav__icon md-icon"></span>
             Agents
@@ -509,7 +513,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/base_agent/" class="md-nav__link">
+      <a href="../../../base_agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -527,24 +531,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/agents/q_learning/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -561,7 +567,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_1_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_1_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_1_2">
             <span class="md-nav__icon md-icon"></span>
             Q Learning
@@ -575,7 +581,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/q_learning/agent/" class="md-nav__link">
+      <a href="../../agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -596,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/q_learning/dynamic_q_table/" class="md-nav__link">
+      <a href="../../dynamic_q_table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -614,24 +620,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/agents/q_learning/exploration_strategies/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -648,7 +656,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_3_1_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_3_1_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_1_2_3">
             <span class="md-nav__icon md-icon"></span>
             Exploration Strategies
@@ -662,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
+      <a href="../base_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -683,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
+      <a href="../epsilon_greedy_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -701,10 +709,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../model/agents/q_learning/exploration_strategies/strategy_options/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Strategy Options
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -713,6 +739,42 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.strategy_options" class="md-nav__link">
+    <span class="md-ellipsis">
+      strategy_options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.strategy_options.ExplorationStrategyOptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExplorationStrategyOptions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -733,7 +795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/q_learning/reward_replay_queue/" class="md-nav__link">
+      <a href="../../reward_replay_queue/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -776,7 +838,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/agents/value_iteration/" class="md-nav__link ">
+            <a href="../../../value_iteration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -807,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/value_iteration/agent/" class="md-nav__link">
+      <a href="../../../value_iteration/agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -828,7 +890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/value_iteration/agent_optimised/" class="md-nav__link">
+      <a href="../../../value_iteration/agent_optimised/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -849,7 +911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/value_iteration/dynamics_distribution/" class="md-nav__link">
+      <a href="../../../value_iteration/dynamics_distribution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -870,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/agents/value_iteration/types/" class="md-nav__link">
+      <a href="../../../value_iteration/types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -921,7 +983,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/config/" class="md-nav__link ">
+            <a href="../../../../config/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -952,7 +1014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/config/agent_section/" class="md-nav__link">
+      <a href="../../../../config/agent_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -973,7 +1035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/config/base_section/" class="md-nav__link">
+      <a href="../../../../config/base_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -994,7 +1056,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/config/grid_world_section/" class="md-nav__link">
+      <a href="../../../../config/grid_world_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1015,7 +1077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/config/gui_section/" class="md-nav__link">
+      <a href="../../../../config/gui_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1036,7 +1098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/config/reader/" class="md-nav__link">
+      <a href="../../../../config/reader/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1079,7 +1141,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/dynamics/" class="md-nav__link ">
+            <a href="../../../../dynamics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1110,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/dynamics/actions/" class="md-nav__link">
+      <a href="../../../../dynamics/actions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1131,7 +1193,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/dynamics/base_dynamics/" class="md-nav__link">
+      <a href="../../../../dynamics/base_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1152,7 +1214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/dynamics/collection_dynamics/" class="md-nav__link">
+      <a href="../../../../dynamics/collection_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1173,7 +1235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/dynamics/grid_world/" class="md-nav__link">
+      <a href="../../../../dynamics/grid_world/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1216,7 +1278,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/learning_system/" class="md-nav__link ">
+            <a href="../../../../learning_system/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1247,7 +1309,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/cell_configuration/" class="md-nav__link">
+      <a href="../../../../learning_system/cell_configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1268,7 +1330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/learning_instance/" class="md-nav__link">
+      <a href="../../../../learning_system/learning_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1289,7 +1351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/learning_system/" class="md-nav__link">
+      <a href="../../../../learning_system/learning_system/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1310,7 +1372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/options/" class="md-nav__link">
+      <a href="../../../../learning_system/options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1345,7 +1407,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/learning_system/state_description/" class="md-nav__link ">
+            <a href="../../../../learning_system/state_description/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1376,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/state_description/cell_state_lookup/" class="md-nav__link">
+      <a href="../../../../learning_system/state_description/cell_state_lookup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1397,7 +1459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/state_description/state_description/" class="md-nav__link">
+      <a href="../../../../learning_system/state_description/state_description/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1418,7 +1480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/state_description/state_description_factory/" class="md-nav__link">
+      <a href="../../../../learning_system/state_description/state_description_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1461,7 +1523,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/learning_system/value_standardisation/" class="md-nav__link ">
+            <a href="../../../../learning_system/value_standardisation/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1492,7 +1554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/value_standardisation/normaliser/" class="md-nav__link">
+      <a href="../../../../learning_system/value_standardisation/normaliser/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1513,7 +1575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
+      <a href="../../../../learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1534,7 +1596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/learning_system/value_standardisation/value_range/" class="md-nav__link">
+      <a href="../../../../learning_system/value_standardisation/value_range/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1585,7 +1647,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../model/state/" class="md-nav__link ">
+            <a href="../../../../state/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1616,7 +1678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/state/cell_entities/" class="md-nav__link">
+      <a href="../../../../state/cell_entities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1637,7 +1699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/state/state_builder/" class="md-nav__link">
+      <a href="../../../../state/state_builder/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1658,7 +1720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/state/state_instance/" class="md-nav__link">
+      <a href="../../../../state/state_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1679,7 +1741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../model/state/state_pool/" class="md-nav__link">
+      <a href="../../../../state/state_pool/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1716,7 +1778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../profile/" class="md-nav__link">
+      <a href="../../../../../profile/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1734,26 +1796,24 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../../../../../view/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1770,7 +1830,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_5">
             <span class="md-nav__icon md-icon"></span>
             View
@@ -1781,26 +1841,24 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../../../view/grid_world_view_v2/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1817,7 +1875,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_5_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_5_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_5_1">
             <span class="md-nav__icon md-icon"></span>
             Grid World View V2
@@ -1831,7 +1889,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../auto_speed_state_manager/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/auto_speed_state_manager/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1852,7 +1910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../controls/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1870,26 +1928,24 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../../../view/grid_world_view_v2/display_state_v2/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1906,7 +1962,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_1_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_1_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_5_1_3">
             <span class="md-nav__icon md-icon"></span>
             Display State V2
@@ -1917,26 +1973,24 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_1_3_1" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1947,13 +2001,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_1_5_1_3_1" id="__nav_1_5_1_3_1_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_1_3_1" id="__nav_1_5_1_3_1_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_5_1_3_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_5_1_3_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_5_1_3_1">
             <span class="md-nav__icon md-icon"></span>
             Cell
@@ -1967,7 +2021,7 @@
   
   
     <li class="md-nav__item">
-      <a href="arrow_layer/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/arrow_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1988,7 +2042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="background_layer/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/background_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2009,7 +2063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="base_layer/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/base_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2030,7 +2084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cell/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/cell/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2051,7 +2105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cell_layout/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/cell_layout/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2072,7 +2126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="main_icon_layer/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2101,7 +2155,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../display/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/display_state_v2/display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2130,7 +2184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../grid_world_v2/" class="md-nav__link">
+      <a href="../../../../../view/grid_world_view_v2/grid_world_v2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2173,7 +2227,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../icons/" class="md-nav__link ">
+            <a href="../../../../../view/icons/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2204,7 +2258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../icons/load_icon/" class="md-nav__link">
+      <a href="../../../../../view/icons/load_icon/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2233,7 +2287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view_root_v2/" class="md-nav__link">
+      <a href="../../../../../view/view_root_v2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2287,9 +2341,18 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#src.view.grid_world_view_v2.display_state_v2.cell" class="md-nav__link">
+  <a href="#src.model.agents.q_learning.exploration_strategies.strategy_options" class="md-nav__link">
     <span class="md-ellipsis">
-      cell
+      strategy_options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.strategy_options.ExplorationStrategyOptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExplorationStrategyOptions
     </span>
   </a>
   
@@ -2310,16 +2373,14 @@
                   
 
 
-  <h1>Cell</h1>
+  <h1>Strategy Options</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="src.view.grid_world_view_v2.display_state_v2.cell"></a>
+<a id="src.model.agents.q_learning.exploration_strategies.strategy_options"></a>
   <div class="doc doc-contents first">
-  
-      <p>This package is for the drawing of a cell in the grid world view.</p>
 
   
 
@@ -2331,6 +2392,57 @@
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.model.agents.q_learning.exploration_strategies.strategy_options.ExplorationStrategyOptions" class="doc doc-heading">
+          <code>ExplorationStrategyOptions</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="enum.Enum">Enum</span></code></p>
+
+  
+      <p>Enumerates all exploration strategies.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/strategy_options.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ExplorationStrategyOptions</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerates all exploration strategies.&quot;&quot;&quot;</span>
+
+    <span class="n">epsilon_greedy</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
@@ -2386,10 +2498,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
     
   </body>

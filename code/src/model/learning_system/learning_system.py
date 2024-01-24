@@ -6,6 +6,9 @@ from ..agents import (
     ValueIterationAgent,
     ValueIterationAgentOptimised,
 )
+from ..agents.q_learning.exploration_strategies.strategy_options import (
+    ExplorationStrategyOptions,
+)
 from ..config.reader import ConfigReader
 from ..dynamics.base_dynamics import BaseDynamics
 from ..dynamics.collection_dynamics import CollectionDynamics
@@ -99,7 +102,10 @@ class LearningSystem(object):
                     self._agent_config, self.get_dynamics()
                 )
             case AgentOptions.q_learning:
-                self._agent = QLearningAgent(self._agent_config)
+                self._agent = QLearningAgent(
+                    self._agent_config,
+                    ExplorationStrategyOptions.epsilon_greedy,
+                )
             case _:
                 raise ValueError(f"unknown agent {self._agent_option.name}")
 

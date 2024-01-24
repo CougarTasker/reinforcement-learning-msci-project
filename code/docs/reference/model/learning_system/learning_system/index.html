@@ -618,6 +618,122 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../agents/q_learning/exploration_strategies/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Exploration Strategies
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_3_1_2_3" id="__nav_1_3_1_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_3_1_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3_1_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Exploration Strategies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Base Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Epsilon Greedy Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/q_learning/exploration_strategies/strategy_options/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Strategy Options
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
     <li class="md-nav__item">
       <a href="../../agents/q_learning/reward_replay_queue/" class="md-nav__link">
         
@@ -2432,10 +2548,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 19</span>
-<span class="normal"> 20</span>
-<span class="normal"> 21</span>
-<span class="normal"> 22</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 22</span>
 <span class="normal"> 23</span>
 <span class="normal"> 24</span>
 <span class="normal"> 25</span>
@@ -2565,7 +2678,13 @@
 <span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
-<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LearningSystem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LearningSystem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controller for managing one pair of agent and dynamics.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -2648,7 +2767,10 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_agent_config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dynamics</span><span class="p">()</span>
                 <span class="p">)</span>
             <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">q_learning</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="o">=</span> <span class="n">QLearningAgent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_agent_config</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="o">=</span> <span class="n">QLearningAgent</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_agent_config</span><span class="p">,</span>
+                    <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown agent </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_agent_option</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -2779,10 +2901,7 @@ will depend on that.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
@@ -2805,7 +2924,10 @@ will depend on that.</p>
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">agent</span><span class="p">:</span> <span class="n">AgentOptions</span><span class="p">,</span>
     <span class="n">dynamics</span><span class="p">:</span> <span class="n">DynamicsOptions</span><span class="p">,</span>
@@ -2916,10 +3038,7 @@ offloading this to another thread</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 76</span>
-<span class="normal"> 77</span>
-<span class="normal"> 78</span>
-<span class="normal"> 79</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 79</span>
 <span class="normal"> 80</span>
 <span class="normal"> 81</span>
 <span class="normal"> 82</span>
@@ -2946,7 +3065,13 @@ offloading this to another thread</p>
 <span class="normal">103</span>
 <span class="normal">104</span>
 <span class="normal">105</span>
-<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseAgent</span><span class="p">:</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseAgent</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the agent.</span>
 
 <span class="sd">    this will perform any necessary setup, this may take time consider</span>
@@ -2972,7 +3097,10 @@ offloading this to another thread</p>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_agent_config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_dynamics</span><span class="p">()</span>
             <span class="p">)</span>
         <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">q_learning</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="o">=</span> <span class="n">QLearningAgent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_agent_config</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="o">=</span> <span class="n">QLearningAgent</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_agent_config</span><span class="p">,</span>
+                <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown agent </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_agent_option</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -3025,14 +3153,14 @@ offloading this to another thread</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current state of the learning instance.</span>
 
 <span class="sd">    Returns:</span>
@@ -3122,10 +3250,7 @@ offloading this to another thread</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
@@ -3146,7 +3271,10 @@ offloading this to another thread</p>
 <span class="normal">71</span>
 <span class="normal">72</span>
 <span class="normal">73</span>
-<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDynamics</span><span class="p">:</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDynamics</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the dynamics.</span>
 
 <span class="sd">    Raises:</span>
@@ -3195,11 +3323,11 @@ offloading this to another thread</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">perform_action</span><span class="p">(</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">perform_action</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform one action chosen by the agent.&quot;&quot;&quot;</span>
@@ -3228,10 +3356,10 @@ offloading this to another thread</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reset_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reset_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reset the current state to the initial state.&quot;&quot;&quot;</span>
     <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_learning_instance</span><span class="p">()</span>
     <span class="n">instance</span><span class="o">.</span><span class="n">reset_state</span><span class="p">()</span>
@@ -3289,13 +3417,13 @@ offloading this to another thread</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_display_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display_mode</span><span class="p">:</span> <span class="n">DisplayMode</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_display_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">display_mode</span><span class="p">:</span> <span class="n">DisplayMode</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the learning instance&#39;s display mode.</span>
 
 <span class="sd">    Args:</span>
