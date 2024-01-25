@@ -27,7 +27,6 @@ class CellConfiguration(object):
     action_values_raw: action_value_description
     location: Tuple[int, int]
     cell_entity: CellEntity
-    display_mode: DisplayMode
     cell_value_normalised: Optional[float] = None
     cell_value_raw: Optional[float] = None
 

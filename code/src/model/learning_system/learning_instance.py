@@ -1,22 +1,33 @@
 from typing import Optional, Tuple
 
-from src.model.agents.base_agent import BaseAgent
+from typing_extensions import override
+
 from src.model.dynamics.actions import Action
-from src.model.dynamics.base_dynamics import BaseDynamics
+from src.model.learning_system.base_entity_decorator import BaseEntityDecorator
+from src.model.learning_system.top_entities import TopLevelEntities
 
 
-class LearningInstance(object):
+class LearningInstance(BaseEntityDecorator):
     """An instance of an agent interacting with the environment."""
 
-    def __init__(self, agent: BaseAgent, dynamics: BaseDynamics) -> None:
+    def __init__(self, entities: TopLevelEntities) -> None:
         """Create the learning instance.
 
         Args:
-            agent (BaseAgent): The agent to learn.
-            dynamics (BaseDynamics): The dynamics the agent is learning.
+            entities (TopLevelEntities): the top level entities used in this
+                learning instance.
         """
-        self.agent = agent
-        self.dynamics = dynamics
+        super().__init__(entities)
+        self.update_entities(entities)
+
+    @override
+    def update_entities(self, entities: TopLevelEntities) -> None:
+        """Update the entities used by this decorator.
+
+        Args:
+            entities (TopLevelEntities): the new entities to use.
+        """
+        super().update_entities(entities)
         self._current_state: Optional[int] = None
 
     def get_current_state(self) -> int:

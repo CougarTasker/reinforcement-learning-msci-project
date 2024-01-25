@@ -2,9 +2,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from .controller.learning_system_controller_factory import (
-    LearningSystemControllerFactory,
-)
+from .controller.learning_system_controller import LearningSystemController
 from .view.view_root_v2 import ReinforcementLearningApp
 
 
@@ -13,7 +11,7 @@ def main():
 
     The main entry point into the application.
     """
-    with LearningSystemControllerFactory() as controller:
+    with LearningSystemController() as controller:
         qt = QApplication(sys.argv)
         app = ReinforcementLearningApp(controller)
         app.show()

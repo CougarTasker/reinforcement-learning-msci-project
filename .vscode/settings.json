@@ -20,6 +20,7 @@
         "finfo",
         "flaticon",
         "fromarray",
+        "getchannel",
         "linters",
         "ndarray",
         "njit",

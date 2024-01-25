@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 from PIL.ImageQt import ImageQt
 from PySide6.QtGui import QPixmap, QResizeEvent
 from PySide6.QtWidgets import QGridLayout, QLabel, QWidget
+from typing_extensions import override
 
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
@@ -48,6 +49,7 @@ class DisplayState(QWidget):
         self.state = state
         self.__configure_grid()
 
+    @override
     def resizeEvent(  # noqa: N802 built in method to base class
         self, event: QResizeEvent
     ):
@@ -101,7 +103,9 @@ class DisplayState(QWidget):
                 bounding_box,
             ) = cell_position
             self.cells[cell_coordinate] = Cell(
-                state.cell_config[cell_coordinate], bounding_box
+                state.global_options,
+                state.cell_config[cell_coordinate],
+                bounding_box,
             )
 
     def __get_current_size(self):

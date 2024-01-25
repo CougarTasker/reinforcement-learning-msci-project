@@ -23,7 +23,7 @@ class BaseExplorationStrategy(object):
 
         Raises:
             NotImplementedError: If this method has not been overridden by a
-            concrete strategy.
+                concrete strategy.
 
         Returns:
             Action: The action the agent should perform

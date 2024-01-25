@@ -3,7 +3,9 @@ from typing import Optional
 from PIL.Image import Image
 
 from src.model.dynamics.actions import Action
-from src.model.learning_system.cell_configuration import DisplayMode
+from src.model.learning_system.cell_configuration.cell_configuration import (
+    DisplayMode,
+)
 from src.model.state.cell_entities import CellEntity
 from src.view.grid_world_view_v2.display_state_v2.cell.base_layer import (
     BaseLayer,
@@ -30,21 +32,21 @@ class MainIconLayer(BaseLayer):
         Returns:
             Image: the image that corresponds to what the main icon should be
         """
-        config = self.config
+        cell_entity = self.config.cell_entity
         loader = self.icon_loader
-        match config.display_mode:
+        match self.options.display_mode:
             case DisplayMode.default | DisplayMode.state_value:
-                return loader.get_cell_entity_icon(config.cell_entity, size)
+                return loader.get_cell_entity_icon(cell_entity, size)
             case (
                 DisplayMode.action_value_global | DisplayMode.action_value_local
             ):
-                if config.cell_entity is CellEntity.goal:
-                    return loader.get_cell_entity_icon(config.cell_entity, size)
+                if cell_entity is CellEntity.goal:
+                    return loader.get_cell_entity_icon(cell_entity, size)
                 return None
             case DisplayMode.best_action:
                 best_action = self.__get_best_action()
                 if best_action is None:
-                    return loader.get_cell_entity_icon(config.cell_entity, size)
+                    return loader.get_cell_entity_icon(cell_entity, size)
 
                 return loader.get_action_icon(best_action, size)
 

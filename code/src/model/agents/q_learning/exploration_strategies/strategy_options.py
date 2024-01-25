@@ -4,4 +4,5 @@ from enum import Enum
 class ExplorationStrategyOptions(Enum):
     """Enumerates all exploration strategies."""
 
-    epsilon_greedy = 0
+    not_applicable = 0
+    epsilon_greedy = 1

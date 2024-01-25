@@ -1,3 +1,9 @@
+from dataclasses import replace
+from multiprocessing import Process
+
+from git import Optional
+from typing_extensions import Self
+
 from src.controller.state_update_bridge import StateUpdateBridge
 from src.controller.user_action_bridge import (
     UserAction,
@@ -10,20 +16,38 @@ from src.model.learning_system.learning_system import LearningSystem
 class LearningSystemController(object):
     """Controller for managing learning systems."""
 
-    def __init__(
-        self,
-        system: LearningSystem,
-    ) -> None:
-        """Initialise the learning system controller.
-
-        Args:
-            system (LearningSystem): the learning system to control
-        """
-        self.system = system
-
+    def __init__(self) -> None:
+        """Initialise the learning system controller."""
+        self.system = LearningSystem()
         self.user_action_bridge = UserActionBridge()
         self.state_update_bridge = StateUpdateBridge()
         self.auto = False
+
+        self.model_process: Optional[Process] = None
+
+    def __enter__(self) -> Self:
+        """Enter the context manager.
+
+        the context manager is used for cleaning up processes gracefully.
+
+        Returns:
+            Self: the factory.
+        """
+        self.model_process = Process(target=self.model_mainloop, daemon=True)
+        self.model_process.start()
+        return self
+
+    def __exit__(self, exc_type, exc_value, exc_tb) -> None:
+        """Exit the context, clean up the resources.
+
+        Args:
+            exc_type (Any): Not used.
+            exc_value (Any): Not used.
+            exc_tb (Any): Not used.
+        """
+        self.user_action_bridge.submit_action(UserAction.end)
+        if self.model_process is not None:
+            self.model_process.join()
 
     def model_mainloop(
         self,
@@ -54,21 +78,23 @@ class LearningSystemController(object):
                 case UserActionMessage(action=UserAction.stop_auto):
                     self.auto = False
                 case UserActionMessage(action=UserAction.reset):
-                    self.system.reset_state()
+                    self.system.learning_instance.reset_state()
                     self.send_current_state()
                 case UserActionMessage(action=UserAction.fetch_current_state):
                     self.send_current_state()
                 case UserActionMessage(
                     action=UserAction.set_display_mode, payload=display_mode
                 ):
-                    self.system.set_display_mode(display_mode)
+                    self.system.update_options(
+                        replace(self.system.options, display_mode=display_mode)
+                    )
                     self.send_current_state()
                 case _:
                     raise RuntimeError("Unknown action performed.")
 
     def one_step(self):
         """Perform one step."""
-        self.system.perform_action()
+        self.system.learning_instance.perform_action()
         self.send_current_state()
 
     def send_current_state(self):

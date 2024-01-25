@@ -1,44 +1,31 @@
 from colorsys import hls_to_rgb
+from dataclasses import dataclass
 from typing import Tuple
 
 from PIL.Image import Image
 from PIL.ImageDraw import ImageDraw
 
-from src.model.learning_system.cell_configuration import CellConfiguration
+from src.model.learning_system.cell_configuration.cell_configuration import (
+    CellConfiguration,
+)
+from src.model.learning_system.global_options import GlobalOptions
 from src.view.grid_world_view_v2.display_state_v2.cell.cell_layout import (
     CellLayout,
 )
 from src.view.icons.load_icon import IconLoader, rgb_type
 
 
+@dataclass(slots=True, frozen=True)
 class BaseLayer(object):
     """Represents one layer of the cell's drawing."""
 
-    def __init__(  # Noqa : WPS211
-        self,
-        config: CellConfiguration,
-        canvas: Image,
-        drawing_context: ImageDraw,
-        bounding_box: Tuple[int, int, int, int],
-        cell_layout: CellLayout,
-    ) -> None:
-        """Initialise the layer.
-
-        Args:
-            config (CellConfiguration): the configuration to represent
-            canvas (Image): the canvas to draw on
-            drawing_context (ImageDraw): the drawing context of this canvas
-            bounding_box (Tuple[int, int, int, int]): the area of the canvas
-                this layer should be drawn in.
-            cell_layout (CellLayout): the layout of the entire cell.
-
-        """
-        self.config = config
-        self.canvas = canvas
-        self.drawing_context = drawing_context
-        self.bounding_box = bounding_box
-        self.cell_layout = cell_layout
-        self.icon_loader = IconLoader()
+    options: GlobalOptions
+    config: CellConfiguration
+    canvas: Image
+    drawing_context: ImageDraw
+    bounding_box: Tuple[int, int, int, int]
+    cell_layout: CellLayout
+    icon_loader = IconLoader()
 
     def draw(self):
         """Draw this layer to the canvas.

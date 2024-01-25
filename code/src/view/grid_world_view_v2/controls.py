@@ -7,7 +7,9 @@ from PySide6.QtWidgets import (
 )
 
 from src.controller.user_action_bridge import UserAction, UserActionBridge
-from src.model.learning_system.cell_configuration import DisplayMode
+from src.model.learning_system.cell_configuration.cell_configuration import (
+    DisplayMode,
+)
 from src.view.grid_world_view_v2.auto_speed_state_manager import (
     AutoSpeed,
     AutoStateManager,

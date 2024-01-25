@@ -1,6 +1,8 @@
 from typing import Tuple
 
-from src.model.learning_system.cell_configuration import DisplayMode
+from src.model.learning_system.cell_configuration.cell_configuration import (
+    DisplayMode,
+)
 from src.model.state.cell_entities import CellEntity
 from src.view.grid_world_view_v2.display_state_v2.cell.base_layer import (
     BaseLayer,
@@ -34,7 +36,7 @@ class BackgroundLayer(BaseLayer):
             Tuple[str, str]: inner and outer color
         """
         default_color = self.default_background_color
-        if self.config.display_mode is not DisplayMode.state_value:
+        if self.options.display_mode is not DisplayMode.state_value:
             return default_color, default_color
         cell_value_color = self.__cell_color()
 

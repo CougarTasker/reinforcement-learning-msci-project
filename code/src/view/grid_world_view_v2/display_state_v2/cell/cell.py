@@ -3,19 +3,15 @@ from typing import Tuple
 from PIL.Image import Image
 from PIL.ImageDraw import ImageDraw
 
-from src.model.learning_system.cell_configuration import CellConfiguration
-from src.view.grid_world_view_v2.display_state_v2.cell.arrow_layer import (
-    ArrowLayer,
+from src.model.learning_system.cell_configuration.cell_configuration import (
+    CellConfiguration,
 )
-from src.view.grid_world_view_v2.display_state_v2.cell.background_layer import (
-    BackgroundLayer,
-)
-from src.view.grid_world_view_v2.display_state_v2.cell.cell_layout import (
-    CellLayout,
-)
-from src.view.grid_world_view_v2.display_state_v2.cell.main_icon_layer import (
-    MainIconLayer,
-)
+from src.model.learning_system.global_options import GlobalOptions
+
+from .arrow_layer import ArrowLayer
+from .background_layer import BackgroundLayer
+from .cell_layout import CellLayout
+from .main_icon_layer import MainIconLayer
 
 
 class Cell(object):
@@ -23,6 +19,7 @@ class Cell(object):
 
     def __init__(
         self,
+        options: GlobalOptions,
         config: CellConfiguration,
         bounding_box: Tuple[int, int, int, int],
     ) -> None:
@@ -31,12 +28,15 @@ class Cell(object):
         displays the cell as a rounded rectangle with icons.
 
         Args:
+            options (GlobalOptions): the global configuration used in rendering
+                each cell.
             config (CellConfiguration): the configuration of how this cell
                 should present.
             bounding_box (Tuple[int, int, int, int]): the position and size of
                 this cell on the canvas.
         """
         self.config = config
+        self.options = options
         self.cell_layout = CellLayout(bounding_box)
 
     def draw(
@@ -51,6 +51,7 @@ class Cell(object):
             drawing_context (ImageDraw): the drawing context
         """
         BackgroundLayer(
+            self.options,
             self.config,
             canvas,
             drawing_context,
@@ -58,6 +59,7 @@ class Cell(object):
             self.cell_layout,
         ).draw()
         MainIconLayer(
+            self.options,
             self.config,
             canvas,
             drawing_context,
@@ -67,6 +69,7 @@ class Cell(object):
             self.cell_layout,
         ).draw()
         ArrowLayer(
+            self.options,
             self.config,
             canvas,
             drawing_context,

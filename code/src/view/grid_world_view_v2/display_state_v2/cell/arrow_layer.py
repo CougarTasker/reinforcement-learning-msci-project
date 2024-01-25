@@ -1,6 +1,6 @@
 from src.model.dynamics.actions import Action
 from src.model.dynamics.grid_world import GridWorld
-from src.model.learning_system.cell_configuration import (
+from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
     action_value_description,
 )
@@ -14,7 +14,7 @@ class ArrowLayer(BaseLayer):
 
     def draw(self):
         """Draw the arrow layer."""
-        match self.config.display_mode:
+        match self.options.display_mode:
             case DisplayMode.action_value_global:
                 self.__draw_specific_arrows(
                     self.config.action_values_normalised
