@@ -2047,9 +2047,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.view.grid_world_view_v2.controls.Controls.display_mode_changed" class="md-nav__link">
+  <a href="#src.view.grid_world_view_v2.controls.Controls.display_mode_toggled" class="md-nav__link">
     <span class="md-ellipsis">
-      display_mode_changed()
+      display_mode_toggled()
     </span>
   </a>
   
@@ -2541,9 +2541,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.view.grid_world_view_v2.controls.Controls.display_mode_changed" class="md-nav__link">
+  <a href="#src.view.grid_world_view_v2.controls.Controls.display_mode_toggled" class="md-nav__link">
     <span class="md-ellipsis">
-      display_mode_changed()
+      display_mode_toggled()
     </span>
   </a>
   
@@ -2628,7 +2628,13 @@
 
             <details class="quote">
               <summary>Source code in <code>src/view/grid_world_view_v2/controls.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 19</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
 <span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
@@ -2718,20 +2724,7 @@
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Controls</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">Controls</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Widget that contains the controls for interacting with the grid world.&quot;&quot;&quot;</span>
 
     <span class="n">display_mode_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -2740,6 +2733,12 @@
         <span class="s2">&quot;state value&quot;</span><span class="p">:</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">state_value</span><span class="p">,</span>
         <span class="s2">&quot;action value&quot;</span><span class="p">:</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">action_value_global</span><span class="p">,</span>
         <span class="s2">&quot;action value local&quot;</span><span class="p">:</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">action_value_local</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">auto_speed_options</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Manual&quot;</span><span class="p">:</span> <span class="n">AutoSpeed</span><span class="o">.</span><span class="n">manual</span><span class="p">,</span>
+        <span class="s2">&quot;Auto&quot;</span><span class="p">:</span> <span class="n">AutoSpeed</span><span class="o">.</span><span class="n">auto_local</span><span class="p">,</span>
+        <span class="s2">&quot;Fast&quot;</span><span class="p">:</span> <span class="n">AutoSpeed</span><span class="o">.</span><span class="n">auto_full</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -2783,18 +2782,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">get_progress_button_text</span><span class="p">()</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">auto_speed_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="n">AutoSpeed</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">auto_speed_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle when new speed is selected.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            speed (AutoSpeed): the new speed to operate.</span>
+<span class="sd">            option (str): the new speed to operate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+        <span class="n">auto_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="n">auto_speed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">progress_button</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">get_progress_button_text</span><span class="p">()</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">display_mode_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">display_mode_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;When the display mode option menu is selected.</span>
 
 <span class="sd">        Args:</span>
@@ -2808,7 +2808,7 @@
     <span class="k">def</span> <span class="nf">__add_display_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">:</span> <span class="n">QGridLayout</span><span class="p">):</span>
         <span class="n">display_mode</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
         <span class="n">display_mode</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_mode_options</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
-        <span class="n">display_mode</span><span class="o">.</span><span class="n">currentTextChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_mode_changed</span><span class="p">)</span>
+        <span class="n">display_mode</span><span class="o">.</span><span class="n">currentTextChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">display_mode_toggled</span><span class="p">)</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">display_mode</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__add_reset_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">:</span> <span class="n">QGridLayout</span><span class="p">):</span>
@@ -2817,24 +2817,10 @@
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">reset_button</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__add_auto_speed_toggles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">:</span> <span class="n">QGridLayout</span><span class="p">):</span>
-        <span class="n">manual_mode</span> <span class="o">=</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="s2">&quot;Manual&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="n">manual_mode</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">manual_mode</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-            <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_toggled</span><span class="p">(</span><span class="n">AutoSpeed</span><span class="o">.</span><span class="n">manual</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">manual_mode</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-        <span class="n">auto_mode</span> <span class="o">=</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="s2">&quot;Auto&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="n">auto_mode</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-            <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_toggled</span><span class="p">(</span><span class="n">AutoSpeed</span><span class="o">.</span><span class="n">auto_local</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">auto_mode</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-        <span class="n">fast_mode</span> <span class="o">=</span> <span class="n">QRadioButton</span><span class="p">(</span><span class="s2">&quot;Fast&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="n">fast_mode</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-            <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_toggled</span><span class="p">(</span><span class="n">AutoSpeed</span><span class="o">.</span><span class="n">auto_full</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">fast_mode</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">auto_speed</span> <span class="o">=</span> <span class="n">QComboBox</span><span class="p">()</span>
+        <span class="n">auto_speed</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_options</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="n">auto_speed</span><span class="o">.</span><span class="n">currentTextChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_toggled</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">auto_speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -2983,7 +2969,7 @@ controller of the users actions.</p>
 
 
 <h3 id="src.view.grid_world_view_v2.controls.Controls.auto_speed_toggled" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">auto_speed_toggled</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">auto_speed_toggled</span><span class="p">(</span><span class="n">option</span><span class="p">)</span></code>
 
 </h3>
 
@@ -3006,9 +2992,9 @@ controller of the users actions.</p>
     </thead>
     <tbody>
         <tr>
-          <td><code>speed</code></td>
+          <td><code>option</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="src.view.grid_world_view_v2.auto_speed_state_manager.AutoSpeed" href="../auto_speed_state_manager/#src.view.grid_world_view_v2.auto_speed_state_manager.AutoSpeed">AutoSpeed</a></code>
+                <code>str</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -3033,13 +3019,15 @@ controller of the users actions.</p>
 <span class="normal">77</span>
 <span class="normal">78</span>
 <span class="normal">79</span>
-<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">auto_speed_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">:</span> <span class="n">AutoSpeed</span><span class="p">):</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">auto_speed_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle when new speed is selected.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        speed (AutoSpeed): the new speed to operate.</span>
+<span class="sd">        option (str): the new speed to operate.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="n">speed</span><span class="p">)</span>
+    <span class="n">auto_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_speed_options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="n">auto_speed</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">progress_button</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">auto_mode_manger</span><span class="o">.</span><span class="n">get_progress_button_text</span><span class="p">()</span>
     <span class="p">)</span>
@@ -3055,8 +3043,8 @@ controller of the users actions.</p>
 
 
 
-<h3 id="src.view.grid_world_view_v2.controls.Controls.display_mode_changed" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">display_mode_changed</span><span class="p">(</span><span class="n">option</span><span class="p">)</span></code>
+<h3 id="src.view.grid_world_view_v2.controls.Controls.display_mode_toggled" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">display_mode_toggled</span><span class="p">(</span><span class="n">option</span><span class="p">)</span></code>
 
 </h3>
 
@@ -3097,8 +3085,7 @@ controller of the users actions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/grid_world_view_v2/controls.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
-<span class="normal">83</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
@@ -3106,7 +3093,8 @@ controller of the users actions.</p>
 <span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span>
-<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">display_mode_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">display_mode_toggled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;When the display mode option menu is selected.</span>
 
 <span class="sd">    Args:</span>

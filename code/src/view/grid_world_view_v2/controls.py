@@ -1,10 +1,4 @@
-from PySide6.QtWidgets import (
-    QComboBox,
-    QGridLayout,
-    QPushButton,
-    QRadioButton,
-    QWidget,
-)
+from PySide6.QtWidgets import QComboBox, QGridLayout, QPushButton, QWidget
 
 from src.controller.user_action_bridge import UserAction, UserActionBridge
 from src.model.learning_system.cell_configuration.cell_configuration import (
@@ -25,6 +19,12 @@ class Controls(QWidget):
         "state value": DisplayMode.state_value,
         "action value": DisplayMode.action_value_global,
         "action value local": DisplayMode.action_value_local,
+    }
+
+    auto_speed_options = {
+        "Manual": AutoSpeed.manual,
+        "Auto": AutoSpeed.auto_local,
+        "Fast": AutoSpeed.auto_full,
     }
 
     def __init__(
@@ -68,18 +68,19 @@ class Controls(QWidget):
             self.auto_mode_manger.get_progress_button_text()
         )
 
-    def auto_speed_toggled(self, speed: AutoSpeed):
+    def auto_speed_toggled(self, option: str):
         """Handle when new speed is selected.
 
         Args:
-            speed (AutoSpeed): the new speed to operate.
+            option (str): the new speed to operate.
         """
-        self.auto_mode_manger.set_speed(speed)
+        auto_speed = self.auto_speed_options[option]
+        self.auto_mode_manger.set_speed(auto_speed)
         self.progress_button.setText(
             self.auto_mode_manger.get_progress_button_text()
         )
 
-    def display_mode_changed(self, option: str):
+    def display_mode_toggled(self, option: str):
         """When the display mode option menu is selected.
 
         Args:
@@ -93,7 +94,7 @@ class Controls(QWidget):
     def __add_display_mode(self, layout: QGridLayout):
         display_mode = QComboBox()
         display_mode.addItems(list(self.display_mode_options.keys()))
-        display_mode.currentTextChanged.connect(self.display_mode_changed)
+        display_mode.currentTextChanged.connect(self.display_mode_toggled)
         layout.addWidget(display_mode, 0, 0)
 
     def __add_reset_button(self, layout: QGridLayout):
@@ -102,21 +103,7 @@ class Controls(QWidget):
         layout.addWidget(reset_button, 0, 1)
 
     def __add_auto_speed_toggles(self, layout: QGridLayout):
-        manual_mode = QRadioButton("Manual", self)
-        manual_mode.setChecked(True)
-        manual_mode.clicked.connect(
-            lambda: self.auto_speed_toggled(AutoSpeed.manual)
-        )
-        layout.addWidget(manual_mode, 0, 2)
-
-        auto_mode = QRadioButton("Auto", self)
-        auto_mode.clicked.connect(
-            lambda: self.auto_speed_toggled(AutoSpeed.auto_local)
-        )
-        layout.addWidget(auto_mode, 1, 2)
-
-        fast_mode = QRadioButton("Fast", self)
-        fast_mode.clicked.connect(
-            lambda: self.auto_speed_toggled(AutoSpeed.auto_full)
-        )
-        layout.addWidget(fast_mode, 2, 2)
+        auto_speed = QComboBox()
+        auto_speed.addItems(list(self.auto_speed_options.keys()))
+        auto_speed.currentTextChanged.connect(self.auto_speed_toggled)
+        layout.addWidget(auto_speed, 0, 2)
