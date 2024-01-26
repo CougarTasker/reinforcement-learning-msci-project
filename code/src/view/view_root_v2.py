@@ -42,6 +42,7 @@ class ReinforcementLearningApp(QWidget):
         self.display_state = DisplayState(self)
         layout.addWidget(self.display_state, 1, 0)
         self.publisher.subscribe(self.display_state)
+        layout.setRowStretch(1, 1)
 
         self.interaction_controls = InteractionControls(self, control_factory)
         layout.addWidget(self.interaction_controls, 2, 0)

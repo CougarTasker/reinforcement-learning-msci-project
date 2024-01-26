@@ -52,7 +52,9 @@ class CustomComboWidget(QComboBox, BaseStateObserver):
 
         self.responsive_options_handler: Optional[handler_type] = None
 
-        self.currentTextChanged.connect(self.__update_handler)
+        self.currentTextChanged.connect(self.update_handler)
+
+        self.reset_guard = False
 
     def set_responsive_options_handler(
         self, responsive_options_handler: handler_type
@@ -76,18 +78,23 @@ class CustomComboWidget(QComboBox, BaseStateObserver):
             combo_state = self.responsive_options_handler(state)
             self.__set_state(combo_state)
 
-    def __update_handler(self, text: str) -> None:
+    def update_handler(self, text: str) -> None:
         """Handle update, send the appropriate request to the user.
 
         Args:
             text (str): the option that has been selected.
         """
+        if self.reset_guard:
+            return
         self.controller.user_action_bridge.submit_action(
             self.action, self.state.options[text]
         )
 
     def __set_state(self, state: ComboWidgetState):
+        self.reset_guard = True
         self.state = state
+        self.clear()
         self.addItems(list(state.options.keys()))
         self.setCurrentText(state.selected_option)
         self.setEnabled(state.enabled)
+        self.reset_guard = False

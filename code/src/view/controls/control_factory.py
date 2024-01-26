@@ -63,6 +63,33 @@ class ControlFactory(object):
             self.state_update_publisher.subscribe(widget)
         return widget
 
+    def create_combo_state(
+        self,
+        parent: QWidget,
+        state: ComboWidgetState,
+        action: UserAction,
+        responsive_options_handler: Optional[handler_type] = None,
+    ) -> CustomComboWidget:
+        """Create combo box widget with given state.
+
+        Args:
+            parent (QWidget): the parent widget this widget should be rendered
+                into.
+            state (ComboWidgetState): the initial state of the widget
+            action (UserAction): The user action this combo box corresponds to
+            responsive_options_handler (Optional[handler_type]): an optional
+                handler to make this combo box responsive to state updates.
+
+        Returns:
+            CustomComboWidget: the connected widget.
+        """
+        widget = CustomComboWidget(parent, state, action, self.controller)
+        if responsive_options_handler is not None:
+            widget.set_responsive_options_handler(responsive_options_handler)
+            self.state_update_publisher.subscribe(widget)
+
+        return widget
+
     def create_combo(
         self,
         parent: QWidget,
@@ -70,7 +97,10 @@ class ControlFactory(object):
         action: UserAction,
         responsive_options_handler: Optional[handler_type] = None,
     ) -> CustomComboWidget:
-        """Create combo box widget.
+        """Create combo box widget with options.
+
+        The first option will be selected as the default. and the widget will be
+        enabled.
 
         Args:
             parent (QWidget): the parent widget this widget should be rendered
@@ -86,9 +116,6 @@ class ControlFactory(object):
         first_option = list(options)[0]
 
         state = ComboWidgetState(options, first_option, enabled=True)
-        widget = CustomComboWidget(parent, state, action, self.controller)
-        if responsive_options_handler is not None:
-            widget.set_responsive_options_handler(responsive_options_handler)
-            self.state_update_publisher.subscribe(widget)
-
-        return widget
+        return self.create_combo_state(
+            parent, state, action, responsive_options_handler
+        )

@@ -5,7 +5,11 @@ from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
 from src.model.learning_system.options import AgentOptions, DynamicsOptions
+from src.model.learning_system.state_description.state_description import (
+    StateDescription,
+)
 from src.view.controls.control_factory import ControlFactory
+from src.view.controls.custom_combo_widget import ComboWidgetState
 
 
 class OptionControls(QGroupBox):
@@ -16,8 +20,22 @@ class OptionControls(QGroupBox):
         "Q-Learning": AgentOptions.q_learning,
     }
 
-    agent_strategy_options = {
-        "Epsilon-greedy": ExplorationStrategyOptions.epsilon_greedy
+    not_applicable = ComboWidgetState(
+        {"Not Applicable": ExplorationStrategyOptions.not_applicable},
+        "Not Applicable",
+        enabled=False,
+    )
+
+    q_learning = ComboWidgetState(
+        {"Epsilon-greedy": ExplorationStrategyOptions.epsilon_greedy},
+        "Epsilon-greedy",
+        enabled=True,
+    )
+
+    agent_strategy_states = {
+        AgentOptions.value_iteration: not_applicable,
+        AgentOptions.value_iteration_optimised: not_applicable,
+        AgentOptions.q_learning: q_learning,
     }
 
     dynamics_options = {
@@ -47,8 +65,11 @@ class OptionControls(QGroupBox):
         )
         layout.addWidget(agent, 0, 0)
 
-        agent_strategy = control_factory.create_combo(
-            self, self.agent_strategy_options, UserAction.set_agent_strategy
+        agent_strategy = control_factory.create_combo_state(
+            self,
+            self.agent_strategy_states[AgentOptions.value_iteration],
+            UserAction.set_agent_strategy,
+            self.__strategy_combo_responsive_options,
         )
         layout.addWidget(agent_strategy, 0, 1)
 
@@ -61,3 +82,8 @@ class OptionControls(QGroupBox):
             self, self.reset_button_text, UserAction.reset_system
         )
         layout.addWidget(reset, 0, 3)
+
+    def __strategy_combo_responsive_options(
+        self, state: StateDescription
+    ) -> ComboWidgetState:
+        return self.agent_strategy_states[state.global_options.agent]

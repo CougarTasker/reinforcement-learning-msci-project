@@ -18,7 +18,7 @@ class LearningInstance(BaseEntityDecorator):
                 learning instance.
         """
         super().__init__(entities)
-        self.update_entities(entities)
+        self._current_state: Optional[int] = None
 
     @override
     def update_entities(self, entities: TopLevelEntities) -> None:
@@ -27,8 +27,11 @@ class LearningInstance(BaseEntityDecorator):
         Args:
             entities (TopLevelEntities): the new entities to use.
         """
+        different_agent = self.entities.agent is not entities.agent
+        different_dynamics = self.entities.dynamics is not entities.dynamics
+        if different_agent or different_dynamics:
+            self._current_state = None
         super().update_entities(entities)
-        self._current_state: Optional[int] = None
 
     def get_current_state(self) -> int:
         """Get the current state ID.
