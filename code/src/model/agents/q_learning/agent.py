@@ -6,7 +6,7 @@ from .exploration_strategies.base_strategy import BaseExplorationStrategy
 from .exploration_strategies.epsilon_greedy_strategy import (
     EpsilonGreedyStrategy,
 )
-from .exploration_strategies.strategy_options import ExplorationStrategyOptions
+from .exploration_strategies.options import ExplorationStrategyOptions
 from .reward_replay_queue import RewardReplayQueue
 
 

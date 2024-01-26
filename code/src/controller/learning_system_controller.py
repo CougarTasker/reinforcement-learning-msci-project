@@ -77,7 +77,7 @@ class LearningSystemController(object):
                     self.auto = True
                 case UserActionMessage(action=UserAction.stop_auto):
                     self.auto = False
-                case UserActionMessage(action=UserAction.reset):
+                case UserActionMessage(action=UserAction.reset_state):
                     self.system.learning_instance.reset_state()
                     self.send_current_state()
                 case UserActionMessage(action=UserAction.fetch_current_state):
@@ -88,6 +88,33 @@ class LearningSystemController(object):
                     self.system.update_options(
                         replace(self.system.options, display_mode=display_mode)
                     )
+                    self.send_current_state()
+
+                case UserActionMessage(
+                    action=UserAction.set_agent, payload=agent
+                ):
+                    self.system.update_options(
+                        replace(self.system.options, agent=agent)
+                    )
+                    self.send_current_state()
+                case UserActionMessage(
+                    action=UserAction.set_dynamics, payload=dynamics
+                ):
+                    self.system.update_options(
+                        replace(self.system.options, dynamics=dynamics)
+                    )
+                    self.send_current_state()
+                case UserActionMessage(
+                    action=UserAction.set_agent_strategy, payload=agent_strategy
+                ):
+                    self.system.update_options(
+                        replace(
+                            self.system.options, agent_strategy=agent_strategy
+                        )
+                    )
+                    self.send_current_state()
+                case UserActionMessage(action=UserAction.reset_system):
+                    self.system.reset_top_level()
                     self.send_current_state()
                 case _:
                     raise RuntimeError("Unknown action performed.")

@@ -1,6 +1,13 @@
-from PySide6.QtWidgets import QComboBox, QGridLayout, QPushButton, QWidget
+from PySide6.QtWidgets import (
+    QComboBox,
+    QGridLayout,
+    QGroupBox,
+    QPushButton,
+    QWidget,
+)
 
-from src.controller.user_action_bridge import UserAction, UserActionBridge
+from src.controller.learning_system_controller import LearningSystemController
+from src.controller.user_action_bridge import UserAction
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
@@ -10,7 +17,7 @@ from src.view.grid_world_view_v2.auto_speed_state_manager import (
 )
 
 
-class Controls(QWidget):
+class InteractionControls(QGroupBox):
     """Widget that contains the controls for interacting with the grid world."""
 
     display_mode_options = {
@@ -27,19 +34,21 @@ class Controls(QWidget):
         "Fast": AutoSpeed.auto_full,
     }
 
+    group_title = "Simulation Interaction Controls"
+
     def __init__(
-        self, parent: QWidget, action_bridge: UserActionBridge
+        self, parent: QWidget, controller: LearningSystemController
     ) -> None:
         """Initialise the controls.
 
         Args:
             parent (QWidget): the parent of this widget.
-            action_bridge (UserActionBridge): the channel to notify the
+            controller (LearningSystemController): the channel to notify the
                 controller of the users actions.
         """
-        super().__init__(parent)
+        super().__init__(self.group_title, parent)
 
-        self.action_bridge = action_bridge
+        self.controller = controller
 
         layout = QGridLayout(self)
 
@@ -49,7 +58,7 @@ class Controls(QWidget):
 
         self.__add_auto_speed_toggles(layout)
 
-        self.auto_mode_manger = AutoStateManager(action_bridge)
+        self.auto_mode_manger = AutoStateManager(controller)
 
         self.progress_button = QPushButton(
             self.auto_mode_manger.get_progress_button_text()
@@ -59,7 +68,7 @@ class Controls(QWidget):
 
     def reset_button_pressed(self):
         """When the reset button is pressed. reset the state."""
-        self.action_bridge.submit_action(UserAction.reset)
+        self.controller.user_action_bridge.submit_action(UserAction.reset_state)
 
     def progress_button_pressed(self):
         """When the next button is presses step the state forward."""
@@ -87,7 +96,7 @@ class Controls(QWidget):
             option (str): the mode selected
         """
         display_mode = self.display_mode_options[option]
-        self.action_bridge.submit_action(
+        self.controller.user_action_bridge.submit_action(
             UserAction.set_display_mode, display_mode
         )
 

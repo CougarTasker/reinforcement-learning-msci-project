@@ -10,10 +10,14 @@ class UserAction(Enum):
     one_step = 0
     start_auto = 1
     stop_auto = 2
-    reset = 3
+    reset_state = 3
     fetch_current_state = 4
     set_display_mode = 5
-    end = 6
+    set_agent = 6
+    set_dynamics = 7
+    set_agent_strategy = 8
+    reset_system = 9
+    end = 10
 
 
 class UserActionMessage(object):

@@ -9,7 +9,7 @@ from src.model.learning_system.state_description.state_description import (
 )
 from src.model.learning_system.top_entities import TopLevelEntities
 
-from ..agents.q_learning.exploration_strategies.strategy_options import (
+from ..agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
 from .state_description.state_description_factory import StateDescriptionFactory
@@ -47,5 +47,11 @@ class LearningSystem(object):
         """
         self.options = options
         self.entities = self.entities.update_options(options)
+        self.learning_instance.update_entities(self.entities)
+        self.state_description_factory.update_entities(self.entities)
+
+    def reset_top_level(self):
+        """Reset the toplevel entities. wipes all learning information."""
+        self.entities = TopLevelEntities.create_new_entities(self.options)
         self.learning_instance.update_entities(self.entities)
         self.state_description_factory.update_entities(self.entities)

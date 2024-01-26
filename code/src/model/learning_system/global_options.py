@@ -13,7 +13,7 @@ from src.model.learning_system.cell_configuration.cell_configuration import (
 )
 from src.model.learning_system.options import AgentOptions, DynamicsOptions
 
-from ..agents.q_learning.exploration_strategies.strategy_options import (
+from ..agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
 from ..dynamics.collection_dynamics import CollectionDynamics

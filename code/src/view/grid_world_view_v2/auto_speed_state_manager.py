@@ -2,7 +2,8 @@ from enum import Enum
 
 from PySide6.QtCore import QTimer
 
-from src.controller.user_action_bridge import UserAction, UserActionBridge
+from src.controller.learning_system_controller import LearningSystemController
+from src.controller.user_action_bridge import UserAction
 
 
 class AutoSpeed(Enum):
@@ -32,20 +33,20 @@ class AutoStateManager(object):
         ProgressButtonMode.restart: "Start",
     }
 
-    def __init__(self, action_bridge: UserActionBridge) -> None:
+    def __init__(self, controller: LearningSystemController) -> None:
         """Initialise the state manager.
 
         initially in the manual mode
 
         Args:
-            action_bridge (UserActionBridge): update the controller with the
-            user's action.
+            controller (LearningSystemController): update the controller with
+            the user's action.
         """
         self.current_speed = AutoSpeed.manual
         self.paused = False
         self.auto_timer = QTimer()
         self.auto_timer.timeout.connect(self.__one_step)
-        self.action_bridge = action_bridge
+        self.controller = controller
 
     def set_speed(self, speed: AutoSpeed):
         """Set the current speed.
@@ -99,18 +100,22 @@ class AutoStateManager(object):
         return ProgressButtonMode.pause
 
     def __one_step(self):
-        self.action_bridge.submit_action(UserAction.one_step)
+        self.controller.user_action_bridge.submit_action(UserAction.one_step)
 
     def __stop_mode(self, mode: AutoSpeed):
         match mode:
             case AutoSpeed.auto_local:
                 self.auto_timer.stop()
             case AutoSpeed.auto_full:
-                self.action_bridge.submit_action(UserAction.stop_auto)
+                self.controller.user_action_bridge.submit_action(
+                    UserAction.stop_auto
+                )
 
     def __start_mode(self, mode: AutoSpeed):
         match mode:
             case AutoSpeed.auto_local:
                 self.auto_timer.start(self.auto_speed_ms)
             case AutoSpeed.auto_full:
-                self.action_bridge.submit_action(UserAction.start_auto)
+                self.controller.user_action_bridge.submit_action(
+                    UserAction.start_auto
+                )

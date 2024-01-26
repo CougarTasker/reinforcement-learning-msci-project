@@ -5,7 +5,10 @@ from qdarktheme import setup_theme
 from src.controller.learning_system_controller import LearningSystemController
 from src.model.config.reader import ConfigReader
 from src.model.learning_system.options import AgentOptions
+from src.view.controls.control_factory import ControlFactory
 from src.view.grid_world_view_v2.grid_world_v2 import GridWorld
+from src.view.option_controls import OptionControls
+from src.view.state_publisher import StatePublisher
 
 
 class ReinforcementLearningApp(QWidget):
@@ -27,8 +30,17 @@ class ReinforcementLearningApp(QWidget):
         self.setWindowTitle("RHUL MSci FYP - Reinforcement Learning App")
         self.setup_config()
 
+        self.publisher = StatePublisher(self, controller)
         layout = QGridLayout(self)
-        layout.addWidget(GridWorld(None, controller))
+
+        control_factory = ControlFactory(controller, self.publisher)
+
+        self.controls = OptionControls(self, control_factory)
+        layout.addWidget(self.controls, 0, 0)
+
+        self.grid_world = GridWorld(self, controller)
+        layout.addWidget(self.grid_world, 1, 0)
+        self.publisher.subscribe(self.grid_world)
 
     def setup_config(self):
         """Set app properties from config."""

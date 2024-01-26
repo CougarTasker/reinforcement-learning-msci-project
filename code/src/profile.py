@@ -8,7 +8,7 @@ from PySide6.QtWidgets import QApplication
 
 from src.controller.learning_system_controller import LearningSystemController
 from src.controller.user_action_bridge import UserAction
-from src.model.agents.q_learning.exploration_strategies.strategy_options import (
+from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
 from src.model.learning_system.cell_configuration.cell_configuration import (

@@ -1,51 +1,50 @@
 from typing import Optional
 
-from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QGridLayout, QWidget
+from typing_extensions import override
 
 from src.controller.learning_system_controller import LearningSystemController
-from src.controller.user_action_bridge import UserAction
-from src.view.grid_world_view_v2.controls import Controls
+from src.model.learning_system.state_description.state_description import (
+    StateDescription,
+)
 from src.view.grid_world_view_v2.display_state_v2.display import DisplayState
+from src.view.grid_world_view_v2.interaction_controls import InteractionControls
+from src.view.state_publisher import BaseStateObserver
 
 
-class GridWorld(QWidget):
+class GridWorld(QWidget, BaseStateObserver):
     """This component combines a display with its controls.
 
     this widget represents a complete interface grid based agents.
     """
 
     def __init__(
-        self, parent: Optional[QWidget], system: LearningSystemController
+        self, parent: Optional[QWidget], controller: LearningSystemController
     ) -> None:
         """Initialise the grid world agent.
 
         Args:
             parent (Optional[QWidget]): the parent widget this view should be
                 mounted within.
-            system (LearningSystemController): the controller for handling the
-                user's interactions.
+            controller (LearningSystemController): Notify this controller when
+                the user selects controls.
         """
         super().__init__(parent)
-        self.update_bridge = system.state_update_bridge
-        self.action_bridge = system.user_action_bridge
         layout = QGridLayout(self)
 
         self.display = DisplayState(self)
         layout.addWidget(self.display, 0, 0)
         layout.setRowStretch(0, 1)
 
-        self.controls = Controls(self, self.action_bridge)
+        self.controls = InteractionControls(self, controller)
         layout.addWidget(self.controls, 1, 0)
 
-        timer = QTimer(self)
-        timer.timeout.connect(self.check_for_work)
-        timer.start(1)
+    @override
+    def state_updated(self, state: StateDescription):
+        """Handle state update events.
 
-        self.action_bridge.submit_action(UserAction.fetch_current_state)
+        Args:
+            state (StateDescription): the new state
 
-    def check_for_work(self):
-        """Check if any updates to the UI are requested."""
-        state = self.update_bridge.get_latest_state()
-        if state is not None:
-            self.display.set_state(state)
+        """
+        self.display.set_state(state)
