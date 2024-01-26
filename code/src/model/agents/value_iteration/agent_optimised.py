@@ -56,9 +56,9 @@ def compute_value_table(  # noqa: WPS211
         lookup_table (numpy_int): maps state and actions to observed transitions
         next_state (numpy_int): the following state after some state and action
         expected_reward (numpy_float): the average reward after completing some
-        action.
+            action.
         frequency (numpy_float): The relative frequency of this transition
-        compared to others under the same initial state and action.
+            compared to others under the same initial state and action.
 
     Returns:
         value_table_type: the value table for the dynamics
@@ -98,15 +98,15 @@ def compute_updated_value(  # noqa: WPS211
 
     Args:
         value_table (value_table_type): our current expectation of value in
-        future states to base our estimate.
+            future states to base our estimate.
         state (int): the state to calculate the value for.
         discount_rate (float): The rate to discount future rewards
         lookup_table (numpy_int): maps state and actions to observed transitions
         next_state (numpy_int): the following state after some state and action
         expected_reward (numpy_float): the average reward after completing some
-        action.
+            action.
         frequency (numpy_float): The relative frequency of this transition
-        compared to others under the same initial state and action.
+            compared to others under the same initial state and action.
 
 
     Returns:

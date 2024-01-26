@@ -21,7 +21,7 @@ class BaseAgent(object):
 
         Raises:
             NotImplementedError: If this method has not been overridden by
-            concrete agent.
+                concrete agent.
 
         Returns:
             Action: the action to take in this state
@@ -46,7 +46,7 @@ class BaseAgent(object):
 
         Raises:
             NotImplementedError: If this method has not been overridden by
-            concrete agent.
+                concrete agent.
         """
         self.__throw_not_implemented()
 
@@ -58,7 +58,7 @@ class BaseAgent(object):
 
         Raises:
             NotImplementedError: If this method has not been overridden by
-            concrete agent.
+                concrete agent.
 
         Returns:
             float: the agents interpretation of the value of this state
@@ -77,7 +77,7 @@ class BaseAgent(object):
 
         Raises:
             NotImplementedError: If this method has not been overridden by
-            concrete agent.
+                concrete agent.
 
         Returns:
             float: the agents interpretation of the value of this state and

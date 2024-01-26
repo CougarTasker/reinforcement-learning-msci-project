@@ -27,7 +27,7 @@ class ValueIterationAgent(BaseAgent):
         Args:
             config (AgentConfig): the configuration for the agent.
             dynamics (BaseDynamics): the dynamics function used to build the
-            value table and pick optimal actions
+                value table and pick optimal actions
         """
         super().__init__(config)
         self.dynamics = dynamics
@@ -69,10 +69,10 @@ class ValueIterationAgent(BaseAgent):
         stopping_epsilon = self.stopping_epsilon
         maximum_epsilon: float = 1
         while maximum_epsilon > stopping_epsilon:
-            maximum_epsilon = 0
+            maximum_epsilon = float(0)
             for state in state_list:
                 new_value = self.compute_updated_value(value_table, state)
-                epsilon = abs(value_table[state] - new_value)
+                epsilon = abs(float(value_table[state]) - new_value)
                 value_table[state] = new_value
                 maximum_epsilon = max(epsilon, maximum_epsilon)
         return value_table
@@ -86,7 +86,7 @@ class ValueIterationAgent(BaseAgent):
 
         Args:
             value_table (value_table_type): our current expectation of value in
-            future states to base our estimate.
+                future states to base our estimate.
             state (int): the state to calculate the value for.
 
 
@@ -114,9 +114,9 @@ class ValueIterationAgent(BaseAgent):
 
         Args:
             distribution (distribution_result): the distribution of
-            results to weight the rewards
+                results to weight the rewards
             value_table (value_table_type): our current expectation of value in
-            future states to base our estimate.
+                future states to base our estimate.
 
         Returns:
             float: the expected value for this state and action
@@ -129,7 +129,7 @@ class ValueIterationAgent(BaseAgent):
             )
         return expected_value
 
-    def get_state_action_value(self, state: int, action: Action):
+    def get_state_action_value(self, state: int, action: Action) -> float:
         """Compute the expected action-value of a given state.
 
         Args:

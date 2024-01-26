@@ -1,0 +1,416 @@
+\documentclass[]{final_report}
+\usepackage{graphicx}
+\graphicspath{ {./images/}{../../media/images} }
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{dirtytalk}
+\usepackage{calligra}
+\usepackage{subcaption}
+\usepackage{float}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Input project details
+\def\studentname{Cougar Tasker}
+\def\reportyear{2023-24}
+\def\projecttitle{Resourceful Robots}
+\def\supervisorname{Dr. Anand Subramoney}
+\def\degree{MSci (Hons) in Computer Science (Artificial Intelligence)}
+\def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
+\def\finalOrInterim{Interim Report} % indicate if this document is your Final Report or Interim Report
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Declaration
+
+\chapter*{Declaration}
+
+This report has been prepared on the basis of my own work. Where other published and unpublished source materials have been used, these have been acknowledged.
+
+\vskip3em
+
+Word Count: 
+
+\vskip3em
+
+Student Name: \studentname
+
+\vskip3em
+
+Date of Submission: 08/12/2023
+
+\vskip3em
+
+Signature: {\calligra \LARGE \studentname}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+\tableofcontents\pdfbookmark[0]{Table of Contents}{toc}\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Your Abstract here
+
+\begin{abstract}
+
+  To complete many objectives robotic agents need to adapt and learn new environments. This presents a problem for traditional supervised learning approaches that operate under the (IID) assumption\cite{bagnell2005robust}, training data may not apply to new environments. This report investigates reinforcement learning (RL) techniques as an alternative for this class of robotics. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent decides on the consequences of their actions. this is unlike supervised learning; there is no need for training in RL the agent will continuously learn from their successes and failures. Although RL does not need training data it is also unlike unsupervised learning, since RL agents learn to achieve more reward from within the system rather than observing underlying patterns.
+  
+  These unique benefits of reinforcement learning make this field applicable to many real-world problems. RL is built upon a strong mathematical foundation that allows us to make strong guarantees about solutions in the reinforcement learning domain. Furthermore, RL spans widely uniting together many important and diverse areas of study such as Economics, Optimisation, Game Theory, robotics and Cognitive Science.
+  
+  It follows that the primary goal of this project is to understand and implement reinforcement learning. As this project develops the secondary aim is to frame these solutions from the perspective of autonomous robotic agents to aid in decision-making. This robotics background fits well with this project's other requirements: such as implementing a grid world environment and Q-learning agents. Resource-gathering robots from autonomous vacuum cleaners to industrial warehouse robots can be modelled in these grid world environments and this project aims to create reinforcement learning agents that are successful in these environments. Although the project is not limited to these technologies we will also evaluate more advanced techniques such as deep reinforcement learning agents and diverse RL environments from the gymnasium library.
+  
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Introduction
+% \chapter{Introduction}
+
+% \section{The Challenge}
+
+\section{Aims and Objectives}
+
+
+\begin{itemize}
+  \item Efficient Navigation: The agent must autonomously navigate a grid world while making decisions to optimise rewards. The robot should learn to prioritise efficient paths.
+  \item Balancing Constraints: The agent must balance collecting resources with constraints such as energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
+  \item General Approach: The agent must not use any environment-specific techniques. It should learn from and function in any Markov environment.
+  \item Deep Reinforcement Learning: The program should integrate deep neural networks (DNN) with Q-learning.
+  \item Visualisation: The program should provide a GUI that visualises the operation of these agents interactively.
+\end{itemize}
+
+
+\section{Motivation}
+
+My inspiration for studying for this degree, specialising in artificial intelligence, comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
+
+What is unique about this resource-gathering robot project is its structured progression of complexity, Starting from fundamental concepts and culminating in advanced techniques. This gradient makes the complex nature of reinforcement learning more approachable than it may be in industry. 
+
+This project interests me because of its generality and applicability to many different scenarios. Resource-gathering has the potential to incorporate many real-world constraints like energy, visibility and obstacles. I would like to see how this impacts different exploration strategies.
+
+Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. It is clear that AI is a clear focus for most companies, Ransbotham et al. said: 
+\begin{quote}
+  Almost 85\% believe AI will allow their companies to obtain or sustain a competitive advantage \cite{ransbotham2017reshaping}
+\end{quote}
+
+Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
+
+
+% \section{Literature Survey}
+
+\chapter{Software Engineering}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{state_value}
+    \caption[width=0.5\linewidth]{\label{fig:screenshot:state-value-table} The V (state-value) table}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{action_value}
+    \caption[width=0.5\linewidth]{\label{fig:screenshot:action-value-table} The Q (action-value) table}
+  \end{subfigure}
+  \caption{Two of the application's visualisations}
+  \label{fig:app-ui}
+\end{figure}
+
+\section{System Design}
+
+This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have moved the bulk of the computation onto libraries such as Numpy, Numba and Pillow. 
+
+The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. Due to the nature of the GUI framework, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view.
+
+The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application this is achieved by adhering to software engineering principles \cite{softwareEngineringPrinciples} and using software design patterns where applicable.
+
+\pagebreak
+\section{Workflow}
+
+
+All aspects of this project are stored under the Git version control system, and changes made on this project are grouped into small units called commits. Each commit belongs to a branch and has a message summarising the changes. Conventional commits \cite{conventionalCommitsOnline} is a standard for commit messages. In this project I have followed this standard because it keeps commit message consistent and enables the use of tools such as automated change log generation and versioning. As this project has a single author I have chosen to use branches to group together related work, instead of following a specific branching strategy. However like most branching strategies the main branch represents the project after each stage of work is completed and should always be in a working state. 
+
+One key part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes firstly the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code ensuring 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command and most editors also integrate docstrings so they are accessible during development. Importantly this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date\cite{pythonAutoDoc} and covers all of the code. 
+
+Testing is integral to this project, as part of my workflow I write unit tests. Unit tests are pieces of code that perform validation and verification parts of the main application. A unit testing framework has been configured to run these tests and collate the results. All tests must pass before each commit can be made this means that regressions are spotted quickly.These tests are also integrated into the IDE providing feedback and easing debugging.  While testing can be valuable it can be costly, Daka et al found developers spent a substantial time writing tests \cite{unitTestingSurvey}. The returns from testing can be especially low for trivial code that can take several times longer to test than create. For this reason I have limited tests to all important areas or complex areas of the program.  
+
+The development environment is the system of programs where this workflow takes place. This project is configured to work well with a particular Integrated development environment (IDE), for instance, the IDE will be able to start the application with a debugger attached allowing the user to step through the code in the editor. Code quality is maintained in this repository with several automated tools. Static code analysis tools enforce a consistent code style and check for typing errors. I have configured these tools to integrate with the IDE giving immediate feedback so issues can be addressed quickly. Furthermore, Git is configured with pre-commit hooks so these tools must run and validate the code before every commit is made. Furthermore these tools can be integrated with CI/CD pipelines this is particularly useful for collaborative projects.
+
+While all of the tooling for this project improves many aspects of development this may be difficult to set up and provides many opportunities for discrepancies to emerge between different setups. For this reason, I have created a development container, This container fully specifies every tool and its version to be installed. This containerised environment makes it easy to set up the environment and consistent each time. Containers for development are rapidly growing in interest\cite{developmentContainers}. 
+
+For the sake of consistency, the application itself has been configured with a dependency management and packaging tool. All of the libraries the application relies upon are specified in the standard `pyproject.toml` and the tool manages their installation in an isolated virtual environment. This process makes it easy to distribute this application and avoids inconsistencies on different computers.
+
+\section{Functionality and Usage}
+
+When starting the application you will be greeted by a window that is largely broken into three parts. At the top there is a section which has the main controls for selecting the major options such as the agent and dynamics. 
+
+In the middle there is the main display, it will initially look like a gird of squares with some icons and colors. the display represents as single state in the dynamics initially this is the grid world dynamics. The icons can represent entities in the state. The robot is the agent's location, Arrows typically represent actions. The gird may be coloured to represent the agents interpretation of value with reds representing the agents lowest values states and greens representing the most valuable states.
+
+At the bottom are specific controls specific to the current learning setup,Generally there are controls that affect the visualisation and allow the user to step thought the simulation. 
+
+\subsection{Getting Started}
+
+The project is set up as a standard distribution package, poetry is the build backend. While you may also use poetry as the build frontend if you have it installed however it may be excessive if you are only interested in starting the application.
+
+Pipx is simple build frontend that should be familiar if you have experience with pip. You can find instructions on how to \href{https://pipx.pypa.io/stable/installation/}{install pipx for your platform here}. If you have installed pipx you can run the application with the following command:
+
+\begin{verbatim*}
+python3 -m pipx run --spec . start
+\end{verbatim*}
+
+You can find more information about this application and how to start it in the readme file in the code folder.
+
+\subsection{Controls and Operation}
+
+
+
+% \chapter{Timeline}
+
+% planning and time-scale; use project plan and compare with reality
+
+\chapter{Fundamental Concepts}
+\section{Markov Decision Processes}
+
+Markov Decision Processes (MDP) provide a mathematical formalisation of decision-making problems. Markov Decision Processes provide the foundation for reinforcement learning (RL). This is because MDPs distil the fundamental parts of decision-making, allowing RL techniques built upon MDPs to generalise to learning in the real world and across different domains such as finance and robotics. 
+
+As a formal mathematical framework, MDPs allow us to derive and prove statements about our RL methods built upon them. An important example of this is that we can prove that Q-learning (an RL technique explained in chapter~\ref{chap:q-learning}) will converge to the true Q-values as long as each Action-State pair is visited infinitely often. \cite{watkins1992q}. Furthermore, MDPs allow us to reason about problems with uncertainty allowing RL agents to account for randomness in their environment. 
+
+The standardisation of decision-making problems as MDPs allows for a uniform definition of optimality with the value functions. MDPs give a basis for assessing the performance of RL algorithms, facilitating like-for-like comparisons for different RL approaches. 
+
+
+\subsection{Markov Property}
+
+The Markov property is that the future state of a Markov system only depends on the current state of the system. In other words, if we have a system that follows the Markov property, then the history preceding the current configuration of the system will not influence the following state.
+
+To put the Markov property formally $S_t$ represents the state at some time $t$. $S_t$ represents the outcome of some random variable. Then the Markov property would hold if and only if:
+
+
+\begin{equation}
+  \Pr(S_{c+1}\ |\ S_{c},S_{c-1},\dots,S_0) = \Pr(S_{c+1}\ |\ S_{c})
+  \label{eqn:markov-property}
+\end{equation}
+
+This definition demonstrates how the Markov property can hold in non-deterministic, stochastic processes. It also shows that predictions that are only based on the current state are just as good as those that record the history in a Markov process. The sequence of events in this definition, $S_t$, is called a Markov Chain\cite{meyn2012markov}.
+
+\subsection{Extending Markov Chains}
+
+Markov Decision Processes extend Markov Chains in two important ways. Firstly MDPs introduce decision-making through actions. Each state in an MDP has a set of available actions in that state. In each state, an action is required to transition to the next state; this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value. The reward is determined from the current state and action; it is produced simultaneously with the following state.
+
+A formal definition of a Markov Decision Process is a tuple $(\mathcal{S},\mathcal{A}_s,p)$ where:
+\begin{itemize}
+  \item $\mathcal{S}$ defines the set of all states
+  \item $\mathcal{A}_s$ defines the set of available actions in state $s$
+  \item $p$ defines the relationship between states, actions and rewards: \\
+        $p(s',r\ |\ s,a) \doteq \Pr(S_{t+1} = s', R_{t+1} = r | S_t = s, A_t = a)\cite{sutton2018reinforcement}$
+        \begin{itemize}
+          \item $s, s' \in \mathcal{S}$, $a \in \mathcal{A}_s$ and $r \in \mathbb{R}$
+          \item $p: \mathcal{S} \times \mathbb{R} \times \mathcal{S} \times \mathcal{A} \rightarrow [0,1]$
+        \end{itemize}
+\end{itemize}
+
+The function $p$ is an integral part of this definition; it fully describes how the system will evolve. We call this function the dynamics of the MDP. What this definition does not describe is how actions are chosen. This decision-making is done by an entity called an agent. For our purposes, the agent will have complete visibility as to the current state of the MDP. However, like most real-world situations, our agent will not have any a priori knowledge of the dynamics. 
+
+\begin{figure}[H]
+  \centering
+  \fboxsep 2mm
+  \framebox{
+    \includegraphics[width=6cm]{agent-enviroment}
+  }
+  \caption{\label{fig:agent-enviroment} The agent-environment interface}
+\end{figure}
+% stateDiagram-v2
+%     direction LR
+%     a : Agent
+%     e : Enviroment
+
+%     a --> e : Action
+%     e --> a : Reward
+%     e --> a : State
+
+The agent comprises the entire decision-making entity in an MDP; anything unknown or not wholly under the agent's control is called the agent's environment. In the context of reinforcement learning, the environment is essentially the dynamics of the MDP. Figure~\ref{fig:agent-enviroment} demonstrates how the agent and environments affect each other in an MDP. 
+
+\label{policy-informal-definition}
+For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning\ref{chap:q-learning} or a more complex process such as deep Q-learning. A policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
+
+
+\section{Policy and Value functions}
+
+After each action, a reward is received. It follows that the goal of an agent should be to choose the actions to maximise these reward signals received. Following the Markov principle and the definition of an MDP, this reward only depends on the current state and the action chosen. Consequently, being in some states and performing some actions are more valuable to the agent than other states and actions. We can define value functions: 
+\begin{itemize}
+  \item $v(s)$ function determines the value of being in a given state
+  \item $q(s,a)$ function determines the value of being in a given state and performing a specific action
+\end{itemize}
+
+
+% stateDiagram-v2
+%     a --> b : R = 0
+%     b --> b : R = 100
+\begin{figure}[H]
+  \centering
+  \fboxsep 2mm
+  \framebox{
+    \includegraphics[width=6cm]{reward-example}
+  }
+  \caption{\label{fig:reward-example} An example of transitive value of states $v(b) > v(a) > v(c)$}
+\end{figure}
+
+Intuitively, the value of being in a state is more than only its immediate reward that might be found from performing actions in that state. It is also related to the potential future reward that might be achieved in the reachable subsequent states. This can be demonstrated with two states $a$, and $b$, where there is a large reward at $b$ and the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However, $a$ can be considered less valuable than $b$, because it always requires more steps to achieve the reward from $a$ than at $b$. To account for preferring more immediate rewards, the value function should also discount future value with a parameter $\gamma$. 
+
+
+These value functions go hand in hand with an agent's policy; a good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards, which are in part determined by the actions the policy selects. Basing the policy on the value function gives the value function's definition impact over that agent's decision-making, in particular, the discount rate ($\gamma$). With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted, ignoring the potential long-term benefits of certain actions.
+
+While the policy is informally described at the end of chapter~\ref{policy-informal-definition}, a formal definition of a policy ($\pi$) is the probability distribution of an agent picking a given action in a given state:
+
+\begin{equation}
+  \pi(a \ |\ s) \doteq \Pr(A_t = a | S_t = s)
+  \label{eqn:policy-def}
+\end{equation}
+
+
+
+Where $s \in \mathcal{S}$ and $a \in \mathcal{A}_s$. This definition shows how the policy can be stochastic. A stochastic policy can be beneficial in many ways, such as breaking ties where multiple actions are equally good and choosing between when to explore more or seek rewards. 
+
+\subsection{optimal policy/value function via the Bellman equation}
+
+With a known policy and dynamics, the future state can be wholly determined, allowing for a complete mathematical definition of the value functions under a given policy that describes our above intuitions. for the state-value function ($v$) and action-value function ($q$) under a policy $\pi$ we have the formulas:
+
+
+\begin{align}
+  q_\pi(s,a) & \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_\pi(s')]\label{eqn:q-def} \\
+  v_\pi(s)   & \doteq \sum_a \pi(a\ |\ s) q_\pi(s,a) \label{eqn:v-def}
+\end{align}
+
+These value functions are defined recursively in terms of each other; these definitions can be unrolled to only be in terms of themselves. The unrolled form of the state-value function is known as the Bellman equation. These equations are named Richard Bellman, who, in the process of developing the field of dynamic programming, created them\cite{bellman1957}.   
+
+These functions demonstrate the intertwined relationships between the policy chosen and the value of that state if there is a particularly valuable action $a^\ast$ such that $q_\pi(s,a^\ast)$ is far better than for all other actions. A policy $\pi(a^\ast\ |\ s) = 0$ would hamper the potential value of $s$. Therefore, the value function can be used to compare how well different policies perform. If for policy $\pi_a$ there does not exist another policy $\pi_b$ such that $\pi_b$ has a better value $v_{\pi_b}(s) > v_{\pi_a}(s)$ for all states $s \in \mathcal{S}$ then we can consider this policy $\pi_a$ an optimal policy. There may be many optimal policies; however, we often do not need to distinguish them, so we often denote any optimal policy with $\pi_\ast$. This is because all optimal policies share the same state-value, and by definition action-value, function, we denote this $ v_\ast$ and $q_\ast$. The optimal value function $v_\ast$ is known as the Bellman optimality equation. These optimal equations can be written formally as:
+
+
+\begin{align}
+  q_\ast(s,a) & \doteq \max_\pi q_\pi(s,a)\label{eqn:q-optimal-def} \\
+  v_\ast(s)   & \doteq \max_\pi v_\pi(s) \label{eqn:v-optimal-def}
+\end{align}
+
+
+
+
+\subsection{Finding optimal policies by iteration}\label{iteration-approaches}
+
+Although optimal policies exist, finding them is another matter. The policy search space is potentially infinite so an intelligent method is required. An optimal policy can be extracted from an optimal value function and the dynamics of the MDP; the optimal policy would only select actions that result in the highest value. Finding the optimal value function with the optimal policy is straightforward, but this is a catch-22. The optimal value function must be self-consistent with the Bellman equations. One approach to solving these equations is iteration, for each step moving slightly closer to the optimal solution from an initial guess. 
+
+\subsubsection{Policy Iteration}
+
+In policy iteration, we improve a policy over time until it is optimal. updating a policy like this is only possible because of the policy improvement theorem. This theorem considers if we have a policy $\pi_{\text{old}}$. We are at some state $s$, $\pi_{\text{old}}$ will pick the action $a$ under this state $\pi_{\text{old}}(a\ |\ s) = 1$ what happens if we consider some other action $a'$ but then continue to follow the original policy. Because we continue to follow the original policy, we can use the existing value function $v_{\pi_{\text{old}}}(S_{t+1})$ for the subsequent states. We call this slightly adjusted policy $\pi_{\text{new}}$. By applying the bellman equations and the existing value function then we can recalculate the value at $s$ of $\pi_{\text{new}}$ if this new value is better than the original policy then we know that $\pi_{\text{new}}$ must be as good if not better for all states $s \in \mathcal{S}$ than $\pi_{\text{old}}$ thus $\pi_{\text{new}}$ would be a better policy. 
+
+
+\begin{equation}
+  \sum_a \pi_{\text{new}}(a\ |\ s) q_{\pi_{\text{old}}}(s,a) \ge v_{\pi_{\text{old}}}(s) \Rightarrow  \pi_{\text{new}} \ge \pi_{\text{old}}
+  \label{eqn:policy-improvement-theorem}
+\end{equation}
+
+For some policy $\pi$ you can apply this policy improvement theorem for every state and action in the MDP. This approach of comparing all actions over all states is called policy improvement. This policy improvement step can be applied iteratively until the policy stops improving. If the policy does not improve over this policy improvement step, then all of the actions are optimal, and this policy is optimal
+
+Although this policy improvement sounds computationally expensive, each state can be considered simultaneously and with a shared base policy; in each iteration, the state-value function is the same; caching this removes redundant calculations. Calculating the value function is improved by using an iterative approach and utilising the previous value function as a launching point.  
+
+
+\subsubsection{Value Iteration}
+
+Policy iteration is a practical approach, for a finite MDP is guaranteed to finish in finite time. In practice, policy improvement does better and only takes a few iterations. However, in each iteration, multiple full sweeps of the state space are required. The idea of value iteration is to improve the policy within the value iteration step. This value iteration approach only requires one iteration. 
+
+The Bellman equation\ref{eqn:v-def} can be used as an update rule to compute the value function iteratively. A table of values is maintained for each state, initialised randomly. The value of each state can be updated based on the immediate reward and the current estimates of the subsequent states; this is guaranteed to reduce the error at that state because the $\gamma$ discount rate discounts the error at the subsequent state. This process is called bootstrapping; the smaller $\gamma$, the quicker the error rate will decrease, and the faster the process will converge. When the inconsistency at each state is suitable, the process will stop. 
+
+This standard approach uses the traditional value Bellman equation\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
+
+\begin{align}
+  q_{\text{max}}(s,a)          & \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \tag{from \ref{eqn:q-def}} \\
+  v_{\text{max}}(s)            & \leftarrow  \max_a q_{\text{max}}(s,a) \label{eqn:v-update}                                  \\
+  \therefore v_{\text{max}}(s) & \leftarrow  \max_a \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')]
+\end{align}
+
+
+As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\ast$ function.$q_\ast$, can be derived from the $v_\ast$ with the dynamics $p$ function.
+
+
+\section{Learning as incrementally optimising policy in a MDP}
+
+Learning is the process of acquiring new information and skills. There are many different ways organisms can learn, In psychology one of the methods is called Operant Conditioning. In Operant Conditioning the learner receives feedback from the environment as either a reward or punishment for completing different actions\cite{staddon2003operant}. In an experiment this could be some food for opening a door, this feedback influences the learner's future actions. This is an equivalent mechanism that reinforcement learning operates under. It is, for this reason, that RL is considered the dominant theoretical framework for operant learning \cite{shteingart2014reinforcement}. 
+
+To demonstrate learning as policy optimisation consider an agent that is introduced to a new Markov environment. This agent has no prior knowledge therefore its initial policy is independent of the environment's features. eventually, the agent will pick some action in a state and receive some reward from the environment. This information can be used to update the policy to prioritise that one successful action. since the environment obeys the Markov property repeating this successful action will continue to reward. If the agent continues to optimise its policy as it finds rewards then it can improve its average reward. through incrementally optimising its policy this agent has learnt what are the successful actions and improved its behaviour.
+
+
+
+\section{Q-learning}\label{chap:q-learning}
+
+
+Q-learning is like value and policy iteration; all search for an optimal value function. However, Q-learning operates under extra constraints. The value and policy iteration extensively use the MDP's dynamics ($p$). In most real-world problems, the dynamics are unknown or too complex to be represented accurately. Iteration approaches can be adapted using samples to work without $p$. Samples are captured from the environment when the agent performs actions, which can be chosen randomly or by following another policy. Monti-Carlo is another technique that uses samples to emulate the value functions more directly, but these approaches are inherently offline. While offline methods have many advantages, their shortcomings, such as the inability to adapt to changing environments, make them unsuitable for many applications. 
+
+\subsection{Temporal difference}
+
+Temporal difference (TD) algorithms are another class of RL algorithms. TD is an online process that improves the policy as new data becomes available. The goal of TD is to minimise the $\delta$ parameter that represents the difference (error) between the observed and predicted rewards. This difference $\delta$ is used to update the model like the iterative approaches we bootstrap our model over time. The magnitude of each update is controlled with the learning rate parameter, $\alpha$. $\alpha$ helps avoid overfitting to samples since observations made in the real world may be noisy and change over time. The learning rate and discount rate can affect the convergence rate for TD; however, these are distinct variables and have different purposes. When $\alpha$ is low, the process will take longer to converge; however, if $\alpha$ is too large, the process may diverge
+
+Reinforcement learning algorithms typically can learn in two fashions: on-policy and off-policy. On-policy algorithms learn while the agent uses the policy being improved; an example is SARSA. Off-policy algorithms typically learn the value functions while the agent follows a different \say{behaviour} policy. While on-policy techniques can start exploiting their knowledge for reward quickly, they can get stuck in local minima. Off-policy techniques can provide more control over the exploration and exploitation. Q-learning is an off-policy TD reinforcement learning algorithm implemented in this project.
+
+\subsection{Definition}
+
+As the name suggests, Q-learning learns the optimal action-value function $q$ to find the optimal policy. TD techniques must learn the $q$ function directly. The $v$ function requires knowledge of the dynamics to derive the optimal policy; however, with the $q$ alone, the optimal policy can be determined. For this purpose, Q-learning needs to maintain a table entry for each action in each state so these entries can be updated after each observed action. We will represent this estimate of $q$ with $Q$. There are five parts to each transition: 
+\begin{itemize}
+  \item $S_{t-1}$ the previous state before the transition
+  \item $A_{t-1}$ the action that was performed
+  \item $R_t$ the reward received
+  \item $S_t$ the new and now current state
+\end{itemize}
+
+Q-learning uses these observations to update its estimates with this formula:
+
+\begin{equation}
+  Q(S_{t-1}, A_{t-1}) \leftarrow Q(S_{t-1}, A_{t-1}) +  \alpha [R_t + \gamma \max_a(Q(S_t,a)) - Q(S_{t-1}, A_{t-1})]
+  \label{eqn:q-learning-update-formula}
+\end{equation}
+
+
+This formula can be thought of as interpolating the old estimate at the old state $Q(S_{t-1}, A_{t-1})$ with this new observed Q-value $R_t + \gamma \max_a(Q(S_t, a))$. When $\alpha = 1$, this formula replaces the existing value with the new observed Q-value.  When $\alpha = 0$, the observation is ignored like it never happened. The formula $R_t + \gamma \max_a(Q(S_t, a))$ calculates the new observed Q-value based upon the same principle as value iteration; the implicit policy is to pick the best possible action. 
+
+\subsection{Implementation conditions}
+
+Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal q values $q_\ast$ provided the behaviour function visits all state-action pairs infinitely often. In practice, these q-values do not need to be perfect to derive an optimal policy. However, it can still take many visits to converge enough. Many observations may be necessary to build up a picture of the probability distribution and isolate noise. However, another reason for repeated observations is that the behaviour policy moves the agent forward in time, but the Q-learning table updates the last state. This conflicts as information propagates in the opposite direction of the updates that spread it. For example, suppose a sequence of $n$ states-actions have no reward but lead to some large reward at the end. as the behaviour completes these actions. In that case, only the last action will be updated to reflect the potential value, and every time the sequence is repeated, some of the value will propagate back one step. Many Q-learning implementations like ours will replay recent observations in reverse order to improve this performance. This is called the action-replay process (ARP). Replaying observations can be particularly effective when getting new observations is costly or slow, allowing for quicker convergence.
+
+
+In \ref{eqn:q-learning-update-formula}, we can see how $\alpha$ controls the influence of each observation. But how do we tune this hyper-parameter? One option is to treat it like other hyperparameters where possible and use previous experimentation to find a practical value. However, one of the main reasons to use RL is that it does not require prior knowledge, so this is not always suitable. A fixed learning rate may not also be suitable. Some observations may be more important than others; It has been observed that a decaying learning rate has been more effective. It is believed that a decaying learning rate allows for learning algorithms to avoid local minima at the beginning with the large learning rate and then settle on a global minima as the learning rate decays\cite{decayingLearningRates}. The paper \say{Learning Rates for Q-learning}\cite{even2003learning} derives how polynomial learning rates such as $\alpha = 1/t^\omega$ converge much better than linear ($\alpha = 1/t$) rates.
+
+Picking the behavioural policy is important; it must balance exploring and gaining rewards (exploitation). For some policies, the $\epsilon$ parameter determines the ratio of exploration and exploitation, a high $\epsilon$ would result in more exploration. There are two common behaviour policies for this:
+\begin{itemize}
+  \item $\epsilon$-greedy: this policy randomly picks between (A) selecting the best action based on the current Q-table or (B) selecting another action. A or B is random with the ratio determined by $\epsilon$
+  \item $\epsilon$-soft: this policy assigns probabilities to all actions based upon their q-values, biased towards the higher Q-values by $\epsilon$. Then, random actions are chosen according to this probability distribution.
+\end{itemize}
+
+Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
+
+
+
+
+%%%% ADD YOUR BIBLIOGRAPHY HERE
+\newpage
+
+\bibliographystyle{IEEEtran}
+\bibliography{refrences}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\appendix
+
+\chapter{Diary}
+
+\input{diary}
+
+
+
+\label{endpage}
+
+
+
+\end{document}
+
+\end{article}

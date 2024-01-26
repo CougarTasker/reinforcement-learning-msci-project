@@ -11,17 +11,18 @@ numpy = "^1.26.1"
 toml = "^0.10.2"
 schema = "^0.7.5"
 immutables = "^0.20"
-customtkinter = "^5.2.1"
 pillow = "^10.1.0"
-colour = "^0.1.5"
 numba = "^0.58.1"
-tkinter-tooltip = "^2.1.0"
 packaging = "^23.2"
+pyside6 = "^6.6.1"
+pyqtdarktheme = "^2.1.0"
+typing-extensions = "^4.9.0"
+pyzmq = "^25.1.2"
 
 
 [tool.poetry.scripts]
 start = "src.main:main"
-profile = "src.profile:main"
+profile = "src.profile:profile"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -36,6 +37,14 @@ types-toml = "^0.10.8.7"
 pep8-naming = "^0.13.3"
 wemake-python-styleguide = "^0.18.0"
 snakeviz = "^2.2.0"
+mkdocs-material = "^9.5.0"
+pytz = "^2023.3.post1"
+mkdocstrings = "^0.24.0"
+mkdocs-gen-files = "^0.5.0"
+mkdocs-literate-nav = "^0.6.1"
+mkdocs-section-index = "^0.3.8"
+mkdocstrings-python = "^1.7.5"
+mkdocs-no-sitemap-plugin = "^0.0.1"
 
 [tool.isort]
 profile = "black"

@@ -1,4 +1,4 @@
-from typing import Optional, Set
+from typing import Optional
 
 from ..agents import (
     BaseAgent,
@@ -7,15 +7,13 @@ from ..agents import (
     ValueIterationAgentOptimised,
 )
 from ..config.reader import ConfigReader
-from ..dynamics.actions import Action
 from ..dynamics.base_dynamics import BaseDynamics
 from ..dynamics.collection_dynamics import CollectionDynamics
 from .cell_configuration import DisplayMode
 from .learning_instance import LearningInstance
 from .options import AgentOptions, DynamicsOptions
-from .state_description import StateDescription
-from .value_range_normaliser.normaliser import StateValueNormaliser
-from .value_range_normaliser.normaliser_factory import NormaliserFactory
+from .state_description.state_description import StateDescription
+from .state_description.state_description_factory import StateDescriptionFactory
 
 
 class LearningSystem(object):
@@ -42,14 +40,12 @@ class LearningSystem(object):
         self._dynamics: Optional[BaseDynamics] = None
 
         self._main_learning_instance: Optional[LearningInstance] = None
-        self._simultaneous_learning_instances: Set[LearningInstance] = set()
-        self._value_normalisation_factory: Optional[NormaliserFactory] = None
+        self._state_description_factory: Optional[
+            StateDescriptionFactory
+        ] = None
         self._display_mode = DisplayMode.default
 
         self._agent_config = ConfigReader().agent()
-        self.set_simultaneous_agents(
-            self._agent_config.get_simultaneous_agents()
-        )
 
     def get_dynamics(self) -> BaseDynamics:
         """Get the dynamics.
@@ -113,46 +109,21 @@ class LearningSystem(object):
         """Get the current state of the learning instance.
 
         Returns:
-            StateDescription: the current state instance
+            StateDescription: the current configuration for this state.
         """
-        instance = self.__get_main_learning_instance()
+        instance = self.__get_learning_instance()
         return self.__state_id_to_description(instance.get_current_state())
 
     def perform_action(
         self,
-    ) -> tuple[StateDescription, Action, StateDescription, float]:
-        """Perform one action chosen by the agent.
+    ):
+        """Perform one action chosen by the agent."""
+        self.__get_learning_instance().perform_action()
 
-        Returns:
-            tuple[StateDescription, Action, StateDescription, float]: the
-            transition information, the last state, the action chosen, the next
-            state, the reward received for this action.
-        """
-        for simultaneous in self._simultaneous_learning_instances:
-            simultaneous.perform_action()
-
-        (
-            last_state,
-            action,
-            next_state,
-            reward,
-        ) = self.__get_main_learning_instance().perform_action()
-        return (
-            self.__state_id_to_description(last_state),
-            action,
-            self.__state_id_to_description(next_state),
-            reward,
-        )
-
-    def reset_state(self) -> StateDescription:
-        """Reset the current state to the initial state.
-
-        Returns:
-            StateDescription: the initial state description and new current
-            state.
-        """
-        instance = self.__get_main_learning_instance()
-        return self.__state_id_to_description(instance.reset_state())
+    def reset_state(self):
+        """Reset the current state to the initial state."""
+        instance = self.__get_learning_instance()
+        instance.reset_state()
 
     def set_display_mode(self, display_mode: DisplayMode):
         """Set the learning instance's display mode.
@@ -162,55 +133,17 @@ class LearningSystem(object):
         """
         self._display_mode = display_mode
 
-    def get_normaliser(self, state_id: int) -> StateValueNormaliser:
-        """Get the normaliser for a given state.
-
-        Args:
-            state_id (int): the state to base the normaliser on
-
-        Returns:
-            StateValueNormaliser: the normaliser for this state
-        """
-        if self._value_normalisation_factory is None:
-            self._value_normalisation_factory = NormaliserFactory(
-                self.get_agent(),
-                self.get_dynamics(),
-                self._agent_option == AgentOptions.value_iteration,
-            )
-        return self._value_normalisation_factory.create_normaliser(state_id)
-
-    def set_simultaneous_agents(self, count: int):
-        """Set the number of agents to be run in parallel with the main agent.
-
-        this speeds up q-learning otherwise it can be very slow. will not apply
-        to other types of agents
-
-        Args:
-            count (int): the number of simultaneous agents to add
-        """
-        if self._agent_option is not AgentOptions.q_learning:
-            return
-
-        diff = max(int(count), 0) - len(self._simultaneous_learning_instances)
-        if diff > 0:
-            for _ in range(diff):
-                self._simultaneous_learning_instances.add(
-                    LearningInstance(self.get_agent(), self.get_dynamics())
-                )
-        elif diff < 0:
-            for _ in range(-diff):
-                self._simultaneous_learning_instances.pop()
-        assert len(self._simultaneous_learning_instances) == count
-
     def __state_id_to_description(self, state_id: int) -> StateDescription:
-        return StateDescription(
-            self.get_dynamics(),
-            state_id,
-            self.get_normaliser(state_id),
-            self._display_mode,
+        if self._state_description_factory is None:
+            self._state_description_factory = StateDescriptionFactory(
+                self.get_agent(), self.get_dynamics(), self._display_mode
+            )
+        self._state_description_factory.display_mode = self._display_mode
+        return self._state_description_factory.create_state_description(
+            state_id
         )
 
-    def __get_main_learning_instance(self):
+    def __get_learning_instance(self):
         if self._main_learning_instance is not None:
             return self._main_learning_instance
         self._main_learning_instance = LearningInstance(

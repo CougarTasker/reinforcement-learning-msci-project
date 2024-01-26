@@ -2,6 +2,7 @@ from os import path
 from typing import Any
 
 import toml
+from typing_extensions import Self
 
 from .agent_section import AgentConfig
 from .base_section import BaseConfigSection
@@ -21,14 +22,14 @@ class ConfigReader(object):
     config_file_name = "config.toml"
     _instance = None
 
-    def __new__(cls):
+    def __new__(cls) -> Self:
         """Create a config object.
 
         Overridden to provide the singleton patten, there must only be one
         config object. to avoid redundant loading
 
         Returns:
-            ConfigReader: The config object with the loaded data
+            Self: The config object with the loaded data
         """
         # https://python-patterns.guide/gang-of-four/singleton/
         if cls._instance is None:

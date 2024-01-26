@@ -1,4 +1,11 @@
-from src.controller.controller import Controller
+import sys
+
+from PySide6.QtWidgets import QApplication
+
+from .controller.learning_system_controller_factory import (
+    LearningSystemControllerFactory,
+)
+from .view.view_root_v2 import ReinforcementLearningApp
 
 
 def main():
@@ -6,7 +13,11 @@ def main():
 
     The main entry point into the application.
     """
-    Controller().start()
+    with LearningSystemControllerFactory() as controller:
+        qt = QApplication(sys.argv)
+        app = ReinforcementLearningApp(controller)
+        app.show()
+        qt.exec()
 
 
 if __name__ == "__main__":

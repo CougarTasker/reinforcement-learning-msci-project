@@ -11,25 +11,32 @@
     "cSpell.words": [
         "astype",
         "backpropagation",
+        "color",
         "colors",
         "columnspan",
+        "docstrings",
         "dtype",
+        "fastmath",
         "finfo",
-        "Flaticon",
+        "flaticon",
         "fromarray",
+        "linters",
         "ndarray",
         "njit",
+        "nopython",
         "numba",
+        "numpy",
         "padx",
         "pady",
         "pipx",
         "relx",
         "RHUL",
         "softmax",
-        "Tkinter",
+        "tkinter",
         "tktooltip",
         "venv"
     ],
+    "cSpell.files": [],
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -38,9 +45,9 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "**/__pycache__": true,
-        "**/.pytest_cache":true,
-        "**/.coverage":false,
-        "**/.mypy_cache":true
+        "**/.pytest_cache": true,
+        "**/.coverage": false,
+        "**/.mypy_cache": true
     },
     "python.testing.pytestArgs": [
         "code/tests"
@@ -51,8 +58,24 @@
     "python.pythonPath": "${workspaceFolder}/code/.venv/bin/python",
     // "python.testing.cwd": "${workspaceFolder}/code",
     "python.envFile": "${workspaceFolder}/code/.env",
-    "flake8.args": ["--config=${workspaceFolder}/code/setup.cfg"],
+    "flake8.args": [
+        "--config=${workspaceFolder}/code/setup.cfg"
+    ],
     "flake8.cwd": "${workspaceFolder}/code",
     "python.analysis.autoImportCompletions": true,
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+    },
+    "isort.args": [
+        "--settings-file",
+        "${workspaceFolder}/code/pyproject.toml"
+    ],
+    "yaml.schemas": {
+        "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
+    }
 }

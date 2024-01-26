@@ -3,6 +3,8 @@
 
 This application implements reinforcement learning agents in a grid world. 
 
+![Q Learning](../media/images/q_learning_state_table.png)
+![Value Iteration](../media/images/action_value.png)
 
 <!-- omit in toc -->
 ## Table Of Contents
@@ -16,7 +18,7 @@ This application implements reinforcement learning agents in a grid world.
 
 ## Running the Program
 
-> Note: This guide is for thoes only interested in using the application, see [Development](#development) for a development workflow.
+> Note: This guide is for those only interested in using the application, see [Development](#development) for a development workflow.
 
 This project requires Python 3.10 and with Tkinter. Most distributions of Python include tkinter although it may need to be enabled in the installer. Python installers can be found [here](https://www.python.org/downloads/).
 
@@ -53,14 +55,18 @@ UIcons by [Flaticon](https://www.flaticon.com/uicons)
 
 ## Documentation
 
-The code is documented with docstrings, In the Google docstring format. this documentation can be viewed in a web browser with `pydoc`
+Documentation is written alongside the code with doc-strings, in the Google docstring format. This can be built into a complete documentation site. a package called `mkdocs` has been configured for building this site.
 
-To view the documentation run the following command in the code folder.
-```Bash 
-python3 -m pydoc -p 3000
+The last build of the docs is at `code/docs` you can open these files directly or run one of the following commands to start a local server then open [http://localhost:3000](http://localhost:3000) in your browser to view the documentation.
+
+To start a local server of the last build you can run.
+```Bash
+python3 -m http.server --directory docs 3000
 ```
-Then open [http://localhost:3000/src.html](http://localhost:3000/src.html) in your browser to view the documentation
-
+Alternatively use the following command to get the latest docs as a local server.
+```Bash 
+poetry run mkdocs serve -a localhost:3000
+```
 
 ## Development
 
