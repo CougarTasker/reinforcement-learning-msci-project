@@ -56,11 +56,10 @@ class ControlFactory(object):
         Returns:
             CustomButtonWidget: the connected widget.
         """
-        widget = CustomButtonWidget(
-            parent, text, action, self.controller, responsive_text_handler
-        )
+        widget = CustomButtonWidget(parent, text, action, self.controller)
 
         if responsive_text_handler is not None:
+            widget.set_responsive_handler(responsive_text_handler)
             self.state_update_publisher.subscribe(widget)
         return widget
 
@@ -87,10 +86,9 @@ class ControlFactory(object):
         first_option = list(options)[0]
 
         state = ComboWidgetState(options, first_option, enabled=True)
-        widget = CustomComboWidget(
-            parent, state, action, self.controller, responsive_options_handler
-        )
+        widget = CustomComboWidget(parent, state, action, self.controller)
         if responsive_options_handler is not None:
+            widget.set_responsive_options_handler(responsive_options_handler)
             self.state_update_publisher.subscribe(widget)
 
         return widget

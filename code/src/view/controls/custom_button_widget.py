@@ -22,7 +22,6 @@ class CustomButtonWidget(QPushButton, BaseStateObserver):
         text: str,
         action: UserAction,
         controller: LearningSystemController,
-        responsive_text_handler: Optional[responsive_text_handler_type],
     ):
         """Initialise the Button widget.
 
@@ -32,9 +31,6 @@ class CustomButtonWidget(QPushButton, BaseStateObserver):
             action (UserAction): the action this button should perform when
                 pressed.
             controller (LearningSystemController): the controller to notify.
-            responsive_text_handler (Optional[responsive_text_handler_type]): an
-                additional property that can be provided to update the text
-                dynamically.
         """
         super().__init__(text, parent)
         self.action = action
@@ -42,6 +38,19 @@ class CustomButtonWidget(QPushButton, BaseStateObserver):
 
         self.clicked.connect(self.__click_handler)
 
+        self.responsive_text_handler: Optional[
+            responsive_text_handler_type
+        ] = None
+
+    def set_responsive_handler(
+        self, responsive_text_handler: responsive_text_handler_type
+    ):
+        """Set the handler for responsive text.
+
+        Args:
+            responsive_text_handler (responsive_text_handler_type): the method
+                for generating the buttons text.
+        """
         self.responsive_text_handler = responsive_text_handler
 
     @override

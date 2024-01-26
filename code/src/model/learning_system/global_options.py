@@ -11,7 +11,11 @@ from src.model.dynamics.base_dynamics import BaseDynamics
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
-from src.model.learning_system.options import AgentOptions, DynamicsOptions
+from src.model.learning_system.options import (
+    AgentOptions,
+    AutomaticOptions,
+    DynamicsOptions,
+)
 
 from ..agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
@@ -27,6 +31,7 @@ class GlobalOptions(object):
     dynamics: DynamicsOptions
     exploration_strategy: ExplorationStrategyOptions
     display_mode: DisplayMode
+    automatic: AutomaticOptions
 
     def create_agent(self, dynamics: BaseDynamics) -> BaseAgent:
         """Create the agent based upon these options.
@@ -54,7 +59,7 @@ class GlobalOptions(object):
                     self.exploration_strategy,
                 )
             case _:
-                raise ValueError(f"unknown agent {self._agent_option.name}")
+                raise ValueError(f"unknown agent {self.agent.name}")
 
     def create_dynamics(self) -> BaseDynamics:
         """Create the dynamics appropriate for these options.

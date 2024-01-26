@@ -34,8 +34,16 @@ class BaseUserActionHandler(object):
         chain.
 
         Args:
-            user_action (UserActionMessage): the action the handler should
-                consider.
+            user_action (UserActionMessage): the action the handler
+            should consider.
+
+        Returns:
+            HandleResult: weather this handler has been successful.
+        """
+        return HandleResult.fail
+
+    def handle_inaction(self) -> HandleResult:
+        """Handle if there has not been an action provided.
 
         Returns:
             HandleResult: weather this handler has been successful.

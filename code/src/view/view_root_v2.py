@@ -6,7 +6,8 @@ from src.controller.learning_system_controller import LearningSystemController
 from src.model.config.reader import ConfigReader
 from src.model.learning_system.options import AgentOptions
 from src.view.controls.control_factory import ControlFactory
-from src.view.grid_world_view_v2.grid_world_v2 import GridWorld
+from src.view.display_state_v2.display import DisplayState
+from src.view.interaction_controls import InteractionControls
 from src.view.option_controls import OptionControls
 from src.view.state_publisher import StatePublisher
 
@@ -35,12 +36,15 @@ class ReinforcementLearningApp(QWidget):
 
         control_factory = ControlFactory(controller, self.publisher)
 
-        self.controls = OptionControls(self, control_factory)
-        layout.addWidget(self.controls, 0, 0)
+        self.option_controls = OptionControls(self, control_factory)
+        layout.addWidget(self.option_controls, 0, 0)
 
-        self.grid_world = GridWorld(self, controller)
-        layout.addWidget(self.grid_world, 1, 0)
-        self.publisher.subscribe(self.grid_world)
+        self.display_state = DisplayState(self)
+        layout.addWidget(self.display_state, 1, 0)
+        self.publisher.subscribe(self.display_state)
+
+        self.interaction_controls = InteractionControls(self, control_factory)
+        layout.addWidget(self.interaction_controls, 2, 0)
 
     def setup_config(self):
         """Set app properties from config."""

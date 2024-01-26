@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any
+from typing import Any, Optional
 
 from .base_bridge import BaseBridge
 
@@ -7,17 +7,16 @@ from .base_bridge import BaseBridge
 class UserAction(Enum):
     """Enumerate all possible user actions."""
 
-    one_step = 0
-    start_auto = 1
-    stop_auto = 2
-    reset_state = 3
-    fetch_current_state = 4
-    set_display_mode = 5
-    set_agent = 6
-    set_dynamics = 7
-    set_agent_strategy = 8
-    reset_system = 9
-    end = 10
+    progress = 0
+    select_auto = 1
+    reset_state = 2
+    fetch_current_state = 3
+    set_display_mode = 4
+    set_agent = 5
+    set_dynamics = 6
+    set_agent_strategy = 7
+    reset_system = 8
+    end = 9
 
 
 class UserActionMessage(object):
@@ -56,7 +55,7 @@ class UserActionBridge(BaseBridge):
         """
         return self.get_item_blocking()
 
-    def get_action_non_blocking(self) -> UserActionMessage:
+    def get_action_non_blocking(self) -> Optional[UserActionMessage]:
         """Get the latest action the user has performed.
 
         This is blocking.

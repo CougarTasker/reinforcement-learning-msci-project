@@ -33,7 +33,6 @@ class CustomComboWidget(QComboBox, BaseStateObserver):
         state: ComboWidgetState,
         action: UserAction,
         controller: LearningSystemController,
-        responsive_options_handler: Optional[handler_type] = None,
     ) -> None:
         """Initialise the combo box widget.
 
@@ -44,8 +43,6 @@ class CustomComboWidget(QComboBox, BaseStateObserver):
             action (UserAction): The user action this combo box corresponds to
             controller (LearningSystemController): the controller to update when
                 the user selects something.
-            responsive_options_handler (Optional[handler_type]): an optional
-                handler to make this combo box responsive to state updates.
         """
         super().__init__(parent)
         self.state = state
@@ -53,9 +50,20 @@ class CustomComboWidget(QComboBox, BaseStateObserver):
         self.action = action
         self.controller = controller
 
-        self.responsive_options_handler = responsive_options_handler
+        self.responsive_options_handler: Optional[handler_type] = None
 
         self.currentTextChanged.connect(self.__update_handler)
+
+    def set_responsive_options_handler(
+        self, responsive_options_handler: handler_type
+    ):
+        """Set the handler for responsive options.
+
+        Args:
+            responsive_options_handler (handler_type): he method
+                for generating the options.
+        """
+        self.responsive_options_handler = responsive_options_handler
 
     @override
     def state_updated(self, state: StateDescription) -> None:

@@ -3,7 +3,11 @@ from src.model.learning_system.cell_configuration.cell_configuration import (
 )
 from src.model.learning_system.global_options import GlobalOptions
 from src.model.learning_system.learning_instance import LearningInstance
-from src.model.learning_system.options import AgentOptions, DynamicsOptions
+from src.model.learning_system.options import (
+    AgentOptions,
+    AutomaticOptions,
+    DynamicsOptions,
+)
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )
@@ -25,6 +29,7 @@ class LearningSystem(object):
             DynamicsOptions.collection,
             ExplorationStrategyOptions.not_applicable,
             DisplayMode.default,
+            AutomaticOptions.manual,
         )
         self.entities = TopLevelEntities.create_new_entities(self.options)
         self.learning_instance = LearningInstance(self.entities)
