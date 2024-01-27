@@ -1603,11 +1603,20 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="GlobalOptions">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.learning_system.global_options.TopEntitiesOptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      TopEntitiesOptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TopEntitiesOptions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#src.model.learning_system.global_options.GlobalOptions.create_agent" class="md-nav__link">
+  <a href="#src.model.learning_system.global_options.TopEntitiesOptions.create_agent" class="md-nav__link">
     <span class="md-ellipsis">
       create_agent()
     </span>
@@ -1616,7 +1625,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.model.learning_system.global_options.GlobalOptions.create_dynamics" class="md-nav__link">
+  <a href="#src.model.learning_system.global_options.TopEntitiesOptions.create_dynamics" class="md-nav__link">
     <span class="md-ellipsis">
       create_dynamics()
     </span>
@@ -2734,11 +2743,20 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="GlobalOptions">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.learning_system.global_options.TopEntitiesOptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      TopEntitiesOptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TopEntitiesOptions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#src.model.learning_system.global_options.GlobalOptions.create_agent" class="md-nav__link">
+  <a href="#src.model.learning_system.global_options.TopEntitiesOptions.create_agent" class="md-nav__link">
     <span class="md-ellipsis">
       create_agent()
     </span>
@@ -2747,7 +2765,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.model.learning_system.global_options.GlobalOptions.create_dynamics" class="md-nav__link">
+  <a href="#src.model.learning_system.global_options.TopEntitiesOptions.create_dynamics" class="md-nav__link">
     <span class="md-ellipsis">
       create_dynamics()
     </span>
@@ -2820,6 +2838,67 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/learning_system/global_options.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">GlobalOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class represents the current options.&quot;&quot;&quot;</span>
+
+    <span class="n">top_level_options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span>
+    <span class="n">display_mode</span><span class="p">:</span> <span class="n">DisplayMode</span>
+    <span class="n">automatic</span><span class="p">:</span> <span class="n">AutomaticOptions</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.model.learning_system.global_options.TopEntitiesOptions" class="doc doc-heading">
+          <code>TopEntitiesOptions</code>
+
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code>object</code></p>
+
+  
+      <p>Class that represents the options for the top level entities.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/model/learning_system/global_options.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
@@ -2871,17 +2950,13 @@
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">GlobalOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class represents the current options.&quot;&quot;&quot;</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">TopEntitiesOptions</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class that represents the options for the top level entities.&quot;&quot;&quot;</span>
 
     <span class="n">agent</span><span class="p">:</span> <span class="n">AgentOptions</span>
     <span class="n">dynamics</span><span class="p">:</span> <span class="n">DynamicsOptions</span>
     <span class="n">exploration_strategy</span><span class="p">:</span> <span class="n">ExplorationStrategyOptions</span>
-    <span class="n">display_mode</span><span class="p">:</span> <span class="n">DisplayMode</span>
-    <span class="n">automatic</span><span class="p">:</span> <span class="n">AutomaticOptions</span>
 
     <span class="k">def</span> <span class="nf">create_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">:</span> <span class="n">BaseDynamics</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseAgent</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the agent based upon these options.</span>
@@ -2948,7 +3023,7 @@
 
 
 
-<h3 id="src.model.learning_system.global_options.GlobalOptions.create_agent" class="doc doc-heading">
+<h3 id="src.model.learning_system.global_options.TopEntitiesOptions.create_agent" class="doc doc-heading">
           <code class="highlight language-python"><span class="n">create_agent</span><span class="p">(</span><span class="n">dynamics</span><span class="p">)</span></code>
 
 </h3>
@@ -3049,7 +3124,9 @@ iteration agent.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/global_options.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
@@ -3073,9 +3150,7 @@ iteration agent.</p>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">:</span> <span class="n">BaseDynamics</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseAgent</span><span class="p">:</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">:</span> <span class="n">BaseDynamics</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseAgent</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the agent based upon these options.</span>
 
 <span class="sd">    Args:</span>
@@ -3114,7 +3189,7 @@ iteration agent.</p>
 
 
 
-<h3 id="src.model.learning_system.global_options.GlobalOptions.create_dynamics" class="doc doc-heading">
+<h3 id="src.model.learning_system.global_options.TopEntitiesOptions.create_dynamics" class="doc doc-heading">
           <code class="highlight language-python"><span class="n">create_dynamics</span><span class="p">()</span></code>
 
 </h3>
@@ -3184,7 +3259,9 @@ iteration agent.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/global_options.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
@@ -3197,9 +3274,7 @@ iteration agent.</p>
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDynamics</span><span class="p">:</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDynamics</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the dynamics appropriate for these options.</span>
 
 <span class="sd">    Raises:</span>

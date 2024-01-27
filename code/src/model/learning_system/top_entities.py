@@ -1,9 +1,11 @@
-from dataclasses import dataclass, replace
-
-from typing_extensions import Self
+from dataclasses import dataclass
+from typing import Dict
 
 from src.model.dynamics.base_dynamics import BaseDynamics
-from src.model.learning_system.global_options import GlobalOptions
+from src.model.learning_system.global_options import (
+    GlobalOptions,
+    TopEntitiesOptions,
+)
 
 from ..agents import BaseAgent
 
@@ -16,41 +18,46 @@ class TopLevelEntities(object):
     dynamics: BaseDynamics
     options: GlobalOptions
 
-    @classmethod
-    def create_new_entities(cls, options: GlobalOptions) -> Self:
-        """Construct new top level entities from specified options.
+
+class TopEntitiesCache(object):
+    """Cache for top level entities keeping consistency."""
+
+    cache: Dict[TopEntitiesOptions, TopLevelEntities] = {}
+
+    def get_entities(self, options: GlobalOptions) -> TopLevelEntities:
+        """Get top level entities from specified options.
+
+        If a cached option exists this will be returned.
 
         Args:
-            options (GlobalOptions): the options that specify how the top level
-                entities should be.
+            options (GlobalOptions): the options that specify how the top
+                level entities should be.
 
         Returns:
-            Self: the new top level entities
+            TopLevelEntities: The entities based upon the options.
         """
-        dynamics = options.create_dynamics()
-        agent = options.create_agent(dynamics)
-        return cls(agent, dynamics, options)
+        entities = self.cache.get(options.top_level_options, None)
 
-    def update_options(self, options: GlobalOptions) -> "TopLevelEntities":
-        """Construct new top level entities from specified options.
+        if entities is not None:
+            return entities
+        return self.create_new_entities(options)
 
-        unlike create new entities, this method will reuse where possible.
+    def create_new_entities(self, options: GlobalOptions) -> TopLevelEntities:
+        """Get top level entities from specified options.
+
+        This circumvents the cache and updates its value.
 
         Args:
-            options (GlobalOptions): the options that specify how the top level
-                entities should be.
+            options (GlobalOptions): the options that specify how the top
+                level entities should be.
 
         Returns:
-            Self: the new top level entities.
+            TopLevelEntities: The entities based upon the options.
         """
-        if options == self.options:
-            return self
+        top_level_options = options.top_level_options
 
-        if self.options.dynamics is not options.dynamics:
-            return self.create_new_entities(options)
-
-        if self.options.agent is not options.agent:
-            agent = options.create_agent(self.dynamics)
-            return TopLevelEntities(agent, self.dynamics, options)
-
-        return replace(self, options=options)
+        dynamics = top_level_options.create_dynamics()
+        agent = top_level_options.create_agent(dynamics)
+        entities = TopLevelEntities(agent, dynamics, options)
+        self.cache[top_level_options] = entities
+        return entities

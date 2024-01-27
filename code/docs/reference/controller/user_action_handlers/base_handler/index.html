@@ -544,6 +544,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#src.controller.user_action_handlers.base_handler.BaseUserActionHandler.set_top_level_options" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_top_level_options()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2818,6 +2827,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#src.controller.user_action_handlers.base_handler.BaseUserActionHandler.set_top_level_options" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_top_level_options()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2942,7 +2960,26 @@
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseUserActionHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseUserActionHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for user action handlers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -2989,13 +3026,32 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">learning_instance</span>
 
     <span class="k">def</span> <span class="nf">set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shorthand for updating learning system options.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shorthand for updating global options.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            options (Dict[str, Any]): the options to change.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span>
             <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_top_level_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shorthand for updating entity options.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            options (Dict[str, Any]): the options to change.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">existing_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">options</span>
+        <span class="n">top_level_options</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span>
+            <span class="n">existing_options</span><span class="o">.</span><span class="n">top_level_options</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">options</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span>
+            <span class="n">replace</span><span class="p">(</span>
+                <span class="n">existing_options</span><span class="p">,</span>
+                <span class="n">top_level_options</span><span class="o">=</span><span class="n">top_level_options</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -3313,7 +3369,7 @@ chain.</p>
 
   <div class="doc doc-contents ">
   
-      <p>Shorthand for updating learning system options.</p>
+      <p>Shorthand for updating global options.</p>
 
 
 
@@ -3356,13 +3412,102 @@ chain.</p>
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shorthand for updating learning system options.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shorthand for updating global options.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        options (Dict[str, Any]): the options to change.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span>
         <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+    <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.controller.user_action_handlers.base_handler.BaseUserActionHandler.set_top_level_options" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">set_top_level_options</span><span class="p">(</span><span class="o">**</span><span class="n">options</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Shorthand for updating entity options.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>options</code></td>
+          <td>
+                <code>Dict[str, Any]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the options to change.</p>
+            </div>
+          </td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/controller/user_action_handlers/base_handler.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_top_level_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shorthand for updating entity options.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        options (Dict[str, Any]): the options to change.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">existing_options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">options</span>
+    <span class="n">top_level_options</span> <span class="o">=</span> <span class="n">replace</span><span class="p">(</span>
+        <span class="n">existing_options</span><span class="o">.</span><span class="n">top_level_options</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">options</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">learning_system</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span>
+        <span class="n">replace</span><span class="p">(</span>
+            <span class="n">existing_options</span><span class="p">,</span>
+            <span class="n">top_level_options</span><span class="o">=</span><span class="n">top_level_options</span><span class="p">,</span>
+        <span class="p">)</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>

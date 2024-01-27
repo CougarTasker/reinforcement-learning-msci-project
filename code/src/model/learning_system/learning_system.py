@@ -1,7 +1,10 @@
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
-from src.model.learning_system.global_options import GlobalOptions
+from src.model.learning_system.global_options import (
+    GlobalOptions,
+    TopEntitiesOptions,
+)
 from src.model.learning_system.learning_instance import LearningInstance
 from src.model.learning_system.options import (
     AgentOptions,
@@ -11,7 +14,7 @@ from src.model.learning_system.options import (
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )
-from src.model.learning_system.top_entities import TopLevelEntities
+from src.model.learning_system.top_entities import TopEntitiesCache
 
 from ..agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
@@ -25,13 +28,16 @@ class LearningSystem(object):
     def __init__(self) -> None:
         """Class for managing a complete learning system."""
         self.options = GlobalOptions(
-            AgentOptions.value_iteration_optimised,
-            DynamicsOptions.collection,
-            ExplorationStrategyOptions.not_applicable,
+            TopEntitiesOptions(
+                AgentOptions.value_iteration_optimised,
+                DynamicsOptions.collection,
+                ExplorationStrategyOptions.not_applicable,
+            ),
             DisplayMode.default,
             AutomaticOptions.manual,
         )
-        self.entities = TopLevelEntities.create_new_entities(self.options)
+        self.entity_cache = TopEntitiesCache()
+        self.entities = self.entity_cache.get_entities(self.options)
         self.learning_instance = LearningInstance(self.entities)
         self.state_description_factory = StateDescriptionFactory(self.entities)
 
@@ -50,13 +56,17 @@ class LearningSystem(object):
         Args:
             options (GlobalOptions): how to display the learning instance
         """
+        entity_options = options.top_level_options
+        entities_updated = entity_options != self.options.top_level_options
         self.options = options
-        self.entities = self.entities.update_options(options)
-        self.learning_instance.update_entities(self.entities)
-        self.state_description_factory.update_entities(self.entities)
+
+        if entities_updated:
+            self.entities = self.entity_cache.get_entities(options)
+            self.learning_instance.update_entities(self.entities)
+            self.state_description_factory.update_entities(self.entities)
 
     def reset_top_level(self):
         """Reset the toplevel entities. wipes all learning information."""
-        self.entities = TopLevelEntities.create_new_entities(self.options)
+        self.entities = self.entity_cache.create_new_entities(self.options)
         self.learning_instance.update_entities(self.entities)
         self.state_description_factory.update_entities(self.entities)

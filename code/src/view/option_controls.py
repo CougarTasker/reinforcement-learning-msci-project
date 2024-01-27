@@ -86,4 +86,6 @@ class OptionControls(QGroupBox):
     def __strategy_combo_responsive_options(
         self, state: StateDescription
     ) -> ComboWidgetState:
-        return self.agent_strategy_states[state.global_options.agent]
+        return self.agent_strategy_states[
+            state.global_options.top_level_options.agent
+        ]

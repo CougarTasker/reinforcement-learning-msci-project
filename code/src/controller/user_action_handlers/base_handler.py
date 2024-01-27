@@ -60,11 +60,30 @@ class BaseUserActionHandler(object):
         return self.learning_system.learning_instance
 
     def set_options(self, **options):
-        """Shorthand for updating learning system options.
+        """Shorthand for updating global options.
 
         Args:
             options (Dict[str, Any]): the options to change.
         """
         self.learning_system.update_options(
             replace(self.learning_system.options, **options)
+        )
+
+    def set_top_level_options(self, **options):
+        """Shorthand for updating entity options.
+
+        Args:
+            options (Dict[str, Any]): the options to change.
+        """
+        existing_options = self.learning_system.options
+        top_level_options = replace(
+            existing_options.top_level_options,
+            **options,
+        )
+
+        self.learning_system.update_options(
+            replace(
+                existing_options,
+                top_level_options=top_level_options,
+            )
         )

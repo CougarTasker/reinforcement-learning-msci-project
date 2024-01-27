@@ -37,7 +37,7 @@ class SetOptionsHandler(BaseUserActionHandler):
                 self.set_options(display_mode=display_mode)
 
             case UserActionMessage(action=UserAction.set_agent, payload=agent):
-                self.set_options(
+                self.set_top_level_options(
                     agent=agent,
                     exploration_strategy=self.default_strategies[agent],
                 )
@@ -45,12 +45,12 @@ class SetOptionsHandler(BaseUserActionHandler):
             case UserActionMessage(
                 action=UserAction.set_dynamics, payload=dynamics
             ):
-                self.set_options(dynamics=dynamics)
+                self.set_top_level_options(dynamics=dynamics)
 
             case UserActionMessage(
                 action=UserAction.set_agent_strategy, payload=agent_strategy
             ):
-                self.set_options(exploration_strategy=agent_strategy)
+                self.set_top_level_options(exploration_strategy=agent_strategy)
 
             case _:
                 return HandleResult.fail

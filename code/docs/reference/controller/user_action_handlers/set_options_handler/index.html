@@ -2872,7 +2872,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">display_mode</span><span class="o">=</span><span class="n">display_mode</span><span class="p">)</span>
 
             <span class="k">case</span> <span class="n">UserActionMessage</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">UserAction</span><span class="o">.</span><span class="n">set_agent</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">agent</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_top_level_options</span><span class="p">(</span>
                     <span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span>
                     <span class="n">exploration_strategy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">default_strategies</span><span class="p">[</span><span class="n">agent</span><span class="p">],</span>
                 <span class="p">)</span>
@@ -2880,12 +2880,12 @@
             <span class="k">case</span> <span class="n">UserActionMessage</span><span class="p">(</span>
                 <span class="n">action</span><span class="o">=</span><span class="n">UserAction</span><span class="o">.</span><span class="n">set_dynamics</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">dynamics</span>
             <span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_top_level_options</span><span class="p">(</span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
 
             <span class="k">case</span> <span class="n">UserActionMessage</span><span class="p">(</span>
                 <span class="n">action</span><span class="o">=</span><span class="n">UserAction</span><span class="o">.</span><span class="n">set_agent_strategy</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">agent_strategy</span>
             <span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">exploration_strategy</span><span class="o">=</span><span class="n">agent_strategy</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_top_level_options</span><span class="p">(</span><span class="n">exploration_strategy</span><span class="o">=</span><span class="n">agent_strategy</span><span class="p">)</span>
 
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">HandleResult</span><span class="o">.</span><span class="n">fail</span>
@@ -3031,7 +3031,7 @@ request.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">display_mode</span><span class="o">=</span><span class="n">display_mode</span><span class="p">)</span>
 
         <span class="k">case</span> <span class="n">UserActionMessage</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">UserAction</span><span class="o">.</span><span class="n">set_agent</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">agent</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_top_level_options</span><span class="p">(</span>
                 <span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">,</span>
                 <span class="n">exploration_strategy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">default_strategies</span><span class="p">[</span><span class="n">agent</span><span class="p">],</span>
             <span class="p">)</span>
@@ -3039,12 +3039,12 @@ request.</p>
         <span class="k">case</span> <span class="n">UserActionMessage</span><span class="p">(</span>
             <span class="n">action</span><span class="o">=</span><span class="n">UserAction</span><span class="o">.</span><span class="n">set_dynamics</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">dynamics</span>
         <span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_top_level_options</span><span class="p">(</span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
 
         <span class="k">case</span> <span class="n">UserActionMessage</span><span class="p">(</span>
             <span class="n">action</span><span class="o">=</span><span class="n">UserAction</span><span class="o">.</span><span class="n">set_agent_strategy</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">agent_strategy</span>
         <span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">exploration_strategy</span><span class="o">=</span><span class="n">agent_strategy</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_top_level_options</span><span class="p">(</span><span class="n">exploration_strategy</span><span class="o">=</span><span class="n">agent_strategy</span><span class="p">)</span>
 
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">HandleResult</span><span class="o">.</span><span class="n">fail</span>

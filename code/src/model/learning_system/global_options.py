@@ -23,15 +23,13 @@ from ..agents.q_learning.exploration_strategies.options import (
 from ..dynamics.collection_dynamics import CollectionDynamics
 
 
-@dataclass(frozen=True)
-class GlobalOptions(object):
-    """Class represents the current options."""
+@dataclass(frozen=True, slots=True)
+class TopEntitiesOptions(object):
+    """Class that represents the options for the top level entities."""
 
     agent: AgentOptions
     dynamics: DynamicsOptions
     exploration_strategy: ExplorationStrategyOptions
-    display_mode: DisplayMode
-    automatic: AutomaticOptions
 
     def create_agent(self, dynamics: BaseDynamics) -> BaseAgent:
         """Create the agent based upon these options.
@@ -77,3 +75,12 @@ class GlobalOptions(object):
                 return CollectionDynamics(dynamic_config)
             case _:
                 raise ValueError(f"unknown dynamics {self.dynamics.name}")
+
+
+@dataclass(frozen=True, slots=True)
+class GlobalOptions(object):
+    """Class represents the current options."""
+
+    top_level_options: TopEntitiesOptions
+    display_mode: DisplayMode
+    automatic: AutomaticOptions
