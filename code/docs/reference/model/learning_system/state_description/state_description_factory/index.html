@@ -1312,6 +1312,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../dynamics/cliff_dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cliff Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../dynamics/collection_dynamics/" class="md-nav__link">
         
   
@@ -1780,6 +1801,15 @@
   <a href="#src.model.learning_system.state_description.state_description_factory.StateDescriptionFactory.update_entities" class="md-nav__link">
     <span class="md-ellipsis">
       update_entities()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.learning_system.state_description.state_description_factory.StateDescriptionFactory.update_options" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_options()
     </span>
   </a>
   
@@ -2775,6 +2805,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#src.model.learning_system.state_description.state_description_factory.StateDescriptionFactory.update_options" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_options()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2836,8 +2875,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/learning_system/state_description/state_description_factory.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
-<span class="normal">13</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -2873,18 +2911,37 @@
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">StateDescriptionFactory</span><span class="p">(</span><span class="n">BaseEntityDecorator</span><span class="p">):</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">StateDescriptionFactory</span><span class="p">(</span><span class="n">BaseEntityDecorator</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory class for creating state descriptions from states.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">TopLevelEntities</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">TopLevelEntities</span><span class="p">,</span> <span class="n">global_options</span><span class="p">:</span> <span class="n">GlobalOptions</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a state description factory for these entities.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            entities (TopLevelEntities): The entities this class uses</span>
 <span class="sd">                internally.</span>
+<span class="sd">            global_options (GlobalOptions): The global options for the</span>
+<span class="sd">                description.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cell_configuration_factory</span> <span class="o">=</span> <span class="n">CellConfigurationFactory</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span> <span class="o">=</span> <span class="n">global_options</span>
 
     <span class="nd">@override</span>
     <span class="k">def</span> <span class="nf">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">TopLevelEntities</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -2895,6 +2952,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cell_configuration_factory</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the options used in the state descriptions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            options (GlobalOptions): the new options.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span> <span class="o">=</span> <span class="n">options</span>
 
     <span class="k">def</span> <span class="nf">create_state_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new state description from a given state ID.</span>
@@ -2909,7 +2974,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">grid_world</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state_pool</span><span class="o">.</span><span class="n">get_state_from_id</span><span class="p">(</span><span class="n">state_id</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cell_configuration_factory</span><span class="o">.</span><span class="n">get_cell_configuration</span><span class="p">(</span><span class="n">state_id</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span><span class="p">,</span>
         <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2933,7 +2998,7 @@
 
 
 <h3 id="src.model.learning_system.state_description.state_description_factory.StateDescriptionFactory.__init__" class="doc doc-heading">
-          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">entities</span><span class="p">,</span> <span class="n">global_options</span><span class="p">)</span></code>
 
 </h3>
 
@@ -2970,28 +3035,53 @@ internally.</p>
               <em>required</em>
           </td>
         </tr>
+        <tr>
+          <td><code>global_options</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.learning_system.global_options.GlobalOptions" href="../../global_options/#src.model.learning_system.global_options.GlobalOptions">GlobalOptions</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The global options for the
+description.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
     </tbody>
   </table>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/state_description/state_description_factory.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
-<span class="normal">16</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
-<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">TopLevelEntities</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">TopLevelEntities</span><span class="p">,</span> <span class="n">global_options</span><span class="p">:</span> <span class="n">GlobalOptions</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a state description factory for these entities.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        entities (TopLevelEntities): The entities this class uses</span>
 <span class="sd">            internally.</span>
+<span class="sd">        global_options (GlobalOptions): The global options for the</span>
+<span class="sd">            description.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cell_configuration_factory</span> <span class="o">=</span> <span class="n">CellConfigurationFactory</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span> <span class="o">=</span> <span class="n">global_options</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -3070,21 +3160,21 @@ internally.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/state_description/state_description_factory.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_state_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_state_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new state description from a given state ID.</span>
 
 <span class="sd">    Args:</span>
@@ -3097,7 +3187,7 @@ internally.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">grid_world</span><span class="p">,</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state_pool</span><span class="o">.</span><span class="n">get_state_from_id</span><span class="p">(</span><span class="n">state_id</span><span class="p">),</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cell_configuration_factory</span><span class="o">.</span><span class="n">get_cell_configuration</span><span class="p">(</span><span class="n">state_id</span><span class="p">),</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
@@ -3153,15 +3243,15 @@ internally.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/state_description/state_description_factory.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@override</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@override</span>
 <span class="k">def</span> <span class="nf">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">TopLevelEntities</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the entities used by this decorator.</span>
 
@@ -3170,6 +3260,73 @@ internally.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">cell_configuration_factory</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.learning_system.state_description.state_description_factory.StateDescriptionFactory.update_options" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">update_options</span><span class="p">(</span><span class="n">options</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Update the options used in the state descriptions.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>options</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.learning_system.global_options.GlobalOptions" href="../../global_options/#src.model.learning_system.global_options.GlobalOptions">GlobalOptions</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the new options.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/learning_system/state_description/state_description_factory.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the options used in the state descriptions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        options (GlobalOptions): the new options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">global_options</span> <span class="o">=</span> <span class="n">options</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>

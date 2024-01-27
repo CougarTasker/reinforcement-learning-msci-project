@@ -40,6 +40,7 @@ class OptionControls(QGroupBox):
 
     dynamics_options = {
         "Collection": DynamicsOptions.collection,
+        "Cliff": DynamicsOptions.cliff,
     }
 
     group_title = "Simulation Configuration Controls"

@@ -1,7 +1,6 @@
 from src.model.agents.base_agent import BaseAgent
 from src.model.dynamics.base_dynamics import BaseDynamics
 from src.model.dynamics.grid_world import GridWorld
-from src.model.learning_system.global_options import GlobalOptions
 from src.model.learning_system.top_entities import TopLevelEntities
 from src.model.state.state_pool import StatePool
 
@@ -61,12 +60,3 @@ class BaseEntityDecorator(object):
             BaseDynamics: the dynamics part of these entities
         """
         return self.entities.dynamics
-
-    @property
-    def options(self) -> GlobalOptions:
-        """Access the options of these entities.
-
-        Returns:
-            GlobalOptions: the options part of these entities
-        """
-        return self.entities.options

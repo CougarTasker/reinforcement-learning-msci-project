@@ -1312,6 +1312,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dynamics/cliff_dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cliff Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../dynamics/collection_dynamics/" class="md-nav__link">
         
   
@@ -2834,7 +2855,10 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/learning_system/top_entities.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
@@ -2872,50 +2896,47 @@
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">TopEntitiesCache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">TopEntitiesCache</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Cache for top level entities keeping consistency.&quot;&quot;&quot;</span>
 
     <span class="n">cache</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TopEntitiesOptions</span><span class="p">,</span> <span class="n">TopLevelEntities</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">def</span> <span class="nf">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get top level entities from specified options.</span>
 
 <span class="sd">        If a cached option exists this will be returned.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            options (GlobalOptions): the options that specify how the top</span>
+<span class="sd">            options (TopEntitiesOptions): the options that specify how the top</span>
 <span class="sd">                level entities should be.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            TopLevelEntities: The entities based upon the options.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">entities</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">entities</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_new_entities</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">create_new_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_new_entities</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get top level entities from specified options.</span>
 
 <span class="sd">        This circumvents the cache and updates its value.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            options (GlobalOptions): the options that specify how the top</span>
+<span class="sd">            options (TopEntitiesOptions): the options that specify how the top</span>
 <span class="sd">                level entities should be.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            TopLevelEntities: The entities based upon the options.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">top_level_options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
-
-        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">top_level_options</span><span class="o">.</span><span class="n">create_dynamics</span><span class="p">()</span>
-        <span class="n">agent</span> <span class="o">=</span> <span class="n">top_level_options</span><span class="o">.</span><span class="n">create_agent</span><span class="p">(</span><span class="n">dynamics</span><span class="p">)</span>
+        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">create_dynamics</span><span class="p">()</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">create_agent</span><span class="p">(</span><span class="n">dynamics</span><span class="p">)</span>
         <span class="n">entities</span> <span class="o">=</span> <span class="n">TopLevelEntities</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">top_level_options</span><span class="p">]</span> <span class="o">=</span> <span class="n">entities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">=</span> <span class="n">entities</span>
         <span class="k">return</span> <span class="n">entities</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2965,7 +2986,7 @@
         <tr>
           <td><code>options</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="src.model.learning_system.global_options.GlobalOptions" href="../global_options/#src.model.learning_system.global_options.GlobalOptions">GlobalOptions</a></code>
+                <code><a class="autorefs autorefs-internal" title="src.model.learning_system.global_options.TopEntitiesOptions" href="../global_options/#src.model.learning_system.global_options.TopEntitiesOptions">TopEntitiesOptions</a></code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -3006,7 +3027,10 @@ level entities should be.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/top_entities.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
@@ -3021,27 +3045,24 @@ level entities should be.</p>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_new_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">create_new_entities</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get top level entities from specified options.</span>
 
 <span class="sd">    This circumvents the cache and updates its value.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        options (GlobalOptions): the options that specify how the top</span>
+<span class="sd">        options (TopEntitiesOptions): the options that specify how the top</span>
 <span class="sd">            level entities should be.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        TopLevelEntities: The entities based upon the options.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">top_level_options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
-
-    <span class="n">dynamics</span> <span class="o">=</span> <span class="n">top_level_options</span><span class="o">.</span><span class="n">create_dynamics</span><span class="p">()</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">top_level_options</span><span class="o">.</span><span class="n">create_agent</span><span class="p">(</span><span class="n">dynamics</span><span class="p">)</span>
+    <span class="n">dynamics</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">create_dynamics</span><span class="p">()</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">create_agent</span><span class="p">(</span><span class="n">dynamics</span><span class="p">)</span>
     <span class="n">entities</span> <span class="o">=</span> <span class="n">TopLevelEntities</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">top_level_options</span><span class="p">]</span> <span class="o">=</span> <span class="n">entities</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">=</span> <span class="n">entities</span>
     <span class="k">return</span> <span class="n">entities</span>
 </code></pre></div></td></tr></table></div>
           </details>
@@ -3082,7 +3103,7 @@ level entities should be.</p>
         <tr>
           <td><code>options</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="src.model.learning_system.global_options.GlobalOptions" href="../global_options/#src.model.learning_system.global_options.GlobalOptions">GlobalOptions</a></code>
+                <code><a class="autorefs autorefs-internal" title="src.model.learning_system.global_options.TopEntitiesOptions" href="../global_options/#src.model.learning_system.global_options.TopEntitiesOptions">TopEntitiesOptions</a></code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -3123,7 +3144,10 @@ level entities should be.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/top_entities.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
@@ -3136,22 +3160,19 @@ level entities should be.</p>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TopLevelEntities</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get top level entities from specified options.</span>
 
 <span class="sd">    If a cached option exists this will be returned.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        options (GlobalOptions): the options that specify how the top</span>
+<span class="sd">        options (TopEntitiesOptions): the options that specify how the top</span>
 <span class="sd">            level entities should be.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        TopLevelEntities: The entities based upon the options.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">entities</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">entities</span>
@@ -3195,19 +3216,19 @@ level entities should be.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/model/learning_system/top_entities.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">TopLevelEntities</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class that encompasses the top level entities of the learning system.&quot;&quot;&quot;</span>
 
     <span class="n">agent</span><span class="p">:</span> <span class="n">BaseAgent</span>
     <span class="n">dynamics</span><span class="p">:</span> <span class="n">BaseDynamics</span>
-    <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span>
 </code></pre></div></td></tr></table></div>
             </details>
 

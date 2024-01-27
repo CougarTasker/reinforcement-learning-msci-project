@@ -1310,6 +1310,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../model/dynamics/cliff_dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cliff Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../model/dynamics/collection_dynamics/" class="md-nav__link">
         
   
@@ -2872,7 +2893,8 @@
 <span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span>
-<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OptionControls</span><span class="p">(</span><span class="n">QGroupBox</span><span class="p">):</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OptionControls</span><span class="p">(</span><span class="n">QGroupBox</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Widget that contains the controls for interacting with the grid world.&quot;&quot;&quot;</span>
 
     <span class="n">agent_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -2900,6 +2922,7 @@
 
     <span class="n">dynamics_options</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;Collection&quot;</span><span class="p">:</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span><span class="p">,</span>
+        <span class="s2">&quot;Cliff&quot;</span><span class="p">:</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">cliff</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="n">group_title</span> <span class="o">=</span> <span class="s2">&quot;Simulation Configuration Controls&quot;</span>
@@ -3027,8 +3050,7 @@ with.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/option_controls.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
-<span class="normal">50</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -3062,7 +3084,8 @@ with.</p>
 <span class="normal">81</span>
 <span class="normal">82</span>
 <span class="normal">83</span>
-<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QWidget</span><span class="p">,</span> <span class="n">control_factory</span><span class="p">:</span> <span class="n">ControlFactory</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the option controls.</span>

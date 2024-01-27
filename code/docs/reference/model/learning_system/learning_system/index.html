@@ -1312,6 +1312,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../dynamics/cliff_dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cliff Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../dynamics/collection_dynamics/" class="md-nav__link">
         
   
@@ -2899,24 +2920,32 @@
 <span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LearningSystem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">LearningSystem</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controller for managing one pair of agent and dynamics.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Class for managing a complete learning system.&quot;&quot;&quot;</span>
+        <span class="n">top_level_options</span> <span class="o">=</span> <span class="n">TopEntitiesOptions</span><span class="p">(</span>
+            <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">,</span>
+            <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span><span class="p">,</span>
+            <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">GlobalOptions</span><span class="p">(</span>
-            <span class="n">TopEntitiesOptions</span><span class="p">(</span>
-                <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">,</span>
-                <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span><span class="p">,</span>
-                <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">,</span>
-            <span class="p">),</span>
+            <span class="n">top_level_options</span><span class="p">,</span>
             <span class="n">DisplayMode</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
             <span class="n">AutomaticOptions</span><span class="o">.</span><span class="n">manual</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span> <span class="o">=</span> <span class="n">TopEntitiesCache</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">top_level_options</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_instance</span> <span class="o">=</span> <span class="n">LearningInstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span> <span class="o">=</span> <span class="n">StateDescriptionFactory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span> <span class="o">=</span> <span class="n">StateDescriptionFactory</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current state of the learning instance.</span>
@@ -2936,15 +2965,17 @@
         <span class="n">entity_options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
         <span class="n">entities_updated</span> <span class="o">=</span> <span class="n">entity_options</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">entities_updated</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">entity_options</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">learning_instance</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">reset_top_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the toplevel entities. wipes all learning information.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">create_new_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">create_new_entities</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_instance</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -2994,21 +3025,27 @@
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for managing a complete learning system.&quot;&quot;&quot;</span>
+    <span class="n">top_level_options</span> <span class="o">=</span> <span class="n">TopEntitiesOptions</span><span class="p">(</span>
+        <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">,</span>
+        <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span><span class="p">,</span>
+        <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">GlobalOptions</span><span class="p">(</span>
-        <span class="n">TopEntitiesOptions</span><span class="p">(</span>
-            <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">,</span>
-            <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">collection</span><span class="p">,</span>
-            <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">,</span>
-        <span class="p">),</span>
+        <span class="n">top_level_options</span><span class="p">,</span>
         <span class="n">DisplayMode</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
         <span class="n">AutomaticOptions</span><span class="o">.</span><span class="n">manual</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span> <span class="o">=</span> <span class="n">TopEntitiesCache</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">top_level_options</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">learning_instance</span> <span class="o">=</span> <span class="n">LearningInstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span> <span class="o">=</span> <span class="n">StateDescriptionFactory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span> <span class="o">=</span> <span class="n">StateDescriptionFactory</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
+    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -3057,14 +3094,14 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
 <span class="normal">50</span>
-<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateDescription</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current state of the learning instance.</span>
 
 <span class="sd">    Returns:</span>
@@ -3096,13 +3133,17 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reset_top_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reset_top_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reset the toplevel entities. wipes all learning information.&quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">create_new_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">create_new_entities</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
+    <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">learning_instance</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -3159,10 +3200,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/learning_system.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
@@ -3172,7 +3210,10 @@
 <span class="normal">63</span>
 <span class="normal">64</span>
 <span class="normal">65</span>
-<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">):</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">GlobalOptions</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the global options used by this system.</span>
 
 <span class="sd">    Args:</span>
@@ -3181,9 +3222,9 @@
     <span class="n">entity_options</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
     <span class="n">entities_updated</span> <span class="o">=</span> <span class="n">entity_options</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">top_level_options</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="n">options</span>
-
+    <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span><span class="o">.</span><span class="n">update_options</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">entities_updated</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">entity_cache</span><span class="o">.</span><span class="n">get_entities</span><span class="p">(</span><span class="n">entity_options</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_instance</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state_description_factory</span><span class="o">.</span><span class="n">update_entities</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entities</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>

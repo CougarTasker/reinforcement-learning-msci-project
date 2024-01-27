@@ -13,6 +13,7 @@ class DynamicsOptions(Enum):
     """Enumerates the possible agents."""
 
     collection = 1
+    cliff = 2
 
 
 class AutomaticOptions(Enum):

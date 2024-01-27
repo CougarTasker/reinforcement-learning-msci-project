@@ -8,6 +8,7 @@ from src.model.agents.value_iteration.agent_optimised import (
 )
 from src.model.config.reader import ConfigReader
 from src.model.dynamics.base_dynamics import BaseDynamics
+from src.model.dynamics.cliff_dynamics import CliffDynamics
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
@@ -73,6 +74,8 @@ class TopEntitiesOptions(object):
         match self.dynamics:
             case DynamicsOptions.collection:
                 return CollectionDynamics(dynamic_config)
+            case DynamicsOptions.cliff:
+                return CliffDynamics(dynamic_config)
             case _:
                 raise ValueError(f"unknown dynamics {self.dynamics.name}")
 

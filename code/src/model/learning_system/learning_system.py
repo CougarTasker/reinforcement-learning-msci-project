@@ -27,19 +27,22 @@ class LearningSystem(object):
 
     def __init__(self) -> None:
         """Class for managing a complete learning system."""
+        top_level_options = TopEntitiesOptions(
+            AgentOptions.value_iteration_optimised,
+            DynamicsOptions.collection,
+            ExplorationStrategyOptions.not_applicable,
+        )
         self.options = GlobalOptions(
-            TopEntitiesOptions(
-                AgentOptions.value_iteration_optimised,
-                DynamicsOptions.collection,
-                ExplorationStrategyOptions.not_applicable,
-            ),
+            top_level_options,
             DisplayMode.default,
             AutomaticOptions.manual,
         )
         self.entity_cache = TopEntitiesCache()
-        self.entities = self.entity_cache.get_entities(self.options)
+        self.entities = self.entity_cache.get_entities(top_level_options)
         self.learning_instance = LearningInstance(self.entities)
-        self.state_description_factory = StateDescriptionFactory(self.entities)
+        self.state_description_factory = StateDescriptionFactory(
+            self.entities, self.options
+        )
 
     def get_current_state(self) -> StateDescription:
         """Get the current state of the learning instance.
@@ -59,14 +62,16 @@ class LearningSystem(object):
         entity_options = options.top_level_options
         entities_updated = entity_options != self.options.top_level_options
         self.options = options
-
+        self.state_description_factory.update_options(options)
         if entities_updated:
-            self.entities = self.entity_cache.get_entities(options)
+            self.entities = self.entity_cache.get_entities(entity_options)
             self.learning_instance.update_entities(self.entities)
             self.state_description_factory.update_entities(self.entities)
 
     def reset_top_level(self):
         """Reset the toplevel entities. wipes all learning information."""
-        self.entities = self.entity_cache.create_new_entities(self.options)
+        self.entities = self.entity_cache.create_new_entities(
+            self.options.top_level_options
+        )
         self.learning_instance.update_entities(self.entities)
         self.state_description_factory.update_entities(self.entities)
