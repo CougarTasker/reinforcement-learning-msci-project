@@ -45,10 +45,8 @@ class CliffDynamics(BaseDynamics):
         if not self.grid_world.is_in_bounds(self.config.agent_location()):
             raise ValueError("config agent location outside of map bounds")
 
-        initial_state_builder = (
-            StateBuilder()
-            .set_agent_location(self.config.agent_location())
-            .set_energy(self.config.initial_energy())
+        initial_state_builder = StateBuilder().set_agent_location(
+            self.reset_location
         )
         cliff_y = self.config.height() - 1
         cliff_end_x = self.config.width() - 1
@@ -79,6 +77,17 @@ class CliffDynamics(BaseDynamics):
             has been performed and the reward from this action
         """
         next_state_builder = StateBuilder(current_state)
+
+        entity = current_state.entities.get(current_state.agent_location, None)
+        if entity is not None:
+            next_state_builder.set_agent_location(self.reset_location)
+            reset_state = next_state_builder.build()
+
+            if entity is CellEntity.warning:
+                return reset_state, -100
+
+            return reset_state, 100
+
         next_agent_location = self.grid_world.movement_action(
             current_state.agent_location, action
         )
@@ -87,14 +96,4 @@ class CliffDynamics(BaseDynamics):
 
         next_state_builder.set_agent_location(next_agent_location)
 
-        if next_agent_location not in current_state.entities:
-            return next_state_builder.build(), -1
-
-        entity = current_state.entities.get(next_agent_location)
-        next_state_builder.set_agent_location(self.reset_location)
-        reset_state = next_state_builder.build()
-
-        if entity is CellEntity.warning:
-            return reset_state, -100
-
-        return reset_state, 100
+        return next_state_builder.build(), -1

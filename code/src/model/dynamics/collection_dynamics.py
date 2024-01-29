@@ -95,21 +95,24 @@ class CollectionDynamics(BaseDynamics):
             has been performed and the reward from this action
         """
         next_state_builder = StateBuilder(current_state)
+
+        got_goal = current_state.agent_location in current_state.entities
+        if got_goal:
+            next_state_builder.remove_entity(current_state.agent_location)
+
+            if not next_state_builder.entities:
+                # Terminal state all goals have been collected, loop to
+                # beginning to make task continuous
+                return self.initial_state(), 10
+
         next_agent_location = self.grid_world.movement_action(
             current_state.agent_location, action
         )
         if not self.grid_world.is_in_bounds(next_agent_location):
-            return current_state, 0
+            return next_state_builder.build(), -1
 
         next_state_builder.set_agent_location(next_agent_location)
 
-        if next_agent_location not in current_state.entities:
-            return next_state_builder.build(), 0
+        reward = 10 if got_goal else -1
 
-        next_state_builder.remove_entity(next_agent_location)
-
-        if not next_state_builder.entities:
-            # Terminal state all goals have been collected, loop to beginning to
-            # make task continuous
-            return self.initial_state(), 1
-        return next_state_builder.build(), 1
+        return next_state_builder.build(), reward
