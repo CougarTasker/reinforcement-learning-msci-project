@@ -10,10 +10,10 @@ from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )
 from src.view.display_state_v2.cell.cell import Cell
-from src.view.state_publisher import BaseStateObserver
+from src.view.visibility_observer import BaseVisibilityObserver
 
 
-class DisplayState(QWidget, BaseStateObserver):
+class DisplayState(BaseVisibilityObserver):
     """Widget for displaying a given grid world state."""
 
     cell_margins = 0.1
@@ -42,7 +42,7 @@ class DisplayState(QWidget, BaseStateObserver):
         self.state: Optional[StateDescription] = None
 
     @override
-    def state_updated(self, state: StateDescription):
+    def visible_state_updated(self, state: StateDescription):
         """Handle state update events.
 
         Args:

@@ -3,6 +3,9 @@ from typing import Dict
 
 from src.model.dynamics.base_dynamics import BaseDynamics
 from src.model.learning_system.global_options import TopEntitiesOptions
+from src.model.learning_system.learning_instance.statistics_recorder import (
+    StatisticsRecorder,
+)
 
 from ..agents import BaseAgent
 
@@ -13,6 +16,7 @@ class TopLevelEntities(object):
 
     agent: BaseAgent
     dynamics: BaseDynamics
+    statistics: StatisticsRecorder
     options: TopEntitiesOptions
 
 
@@ -55,6 +59,7 @@ class TopEntitiesCache(object):
         """
         dynamics = options.create_dynamics()
         agent = options.create_agent(dynamics)
-        entities = TopLevelEntities(agent, dynamics, options)
+        stats = StatisticsRecorder()
+        entities = TopLevelEntities(agent, dynamics, stats, options)
         self.cache[options] = entities
         return entities

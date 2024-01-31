@@ -14,14 +14,16 @@ class StateDescriptionFactory(BaseEntityDecorator):
     """Factory class for creating state descriptions from states."""
 
     def __init__(
-        self, entities: TopLevelEntities, global_options: GlobalOptions
+        self,
+        entities: TopLevelEntities,
+        global_options: GlobalOptions,
     ) -> None:
         """Create a state description factory for these entities.
 
         Args:
             entities (TopLevelEntities): The entities this class uses
                 internally.
-            global_options (GlobalOptions): The global options for the
+            global_options (GlobalOptions): The initial global options for the
                 description.
         """
         super().__init__(entities)
@@ -60,4 +62,5 @@ class StateDescriptionFactory(BaseEntityDecorator):
             self.state_pool.get_state_from_id(state_id),
             self.cell_configuration_factory.get_cell_configuration(state_id),
             self.global_options,
+            self.statistics.get_statistics(),
         )

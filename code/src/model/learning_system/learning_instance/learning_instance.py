@@ -68,6 +68,9 @@ class LearningInstance(BaseEntityDecorator):
         action = self.agent.evaluate_policy(last_state)
         next_state, reward = self.dynamics.next_state_id(last_state, action)
         self.agent.record_transition(last_state, action, next_state, reward)
+        self.statistics.record_transition(
+            last_state, action, next_state, reward
+        )
         self._current_state = next_state
         return (
             last_state,

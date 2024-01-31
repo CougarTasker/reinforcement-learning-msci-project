@@ -1,6 +1,9 @@
 from src.model.agents.base_agent import BaseAgent
 from src.model.dynamics.base_dynamics import BaseDynamics
 from src.model.dynamics.grid_world import GridWorld
+from src.model.learning_system.learning_instance.statistics_recorder import (
+    StatisticsRecorder,
+)
 from src.model.learning_system.top_entities import TopLevelEntities
 from src.model.state.state_pool import StatePool
 
@@ -60,3 +63,12 @@ class BaseEntityDecorator(object):
             BaseDynamics: the dynamics part of these entities
         """
         return self.entities.dynamics
+
+    @property
+    def statistics(self) -> StatisticsRecorder:
+        """Access the statistics of these entities.
+
+        Returns:
+            StatisticsRecorder: the statistics part of these entities
+        """
+        return self.entities.statistics

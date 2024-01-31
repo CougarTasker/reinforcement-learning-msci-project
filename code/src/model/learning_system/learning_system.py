@@ -5,7 +5,9 @@ from src.model.learning_system.global_options import (
     GlobalOptions,
     TopEntitiesOptions,
 )
-from src.model.learning_system.learning_instance import LearningInstance
+from src.model.learning_system.learning_instance.learning_instance import (
+    LearningInstance,
+)
 from src.model.learning_system.options import (
     AgentOptions,
     AutomaticOptions,

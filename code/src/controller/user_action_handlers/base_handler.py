@@ -2,7 +2,9 @@ from dataclasses import replace
 from enum import Enum
 
 from src.controller.user_action_bridge import UserActionMessage
-from src.model.learning_system.learning_instance import LearningInstance
+from src.model.learning_system.learning_instance.learning_instance import (
+    LearningInstance,
+)
 from src.model.learning_system.learning_system import LearningSystem
 
 

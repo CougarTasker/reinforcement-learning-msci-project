@@ -8,6 +8,8 @@ from src.model.learning_system.cell_configuration.cell_configuration import (
 from src.model.learning_system.global_options import GlobalOptions
 from src.model.state.state_instance import StateInstance
 
+from ..learning_instance.statistics_record import StatisticsRecord
+
 cell_config_listing = Dict[integer_position, CellConfiguration]
 
 
@@ -22,3 +24,4 @@ class StateDescription(object):
     state: StateInstance
     cell_config: cell_config_listing
     global_options: GlobalOptions
+    statistics: StatisticsRecord
