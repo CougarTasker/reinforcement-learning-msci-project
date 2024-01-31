@@ -876,6 +876,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../model/agents/q_learning/exploration_strategies/upper_confidence_bound/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upper Confidence Bound
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2857,7 +2878,8 @@
 
             <details class="quote">
               <summary>Source code in <code>src/view/display_state_v2/cell/main_icon_layer.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
+<span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -2911,10 +2933,7 @@
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MainIconLayer</span><span class="p">(</span><span class="n">BaseLayer</span><span class="p">):</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MainIconLayer</span><span class="p">(</span><span class="n">BaseLayer</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The layer responsible for drawing the background of the cell.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2942,8 +2961,6 @@
             <span class="k">case</span> <span class="p">(</span>
                 <span class="n">DisplayMode</span><span class="o">.</span><span class="n">action_value_global</span> <span class="o">|</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">action_value_local</span>
             <span class="p">):</span>
-                <span class="k">if</span> <span class="n">cell_entity</span> <span class="ow">is</span> <span class="n">CellEntity</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_cell_entity_icon</span><span class="p">(</span><span class="n">cell_entity</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
                 <span class="k">return</span> <span class="kc">None</span>
             <span class="k">case</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">best_action</span><span class="p">:</span>
                 <span class="n">best_action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_best_action</span><span class="p">()</span>
@@ -3029,7 +3046,10 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/display_state_v2/cell/main_icon_layer.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -3045,10 +3065,7 @@
 <span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_best_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Action</span><span class="p">]:</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_best_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Action</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the action that has the best value.</span>
 
 <span class="sd">    Returns:</span>
@@ -3146,7 +3163,8 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/display_state_v2/cell/main_icon_layer.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
+<span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
@@ -3168,10 +3186,7 @@
 <span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_main_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Image</span><span class="p">]:</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_main_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Image</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get what the main icon should be based upon the cell config.</span>
 
 <span class="sd">    Args:</span>
@@ -3188,8 +3203,6 @@
         <span class="k">case</span> <span class="p">(</span>
             <span class="n">DisplayMode</span><span class="o">.</span><span class="n">action_value_global</span> <span class="o">|</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">action_value_local</span>
         <span class="p">):</span>
-            <span class="k">if</span> <span class="n">cell_entity</span> <span class="ow">is</span> <span class="n">CellEntity</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_cell_entity_icon</span><span class="p">(</span><span class="n">cell_entity</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">case</span> <span class="n">DisplayMode</span><span class="o">.</span><span class="n">best_action</span><span class="p">:</span>
             <span class="n">best_action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_best_action</span><span class="p">()</span>
@@ -3221,13 +3234,13 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/display_state_v2/cell/main_icon_layer.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+<span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Draw the main icon.&quot;&quot;&quot;</span>
     <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cell_layout</span><span class="o">.</span><span class="n">get_bounding_box_size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounding_box</span><span class="p">)</span>
     <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_main_icon</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>

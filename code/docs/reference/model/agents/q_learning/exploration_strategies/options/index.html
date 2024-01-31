@@ -12,7 +12,7 @@
         <link rel="prev" href="../epsilon_greedy_strategy/">
       
       
-        <link rel="next" href="../../reward_replay_queue/">
+        <link rel="next" href="../upper_confidence_bound/">
       
       
       <link rel="icon" href="../../../../../../assets/images/favicon.png">
@@ -933,6 +933,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upper_confidence_bound/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upper Confidence Bound
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -2797,11 +2818,13 @@
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ExplorationStrategyOptions</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ExplorationStrategyOptions</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerates all exploration strategies.&quot;&quot;&quot;</span>
 
     <span class="n">not_applicable</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">epsilon_greedy</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">upper_confidence_bound</span> <span class="o">=</span> <span class="mi">2</span>
 </code></pre></div></td></tr></table></div>
             </details>
 

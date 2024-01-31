@@ -7,6 +7,9 @@ from .exploration_strategies.epsilon_greedy_strategy import (
     EpsilonGreedyStrategy,
 )
 from .exploration_strategies.options import ExplorationStrategyOptions
+from .exploration_strategies.upper_confidence_bound import (
+    UpperConfidenceBoundStrategy,
+)
 from .reward_replay_queue import RewardReplayQueue
 
 
@@ -50,6 +53,9 @@ class QLearningAgent(BaseAgent):
         match strategy:
             case ExplorationStrategyOptions.epsilon_greedy:
                 self.strategy = EpsilonGreedyStrategy(self)
+
+            case ExplorationStrategyOptions.upper_confidence_bound:
+                self.strategy = UpperConfidenceBoundStrategy(self)
             case _:
                 raise ValueError(f"Unknown strategy provided {strategy}")
 

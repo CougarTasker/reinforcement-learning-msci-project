@@ -26,16 +26,11 @@ class OptionControls(QGroupBox):
         enabled=False,
     )
 
-    q_learning = ComboWidgetState(
-        {"Epsilon-greedy": ExplorationStrategyOptions.epsilon_greedy},
-        "Epsilon-greedy",
-        enabled=True,
-    )
-
-    agent_strategy_states = {
-        AgentOptions.value_iteration: not_applicable,
-        AgentOptions.value_iteration_optimised: not_applicable,
-        AgentOptions.q_learning: q_learning,
+    exploration_strategy_options = {
+        "Epsilon Greedy": ExplorationStrategyOptions.epsilon_greedy,
+        "Upper Confidence Bound": (
+            ExplorationStrategyOptions.upper_confidence_bound
+        ),
     }
 
     dynamics_options = {
@@ -68,7 +63,7 @@ class OptionControls(QGroupBox):
 
         agent_strategy = control_factory.create_combo_state(
             self,
-            self.agent_strategy_states[AgentOptions.value_iteration],
+            self.not_applicable,
             UserAction.set_agent_strategy,
             self.__strategy_combo_responsive_options,
         )
@@ -87,6 +82,15 @@ class OptionControls(QGroupBox):
     def __strategy_combo_responsive_options(
         self, state: StateDescription
     ) -> ComboWidgetState:
-        return self.agent_strategy_states[
-            state.global_options.top_level_options.agent
-        ]
+        strategy = state.global_options.top_level_options.exploration_strategy
+        if strategy is ExplorationStrategyOptions.not_applicable:
+            return self.not_applicable
+
+        reverse_options = {
+            option: label
+            for label, option in self.exploration_strategy_options.items()
+        }
+
+        selected = reverse_options[strategy]
+
+        return ComboWidgetState(self.exploration_strategy_options, selected)

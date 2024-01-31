@@ -32,7 +32,7 @@ class EpsilonGreedyStrategy(BaseExplorationStrategy):
         if random() < self.config.exploration_ratio():
             return best_action
 
-        best_action_value = float("-inf")
+        best_action_value = -float("inf")
         for action in Action:
             action_value = self.agent.get_state_action_value(state, action)
             if action_value > best_action_value:

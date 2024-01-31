@@ -953,6 +953,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upper_confidence_bound/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upper Confidence Bound
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2885,7 +2906,7 @@ random.</p>
         <span class="k">if</span> <span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">exploration_ratio</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">best_action</span>
 
-        <span class="n">best_action_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">)</span>
+        <span class="n">best_action_value</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">Action</span><span class="p">:</span>
             <span class="n">action_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_state_action_value</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">action_value</span> <span class="o">&gt;</span> <span class="n">best_action_value</span><span class="p">:</span>
@@ -3019,7 +3040,7 @@ given chance of selecting any action.</p>
     <span class="k">if</span> <span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">exploration_ratio</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">best_action</span>
 
-    <span class="n">best_action_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">)</span>
+    <span class="n">best_action_value</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">Action</span><span class="p">:</span>
         <span class="n">action_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_state_action_value</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">action_value</span> <span class="o">&gt;</span> <span class="n">best_action_value</span><span class="p">:</span>

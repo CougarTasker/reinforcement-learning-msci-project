@@ -25,7 +25,7 @@ class ReinforcementLearningApp(QWidget):
 
         Args:
             controller (LearningSystemController): the controller
-            responsible for managing user actions.
+                responsible for managing user actions.
         """
         super().__init__(parent=None, f=Qt.WindowType.Window)
         self.setWindowTitle("RHUL MSci FYP - Reinforcement Learning App")

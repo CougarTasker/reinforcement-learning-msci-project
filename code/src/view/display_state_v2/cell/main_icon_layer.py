@@ -6,7 +6,6 @@ from src.model.dynamics.actions import Action
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
-from src.model.state.cell_entities import CellEntity
 from src.view.display_state_v2.cell.base_layer import BaseLayer
 
 
@@ -38,8 +37,6 @@ class MainIconLayer(BaseLayer):
             case (
                 DisplayMode.action_value_global | DisplayMode.action_value_local
             ):
-                if cell_entity is CellEntity.goal:
-                    return loader.get_cell_entity_icon(cell_entity, size)
                 return None
             case DisplayMode.best_action:
                 best_action = self.__get_best_action()

@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../q_learning/reward_replay_queue/">
+        <link rel="prev" href="../options/">
       
       
-        <link rel="next" href="agent/">
+        <link rel="next" href="../../reward_replay_queue/">
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
-        <title>Value Iteration - Reinforcement Learning App</title>
+        <title>Upper Confidence Bound - Reinforcement Learning App</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.50c56a3b.min.css">
       
       
 
@@ -43,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#src.model.agents.value_iteration" class="md-skip">
+        <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Value Iteration
+              Upper Confidence Bound
             
           </span>
         </div>
@@ -175,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -209,7 +209,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../../../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -254,7 +254,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../controller/" class="md-nav__link ">
+            <a href="../../../../../controller/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -285,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/base_bridge/" class="md-nav__link">
+      <a href="../../../../../controller/base_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -306,7 +306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/" class="md-nav__link">
+      <a href="../../../../../controller/learning_system_controller/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -327,7 +327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/state_update_bridge/" class="md-nav__link">
+      <a href="../../../../../controller/state_update_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -348,7 +348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_bridge/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -383,7 +383,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../controller/user_action_handlers/" class="md-nav__link ">
+            <a href="../../../../../controller/user_action_handlers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -414,7 +414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_handlers/auto_progress_handler/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_handlers/auto_progress_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -435,7 +435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_handlers/base_handler/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_handlers/base_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -456,7 +456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_handlers/progress_handler/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_handlers/progress_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -477,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_handlers/responsibility_chain/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_handlers/responsibility_chain/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -498,7 +498,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_handlers/set_options_handler/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_handlers/set_options_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -519,7 +519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/user_action_handlers/standard_handler/" class="md-nav__link">
+      <a href="../../../../../controller/user_action_handlers/standard_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -556,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../main/" class="md-nav__link">
+      <a href="../../../../../main/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -593,7 +593,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -640,7 +640,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -671,7 +671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base_agent/" class="md-nav__link">
+      <a href="../../../base_agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -689,24 +689,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../q_learning/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -723,7 +725,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_1_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_1_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_1_2">
             <span class="md-nav__icon md-icon"></span>
             Q Learning
@@ -737,7 +739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../q_learning/agent/" class="md-nav__link">
+      <a href="../../agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -758,7 +760,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../q_learning/dynamic_q_table/" class="md-nav__link">
+      <a href="../../dynamic_q_table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -776,24 +778,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_2_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../q_learning/exploration_strategies/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -810,7 +814,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_3_1_2_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="5" aria-labelledby="__nav_1_3_1_2_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_1_2_3">
             <span class="md-nav__icon md-icon"></span>
             Exploration Strategies
@@ -824,7 +828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
+      <a href="../base_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -845,7 +849,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
+      <a href="../epsilon_greedy_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -866,7 +870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../q_learning/exploration_strategies/options/" class="md-nav__link">
+      <a href="../options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -884,10 +888,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../q_learning/exploration_strategies/upper_confidence_bound/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Upper Confidence Bound
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -896,6 +918,75 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      upper_confidence_bound
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      UpperConfidenceBoundStrategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UpperConfidenceBoundStrategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.select_action" class="md-nav__link">
+    <span class="md-ellipsis">
+      select_action()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.upper_confidence_bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      upper_confidence_bound()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -916,7 +1007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../q_learning/reward_replay_queue/" class="md-nav__link">
+      <a href="../../reward_replay_queue/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,26 +1033,24 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_1_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../../value_iteration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -972,13 +1061,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_1_3_1_3" id="__nav_1_3_1_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_3_1_3" id="__nav_1_3_1_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_1_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_1_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_3_1_3">
             <span class="md-nav__icon md-icon"></span>
             Value Iteration
@@ -992,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agent/" class="md-nav__link">
+      <a href="../../../value_iteration/agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1013,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agent_optimised/" class="md-nav__link">
+      <a href="../../../value_iteration/agent_optimised/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1034,7 +1123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="dynamics_distribution/" class="md-nav__link">
+      <a href="../../../value_iteration/dynamics_distribution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1055,7 +1144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="types/" class="md-nav__link">
+      <a href="../../../value_iteration/types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1106,7 +1195,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../config/" class="md-nav__link ">
+            <a href="../../../../config/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1137,7 +1226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/agent_section/" class="md-nav__link">
+      <a href="../../../../config/agent_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1158,7 +1247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/base_section/" class="md-nav__link">
+      <a href="../../../../config/base_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1179,7 +1268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/grid_world_section/" class="md-nav__link">
+      <a href="../../../../config/grid_world_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1200,7 +1289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/gui_section/" class="md-nav__link">
+      <a href="../../../../config/gui_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1221,7 +1310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/reader/" class="md-nav__link">
+      <a href="../../../../config/reader/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1264,7 +1353,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../dynamics/" class="md-nav__link ">
+            <a href="../../../../dynamics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1295,7 +1384,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/actions/" class="md-nav__link">
+      <a href="../../../../dynamics/actions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1316,7 +1405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/base_dynamics/" class="md-nav__link">
+      <a href="../../../../dynamics/base_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1337,7 +1426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/cliff_dynamics/" class="md-nav__link">
+      <a href="../../../../dynamics/cliff_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1358,7 +1447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/collection_dynamics/" class="md-nav__link">
+      <a href="../../../../dynamics/collection_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1379,7 +1468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/grid_world/" class="md-nav__link">
+      <a href="../../../../dynamics/grid_world/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1422,7 +1511,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/" class="md-nav__link ">
+            <a href="../../../../learning_system/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1453,7 +1542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/base_entity_decorator/" class="md-nav__link">
+      <a href="../../../../learning_system/base_entity_decorator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1488,7 +1577,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/cell_configuration/" class="md-nav__link ">
+            <a href="../../../../learning_system/cell_configuration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1519,7 +1608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/cell_configuration/cell_configuration/" class="md-nav__link">
+      <a href="../../../../learning_system/cell_configuration/cell_configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1540,7 +1629,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/cell_configuration/cell_configuration_factory/" class="md-nav__link">
+      <a href="../../../../learning_system/cell_configuration/cell_configuration_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1561,7 +1650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/cell_configuration/cell_state_lookup/" class="md-nav__link">
+      <a href="../../../../learning_system/cell_configuration/cell_state_lookup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1590,7 +1679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/global_options/" class="md-nav__link">
+      <a href="../../../../learning_system/global_options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1611,7 +1700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/learning_instance/" class="md-nav__link">
+      <a href="../../../../learning_system/learning_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1632,7 +1721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/learning_system/" class="md-nav__link">
+      <a href="../../../../learning_system/learning_system/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1653,7 +1742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/options/" class="md-nav__link">
+      <a href="../../../../learning_system/options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1688,7 +1777,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/state_description/" class="md-nav__link ">
+            <a href="../../../../learning_system/state_description/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1719,7 +1808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/state_description/state_description/" class="md-nav__link">
+      <a href="../../../../learning_system/state_description/state_description/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1740,7 +1829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/state_description/state_description_factory/" class="md-nav__link">
+      <a href="../../../../learning_system/state_description/state_description_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1769,7 +1858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/top_entities/" class="md-nav__link">
+      <a href="../../../../learning_system/top_entities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1804,7 +1893,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/value_standardisation/" class="md-nav__link ">
+            <a href="../../../../learning_system/value_standardisation/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1835,7 +1924,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/value_standardisation/normaliser/" class="md-nav__link">
+      <a href="../../../../learning_system/value_standardisation/normaliser/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1856,7 +1945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
+      <a href="../../../../learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1877,7 +1966,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/value_standardisation/value_range/" class="md-nav__link">
+      <a href="../../../../learning_system/value_standardisation/value_range/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1928,7 +2017,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../state/" class="md-nav__link ">
+            <a href="../../../../state/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1959,7 +2048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/cell_entities/" class="md-nav__link">
+      <a href="../../../../state/cell_entities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1980,7 +2069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/state_builder/" class="md-nav__link">
+      <a href="../../../../state/state_builder/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2001,7 +2090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/state_instance/" class="md-nav__link">
+      <a href="../../../../state/state_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2022,7 +2111,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/state_pool/" class="md-nav__link">
+      <a href="../../../../state/state_pool/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2059,7 +2148,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../profile/" class="md-nav__link">
+      <a href="../../../../../profile/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2094,7 +2183,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/" class="md-nav__link ">
+            <a href="../../../../../view/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2139,7 +2228,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/controls/" class="md-nav__link ">
+            <a href="../../../../../view/controls/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2170,7 +2259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/controls/control_factory/" class="md-nav__link">
+      <a href="../../../../../view/controls/control_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2191,7 +2280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/controls/custom_button_widget/" class="md-nav__link">
+      <a href="../../../../../view/controls/custom_button_widget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2212,7 +2301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/controls/custom_combo_widget/" class="md-nav__link">
+      <a href="../../../../../view/controls/custom_combo_widget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2255,7 +2344,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/display_state_v2/" class="md-nav__link ">
+            <a href="../../../../../view/display_state_v2/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2300,7 +2389,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/display_state_v2/cell/" class="md-nav__link ">
+            <a href="../../../../../view/display_state_v2/cell/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2331,7 +2420,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/arrow_layer/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/cell/arrow_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2352,7 +2441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/background_layer/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/cell/background_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2373,7 +2462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/base_layer/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/cell/base_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2394,7 +2483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/cell/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/cell/cell/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2415,7 +2504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/cell_layout/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/cell/cell_layout/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2436,7 +2525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2465,7 +2554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/display/" class="md-nav__link">
+      <a href="../../../../../view/display_state_v2/display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2508,7 +2597,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/icons/" class="md-nav__link ">
+            <a href="../../../../../view/icons/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2539,7 +2628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/icons/load_icon/" class="md-nav__link">
+      <a href="../../../../../view/icons/load_icon/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2568,7 +2657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/interaction_controls/" class="md-nav__link">
+      <a href="../../../../../view/interaction_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2589,7 +2678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/option_controls/" class="md-nav__link">
+      <a href="../../../../../view/option_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2610,7 +2699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/state_publisher/" class="md-nav__link">
+      <a href="../../../../../view/state_publisher/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2631,7 +2720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/view_root_v2/" class="md-nav__link">
+      <a href="../../../../../view/view_root_v2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2685,11 +2774,53 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#src.model.agents.value_iteration" class="md-nav__link">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound" class="md-nav__link">
     <span class="md-ellipsis">
-      value_iteration
+      upper_confidence_bound
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      UpperConfidenceBoundStrategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UpperConfidenceBoundStrategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.select_action" class="md-nav__link">
+    <span class="md-ellipsis">
+      select_action()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.upper_confidence_bound" class="md-nav__link">
+    <span class="md-ellipsis">
+      upper_confidence_bound()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2708,17 +2839,14 @@
                   
 
 
-  <h1>Value Iteration</h1>
+  <h1>Upper Confidence Bound</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="src.model.agents.value_iteration"></a>
+<a id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound"></a>
   <div class="doc doc-contents first">
-  
-      <p>This package contains the implementation of value iteration.</p>
-<p>This value iteration is used to drive an optimal agent.</p>
 
   
 
@@ -2730,6 +2858,517 @@
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy" class="doc doc-heading">
+          <code>UpperConfidenceBoundStrategy</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy" href="../base_strategy/#src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy">BaseExplorationStrategy</a></code></p>
+
+  
+      <p>This class implements the upper confidence bound strategy.</p>
+<p>Selects the action that has the highest upper confidence bound (potential).</p>
+<p>In the case of ties this strategy selects randomly between the best options.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/upper_confidence_bound.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">UpperConfidenceBoundStrategy</span><span class="p">(</span><span class="n">BaseExplorationStrategy</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class implements the upper confidence bound strategy.</span>
+
+<span class="sd">    Selects the action that has the highest upper confidence bound (potential).</span>
+
+<span class="sd">    In the case of ties this strategy selects randomly between the best options.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">initial_action_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">exploration_bias</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">BaseAgent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the Exploration strategy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            agent (BaseAgent): The agent that uses this strategy.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">[</span>
+            <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Action</span><span class="p">],</span> <span class="nb">int</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_action_count</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">upper_confidence_bound</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the upper confidence bound for this state action pair.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state (int): the state to consider.</span>
+<span class="sd">            action (Action): the action to consider with the state.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: the upper confidence bound of the value of this state action</span>
+<span class="sd">                pair.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">q_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_state_action_value</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+        <span class="c1"># divide by zero adjustment</span>
+        <span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+        <span class="n">action_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)]</span> <span class="o">+</span> <span class="n">epsilon</span>
+        <span class="n">confidence_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span><span class="p">)</span> <span class="o">/</span> <span class="n">action_count</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">q_value</span> <span class="o">+</span> <span class="n">confidence_bound</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">exploration_bias</span>
+
+    <span class="k">def</span> <span class="nf">select_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Select the action based upon the upper confidence bound strategy.</span>
+
+<span class="sd">        this strategy picks the best action based upon the value table weighted</span>
+<span class="sd">        by a an uncertainty term.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state (int): the state to select the action for.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Action: the action the agent should select.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">best_action</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Action</span><span class="p">))</span>
+        <span class="n">best_upper_bound</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">Action</span><span class="p">:</span>
+            <span class="n">upper_bound</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">upper_bound</span> <span class="o">&gt;</span> <span class="n">best_upper_bound</span><span class="p">:</span>
+                <span class="n">best_upper_bound</span> <span class="o">=</span> <span class="n">upper_bound</span>
+                <span class="n">best_action</span> <span class="o">=</span> <span class="n">action</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__increment_state_action_count</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">best_action</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">best_action</span>
+
+    <span class="k">def</span> <span class="nf">__increment_state_action_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+        <span class="n">existing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Initialise the Exploration strategy.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>agent</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.agents.base_agent.BaseAgent" href="../../../base_agent/#src.model.agents.base_agent.BaseAgent">BaseAgent</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The agent that uses this strategy.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/upper_confidence_bound.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">BaseAgent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the Exploration strategy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        agent (BaseAgent): The agent that uses this strategy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">[</span>
+        <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Action</span><span class="p">],</span> <span class="nb">int</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_action_count</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.select_action" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">select_action</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Select the action based upon the upper confidence bound strategy.</p>
+<p>this strategy picks the best action based upon the value table weighted
+by a an uncertainty term.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>state</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the state to select the action for.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>Action</code></td>          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.dynamics.actions.Action" href="../../../../dynamics/actions/#src.model.dynamics.actions.Action">Action</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the action the agent should select.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/upper_confidence_bound.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">select_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Select the action based upon the upper confidence bound strategy.</span>
+
+<span class="sd">    this strategy picks the best action based upon the value table weighted</span>
+<span class="sd">    by a an uncertainty term.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (int): the state to select the action for.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Action: the action the agent should select.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">best_action</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Action</span><span class="p">))</span>
+    <span class="n">best_upper_bound</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">Action</span><span class="p">:</span>
+        <span class="n">upper_bound</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">upper_bound</span> <span class="o">&gt;</span> <span class="n">best_upper_bound</span><span class="p">:</span>
+            <span class="n">best_upper_bound</span> <span class="o">=</span> <span class="n">upper_bound</span>
+            <span class="n">best_action</span> <span class="o">=</span> <span class="n">action</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">__increment_state_action_count</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">best_action</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">best_action</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.upper_confidence_bound" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">upper_confidence_bound</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute the upper confidence bound for this state action pair.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>state</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the state to consider.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>action</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.dynamics.actions.Action" href="../../../../dynamics/actions/#src.model.dynamics.actions.Action">Action</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the action to consider with the state.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the upper confidence bound of the value of this state action
+pair.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/upper_confidence_bound.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">upper_confidence_bound</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the upper confidence bound for this state action pair.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (int): the state to consider.</span>
+<span class="sd">        action (Action): the action to consider with the state.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: the upper confidence bound of the value of this state action</span>
+<span class="sd">            pair.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">q_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_state_action_value</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+    <span class="c1"># divide by zero adjustment</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+    <span class="n">action_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)]</span> <span class="o">+</span> <span class="n">epsilon</span>
+    <span class="n">confidence_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span><span class="p">)</span> <span class="o">/</span> <span class="n">action_count</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">q_value</span> <span class="o">+</span> <span class="n">confidence_bound</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">exploration_bias</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
@@ -2785,10 +3424,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": [], "search": "../../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
     
   </body>

@@ -35,7 +35,7 @@ class BaseUserActionHandler(object):
 
         Args:
             user_action (UserActionMessage): the action the handler
-            should consider.
+                should consider.
 
         Returns:
             HandleResult: weather this handler has been successful.
