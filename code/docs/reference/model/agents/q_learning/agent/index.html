@@ -3032,7 +3032,10 @@
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningAgent</span><span class="p">(</span><span class="n">BaseAgent</span><span class="p">):</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningAgent</span><span class="p">(</span><span class="n">BaseAgent</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Agent that learns q-value table to make decisions.&quot;&quot;&quot;</span>
 
     <span class="n">replay_queue_length</span> <span class="o">=</span> <span class="mi">10</span>
@@ -3130,6 +3133,9 @@
 <span class="sd">            reward (float): the reward for performing this action</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">record_transition</span><span class="p">(</span>
+            <span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">observation_queue</span><span class="o">.</span><span class="n">add_observation</span><span class="p">(</span>
             <span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span>
         <span class="p">)</span>
@@ -3663,7 +3669,10 @@ use to select actions.</p>
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">previous_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">previous_action</span><span class="p">:</span> <span class="n">Action</span><span class="p">,</span>
@@ -3679,6 +3688,9 @@ use to select actions.</p>
 <span class="sd">        reward (float): the reward for performing this action</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="o">.</span><span class="n">record_transition</span><span class="p">(</span>
+        <span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span>
+    <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">observation_queue</span><span class="o">.</span><span class="n">add_observation</span><span class="p">(</span>
         <span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span>
     <span class="p">)</span>

@@ -76,6 +76,8 @@ class CustomComboWidget(QComboBox, BaseStateObserver):
         """
         if self.responsive_options_handler is not None:
             combo_state = self.responsive_options_handler(state)
+            if combo_state == self.state:
+                return
             self.__set_state(combo_state)
 
     def update_handler(self, text: str) -> None:

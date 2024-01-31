@@ -111,6 +111,9 @@ class QLearningAgent(BaseAgent):
             reward (float): the reward for performing this action
 
         """
+        self.strategy.record_transition(
+            previous_state, previous_action, new_state, reward
+        )
         self.observation_queue.add_observation(
             previous_state, previous_action, new_state, reward
         )

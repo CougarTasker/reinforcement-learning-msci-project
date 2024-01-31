@@ -898,6 +898,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy.record_transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      record_transition()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy.select_action" class="md-nav__link">
     <span class="md-ellipsis">
       select_action()
@@ -2793,6 +2802,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy.record_transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      record_transition()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy.select_action" class="md-nav__link">
     <span class="md-ellipsis">
       select_action()
@@ -2893,7 +2911,25 @@
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseExplorationStrategy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseExplorationStrategy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides the common base for different exploration strategies.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">BaseAgent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -2920,6 +2956,24 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__throw_not_implemented</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Action</span><span class="o">.</span><span class="n">up</span>
+
+    <span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">previous_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">previous_action</span><span class="p">:</span> <span class="n">Action</span><span class="p">,</span>
+        <span class="n">new_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">reward</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provide the strategy with the information from a transition.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            previous_state (int): the state before the action was taken</span>
+<span class="sd">            previous_action (Action): the action that was taken.</span>
+<span class="sd">            new_state (int): The resulting state after the action has been taken</span>
+<span class="sd">            reward (float): the reward for performing this action</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># not implemented</span>
 
     <span class="k">def</span> <span class="nf">__throw_not_implemented</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
@@ -3003,6 +3057,133 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">()</span><span class="o">.</span><span class="n">agent</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.agents.q_learning.exploration_strategies.base_strategy.BaseExplorationStrategy.record_transition" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">record_transition</span><span class="p">(</span><span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Provide the strategy with the information from a transition.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>previous_state</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the state before the action was taken</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>previous_action</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.dynamics.actions.Action" href="../../../../dynamics/actions/#src.model.dynamics.actions.Action">Action</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the action that was taken.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>new_state</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The resulting state after the action has been taken</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reward</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the reward for performing this action</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/base_strategy.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">previous_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">previous_action</span><span class="p">:</span> <span class="n">Action</span><span class="p">,</span>
+    <span class="n">new_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">reward</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide the strategy with the information from a transition.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        previous_state (int): the state before the action was taken</span>
+<span class="sd">        previous_action (Action): the action that was taken.</span>
+<span class="sd">        new_state (int): The resulting state after the action has been taken</span>
+<span class="sd">        reward (float): the reward for performing this action</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>

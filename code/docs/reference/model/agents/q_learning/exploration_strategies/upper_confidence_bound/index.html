@@ -961,6 +961,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.record_transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      record_transition()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.select_action" class="md-nav__link">
     <span class="md-ellipsis">
       select_action()
@@ -2802,6 +2811,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.record_transition" class="md-nav__link">
+    <span class="md-ellipsis">
+      record_transition()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.select_action" class="md-nav__link">
     <span class="md-ellipsis">
       select_action()
@@ -2951,7 +2969,20 @@
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">UpperConfidenceBoundStrategy</span><span class="p">(</span><span class="n">BaseExplorationStrategy</span><span class="p">):</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">UpperConfidenceBoundStrategy</span><span class="p">(</span><span class="n">BaseExplorationStrategy</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class implements the upper confidence bound strategy.</span>
 
 <span class="sd">    Selects the action that has the highest upper confidence bound (potential).</span>
@@ -3012,12 +3043,25 @@
             <span class="k">if</span> <span class="n">upper_bound</span> <span class="o">&gt;</span> <span class="n">best_upper_bound</span><span class="p">:</span>
                 <span class="n">best_upper_bound</span> <span class="o">=</span> <span class="n">upper_bound</span>
                 <span class="n">best_action</span> <span class="o">=</span> <span class="n">action</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">__increment_state_action_count</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">best_action</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">best_action</span>
 
-    <span class="k">def</span> <span class="nf">__increment_state_action_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">previous_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">previous_action</span><span class="p">:</span> <span class="n">Action</span><span class="p">,</span>
+        <span class="n">new_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">reward</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use transition information to update internal statics.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            previous_state (int): the state before the action was taken</span>
+<span class="sd">            previous_action (Action): the action that was taken.</span>
+<span class="sd">            new_state (int): The resulting state after the action has been taken</span>
+<span class="sd">            reward (float): the reward for performing this action</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">)</span>
         <span class="n">existing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -3119,6 +3163,141 @@
 
 
 
+<h3 id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.record_transition" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">record_transition</span><span class="p">(</span><span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">,</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Use transition information to update internal statics.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>previous_state</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the state before the action was taken</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>previous_action</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.dynamics.actions.Action" href="../../../../dynamics/actions/#src.model.dynamics.actions.Action">Action</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the action that was taken.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>new_state</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The resulting state after the action has been taken</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>reward</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the reward for performing this action</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/agents/q_learning/exploration_strategies/upper_confidence_bound.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">previous_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">previous_action</span><span class="p">:</span> <span class="n">Action</span><span class="p">,</span>
+    <span class="n">new_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">reward</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use transition information to update internal statics.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        previous_state (int): the state before the action was taken</span>
+<span class="sd">        previous_action (Action): the action that was taken.</span>
+<span class="sd">        new_state (int): The resulting state after the action has been taken</span>
+<span class="sd">        reward (float): the reward for performing this action</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">(</span><span class="n">previous_state</span><span class="p">,</span> <span class="n">previous_action</span><span class="p">)</span>
+    <span class="n">existing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">state_action_count</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">time_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
 <h3 id="src.model.agents.q_learning.exploration_strategies.upper_confidence_bound.UpperConfidenceBoundStrategy.select_action" class="doc doc-heading">
           <code class="highlight language-python"><span class="n">select_action</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></code>
 
@@ -3206,9 +3385,7 @@ by a an uncertainty term.</p>
 <span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">select_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">select_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Select the action based upon the upper confidence bound strategy.</span>
 
 <span class="sd">    this strategy picks the best action based upon the value table weighted</span>
@@ -3227,8 +3404,6 @@ by a an uncertainty term.</p>
         <span class="k">if</span> <span class="n">upper_bound</span> <span class="o">&gt;</span> <span class="n">best_upper_bound</span><span class="p">:</span>
             <span class="n">best_upper_bound</span> <span class="o">=</span> <span class="n">upper_bound</span>
             <span class="n">best_action</span> <span class="o">=</span> <span class="n">action</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">__increment_state_action_count</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">best_action</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">best_action</span>
 </code></pre></div></td></tr></table></div>
           </details>

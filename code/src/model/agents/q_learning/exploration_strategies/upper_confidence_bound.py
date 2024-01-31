@@ -72,12 +72,25 @@ class UpperConfidenceBoundStrategy(BaseExplorationStrategy):
             if upper_bound > best_upper_bound:
                 best_upper_bound = upper_bound
                 best_action = action
-
-        self.__increment_state_action_count(state, best_action)
         return best_action
 
-    def __increment_state_action_count(self, state: int, action: Action):
-        key = (state, action)
+    def record_transition(
+        self,
+        previous_state: int,
+        previous_action: Action,
+        new_state: int,
+        reward: float,
+    ) -> None:
+        """Use transition information to update internal statics.
+
+        Args:
+            previous_state (int): the state before the action was taken
+            previous_action (Action): the action that was taken.
+            new_state (int): The resulting state after the action has been taken
+            reward (float): the reward for performing this action
+
+        """
+        key = (previous_state, previous_action)
         existing = self.state_action_count[key]
         self.state_action_count[key] = existing + 1
         self.time_steps += 1

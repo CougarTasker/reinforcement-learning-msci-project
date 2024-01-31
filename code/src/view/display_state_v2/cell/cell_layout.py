@@ -4,10 +4,10 @@ from typing import Tuple
 class CellLayout(object):
     """Class for managing the layout and configuration of each cell."""
 
-    min_border_width: int = 6
+    min_border_width: int = 8
     min_padding: int = 2
     padding_ratio: float = 0.1
-    border_ratio: float = 0.05
+    border_ratio: float = 0.1
 
     def __init__(self, bounding_box: Tuple[int, int, int, int]):
         """Initialise the cell layout.
