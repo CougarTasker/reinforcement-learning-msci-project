@@ -19,6 +19,7 @@
 - [Week 17 (8/1/24) first week of term](#week-17-8124-first-week-of-term)
 - [Week 18 (15/1/24)](#week-18-15124)
 - [Week 19 (22/1/24)](#week-19-22124)
+- [Week 20 (29/1/24)](#week-20-29124)
 
 <!-- omit in toc -->
 ## Weeks
@@ -192,5 +193,19 @@
 ### Week 19 (22/1/24)
 
  - (Wed 24) 
-   - Implemented different exploration strategies for Q-learning
+   - Started Implementing different exploration strategies for Q-learning
+     - separating the exploration strategy from the Q-learning agent 
    - Added more detail to report
+ - (Thu 25) 
+ - (Fri 26)
+   - Reworked parts of the program to make different strategies configurable
+   - First Term two meeting with Anand. where we discussed what the term two focus of the project should be
+  
+### Week 20 (29/1/24)
+
+ - (Mon 29) worked on dynamics to improve consistency for comparisons
+ - (Tue 30) Implemented Upper confidence bound exploration strategy
+ - (Wed 31) added statistics system for recording and displaying the effectiveness of different algorithms.
+ - (Thu 01) 
+   - started hyper parameter tuning system 
+   - reviewed readings from Anand. 
