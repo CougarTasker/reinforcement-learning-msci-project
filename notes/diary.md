@@ -209,3 +209,4 @@
  - (Thu 01) 
    - started hyper parameter tuning system 
    - reviewed readings from Anand. 
+ - (Fri 02) Attended extension focus meeting.
