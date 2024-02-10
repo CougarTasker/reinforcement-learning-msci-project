@@ -16,10 +16,11 @@
 - [Week 11 (27/11/23)](#week-11-271123)
 - [Week 12 (04/12/23)](#week-12-041223)
 - [Christmas Break](#christmas-break)
-- [Week 17 (8/1/24) first week of term](#week-17-8124-first-week-of-term)
-- [Week 18 (15/1/24)](#week-18-15124)
-- [Week 19 (22/1/24)](#week-19-22124)
-- [Week 20 (29/1/24)](#week-20-29124)
+- [Week 17 (08/01/24) first week of term](#week-17-080124-first-week-of-term)
+- [Week 18 (15/01/24)](#week-18-150124)
+- [Week 19 (22/01/24)](#week-19-220124)
+- [Week 20 (29/01/24)](#week-20-290124)
+- [Week 21 (05/02/24)](#week-21-050224)
 
 <!-- omit in toc -->
 ## Weeks
@@ -181,16 +182,16 @@
    - Investigated graphics performance bottleneck
    - Tested different GUI framework
 
-### Week 17 (8/1/24) first week of term
+### Week 17 (08/01/24) first week of term
 
  - (Wed 10) Completed migration to new GUI framework
 
-### Week 18 (15/1/24)
+### Week 18 (15/01/24)
 
  - (Mon 15) Updated IPC method to reduce overhead and latency 
  - (Fri 19) Improved Software Engineering section of the report
 
-### Week 19 (22/1/24)
+### Week 19 (22/01/24)
 
  - (Wed 24) 
    - Started Implementing different exploration strategies for Q-learning
@@ -201,7 +202,7 @@
    - Reworked parts of the program to make different strategies configurable
    - First Term two meeting with Anand. where we discussed what the term two focus of the project should be
   
-### Week 20 (29/1/24)
+### Week 20 (29/01/24)
 
  - (Mon 29) worked on dynamics to improve consistency for comparisons
  - (Tue 30) Implemented Upper confidence bound exploration strategy
@@ -210,3 +211,17 @@
    - started hyper parameter tuning system 
    - reviewed readings from Anand. 
  - (Fri 02) Attended extension focus meeting.
+
+### Week 21 (05/02/24)
+
+This week was spent on a major overhaul to the configuration system to support hyper-parameters for tuning.
+
+ - (Mon 05) started investigating what changes were necessary
+ - (Wed 07) started to rework the configuration system
+   - adding missing parameters 
+   - reorganised configuration objects 
+   - created hyper-parameter listings
+ - (Fri 09) Updated top level entities
+   - reworked top level entities to make it easier to inject different parameters
+   - separated out top level entities to manage there complexity and to ease in their use separate from the main learning system
+ - (Sat 10) Fixed teething issues, updated tests 
