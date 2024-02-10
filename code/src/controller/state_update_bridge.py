@@ -24,4 +24,9 @@ class StateUpdateBridge(BaseBridge):
         Returns:
             Optional[StateDescription]: the new state, none if none has been set
         """
-        return self.get_item_non_blocking()
+        latest_state = None
+        state = self.get_item_non_blocking()
+        while state is not None:
+            latest_state = state
+            state = self.get_item_non_blocking()
+        return latest_state
