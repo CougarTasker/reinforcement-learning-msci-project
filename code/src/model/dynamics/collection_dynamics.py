@@ -43,9 +43,9 @@ class CollectionDynamics(BaseDynamics):
         """
         if self.spawn_positions is not None:
             return self.spawn_positions
-        agent_location = self.config.agent_location()
+        agent_location = self.config.agent_location
         self.spawn_positions = set()
-        while len(self.spawn_positions) < self.config.entity_count():
+        while len(self.spawn_positions) < self.config.entity_count:
             location = self.grid_world.random_in_bounds_cell()
             if location != agent_location:
                 self.spawn_positions.add(location)
@@ -62,13 +62,11 @@ class CollectionDynamics(BaseDynamics):
             StateInstance: the starting state.
 
         """
-        if not self.grid_world.is_in_bounds(self.config.agent_location()):
+        if not self.grid_world.is_in_bounds(self.config.agent_location):
             raise ValueError("config agent location outside of map bounds")
 
-        initial_state_builder = (
-            StateBuilder()
-            .set_agent_location(self.config.agent_location())
-            .set_energy(self.config.initial_energy())
+        initial_state_builder = StateBuilder().set_agent_location(
+            self.config.agent_location
         )
 
         for goal in self.get_spawn_positions():

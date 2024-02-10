@@ -9,6 +9,7 @@ from src.model.agents.q_learning.exploration_strategies.base_strategy import (
     BaseExplorationStrategy,
 )
 from src.model.dynamics.actions import Action
+from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 
 
 class UpperConfidenceBoundStrategy(BaseExplorationStrategy):
@@ -20,7 +21,6 @@ class UpperConfidenceBoundStrategy(BaseExplorationStrategy):
     """
 
     initial_action_count = 0
-    exploration_bias = 2
 
     def __init__(self, agent: BaseAgent) -> None:
         """Initialise the Exploration strategy.
@@ -34,6 +34,9 @@ class UpperConfidenceBoundStrategy(BaseExplorationStrategy):
             Tuple[int, Action], int
         ] = defaultdict(lambda: self.initial_action_count)
         self.time_steps = 1
+        self.exploration_bias = self.agent.hyper_parameters.get_value(
+            HyperParameter.ucb_exploration_bias
+        )
 
     def upper_confidence_bound(self, state: int, action: Action) -> float:
         """Compute the upper confidence bound for this state action pair.

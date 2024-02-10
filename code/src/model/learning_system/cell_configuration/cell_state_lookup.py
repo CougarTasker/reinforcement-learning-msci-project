@@ -48,7 +48,7 @@ class CellStateLookup(object):
             location_x, location_y = state.agent_location
             key = (location_x, location_y, state.entities)
             existing = self.cell_lookup_table.get(key, None)
-            if existing is None or existing.agent_energy < state.agent_energy:
+            if existing is None:
                 self.cell_lookup_table[key] = state
 
         return self.cell_lookup_table

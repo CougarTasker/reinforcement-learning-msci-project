@@ -8,3 +8,4 @@ class StatisticsRecord(object):
 
     time_step: int
     reward_history: List[float]
+    total_reward: float

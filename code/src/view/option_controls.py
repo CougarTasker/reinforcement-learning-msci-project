@@ -4,9 +4,12 @@ from src.controller.user_action_bridge import UserAction
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
-from src.model.learning_system.options import AgentOptions, DynamicsOptions
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
+)
+from src.model.learning_system.top_level_entities.options import (
+    AgentOptions,
+    DynamicsOptions,
 )
 from src.view.controls.control_factory import ControlFactory
 from src.view.controls.custom_combo_widget import ComboWidgetState

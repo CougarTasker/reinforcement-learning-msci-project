@@ -4,7 +4,7 @@ from typing import Any
 import toml
 from typing_extensions import Self
 
-from .agent_section import AgentConfig
+from .agent_section.agent_section import AgentConfig
 from .base_section import BaseConfigSection
 from .grid_world_section import GridWorldConfig
 from .gui_section import GUIConfig
@@ -46,6 +46,7 @@ class ConfigReader(object):
         with open(config_file_path, "r") as config_file:
             self.__raw_config = toml.load(config_file)
 
+    @property
     def grid_world(self) -> GridWorldConfig:
         """Get the configuration for the environment.
 
@@ -55,6 +56,7 @@ class ConfigReader(object):
         """
         return self.__initialise_section(GridWorldConfig())
 
+    @property
     def gui(self) -> GUIConfig:
         """Get the configuration for the GUI.
 
@@ -64,6 +66,7 @@ class ConfigReader(object):
         """
         return self.__initialise_section(GUIConfig())
 
+    @property
     def agent(self) -> AgentConfig:
         """Get the configuration for agents.
 

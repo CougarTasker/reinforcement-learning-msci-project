@@ -4,27 +4,29 @@ from src.model.dynamics.grid_world import GridWorld
 from src.model.learning_system.learning_instance.statistics_recorder import (
     StatisticsRecorder,
 )
-from src.model.learning_system.top_entities import TopLevelEntities
+from src.model.learning_system.top_level_entities.container import (
+    EntityContainer,
+)
 from src.model.state.state_pool import StatePool
 
 
 class BaseEntityDecorator(object):
     """Base class for Wrapper classes of the top level entities."""
 
-    def __init__(self, entities: TopLevelEntities) -> None:
+    def __init__(self, entities: EntityContainer) -> None:
         """Initialise the decorator.
 
         Args:
-            entities (TopLevelEntities): The entities the cell configuration is
+            entities (EntityContainer): The entities the cell configuration is
                 based upon.
         """
         self.entities = entities
 
-    def update_entities(self, entities: TopLevelEntities) -> None:
+    def update_entities(self, entities: EntityContainer) -> None:
         """Update the entities this wrapper uses internally.
 
         Args:
-            entities (TopLevelEntities): The new entities used internally
+            entities (EntityContainer): The new entities used internally
         """
         self.entities = entities
 

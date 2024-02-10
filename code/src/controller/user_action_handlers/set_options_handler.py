@@ -6,7 +6,7 @@ from src.controller.user_action_handlers.base_handler import (
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
-from src.model.learning_system.options import AgentOptions
+from src.model.learning_system.top_level_entities.options import AgentOptions
 
 
 class SetOptionsHandler(BaseUserActionHandler):

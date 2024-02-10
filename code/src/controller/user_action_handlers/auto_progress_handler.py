@@ -3,7 +3,7 @@ from src.controller.user_action_handlers.base_handler import (
     BaseUserActionHandler,
     HandleResult,
 )
-from src.model.learning_system.options import AutomaticOptions
+from src.model.learning_system.global_options import AutomaticOptions
 
 
 class AutoHandler(BaseUserActionHandler):

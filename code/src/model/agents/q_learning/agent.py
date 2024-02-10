@@ -1,4 +1,8 @@
-from ...config.agent_section import AgentConfig
+from src.model.hyperparameters.base_parameter_strategy import (
+    BaseHyperParameterStrategy,
+    HyperParameter,
+)
+
 from ...dynamics.actions import Action
 from ..base_agent import BaseAgent
 from .dynamic_q_table import DynamicQTable
@@ -16,23 +20,34 @@ from .reward_replay_queue import RewardReplayQueue
 class QLearningAgent(BaseAgent):
     """Agent that learns q-value table to make decisions."""
 
-    replay_queue_length = 10
-
     def __init__(
-        self, config: AgentConfig, strategy: ExplorationStrategyOptions
+        self,
+        hyper_parameters: BaseHyperParameterStrategy,
+        strategy: ExplorationStrategyOptions,
     ) -> None:
         """Initialise the agent.
 
         Args:
-            config (AgentConfig): the configuration for the agent.
+            hyper_parameters (BaseHyperParameterStrategy): the hyper parameters
+                the agent should use.
             strategy (ExplorationStrategyOptions): The strategy the agent should
                 use to select actions.
         """
-        super().__init__(config)
+        super().__init__(hyper_parameters)
+
+        replay_queue_length = hyper_parameters.get_integer_value(
+            HyperParameter.replay_queue_length
+        )
+        learning_rate = hyper_parameters.get_value(HyperParameter.learning_rate)
+        discount_rate = hyper_parameters.get_value(HyperParameter.discount_rate)
+        initial_optimism = hyper_parameters.get_value(
+            HyperParameter.initial_optimism
+        )
+
         self.strategy = self.set_exploration_strategy(strategy)
-        self.table = DynamicQTable(config.learning_rate())
+        self.table = DynamicQTable(learning_rate, initial_optimism)
         self.observation_queue = RewardReplayQueue(
-            self.table, self.replay_queue_length, config.discount_rate()
+            self.table, replay_queue_length, discount_rate
         )
 
     def set_exploration_strategy(

@@ -4,28 +4,30 @@ from typing_extensions import override
 
 from src.model.dynamics.actions import Action
 from src.model.learning_system.base_entity_decorator import BaseEntityDecorator
-from src.model.learning_system.top_entities import TopLevelEntities
+from src.model.learning_system.top_level_entities.container import (
+    EntityContainer,
+)
 
 
 class LearningInstance(BaseEntityDecorator):
     """An instance of an agent interacting with the environment."""
 
-    def __init__(self, entities: TopLevelEntities) -> None:
+    def __init__(self, entities: EntityContainer) -> None:
         """Create the learning instance.
 
         Args:
-            entities (TopLevelEntities): the top level entities used in this
+            entities (EntityContainer): the top level entities used in this
                 learning instance.
         """
         super().__init__(entities)
         self._current_state: Optional[int] = None
 
     @override
-    def update_entities(self, entities: TopLevelEntities) -> None:
+    def update_entities(self, entities: EntityContainer) -> None:
         """Update the entities used by this decorator.
 
         Args:
-            entities (TopLevelEntities): the new entities to use.
+            entities (EntityContainer): the new entities to use.
         """
         different_agent = self.entities.agent is not entities.agent
         different_dynamics = self.entities.dynamics is not entities.dynamics

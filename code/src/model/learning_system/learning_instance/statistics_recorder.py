@@ -8,7 +8,7 @@ class StatisticsRecorder(object):
 
     def __init__(self) -> None:
         """Initialise the statistics recorder."""
-        self.statistics = StatisticsRecord(0, [])
+        self.statistics = StatisticsRecord(0, [], 0)
 
     def get_statistics(self) -> StatisticsRecord:
         """Get the current statics information.
@@ -35,5 +35,7 @@ class StatisticsRecorder(object):
         """
         stats = self.statistics
         self.statistics = StatisticsRecord(
-            stats.time_step + 1, [*stats.reward_history, reward]
+            stats.time_step + 1,
+            [*stats.reward_history, reward],
+            stats.total_reward + reward,
         )

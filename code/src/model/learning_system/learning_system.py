@@ -2,21 +2,21 @@ from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
 from src.model.learning_system.global_options import (
+    AutomaticOptions,
     GlobalOptions,
     TopEntitiesOptions,
 )
 from src.model.learning_system.learning_instance.learning_instance import (
     LearningInstance,
 )
-from src.model.learning_system.options import (
-    AgentOptions,
-    AutomaticOptions,
-    DynamicsOptions,
-)
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )
-from src.model.learning_system.top_entities import TopEntitiesCache
+from src.model.learning_system.top_level_entities.cache import TopEntitiesCache
+from src.model.learning_system.top_level_entities.options import (
+    AgentOptions,
+    DynamicsOptions,
+)
 
 from ..agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,

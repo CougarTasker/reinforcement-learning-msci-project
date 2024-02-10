@@ -5,7 +5,9 @@ from typing_extensions import override
 from src.model.dynamics.actions import Action
 from src.model.dynamics.grid_world import integer_position
 from src.model.learning_system.base_entity_decorator import BaseEntityDecorator
-from src.model.learning_system.top_entities import TopLevelEntities
+from src.model.learning_system.top_level_entities.container import (
+    EntityContainer,
+)
 from src.model.learning_system.value_standardisation.normaliser import (
     StateValueNormaliser,
 )
@@ -22,22 +24,22 @@ from .cell_state_lookup import CellStateLookup
 class CellConfigurationFactory(BaseEntityDecorator):
     """Factory for creating cell configurations."""
 
-    def __init__(self, entities: TopLevelEntities) -> None:
+    def __init__(self, entities: EntityContainer) -> None:
         """Initialise the state Description factory.
 
         Args:
-            entities (TopLevelEntities): The entities the cell configuration is
+            entities (EntityContainer): The entities the cell configuration is
                 based upon.
         """
         super().__init__(entities)
         self.update_entities(entities)
 
     @override
-    def update_entities(self, entities: TopLevelEntities) -> None:
+    def update_entities(self, entities: EntityContainer) -> None:
         """Update the entities used by this decorator.
 
         Args:
-            entities (TopLevelEntities): the new entities to use.
+            entities (EntityContainer): the new entities to use.
         """
         super().update_entities(entities)
         self.cell_state_lookup = CellStateLookup(entities.dynamics)

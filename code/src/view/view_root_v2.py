@@ -4,7 +4,7 @@ from qdarktheme import setup_theme
 
 from src.controller.learning_system_controller import LearningSystemController
 from src.model.config.reader import ConfigReader
-from src.model.learning_system.options import AgentOptions
+from src.model.learning_system.top_level_entities.options import AgentOptions
 from src.view.controls.control_factory import ControlFactory
 from src.view.display_state_v2.display import DisplayState
 from src.view.interaction_controls import InteractionControls
@@ -49,10 +49,10 @@ class ReinforcementLearningApp(QWidget):
 
     def setup_config(self):
         """Set app properties from config."""
-        config = ConfigReader().gui()
-        setup_theme(config.appearance_mode())
-        width, height = config.initial_size().split("x")
-        self.resize(int(width), int(height))
+        config = ConfigReader().gui
+        setup_theme(config.appearance_mode)
+        width, height = config.initial_size
+        self.resize(width, height)
 
     def __create_tab_widget(self):
         main_tab_area = QTabWidget(self)

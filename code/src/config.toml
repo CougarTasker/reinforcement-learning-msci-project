@@ -2,21 +2,27 @@
 width = 8
 height = 5
 entity_count = 3
-[grid_world.energy]
-energy_capacity=10
-initial_energy=10
 [grid_world.agent_location]
 x = 3
 y = 2
 
 [agent]
 discount_rate = 0.9
-stopping_epsilon = 0.0001
-learning_rate = 0.1
+[agent.value_iteration]
 sample_count = 100
+stopping_epsilon = 0.0001
+[agent.q_learning]
+learning_rate = 0.1
+initial_optimism = 10.0
+replay_queue_length = 10
+[agent.q_learning.epsilon_greedy]
 exploration_ratio = 0.35
+[agent.q_learning.upper_confidence_bound]
+exploration_bias = 2.0
 
 [gui]
 appearance_mode = "dark"
 color_theme = "blue"
-initial_size = "800x600"
+[gui.initial_size]
+width = 800
+height = 600

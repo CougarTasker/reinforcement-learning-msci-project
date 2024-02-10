@@ -21,7 +21,7 @@ class CliffDynamics(BaseDynamics):
             config (GridWorldConfig): the configuration used by this dynamics.
         """
         super().__init__(config)
-        self.reset_location = (0, config.height() - 1)
+        self.reset_location = (0, config.height - 1)
 
     def is_stochastic(self) -> bool:
         """Determine weather the dynamics behave stochastically.
@@ -42,14 +42,14 @@ class CliffDynamics(BaseDynamics):
             StateInstance: the starting state.
 
         """
-        if not self.grid_world.is_in_bounds(self.config.agent_location()):
+        if not self.grid_world.is_in_bounds(self.config.agent_location):
             raise ValueError("config agent location outside of map bounds")
 
         initial_state_builder = StateBuilder().set_agent_location(
             self.reset_location
         )
-        cliff_y = self.config.height() - 1
-        cliff_end_x = self.config.width() - 1
+        cliff_y = self.config.height - 1
+        cliff_end_x = self.config.width - 1
         for cliff_x in range(1, cliff_end_x):
             position = (cliff_x, cliff_y)
             initial_state_builder.set_entity(position, CellEntity.warning)

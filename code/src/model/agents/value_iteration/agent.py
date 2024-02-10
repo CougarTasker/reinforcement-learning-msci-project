@@ -3,7 +3,11 @@ from typing import Optional
 
 import numpy as np
 
-from ...config.agent_section import AgentConfig
+from src.model.hyperparameters.base_parameter_strategy import (
+    BaseHyperParameterStrategy,
+    HyperParameter,
+)
+
 from ...dynamics.actions import Action
 from ...dynamics.base_dynamics import BaseDynamics
 from ..base_agent import BaseAgent
@@ -19,24 +23,33 @@ class ValueIterationAgent(BaseAgent):
 
     def __init__(
         self,
-        config: AgentConfig,
+        hyper_parameters: BaseHyperParameterStrategy,
         dynamics: BaseDynamics,
     ) -> None:
         """Initialise the agent.
 
         Args:
-            config (AgentConfig): the configuration for the agent.
+            hyper_parameters (BaseHyperParameterStrategy): the hyper parameters
+                the agent should use.
             dynamics (BaseDynamics): the dynamics function used to build the
                 value table and pick optimal actions
         """
-        super().__init__(config)
+        super().__init__(hyper_parameters)
         self.dynamics = dynamics
-        self.dynamics_distribution = DynamicsDistribution(
-            config.sample_count(), dynamics
+        self.stopping_epsilon = hyper_parameters.get_value(
+            HyperParameter.stopping_epsilon
         )
-        self.stopping_epsilon = config.stopping_epsilon()
-        self.discount_rate = config.discount_rate()
+        self.discount_rate = hyper_parameters.get_value(
+            HyperParameter.discount_rate
+        )
+        sample_count = hyper_parameters.get_integer_value(
+            HyperParameter.sample_count
+        )
         self.value_table: Optional[value_table_type] = None
+
+        self.dynamics_distribution = DynamicsDistribution(
+            sample_count, dynamics
+        )
 
     def get_value_table(self) -> value_table_type:
         """Get the value table for the provided dynamics.

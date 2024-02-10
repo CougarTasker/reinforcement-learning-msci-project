@@ -1,4 +1,4 @@
-from schema import Schema
+from typing import Tuple
 
 from .base_section import BaseConfigSection
 
@@ -8,19 +8,21 @@ class GUIConfig(BaseConfigSection):
 
     appearance_mode_property = "appearance_mode"
     color_theme_property = "color_theme"
-    initial_size_property = "initial_size"
+    initial_size_section = "initial_size"
+    width = "width"
+    height = "height"
 
     def __init__(self) -> None:
         """Instantiate Grid world section config."""
-        data_schema = Schema(
-            {
-                self.appearance_mode_property: str,
-                self.color_theme_property: str,
-                self.initial_size_property: str,
-            }
-        )
-        super().__init__("gui", data_schema)
+        data_schema = {
+            self.appearance_mode_property: str,
+            self.color_theme_property: str,
+            self.initial_size_section: {self.width: int, self.height: int},
+        }
 
+        super().__init__("gui", data_schema, [])
+
+    @property
     def appearance_mode(self) -> str:
         """Get the theme style, e.g. light or dark.
 
@@ -29,6 +31,7 @@ class GUIConfig(BaseConfigSection):
         """
         return self.configuration[self.appearance_mode_property]
 
+    @property
     def color_theme(self) -> str:
         """Get the theme color.
 
@@ -40,10 +43,12 @@ class GUIConfig(BaseConfigSection):
         """
         return self.configuration[self.color_theme_property]
 
-    def initial_size(self) -> str:
+    @property
+    def initial_size(self) -> Tuple[int, int]:
         """Get the initial size of the window.
 
         Returns:
-            str: the width and hight formatted as "100x100"
+            Tuple[int, int]: the width and hight of the window
         """
-        return self.configuration[self.initial_size_property]
+        section = self.configuration[self.initial_size_section]
+        return (section[self.width], section[self.height])

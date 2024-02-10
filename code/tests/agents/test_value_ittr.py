@@ -1,20 +1,29 @@
+from decimal import Decimal
+
 import numpy as np
 from numpy import testing
 
 from src.model.agents.value_iteration.agent import ValueIterationAgent
 from src.model.dynamics.actions import Action
+from src.model.hyperparameters.config_parameter_strategy import (
+    ParameterConfigStrategy,
+)
+from tests.state_value.mocks import TestAgentConfig
 
-from .agent_dynamics_mock import TestAgentConfig, VacuumDynamics, VacuumStates
+from .agent_dynamics_mock import VacuumDynamics, VacuumStates
 
 
 def test_get_table():
     test_config = TestAgentConfig()
-    discount_rate = test_config.discount_rate()
+    discount_rate = test_config.discount_rate
     test_dynamics = VacuumDynamics()
-    agent = ValueIterationAgent(test_config, test_dynamics)
-    difference_digits = test_config.stopping_epsilon()
-    table = agent.get_value_table()
 
+    agent = ValueIterationAgent(
+        ParameterConfigStrategy(test_config), test_dynamics
+    )
+
+    table = agent.get_value_table()
+    difference_digits = 3
     # final states should have no value as they are accumulate and provide no
     # more reward
     testing.assert_almost_equal(
@@ -51,7 +60,9 @@ def test_get_table():
 def test_policy_evaluation():
     test_config = TestAgentConfig()
     test_dynamics = VacuumDynamics()
-    agent = ValueIterationAgent(test_config, test_dynamics)
+    agent = ValueIterationAgent(
+        ParameterConfigStrategy(test_config), test_dynamics
+    )
 
     optimal_actions = {
         VacuumStates.ddl.value: Action.up,

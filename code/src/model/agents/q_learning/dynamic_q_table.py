@@ -1,22 +1,22 @@
 from typing import Dict, Tuple
 
-import numpy as np
-
 from src.model.dynamics.actions import Action
 
 
 class DynamicQTable(object):
     """Class for storing and recalling action-state values."""
 
-    def __init__(self, learning_rate: float) -> None:
+    def __init__(self, learning_rate: float, initial_optimism: float) -> None:
         """Initialise a new blank Q Table.
 
         Args:
             learning_rate (float): the rate at which to change the value with
                 each update.
+            initial_optimism (float): the initial value provided.
         """
         self.table: Dict[Tuple[int, Action], float] = {}
         self.learning_rate = learning_rate
+        self.initial_optimism = initial_optimism
 
     def update_value(self, state: int, action: Action, q_value: float):
         """Update the value at state and action based upon some observation.
@@ -64,7 +64,7 @@ class DynamicQTable(object):
         existing_value = self.table.get(key, None)
         if existing_value is not None:
             return existing_value
-        new_value = self.__default_value()
+        new_value = self.initial_optimism
         self.table[key] = new_value
         return new_value
 
@@ -85,7 +85,3 @@ class DynamicQTable(object):
             action_value = self.get_value(state, action)
             best_action_value = max(best_action_value, action_value)
         return best_action_value
-
-    def __default_value(self) -> float:
-        # optimistic value shown to reduce bias
-        return np.random.rand() * self.learning_rate + 1

@@ -1,17 +1,21 @@
-from ..config.agent_section import AgentConfig
+from src.model.hyperparameters.base_parameter_strategy import (
+    BaseHyperParameterStrategy,
+)
+
 from ..dynamics.actions import Action
 
 
 class BaseAgent(object):
     """Provides the common base for different learning agents."""
 
-    def __init__(self, config: AgentConfig) -> None:
+    def __init__(self, hyper_parameters: BaseHyperParameterStrategy) -> None:
         """Initialise an agent.
 
         Args:
-            config (AgentConfig): the configuration for the agent.
+            hyper_parameters (BaseHyperParameterStrategy): the hyper parameters
+                the agent should use.
         """
-        self.config = config
+        self.hyper_parameters = hyper_parameters
 
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.

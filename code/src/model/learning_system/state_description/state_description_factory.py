@@ -2,7 +2,9 @@ from typing_extensions import override
 
 from src.model.learning_system.base_entity_decorator import BaseEntityDecorator
 from src.model.learning_system.global_options import GlobalOptions
-from src.model.learning_system.top_entities import TopLevelEntities
+from src.model.learning_system.top_level_entities.container import (
+    EntityContainer,
+)
 
 from ..cell_configuration.cell_configuration_factory import (
     CellConfigurationFactory,
@@ -15,13 +17,13 @@ class StateDescriptionFactory(BaseEntityDecorator):
 
     def __init__(
         self,
-        entities: TopLevelEntities,
+        entities: EntityContainer,
         global_options: GlobalOptions,
     ) -> None:
         """Create a state description factory for these entities.
 
         Args:
-            entities (TopLevelEntities): The entities this class uses
+            entities (EntityContainer): The entities this class uses
                 internally.
             global_options (GlobalOptions): The initial global options for the
                 description.
@@ -31,11 +33,11 @@ class StateDescriptionFactory(BaseEntityDecorator):
         self.global_options = global_options
 
     @override
-    def update_entities(self, entities: TopLevelEntities) -> None:
+    def update_entities(self, entities: EntityContainer) -> None:
         """Update the entities used by this decorator.
 
         Args:
-            entities (TopLevelEntities): the new entities to use.
+            entities (EntityContainer): the new entities to use.
         """
         super().update_entities(entities)
         self.cell_configuration_factory.update_entities(entities)

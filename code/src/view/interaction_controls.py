@@ -4,7 +4,7 @@ from src.controller.user_action_bridge import UserAction
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
-from src.model.learning_system.options import AutomaticOptions
+from src.model.learning_system.global_options import AutomaticOptions
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )

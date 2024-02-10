@@ -1,5 +1,4 @@
 from src.model.agents.base_agent import BaseAgent
-from src.model.config.reader import ConfigReader
 from src.model.dynamics.actions import Action
 
 
@@ -13,7 +12,6 @@ class BaseExplorationStrategy(object):
             agent (BaseAgent): The agent that uses this strategy.
         """
         self.agent = agent
-        self.config = ConfigReader().agent()
 
     def select_action(self, state: int) -> Action:
         """Select the action based upon this strategy.

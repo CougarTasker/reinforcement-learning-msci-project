@@ -21,7 +21,7 @@ class BaseDynamics(object):
         """
         self.state_pool = StatePool()
         self.config = config
-        self.grid_world = GridWorld(config.width(), config.height())
+        self.grid_world = GridWorld(config.width, config.height)
 
     def is_stochastic(self) -> bool:
         """Determine weather the dynamics behave stochastically.
