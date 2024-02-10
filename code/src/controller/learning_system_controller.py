@@ -30,7 +30,9 @@ class LearningSystemController(object):
         Returns:
             Self: the factory.
         """
-        self.model_process = Process(target=self.model_mainloop, daemon=True)
+        self.model_process = Process(
+            target=self.model_mainloop, name="model_mainloop", daemon=True
+        )
         self.model_process.start()
         return self
 
