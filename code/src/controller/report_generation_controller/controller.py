@@ -37,7 +37,7 @@ class ReportGeneratorController(object):
             Self: the factory.
         """
         self.report_process = Process(
-            target=self.report_mainloop, name="report_mainloop", daemon=True
+            target=self.report_mainloop, name="report_mainloop"
         )
         self.report_process.start()
         return self
@@ -72,6 +72,7 @@ class ReportGeneratorController(object):
             new_report_count = len(current_state.available_reports)
             if new_report_count > report_count:
                 self.send_current_state()
+                report_count = new_report_count
 
             message = None
             if current_state.pending_requests:
@@ -88,6 +89,11 @@ class ReportGeneratorController(object):
                     request=ReportRequest.generate_report, payload=parameter
                 ):
                     report_generator.generate_report(parameter)
+
+                case ReportRequestMessage(
+                    request=ReportRequest.fetch_current_state
+                ):
+                    self.send_current_state()
                 case _:
                     raise RuntimeError("Unsupported report request.")
 

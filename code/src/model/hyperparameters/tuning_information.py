@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
@@ -18,10 +19,23 @@ class HyperParameterDescription(object):
     such as range of sensible values for a hyper parameter.
     """
 
+    name: str
     min_value: float
     max_value: float
     tuning_options: TopEntitiesOptions
     integer_valued: bool = False
+    display_name: Optional[str] = None
+
+    def get_display_name(self) -> str:
+        """Get the name of the parameter for display purposes.
+
+        Returns:
+            str: the name to use on plots.
+        """
+        if self.display_name is not None:
+            return self.display_name
+
+        return self.name
 
     def cap_samples(self, samples: int) -> int:
         """Cap the number of samples for integer ranges to avoid oversampling.
@@ -73,24 +87,32 @@ class TuningInformation(object):
 
     parameter_details = {
         HyperParameter.initial_optimism: HyperParameterDescription(
-            -10, 10, eg_options
+            "Initial Optimism",
+            -10 * 5,
+            100,
+            eg_options,
         ),
         HyperParameter.replay_queue_length: HyperParameterDescription(
-            0, 10, eg_options, integer_valued=True
+            "Replay Queue Length", 0, 10, eg_options, integer_valued=True
         ),
         HyperParameter.learning_rate: HyperParameterDescription(
+            "Learning Rate",
             0.1**3,
             0.1,
             eg_options,
         ),
         HyperParameter.discount_rate: HyperParameterDescription(
-            0.5, 1, eg_options
+            "Discount Rate", 0.5, 1, eg_options
         ),
         HyperParameter.eg_exploration_ratio: HyperParameterDescription(
-            0, 1, eg_options
+            "Epsilon-greedy Exploration Ratio",
+            0,
+            1,
+            eg_options,
+            display_name=r"$\epsilon$-greedy Exploration Ratio",
         ),
         HyperParameter.ucb_exploration_bias: HyperParameterDescription(
-            0, 5, ucb_options
+            "UCB Exploration Bias", 0, 5, ucb_options
         ),
     }
 

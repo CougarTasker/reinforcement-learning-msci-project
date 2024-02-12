@@ -759,6 +759,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.controller.report_generation_controller.report_request_bridge.ReportRequestBridge.request_current_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      request_current_state()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.controller.report_generation_controller.report_request_bridge.ReportRequestBridge.request_report" class="md-nav__link">
     <span class="md-ellipsis">
       request_report()
@@ -3376,11 +3385,53 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../view/main_tab_area/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Tab Area
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../view/option_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Option Controls
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/report_state_publisher/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report State Publisher
   </span>
   
 
@@ -3427,7 +3478,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9" >
         
           
           
@@ -3443,14 +3494,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_5_7" id="__nav_1_5_7_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_9" id="__nav_1_5_9_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_5_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_5_7">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9">
             <span class="md-nav__icon md-icon"></span>
             Statistics
           </label>
@@ -3468,6 +3519,48 @@
   
   <span class="md-ellipsis">
     Matplotlib Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_selector/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Selector
   </span>
   
 
@@ -3634,6 +3727,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.controller.report_generation_controller.report_request_bridge.ReportRequestBridge.request_current_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      request_current_state()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.controller.report_generation_controller.report_request_bridge.ReportRequestBridge.request_report" class="md-nav__link">
     <span class="md-ellipsis">
       request_report()
@@ -3725,11 +3827,13 @@
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReportRequest</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReportRequest</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerate all possible user actions.&quot;&quot;&quot;</span>
 
     <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">generate_report</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">fetch_current_state</span> <span class="o">=</span> <span class="mi">2</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -3774,8 +3878,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
-<span class="normal">26</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
@@ -3809,8 +3912,17 @@
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReportRequestBridge</span><span class="p">(</span><span class="n">BaseBridge</span><span class="p">):</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReportRequestBridge</span><span class="p">(</span><span class="n">BaseBridge</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Bridge for passing the report requests from the view to the model.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">request_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Request to receive the current state.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">ReportRequestMessage</span><span class="p">(</span><span class="n">ReportRequest</span><span class="o">.</span><span class="n">fetch_current_state</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">request_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Request to shutdown the report generator.&quot;&quot;&quot;</span>
@@ -3903,14 +4015,14 @@ request has been made.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
 <span class="normal">49</span>
-<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReportRequestMessage</span><span class="p">]:</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReportRequestMessage</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the latest requested report if there is one.</span>
 
 <span class="sd">    Returns:</span>
@@ -3967,15 +4079,15 @@ request has been made.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_request_blocking</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReportRequestMessage</span><span class="p">:</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_request_blocking</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReportRequestMessage</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the latest request, block until a request is made.</span>
 
 <span class="sd">    can be used while there is no pending requests to avoid computation.</span>
@@ -3984,6 +4096,35 @@ request has been made.</p>
 <span class="sd">        ReportRequestMessage: the latest request.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_blocking</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.controller.report_generation_controller.report_request_bridge.ReportRequestBridge.request_current_state" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">request_current_state</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Request to receive the current state.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">request_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Request to receive the current state.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">ReportRequestMessage</span><span class="p">(</span><span class="n">ReportRequest</span><span class="o">.</span><span class="n">fetch_current_state</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4039,16 +4180,16 @@ report for.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">request_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">request_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Request report from the generator.</span>
 
 <span class="sd">    Args:</span>
@@ -4082,9 +4223,9 @@ report for.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">request_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">request_shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Request to shutdown the report generator.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">ReportRequestMessage</span><span class="p">(</span><span class="n">ReportRequest</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
@@ -4126,12 +4267,12 @@ report for.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/controller/report_generation_controller/report_request_bridge.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
-<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ReportRequestMessage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Encapsulates a user action and its data.&quot;&quot;&quot;</span>
 

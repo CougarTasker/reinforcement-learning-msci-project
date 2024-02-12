@@ -12,6 +12,7 @@ class ReportRequest(Enum):
 
     end = 0
     generate_report = 1
+    fetch_current_state = 2
 
 
 @dataclass(frozen=True, slots=True)
@@ -24,6 +25,10 @@ class ReportRequestMessage(object):
 
 class ReportRequestBridge(BaseBridge):
     """Bridge for passing the report requests from the view to the model."""
+
+    def request_current_state(self) -> None:
+        """Request to receive the current state."""
+        self.add_item(ReportRequestMessage(ReportRequest.fetch_current_state))
 
     def request_shutdown(self) -> None:
         """Request to shutdown the report generator."""

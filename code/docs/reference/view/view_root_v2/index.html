@@ -3260,11 +3260,53 @@
   
   
     <li class="md-nav__item">
+      <a href="../main_tab_area/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Tab Area
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../option_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Option Controls
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report_state_publisher/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report State Publisher
   </span>
   
 
@@ -3311,7 +3353,7 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9" >
         
           
           
@@ -3327,14 +3369,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_5_7" id="__nav_1_5_7_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_5_9" id="__nav_1_5_9_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_5_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_5_7">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_5_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9">
             <span class="md-nav__icon md-icon"></span>
             Statistics
           </label>
@@ -3352,6 +3394,48 @@
   
   <span class="md-ellipsis">
     Matplotlib Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistics/report_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistics/report_selector/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Selector
   </span>
   
 
@@ -3647,7 +3731,8 @@
 
             <details class="quote">
               <summary>Source code in <code>src/view/view_root_v2.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
@@ -3688,19 +3773,7 @@
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReinforcementLearningApp</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReinforcementLearningApp</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This is the root of the applications main UI.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -3728,7 +3801,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">option_controls</span> <span class="o">=</span> <span class="n">OptionControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control_factory</span><span class="p">)</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">option_controls</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">main_tab_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_tab_widget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_tab_area</span> <span class="o">=</span> <span class="n">MainTabArea</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">publisher</span><span class="p">,</span> <span class="n">report_controller</span>
+        <span class="p">)</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_tab_area</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">setRowStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -3741,19 +3816,6 @@
         <span class="n">setup_theme</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">appearance_mode</span><span class="p">)</span>
         <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__create_tab_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">main_tab_area</span> <span class="o">=</span> <span class="n">QTabWidget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-        <span class="n">display_state</span> <span class="o">=</span> <span class="n">DisplayState</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">publisher</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">display_state</span><span class="p">)</span>
-        <span class="n">main_tab_area</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">display_state</span><span class="p">,</span> <span class="s2">&quot;Current State&quot;</span><span class="p">)</span>
-
-        <span class="n">reward_history</span> <span class="o">=</span> <span class="n">RewardHistory</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">publisher</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">reward_history</span><span class="p">)</span>
-        <span class="n">main_tab_area</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">reward_history</span><span class="p">,</span> <span class="s2">&quot;Reward History&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">main_tab_area</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -3833,7 +3895,8 @@ responsible for creating reports.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/view_root_v2.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">23</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
@@ -3863,7 +3926,8 @@ responsible for creating reports.</p>
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
-<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">main_controller</span><span class="p">:</span> <span class="n">LearningSystemController</span><span class="p">,</span>
     <span class="n">report_controller</span><span class="p">:</span> <span class="n">ReportGeneratorController</span><span class="p">,</span>
@@ -3888,7 +3952,9 @@ responsible for creating reports.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">option_controls</span> <span class="o">=</span> <span class="n">OptionControls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">control_factory</span><span class="p">)</span>
     <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">option_controls</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">main_tab_area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_tab_widget</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">main_tab_area</span> <span class="o">=</span> <span class="n">MainTabArea</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">publisher</span><span class="p">,</span> <span class="n">report_controller</span>
+    <span class="p">)</span>
     <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_tab_area</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">layout</span><span class="o">.</span><span class="n">setRowStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
@@ -3918,12 +3984,12 @@ responsible for creating reports.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/view_root_v2.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
-<span class="normal">56</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">setup_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">setup_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set app properties from config.&quot;&quot;&quot;</span>
     <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">()</span><span class="o">.</span><span class="n">gui</span>
     <span class="n">setup_theme</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">appearance_mode</span><span class="p">)</span>

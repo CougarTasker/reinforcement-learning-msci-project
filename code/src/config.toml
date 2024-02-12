@@ -12,7 +12,7 @@ discount_rate = 0.9
 sample_count = 100
 stopping_epsilon = 0.0001
 [agent.q_learning]
-learning_rate = 0.1
+learning_rate = 0.02
 initial_optimism = 10.0
 replay_queue_length = 10
 [agent.q_learning.epsilon_greedy]

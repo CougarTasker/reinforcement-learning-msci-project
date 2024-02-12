@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QGridLayout, QTabWidget, QWidget
+from PySide6.QtWidgets import QGridLayout, QWidget
 from qdarktheme import setup_theme
 
 from src.controller.learning_system_controller.controller import (
@@ -10,11 +10,10 @@ from src.controller.report_generation_controller.controller import (
 )
 from src.model.config.reader import ConfigReader
 from src.view.controls.control_factory import ControlFactory
-from src.view.display_state_v2.display import DisplayState
 from src.view.interaction_controls import InteractionControls
+from src.view.main_tab_area import MainTabArea
 from src.view.option_controls import OptionControls
 from src.view.state_publisher import StatePublisher
-from src.view.statistics.reward_history import RewardHistory
 
 
 class ReinforcementLearningApp(QWidget):
@@ -45,7 +44,9 @@ class ReinforcementLearningApp(QWidget):
         self.option_controls = OptionControls(self, control_factory)
         layout.addWidget(self.option_controls, 0, 0)
 
-        self.main_tab_area = self.__create_tab_widget()
+        self.main_tab_area = MainTabArea(
+            self, self.publisher, report_controller
+        )
         layout.addWidget(self.main_tab_area, 1, 0)
         layout.setRowStretch(1, 1)
 
@@ -58,16 +59,3 @@ class ReinforcementLearningApp(QWidget):
         setup_theme(config.appearance_mode)
         width, height = config.initial_size
         self.resize(width, height)
-
-    def __create_tab_widget(self):
-        main_tab_area = QTabWidget(self)
-
-        display_state = DisplayState(None)
-        self.publisher.subscribe(display_state)
-        main_tab_area.addTab(display_state, "Current State")
-
-        reward_history = RewardHistory(None)
-        self.publisher.subscribe(reward_history)
-        main_tab_area.addTab(reward_history, "Reward History")
-
-        return main_tab_area

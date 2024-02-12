@@ -21,15 +21,16 @@ from src.model.learning_system.top_level_entities.factory import EntityFactory
 class HyperParameterReportGenerator(object):
     """Class for creating hyper parameter tuning reports."""
 
-    worker_count = 5
-    iterations_per_worker = 100
-    samples = 10
+    worker_count = 8
+    iterations_per_worker = 500
+    samples = 200
+    runs = 25
 
     def __init__(self) -> None:
         """Initialise the report generator."""
         manager = Manager()
 
-        self.state = manager.Value(ReportState, ReportState(set(), {}))
+        self.state = manager.Value(ReportState, ReportState(None, set(), {}))
         self.state_lock = manager.Lock()
 
     def get_state(self) -> ReportState:
@@ -56,21 +57,31 @@ class HyperParameterReportGenerator(object):
             )
         with self.state_lock:
             state = self.state.get()
-            # skip redundant work.
-            if parameter in state.pending_requests:
+            self.state.set(state.report_requested(parameter))
+
+            pending = parameter in state.pending_requests
+            available = parameter in state.available_reports
+
+            if pending or available:
+                # skip redundant information
                 return
-            if parameter in state.available_reports:
-                return
-            self.state.set(state.add_pending_request(parameter))
 
         generator = Process(
-            target=self.__generate_report_thread,
+            target=self.generate_report_worker,
             name=f"report-generator {parameter.name}",
             args=(parameter,),
         )
         generator.start()
 
-    def __generate_report_thread(self, parameter: HyperParameter):
+    def generate_report_worker(self, parameter: HyperParameter):
+        """Generate a report for a given parameter.
+
+        this is the internal method that does the heavy lifting in a separate
+        thread. the public method should do all of the validation.
+
+        Args:
+            parameter (HyperParameter): the parameter to evaluate
+        """
         details = TuningInformation.get_parameter_details(parameter)
         samples = details.cap_samples(self.samples)
         progress_steps = np.linspace(0, 1, samples)
@@ -79,7 +90,7 @@ class HyperParameterReportGenerator(object):
 
         with Pool(processes=self.worker_count) as pool:
             y_axis = pool.starmap(
-                self.__test_value, zip(repeat(parameter), x_axis)
+                self.test_value, zip(repeat(parameter), x_axis)
             )
 
             report = HyperParameterReport(parameter, x_axis, y_axis)
@@ -88,18 +99,31 @@ class HyperParameterReportGenerator(object):
                 state = self.state.get()
                 self.state.set(state.complete_request(report))
 
-    def __test_value(
+    def test_value(
         self, parameter: HyperParameter, parameter_value: float
     ) -> float:
+        """Test a parameter and value combination.
+
+        Args:
+            parameter (HyperParameter): the parameter to test
+            parameter_value (float): the value for this parameter to assume
+
+        Returns:
+            float: the total reward under these conditions.
+        """
         details = TuningInformation.get_parameter_details(parameter)
         hyper_parameters = ParameterTuningStrategy(parameter, parameter_value)
-        entities = EntityFactory.create_entities(
-            details.tuning_options, hyper_parameters
-        )
 
-        learning_instance = LearningInstance(entities)
+        total_reward = 0
+        for _ in range(self.runs):
+            entities = EntityFactory.create_entities(
+                details.tuning_options, hyper_parameters
+            )
 
-        for _ in range(self.iterations_per_worker):
-            learning_instance.perform_action()
+            learning_instance = LearningInstance(entities)
 
-        return entities.statistics.get_statistics().total_reward
+            for _ in range(self.iterations_per_worker):
+                learning_instance.perform_action()
+            stats = entities.statistics.get_statistics()
+            total_reward += stats.total_reward
+        return total_reward / self.runs

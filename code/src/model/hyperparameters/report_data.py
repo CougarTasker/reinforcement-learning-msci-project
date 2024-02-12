@@ -1,5 +1,5 @@
-from dataclasses import dataclass
-from typing import Dict, List
+from dataclasses import dataclass, replace
+from typing import Dict, List, Optional
 
 from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 
@@ -17,10 +17,12 @@ class HyperParameterReport(object):
 class ReportState(object):
     """Contains the state of all the reports."""
 
+    current_report: Optional[HyperParameter]
     pending_requests: set[HyperParameter]
+
     available_reports: Dict[HyperParameter, HyperParameterReport]
 
-    def add_pending_request(self, request: HyperParameter) -> "ReportState":
+    def report_requested(self, request: HyperParameter) -> "ReportState":
         """Get the new state after a new request is made.
 
         Args:
@@ -29,14 +31,16 @@ class ReportState(object):
         Returns:
             ReportState: the current state of all reports
         """
-        if request in self.pending_requests:
-            return self
-        if request in self.available_reports:
-            return self
+        pending = request in self.pending_requests
+        available = request in self.available_reports
+        if pending or available:
+            if request is self.current_report:
+                return self
+            return replace(self, current_report=request)
 
         pending_requests = self.pending_requests.copy()
         pending_requests.add(request)
-        return ReportState(pending_requests, self.available_reports)
+        return ReportState(request, pending_requests, self.available_reports)
 
     def complete_request(self, report: HyperParameterReport) -> "ReportState":
         """Create the new state after a report is completed.
@@ -52,4 +56,6 @@ class ReportState(object):
         pending_requests.remove(parameter)
         available_reports = self.available_reports.copy()
         available_reports[parameter] = report
-        return ReportState(pending_requests, available_reports)
+        return ReportState(
+            self.current_report, pending_requests, available_reports
+        )

@@ -1,6 +1,8 @@
 from PySide6.QtWidgets import QGridLayout, QGroupBox, QWidget
 
-from src.controller.user_action_bridge import UserAction
+from src.controller.learning_system_controller.user_action_bridge import (
+    UserAction,
+)
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
