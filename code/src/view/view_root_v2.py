@@ -2,9 +2,13 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QTabWidget, QWidget
 from qdarktheme import setup_theme
 
-from src.controller.learning_system_controller import LearningSystemController
+from src.controller.learning_system_controller.controller import (
+    LearningSystemController,
+)
+from src.controller.report_generation_controller.controller import (
+    ReportGeneratorController,
+)
 from src.model.config.reader import ConfigReader
-from src.model.learning_system.top_level_entities.options import AgentOptions
 from src.view.controls.control_factory import ControlFactory
 from src.view.display_state_v2.display import DisplayState
 from src.view.interaction_controls import InteractionControls
@@ -16,26 +20,27 @@ from src.view.statistics.reward_history import RewardHistory
 class ReinforcementLearningApp(QWidget):
     """This is the root of the applications main UI."""
 
-    tab_labels = {
-        AgentOptions.value_iteration_optimised: "Value Iteration",
-        AgentOptions.q_learning: "Q-Learning",
-    }
-
-    def __init__(self, controller: LearningSystemController) -> None:
+    def __init__(
+        self,
+        main_controller: LearningSystemController,
+        report_controller: ReportGeneratorController,
+    ) -> None:
         """Instantiate the applications user interface.
 
         Args:
-            controller (LearningSystemController): the controller
-                responsible for managing user actions.
+            main_controller (LearningSystemController): the controller
+                responsible for managing the main learning system.
+            report_controller (ReportGeneratorController): the controller
+                responsible for creating reports.
         """
         super().__init__(parent=None, f=Qt.WindowType.Window)
         self.setWindowTitle("RHUL MSci FYP - Reinforcement Learning App")
         self.setup_config()
 
-        self.publisher = StatePublisher(self, controller)
+        self.publisher = StatePublisher(self, main_controller)
         layout = QGridLayout(self)
 
-        control_factory = ControlFactory(controller, self.publisher)
+        control_factory = ControlFactory(main_controller, self.publisher)
 
         self.option_controls = OptionControls(self, control_factory)
         layout.addWidget(self.option_controls, 0, 0)

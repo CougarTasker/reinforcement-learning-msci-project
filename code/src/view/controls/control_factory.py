@@ -2,8 +2,12 @@ from typing import Any, Dict, Optional
 
 from PySide6.QtWidgets import QWidget
 
-from src.controller.learning_system_controller import LearningSystemController
-from src.controller.user_action_bridge import UserAction
+from src.controller.learning_system_controller.controller import (
+    LearningSystemController,
+)
+from src.controller.learning_system_controller.user_action_bridge import (
+    UserAction,
+)
 from src.view.controls.custom_button_widget import (
     CustomButtonWidget,
     responsive_text_handler_type,

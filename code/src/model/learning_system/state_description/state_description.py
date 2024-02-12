@@ -15,7 +15,7 @@ cell_config_listing = Dict[integer_position, CellConfiguration]
 
 @dataclass
 class StateDescription(object):
-    """Compile together the dynamic static state information.
+    """Compile together the dynamic and static state information.
 
     Provides all of the state information in a picklable object for the view.
     """

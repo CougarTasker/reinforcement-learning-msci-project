@@ -6,17 +6,31 @@ import pstats
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication
 
-from src.controller.learning_system_controller import LearningSystemController
-from src.controller.user_action_bridge import UserAction
+from src.controller.learning_system_controller.controller import (
+    LearningSystemController,
+)
+from src.controller.learning_system_controller.user_action_bridge import (
+    UserAction,
+)
+from src.controller.report_generation_controller.controller import (
+    ReportGeneratorController,
+)
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
-from src.model.learning_system.global_options import GlobalOptions
-from src.model.learning_system.options import AgentOptions, DynamicsOptions
-from src.view.grid_world_view_v2.display_state_v2.display import DisplayState
+from src.model.learning_system.global_options import (
+    AutomaticOptions,
+    GlobalOptions,
+)
+from src.model.learning_system.top_level_entities.options import (
+    AgentOptions,
+    DynamicsOptions,
+    TopEntitiesOptions,
+)
+from src.view.display_state_v2.display import DisplayState
 from src.view.view_root_v2 import ReinforcementLearningApp
 
 from .model.learning_system.learning_system import LearningSystem
@@ -30,13 +44,16 @@ def one_process_profiling():
     The code in this method will be profiled by the application.
     """
     ls = LearningSystem()
-
+    top_level_options = TopEntitiesOptions(
+        AgentOptions.value_iteration_optimised,
+        DynamicsOptions.collection,
+        ExplorationStrategyOptions.not_applicable,
+    )
     ls.update_options(
         GlobalOptions(
-            AgentOptions.value_iteration_optimised,
-            DynamicsOptions.collection,
-            ExplorationStrategyOptions.not_applicable,
+            top_level_options,
             DisplayMode.state_value,
+            AutomaticOptions.automatic_playing,
         )
     )
 
@@ -47,7 +64,7 @@ def one_process_profiling():
 
     def loop():
         cs = ls.get_current_state()
-        display_state.set_state(cs)
+        display_state.visible_state_updated(cs)
         ls.learning_instance.perform_action()
 
     timer = QTimer(display_state)
@@ -61,13 +78,15 @@ def profiled_code():
 
     The code in this method will be profiled by the application.
     """
-    with LearningSystemController() as controller:
-        qt = QApplication()
-        app = ReinforcementLearningApp(controller)
-        controller.user_action_bridge.submit_action(UserAction.start_auto)
-        app.show()
-        app.resize(application_size, application_size)
-        qt.exec()
+    with LearningSystemController() as main_controller:
+        with ReportGeneratorController() as report_controller:
+            main_controller.user_action_bridge.submit_action(
+                UserAction.select_auto, AutomaticOptions.automatic_playing
+            )
+            qt = QApplication()
+            app = ReinforcementLearningApp(main_controller, report_controller)
+            app.show()
+            qt.exec()
 
 
 def profile():
