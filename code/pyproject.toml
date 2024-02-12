@@ -19,6 +19,7 @@ pyqtdarktheme = "^2.1.0"
 typing-extensions = "^4.9.0"
 pyzmq = "^25.1.2"
 matplotlib = "^3.8.2"
+seaborn = "^0.13.2"
 
 
 [tool.poetry.scripts]

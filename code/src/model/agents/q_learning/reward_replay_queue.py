@@ -14,7 +14,10 @@ class RewardReplayQueue(object):
     """
 
     def __init__(
-        self, q_table: DynamicQTable, queue_length: int, discount_rate: float
+        self,
+        q_table: DynamicQTable,
+        queue_length: int,
+        discount_rate: float,
     ) -> None:
         """Create a new replay queue.
 

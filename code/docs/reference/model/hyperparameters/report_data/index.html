@@ -1886,6 +1886,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.report_data.ReportState.update_report_progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_report_progress()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3498,12 +3507,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../view/statistics/report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3520,7 +3574,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_selector/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3529,6 +3625,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3690,6 +3794,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.report_data.ReportState.update_report_progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_report_progress()
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3816,10 +3929,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/hyperparameters/report_data.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -3861,12 +3971,38 @@
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ReportState</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Contains the state of all the reports.&quot;&quot;&quot;</span>
 
     <span class="n">current_report</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]</span>
-    <span class="n">pending_requests</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]</span>
+    <span class="n">pending_requests</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
 
     <span class="n">available_reports</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">,</span> <span class="n">HyperParameterReport</span><span class="p">]</span>
 
@@ -3887,8 +4023,31 @@
             <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_report</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
         <span class="n">pending_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">pending_requests</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">pending_requests</span><span class="p">[</span><span class="n">request</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">ReportState</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pending_requests</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_reports</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update_report_progress</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the progress marker for a pending report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            parameter (HyperParameter): the pending report</span>
+<span class="sd">            progress (float): the new progress of this report</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ReportState: the new state with the updated progress.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">parameter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">pending_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># if progress of an incomplete report is &gt;= 1 it can break</span>
+        <span class="c1"># a progress assumption made by the controller</span>
+        <span class="n">pending_requests</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">progress</span><span class="p">,</span> <span class="n">incomplete_progress_cap</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ReportState</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_report</span><span class="p">,</span> <span class="n">pending_requests</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_reports</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">complete_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report</span><span class="p">:</span> <span class="n">HyperParameterReport</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the new state after a report is completed.</span>
@@ -3901,7 +4060,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">parameter</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">parameter</span>
         <span class="n">pending_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">pending_requests</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="n">pending_requests</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
         <span class="n">available_reports</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_reports</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">available_reports</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">report</span>
         <span class="k">return</span> <span class="n">ReportState</span><span class="p">(</span>
@@ -3994,23 +4153,23 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/report_data.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">complete_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report</span><span class="p">:</span> <span class="n">HyperParameterReport</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">complete_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report</span><span class="p">:</span> <span class="n">HyperParameterReport</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the new state after a report is completed.</span>
 
 <span class="sd">    Args:</span>
@@ -4021,7 +4180,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parameter</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">parameter</span>
     <span class="n">pending_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">pending_requests</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+    <span class="n">pending_requests</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
     <span class="n">available_reports</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_reports</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">available_reports</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="n">report</span>
     <span class="k">return</span> <span class="n">ReportState</span><span class="p">(</span>
@@ -4105,10 +4264,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/report_data.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -4123,7 +4279,10 @@
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">report_requested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">report_requested</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the new state after a new request is made.</span>
 
 <span class="sd">    Args:</span>
@@ -4140,8 +4299,143 @@
         <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_report</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="n">pending_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-    <span class="n">pending_requests</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">pending_requests</span><span class="p">[</span><span class="n">request</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">return</span> <span class="n">ReportState</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pending_requests</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_reports</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.hyperparameters.report_data.ReportState.update_report_progress" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">update_report_progress</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">progress</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Update the progress marker for a pending report.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>parameter</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.HyperParameter" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.HyperParameter">HyperParameter</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the pending report</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>progress</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the new progress of this report</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>ReportState</code></td>          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.report_data.ReportState" href="#src.model.hyperparameters.report_data.ReportState">ReportState</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the new state with the updated progress.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/hyperparameters/report_data.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_report_progress</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">progress</span><span class="p">:</span> <span class="nb">float</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ReportState&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update the progress marker for a pending report.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        parameter (HyperParameter): the pending report</span>
+<span class="sd">        progress (float): the new progress of this report</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ReportState: the new state with the updated progress.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">parameter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="n">pending_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># if progress of an incomplete report is &gt;= 1 it can break</span>
+    <span class="c1"># a progress assumption made by the controller</span>
+    <span class="n">pending_requests</span><span class="p">[</span><span class="n">parameter</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">progress</span><span class="p">,</span> <span class="n">incomplete_progress_cap</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ReportState</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_report</span><span class="p">,</span> <span class="n">pending_requests</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_reports</span>
+    <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>

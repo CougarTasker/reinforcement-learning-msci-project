@@ -10,16 +10,24 @@ matplotlib.use("QtAgg")
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
 from matplotlib.pyplot import style, rcParams
+import seaborn as sns
 
-style.use("dark_background")
 
-# set transparent background
-rcParams.update(
-    {
+sns.set_theme(
+    style="darkgrid",
+    rc={
+        "axes.edgecolor": "white",
+        "axes.facecolor": ".2",
+        "axes.labelcolor": "white",
         "figure.facecolor": (0.0, 0.0, 0.0, 0),
-        "axes.facecolor": (0.0, 0.0, 0.0, 0),
-    }
+        "grid.color": "#202124",
+        "text.color": "white",
+        "xtick.color": "white",
+        "ytick.color": "white",
+        "figure.constrained_layout.use": True,
+    },
 )
+sns.set_context("notebook", rc={"grid.linewidth": 2})
 
 
 def create_canvas(figure: Figure) -> FigureCanvasQTAgg:

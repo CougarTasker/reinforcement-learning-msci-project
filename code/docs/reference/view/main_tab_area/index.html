@@ -3478,12 +3478,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../statistics/report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../statistics/report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistics/report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3500,7 +3545,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../statistics/report_selector/" class="md-nav__link">
+      <a href="../statistics/report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistics/report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3509,6 +3596,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3770,7 +3865,7 @@
         <span class="n">state_publisher</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">reward_history</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">reward_history</span><span class="p">,</span> <span class="s2">&quot;Reward History&quot;</span><span class="p">)</span>
 
-        <span class="n">report_display</span> <span class="o">=</span> <span class="n">ReportDisplay</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">report_controller</span><span class="p">)</span>
+        <span class="n">report_display</span> <span class="o">=</span> <span class="n">ReportContainer</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">report_controller</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">report_display</span><span class="p">,</span> <span class="s2">&quot;Hyper-Parameter Tuning&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -3916,7 +4011,7 @@ the report display tab.</p>
     <span class="n">state_publisher</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">reward_history</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">reward_history</span><span class="p">,</span> <span class="s2">&quot;Reward History&quot;</span><span class="p">)</span>
 
-    <span class="n">report_display</span> <span class="o">=</span> <span class="n">ReportDisplay</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">report_controller</span><span class="p">)</span>
+    <span class="n">report_display</span> <span class="o">=</span> <span class="n">ReportContainer</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">report_controller</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">addTab</span><span class="p">(</span><span class="n">report_display</span><span class="p">,</span> <span class="s2">&quot;Hyper-Parameter Tuning&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>

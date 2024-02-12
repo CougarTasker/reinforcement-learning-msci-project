@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../report_selector/">
+        <link rel="prev" href="../report_display/report_selector/">
       
       
         <link rel="next" href="../../view_root_v2/">
@@ -3411,12 +3411,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3433,7 +3478,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../report_selector/" class="md-nav__link">
+      <a href="../report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3442,6 +3529,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3894,7 +3989,7 @@
                 <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Moving Average, Width: </span><span class="si">{</span><span class="n">window_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
             <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__moving_average</span><span class="p">(</span>
@@ -4182,7 +4277,7 @@
             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Moving Average, Width: </span><span class="si">{</span><span class="n">window_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
           </details>

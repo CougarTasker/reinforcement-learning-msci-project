@@ -1890,6 +1890,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.evaluate_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      evaluate_value()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.generate_report" class="md-nav__link">
     <span class="md-ellipsis">
       generate_report()
@@ -1911,15 +1920,6 @@
   <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.get_state" class="md-nav__link">
     <span class="md-ellipsis">
       get_state()
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.test_value" class="md-nav__link">
-    <span class="md-ellipsis">
-      test_value()
     </span>
   </a>
   
@@ -3516,12 +3516,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../view/statistics/report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3538,7 +3583,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_selector/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3547,6 +3634,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3691,6 +3786,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.evaluate_value" class="md-nav__link">
+    <span class="md-ellipsis">
+      evaluate_value()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.generate_report" class="md-nav__link">
     <span class="md-ellipsis">
       generate_report()
@@ -3712,15 +3816,6 @@
   <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.get_state" class="md-nav__link">
     <span class="md-ellipsis">
       get_state()
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.report_generator.HyperParameterReportGenerator.test_value" class="md-nav__link">
-    <span class="md-ellipsis">
-      test_value()
     </span>
   </a>
   
@@ -3895,19 +3990,32 @@
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameterReportGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameterReportGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for creating hyper parameter tuning reports.&quot;&quot;&quot;</span>
 
     <span class="n">worker_count</span> <span class="o">=</span> <span class="mi">8</span>
-    <span class="n">iterations_per_worker</span> <span class="o">=</span> <span class="mi">500</span>
-    <span class="n">samples</span> <span class="o">=</span> <span class="mi">200</span>
-    <span class="n">runs</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="n">iterations_per_worker</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">runs</span> <span class="o">=</span> <span class="mi">5</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the report generator.&quot;&quot;&quot;</span>
         <span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">ReportState</span><span class="p">,</span> <span class="n">ReportState</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span> <span class="p">{}))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">ReportState</span><span class="p">,</span> <span class="n">ReportState</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{}))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReportState</span><span class="p">:</span>
@@ -3967,7 +4075,7 @@
 
         <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">worker_count</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
             <span class="n">y_axis</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">test_value</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_value</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">)</span>
             <span class="p">)</span>
 
             <span class="n">report</span> <span class="o">=</span> <span class="n">HyperParameterReport</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">)</span>
@@ -3976,10 +4084,10 @@
                 <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">complete_request</span><span class="p">(</span><span class="n">report</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">test_value</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">evaluate_value</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test a parameter and value combination.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate a parameter and value combination.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            parameter (HyperParameter): the parameter to test</span>
@@ -3992,6 +4100,9 @@
         <span class="n">hyper_parameters</span> <span class="o">=</span> <span class="n">ParameterTuningStrategy</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span>
 
         <span class="n">total_reward</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">run_progress_amount</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">)</span>
+
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
             <span class="n">entities</span> <span class="o">=</span> <span class="n">EntityFactory</span><span class="o">.</span><span class="n">create_entities</span><span class="p">(</span>
                 <span class="n">details</span><span class="o">.</span><span class="n">tuning_options</span><span class="p">,</span> <span class="n">hyper_parameters</span>
@@ -4003,6 +4114,16 @@
                 <span class="n">learning_instance</span><span class="o">.</span><span class="n">perform_action</span><span class="p">()</span>
             <span class="n">stats</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span>
             <span class="n">total_reward</span> <span class="o">+=</span> <span class="n">stats</span><span class="o">.</span><span class="n">total_reward</span>
+
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                <span class="n">new_progress</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">state</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="n">run_progress_amount</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+                    <span class="n">state</span><span class="o">.</span><span class="n">update_report_progress</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">new_progress</span><span class="p">)</span>
+                <span class="p">)</span>
         <span class="k">return</span> <span class="n">total_reward</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -4046,8 +4167,181 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the report generator.&quot;&quot;&quot;</span>
     <span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">ReportState</span><span class="p">,</span> <span class="n">ReportState</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="nb">set</span><span class="p">(),</span> <span class="p">{}))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Value</span><span class="p">(</span><span class="n">ReportState</span><span class="p">,</span> <span class="n">ReportState</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">{},</span> <span class="p">{}))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.hyperparameters.report_generator.HyperParameterReportGenerator.evaluate_value" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">evaluate_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Evaluate a parameter and value combination.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>parameter</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.HyperParameter" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.HyperParameter">HyperParameter</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the parameter to test</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>parameter_value</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the value for this parameter to assume</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the total reward under these conditions.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/hyperparameters/report_generator.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_value</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate a parameter and value combination.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        parameter (HyperParameter): the parameter to test</span>
+<span class="sd">        parameter_value (float): the value for this parameter to assume</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: the total reward under these conditions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">details</span> <span class="o">=</span> <span class="n">TuningInformation</span><span class="o">.</span><span class="n">get_parameter_details</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+    <span class="n">hyper_parameters</span> <span class="o">=</span> <span class="n">ParameterTuningStrategy</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span>
+
+    <span class="n">total_reward</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">run_progress_amount</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
+        <span class="n">entities</span> <span class="o">=</span> <span class="n">EntityFactory</span><span class="o">.</span><span class="n">create_entities</span><span class="p">(</span>
+            <span class="n">details</span><span class="o">.</span><span class="n">tuning_options</span><span class="p">,</span> <span class="n">hyper_parameters</span>
+        <span class="p">)</span>
+
+        <span class="n">learning_instance</span> <span class="o">=</span> <span class="n">LearningInstance</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations_per_worker</span><span class="p">):</span>
+            <span class="n">learning_instance</span><span class="o">.</span><span class="n">perform_action</span><span class="p">()</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span>
+        <span class="n">total_reward</span> <span class="o">+=</span> <span class="n">stats</span><span class="o">.</span><span class="n">total_reward</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="n">new_progress</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">state</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="o">+</span> <span class="n">run_progress_amount</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+                <span class="n">state</span><span class="o">.</span><span class="n">update_report_progress</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">new_progress</span><span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">total_reward</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4282,7 +4576,7 @@ thread. the public method should do all of the validation.</p>
 
     <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">worker_count</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
         <span class="n">y_axis</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">test_value</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_value</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="n">report</span> <span class="o">=</span> <span class="n">HyperParameterReport</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">)</span>
@@ -4353,153 +4647,6 @@ thread. the public method should do all of the validation.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span>
-</code></pre></div></td></tr></table></div>
-          </details>
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-function">
-
-
-
-
-<h3 id="src.model.hyperparameters.report_generator.HyperParameterReportGenerator.test_value" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">test_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span></code>
-
-</h3>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Test a parameter and value combination.</p>
-
-
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>parameter</code></td>
-          <td>
-                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.HyperParameter" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.HyperParameter">HyperParameter</a></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>the parameter to test</p>
-            </div>
-          </td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-        <tr>
-          <td><code>parameter_value</code></td>
-          <td>
-                <code>float</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>the value for this parameter to assume</p>
-            </div>
-          </td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-
-
-  <p><strong>Returns:</strong></p>
-  <table>
-    <thead>
-      <tr>
-<th>Name</th>        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-<td><code>float</code></td>          <td>
-                <code>float</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>the total reward under these conditions.</p>
-            </div>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-          <details class="quote">
-            <summary>Source code in <code>src/model/hyperparameters/report_generator.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">test_value</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test a parameter and value combination.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        parameter (HyperParameter): the parameter to test</span>
-<span class="sd">        parameter_value (float): the value for this parameter to assume</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        float: the total reward under these conditions.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">details</span> <span class="o">=</span> <span class="n">TuningInformation</span><span class="o">.</span><span class="n">get_parameter_details</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
-    <span class="n">hyper_parameters</span> <span class="o">=</span> <span class="n">ParameterTuningStrategy</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span>
-
-    <span class="n">total_reward</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
-        <span class="n">entities</span> <span class="o">=</span> <span class="n">EntityFactory</span><span class="o">.</span><span class="n">create_entities</span><span class="p">(</span>
-            <span class="n">details</span><span class="o">.</span><span class="n">tuning_options</span><span class="p">,</span> <span class="n">hyper_parameters</span>
-        <span class="p">)</span>
-
-        <span class="n">learning_instance</span> <span class="o">=</span> <span class="n">LearningInstance</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iterations_per_worker</span><span class="p">):</span>
-            <span class="n">learning_instance</span><span class="o">.</span><span class="n">perform_action</span><span class="p">()</span>
-        <span class="n">stats</span> <span class="o">=</span> <span class="n">entities</span><span class="o">.</span><span class="n">statistics</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span>
-        <span class="n">total_reward</span> <span class="o">+=</span> <span class="n">stats</span><span class="o">.</span><span class="n">total_reward</span>
-    <span class="k">return</span> <span class="n">total_reward</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>

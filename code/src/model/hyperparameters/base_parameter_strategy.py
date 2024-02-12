@@ -45,8 +45,11 @@ class BaseHyperParameterStrategy(object):
             int: The value of this hyper parameter.
         """
         parameter_value = self.get_value(parameter)
-        if isinstance(parameter_value, int):
-            return parameter_value
+        # unfortunately this is one of the best ways to do this in python.
+        int_parameter_value = int(parameter_value)
+        if int_parameter_value == parameter_value:
+            return int_parameter_value
+
         raise TypeError(
             f"parameter {parameter.name} did not have an integer type \n"
         )

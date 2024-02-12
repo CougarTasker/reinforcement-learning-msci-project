@@ -3545,12 +3545,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../../view/statistics/report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../view/statistics/report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3567,7 +3612,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../view/statistics/report_selector/" class="md-nav__link">
+      <a href="../../../../view/statistics/report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3576,6 +3663,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -4023,8 +4118,8 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the dynamics distribution.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            per_state_sample_count (int): the number of samples to collect from</span>
-<span class="sd">                each state, for deterministic dynamics only one is needed.</span>
+<span class="sd">            per_state_sample_count (int): the number of samples to collect</span>
+<span class="sd">                from each state, for deterministic dynamics only one is needed.</span>
 <span class="sd">            dynamics (BaseDynamics): the dynamics to get the distribution for.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="p">(</span>
@@ -4050,7 +4145,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">observed_states</span><span class="p">:</span> <span class="n">DefaultDict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">_iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span><span class="p">):</span>  <span class="c1"># noqa: WPS122</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span><span class="p">):</span>
             <span class="n">next_id</span><span class="p">,</span> <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">next_state_id</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
             <span class="n">observed_states</span><span class="p">[</span><span class="n">next_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
 
@@ -4237,8 +4332,8 @@
           </td>
           <td>
             <div class="doc-md-description">
-              <p>the number of samples to collect from
-each state, for deterministic dynamics only one is needed.</p>
+              <p>the number of samples to collect
+from each state, for deterministic dynamics only one is needed.</p>
             </div>
           </td>
           <td>
@@ -4286,8 +4381,8 @@ each state, for deterministic dynamics only one is needed.</p>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the dynamics distribution.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        per_state_sample_count (int): the number of samples to collect from</span>
-<span class="sd">            each state, for deterministic dynamics only one is needed.</span>
+<span class="sd">        per_state_sample_count (int): the number of samples to collect</span>
+<span class="sd">            from each state, for deterministic dynamics only one is needed.</span>
 <span class="sd">        dynamics (BaseDynamics): the dynamics to get the distribution for.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span> <span class="o">=</span> <span class="p">(</span>
@@ -4591,7 +4686,7 @@ but this is not within scope.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">observed_states</span><span class="p">:</span> <span class="n">DefaultDict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">_iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span><span class="p">):</span>  <span class="c1"># noqa: WPS122</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_count</span><span class="p">):</span>
         <span class="n">next_id</span><span class="p">,</span> <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">next_state_id</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
         <span class="n">observed_states</span><span class="p">[</span><span class="n">next_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
 

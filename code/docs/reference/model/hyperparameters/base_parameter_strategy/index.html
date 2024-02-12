@@ -3498,12 +3498,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../view/statistics/report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3520,7 +3565,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_selector/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3529,6 +3616,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3791,7 +3886,10 @@
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseHyperParameterStrategy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseHyperParameterStrategy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The base class for hyper parameter managers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -3822,8 +3920,11 @@
 <span class="sd">            int: The value of this hyper parameter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">parameter_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameter_value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">parameter_value</span>
+        <span class="c1"># unfortunately this is one of the best ways to do this in python.</span>
+        <span class="n">int_parameter_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parameter_value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">int_parameter_value</span> <span class="o">==</span> <span class="n">parameter_value</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">int_parameter_value</span>
+
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;parameter </span><span class="si">{</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> did not have an integer type </span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="p">)</span>
@@ -3960,7 +4061,10 @@
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_integer_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_integer_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the value of a hyper parameter that is an integer.</span>
 
 <span class="sd">    Args:</span>
@@ -3973,8 +4077,11 @@
 <span class="sd">        int: The value of this hyper parameter.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parameter_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameter_value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">parameter_value</span>
+    <span class="c1"># unfortunately this is one of the best ways to do this in python.</span>
+    <span class="n">int_parameter_value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parameter_value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">int_parameter_value</span> <span class="o">==</span> <span class="n">parameter_value</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">int_parameter_value</span>
+
     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;parameter </span><span class="si">{</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> did not have an integer type </span><span class="se">\n</span><span class="s2">&quot;</span>
     <span class="p">)</span>

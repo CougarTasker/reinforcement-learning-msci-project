@@ -65,14 +65,15 @@ class ReportGeneratorController(object):
         request_bridge = self.report_request_bridge
         report_generator = self.report_generator
 
-        report_count = 0  # number of generated reports
+        work_done = 0  # work done on complete and partial reports
         while True:
             current_state = report_generator.get_state()
-
-            new_report_count = len(current_state.available_reports)
-            if new_report_count > report_count:
+            new_work_done = len(current_state.available_reports) + sum(
+                current_state.pending_requests.values()
+            )
+            if new_work_done > work_done:
                 self.send_current_state()
-                report_count = new_report_count
+                work_done = new_work_done
 
             message = None
             if current_state.pending_requests:

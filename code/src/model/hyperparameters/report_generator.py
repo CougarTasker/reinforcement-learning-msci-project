@@ -22,15 +22,15 @@ class HyperParameterReportGenerator(object):
     """Class for creating hyper parameter tuning reports."""
 
     worker_count = 8
-    iterations_per_worker = 500
-    samples = 200
-    runs = 25
+    iterations_per_worker = 100
+    samples = 100
+    runs = 5
 
     def __init__(self) -> None:
         """Initialise the report generator."""
         manager = Manager()
 
-        self.state = manager.Value(ReportState, ReportState(None, set(), {}))
+        self.state = manager.Value(ReportState, ReportState(None, {}, {}))
         self.state_lock = manager.Lock()
 
     def get_state(self) -> ReportState:
@@ -90,7 +90,7 @@ class HyperParameterReportGenerator(object):
 
         with Pool(processes=self.worker_count) as pool:
             y_axis = pool.starmap(
-                self.test_value, zip(repeat(parameter), x_axis)
+                self.evaluate_value, zip(repeat(parameter), x_axis)
             )
 
             report = HyperParameterReport(parameter, x_axis, y_axis)
@@ -99,10 +99,10 @@ class HyperParameterReportGenerator(object):
                 state = self.state.get()
                 self.state.set(state.complete_request(report))
 
-    def test_value(
+    def evaluate_value(
         self, parameter: HyperParameter, parameter_value: float
     ) -> float:
-        """Test a parameter and value combination.
+        """Evaluate a parameter and value combination.
 
         Args:
             parameter (HyperParameter): the parameter to test
@@ -115,6 +115,9 @@ class HyperParameterReportGenerator(object):
         hyper_parameters = ParameterTuningStrategy(parameter, parameter_value)
 
         total_reward = 0
+
+        run_progress_amount = 1 / (self.samples * self.runs)
+
         for _ in range(self.runs):
             entities = EntityFactory.create_entities(
                 details.tuning_options, hyper_parameters
@@ -126,4 +129,14 @@ class HyperParameterReportGenerator(object):
                 learning_instance.perform_action()
             stats = entities.statistics.get_statistics()
             total_reward += stats.total_reward
+
+            with self.state_lock:
+                state = self.state.get()
+                new_progress = (
+                    state.pending_requests.get(parameter, 1)
+                    + run_progress_amount
+                )
+                self.state.set(
+                    state.update_report_progress(parameter, new_progress)
+                )
         return total_reward / self.runs

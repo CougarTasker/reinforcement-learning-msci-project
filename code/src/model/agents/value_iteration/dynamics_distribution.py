@@ -29,8 +29,8 @@ class DynamicsDistribution(object):
         """Initialise the dynamics distribution.
 
         Args:
-            per_state_sample_count (int): the number of samples to collect from
-                each state, for deterministic dynamics only one is needed.
+            per_state_sample_count (int): the number of samples to collect
+                from each state, for deterministic dynamics only one is needed.
             dynamics (BaseDynamics): the dynamics to get the distribution for.
         """
         self.sample_count = (
@@ -56,7 +56,7 @@ class DynamicsDistribution(object):
         """
         observed_states: DefaultDict[int, List[float]] = defaultdict(list)
 
-        for _iteration in range(self.sample_count):  # noqa: WPS122
+        for _ in range(self.sample_count):
             next_id, reward = self.dynamics.next_state_id(state, action)
             observed_states[next_id].append(reward)
 

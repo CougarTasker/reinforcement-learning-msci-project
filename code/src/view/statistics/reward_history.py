@@ -88,7 +88,7 @@ class RewardHistory(BaseVisibilityObserver):
                 label=f"Moving Average, Width: {window_size}",
             )
 
-        self.axes.legend()
+        self.axes.legend(loc="upper left")
         self.canvas.draw()
 
     def __moving_average(

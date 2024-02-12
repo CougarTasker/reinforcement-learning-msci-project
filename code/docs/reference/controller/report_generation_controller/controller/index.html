@@ -3516,12 +3516,57 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_5_9_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../view/statistics/report_display/" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
     Report Display
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_5_9_2" id="__nav_1_5_9_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_5_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_5_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            Report Display
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Progress Indicator
   </span>
   
 
@@ -3538,7 +3583,49 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_selector/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_container/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Container
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Information Display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3547,6 +3634,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -3871,7 +3966,8 @@
 <span class="normal">100</span>
 <span class="normal">101</span>
 <span class="normal">102</span>
-<span class="normal">103</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReportGeneratorController</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ReportGeneratorController</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Controller for managing the report generator.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -3920,14 +4016,15 @@
         <span class="n">request_bridge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_request_bridge</span>
         <span class="n">report_generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_generator</span>
 
-        <span class="n">report_count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># number of generated reports</span>
+        <span class="n">work_done</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># work done on complete and partial reports</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">current_state</span> <span class="o">=</span> <span class="n">report_generator</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-
-            <span class="n">new_report_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_state</span><span class="o">.</span><span class="n">available_reports</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">new_report_count</span> <span class="o">&gt;</span> <span class="n">report_count</span><span class="p">:</span>
+            <span class="n">new_work_done</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_state</span><span class="o">.</span><span class="n">available_reports</span><span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">current_state</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">new_work_done</span> <span class="o">&gt;</span> <span class="n">work_done</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">send_current_state</span><span class="p">()</span>
-                <span class="n">report_count</span> <span class="o">=</span> <span class="n">new_report_count</span>
+                <span class="n">work_done</span> <span class="o">=</span> <span class="n">new_work_done</span>
 
             <span class="n">message</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">current_state</span><span class="o">.</span><span class="n">pending_requests</span><span class="p">:</span>
@@ -4270,7 +4367,8 @@
 <span class="normal">95</span>
 <span class="normal">96</span>
 <span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">report_mainloop</span><span class="p">(</span>
+<span class="normal">98</span>
+<span class="normal">99</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">report_mainloop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the main loop of the report generation process.</span>
@@ -4281,14 +4379,15 @@
     <span class="n">request_bridge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_request_bridge</span>
     <span class="n">report_generator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_generator</span>
 
-    <span class="n">report_count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># number of generated reports</span>
+    <span class="n">work_done</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># work done on complete and partial reports</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">current_state</span> <span class="o">=</span> <span class="n">report_generator</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-
-        <span class="n">new_report_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_state</span><span class="o">.</span><span class="n">available_reports</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">new_report_count</span> <span class="o">&gt;</span> <span class="n">report_count</span><span class="p">:</span>
+        <span class="n">new_work_done</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_state</span><span class="o">.</span><span class="n">available_reports</span><span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">current_state</span><span class="o">.</span><span class="n">pending_requests</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_work_done</span> <span class="o">&gt;</span> <span class="n">work_done</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">send_current_state</span><span class="p">()</span>
-            <span class="n">report_count</span> <span class="o">=</span> <span class="n">new_report_count</span>
+            <span class="n">work_done</span> <span class="o">=</span> <span class="n">new_work_done</span>
 
         <span class="n">message</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">current_state</span><span class="o">.</span><span class="n">pending_requests</span><span class="p">:</span>
@@ -4336,10 +4435,10 @@
 
           <details class="quote">
             <summary>Source code in <code>src/controller/report_generation_controller/controller.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
-<span class="normal">101</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
 <span class="normal">102</span>
-<span class="normal">103</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">send_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">send_current_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Send the current state to the view.&quot;&quot;&quot;</span>
     <span class="n">current_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">report_generator</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">report_update_bridge</span><span class="o">.</span><span class="n">update_report_state</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
