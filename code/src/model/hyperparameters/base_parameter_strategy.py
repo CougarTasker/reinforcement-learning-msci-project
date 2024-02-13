@@ -8,10 +8,11 @@ class HyperParameter(Enum):
     replay_queue_length = 1
     learning_rate = 2
     discount_rate = 3
-    eg_exploration_ratio = 4
-    ucb_exploration_bias = 5
-    stopping_epsilon = 6
-    sample_count = 7
+    eg_initial_exploration_ratio = 4
+    eg_decay_rate = 5
+    ucb_exploration_bias = 6
+    stopping_epsilon = 7
+    sample_count = 8
 
 
 class BaseHyperParameterStrategy(object):

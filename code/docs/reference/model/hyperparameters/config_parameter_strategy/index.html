@@ -3879,7 +3879,10 @@
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParameterConfigStrategy</span><span class="p">(</span><span class="n">BaseHyperParameterStrategy</span><span class="p">):</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParameterConfigStrategy</span><span class="p">(</span><span class="n">BaseHyperParameterStrategy</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class provides hyperparameter values from the configuration.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AgentConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -3902,8 +3905,11 @@
             <span class="p">),</span>
             <span class="n">HyperParameter</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span>
             <span class="n">HyperParameter</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">:</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">,</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_exploration_ratio</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">exploration_ratio</span>
+            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_initial_exploration_ratio</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">initial_exploration_ratio</span>
+            <span class="p">),</span>
+            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_decay_rate</span><span class="p">:</span> <span class="p">(</span>
+                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">decay_rate</span>
             <span class="p">),</span>
             <span class="n">HyperParameter</span><span class="o">.</span><span class="n">ucb_exploration_bias</span><span class="p">:</span> <span class="p">(</span>
                 <span class="n">q_learning_config</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="o">.</span><span class="n">exploration_bias</span>
@@ -4026,7 +4032,10 @@ will be used.</p>
 <span class="normal">43</span>
 <span class="normal">44</span>
 <span class="normal">45</span>
-<span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AgentConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AgentConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the parameter manager.</span>
 
 <span class="sd">    Args:</span>
@@ -4046,8 +4055,11 @@ will be used.</p>
         <span class="p">),</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">:</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">,</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_exploration_ratio</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">exploration_ratio</span>
+        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_initial_exploration_ratio</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">initial_exploration_ratio</span>
+        <span class="p">),</span>
+        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_decay_rate</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">decay_rate</span>
         <span class="p">),</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">ucb_exploration_bias</span><span class="p">:</span> <span class="p">(</span>
             <span class="n">q_learning_config</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="o">.</span><span class="n">exploration_bias</span>
@@ -4159,10 +4171,7 @@ will be used.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/config_parameter_strategy.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -4175,7 +4184,10 @@ will be used.</p>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@override</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@override</span>
 <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the value of a given hyper parameter.</span>
 

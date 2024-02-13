@@ -14,7 +14,9 @@ from src.model.hyperparameters.base_parameter_strategy import (
 from src.model.learning_system.learning_instance.statistics_recorder import (
     StatisticsRecorder,
 )
-from src.model.learning_system.top_level_entities.cache import EntityContainer
+from src.model.learning_system.top_level_entities.container import (
+    EntityContainer,
+)
 
 from .options import AgentOptions, DynamicsOptions, TopEntitiesOptions
 

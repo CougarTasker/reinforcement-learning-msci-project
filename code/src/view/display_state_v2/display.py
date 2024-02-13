@@ -16,6 +16,8 @@ from src.view.visibility_observer import BaseVisibilityObserver
 class DisplayState(BaseVisibilityObserver):
     """Widget for displaying a given grid world state."""
 
+    padding = 10
+
     cell_margins = 0.1
     background_color = (200, 200, 200, 0)
 
@@ -112,6 +114,6 @@ class DisplayState(BaseVisibilityObserver):
             )
 
     def __get_current_size(self):
-        width = self.image_label.contentsRect().width() - 2
-        height = self.image_label.contentsRect().height() - 2
+        width = self.image_label.contentsRect().width() - self.padding
+        height = self.image_label.contentsRect().height() - self.padding
         return width, height

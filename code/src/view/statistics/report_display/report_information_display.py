@@ -56,7 +56,6 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
             return
         if report_parameter is self.current_parameter:
             return
-        self.current_parameter = report_parameter
         report_data = state.available_reports.get(report_parameter, None)
         if report_data is None:
             return
@@ -77,6 +76,7 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
             (best_value, best_result),
         )
         self.canvas.draw()
+        self.current_parameter = report_parameter
 
     def __reset_plot(self, name: str):
         self.axes.clear()

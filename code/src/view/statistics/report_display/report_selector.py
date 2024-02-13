@@ -1,4 +1,4 @@
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from PySide6.QtWidgets import QComboBox, QWidget
 from typing_extensions import override
@@ -41,6 +41,7 @@ class ReportSelector(QComboBox, BaseReportObserver):
         self.reset_guard = False
 
         self.currentTextChanged.connect(self.update_handler)
+        self.current_items: List[str] = []
 
     def update_handler(self, text: str) -> None:
         """Handle update, send the appropriate request to the controller.
@@ -68,7 +69,15 @@ class ReportSelector(QComboBox, BaseReportObserver):
         }
         if state.current_report is None:
             update_options[None] = self.none_selected_text
-        self.clear()
-        self.addItems(list(update_options.values()))
-        self.setCurrentText(update_options[state.current_report])
+
+        new_items = list(update_options.values())
+        # avoid redundant updates can cause flickering
+        if new_items != self.current_items:
+            self.clear()
+            self.addItems(new_items)
+            self.current_items = new_items
+
+        new_current_text = update_options[state.current_report]
+        if self.currentText() != new_current_text:
+            self.setCurrentText(new_current_text)
         self.reset_guard = False

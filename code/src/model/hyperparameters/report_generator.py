@@ -22,9 +22,9 @@ class HyperParameterReportGenerator(object):
     """Class for creating hyper parameter tuning reports."""
 
     worker_count = 8
-    iterations_per_worker = 200
-    samples = 200
-    runs = 3
+    iterations_per_worker = 1000
+    samples = 100
+    runs = 25
 
     def __init__(self) -> None:
         """Initialise the report generator."""
@@ -32,6 +32,12 @@ class HyperParameterReportGenerator(object):
 
         self.state = manager.Value(ReportState, ReportState(None, {}, {}))
         self.state_lock = manager.Lock()
+
+        self.running = manager.Value(bool, value=True)
+
+    def shutdown(self):
+        """Abort any existing work, Stop child processes."""
+        self.running.set(False)
 
     def get_state(self) -> ReportState:
         """Get the current state of the reports.
@@ -94,6 +100,8 @@ class HyperParameterReportGenerator(object):
                 self.evaluate_value,
                 zip(repeat(parameter), x_axis, repeat(run_progress)),
             )
+            if not self.running:
+                return
 
             report = HyperParameterReport(parameter, x_axis, y_axis)
 
@@ -118,12 +126,15 @@ class HyperParameterReportGenerator(object):
         Returns:
             float: the total reward under these conditions.
         """
+        # skip computation if shutting down.
         details = TuningInformation.get_parameter_details(parameter)
         hyper_parameters = ParameterTuningStrategy(parameter, parameter_value)
 
         total_reward = 0
 
         for _ in range(self.runs):
+            if not self.running.get():
+                return 0
             entities = EntityFactory.create_entities(
                 details.tuning_options, hyper_parameters
             )

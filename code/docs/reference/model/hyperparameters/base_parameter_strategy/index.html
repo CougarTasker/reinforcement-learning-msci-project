@@ -3846,8 +3846,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/hyperparameters/base_parameter_strategy.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
-<span class="normal">18</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
@@ -3889,7 +3888,8 @@
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
-<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseHyperParameterStrategy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">60</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">BaseHyperParameterStrategy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;The base class for hyper parameter managers.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -4044,8 +4044,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/base_parameter_strategy.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
-<span class="normal">36</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">36</span>
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
@@ -4064,7 +4063,8 @@
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_integer_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_integer_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the value of a hyper parameter that is an integer.</span>
 
 <span class="sd">    Args:</span>
@@ -4187,8 +4187,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/base_parameter_strategy.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
-<span class="normal">21</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
 <span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
@@ -4200,7 +4199,8 @@
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
-<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the given hyper-parameter&#39;s value.</span>
 
 <span class="sd">    Args:</span>
@@ -4259,17 +4259,19 @@
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameter</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameter</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Enumerates all the different hyperparameters.&quot;&quot;&quot;</span>
 
     <span class="n">initial_optimism</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">replay_queue_length</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">learning_rate</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">discount_rate</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="n">eg_exploration_ratio</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="n">ucb_exploration_bias</span> <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">stopping_epsilon</span> <span class="o">=</span> <span class="mi">6</span>
-    <span class="n">sample_count</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">eg_initial_exploration_ratio</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">eg_decay_rate</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">ucb_exploration_bias</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">stopping_epsilon</span> <span class="o">=</span> <span class="mi">7</span>
+    <span class="n">sample_count</span> <span class="o">=</span> <span class="mi">8</span>
 </code></pre></div></td></tr></table></div>
             </details>
 

@@ -93,23 +93,30 @@ class TuningInformation(object):
             eg_options,
         ),
         HyperParameter.replay_queue_length: HyperParameterDescription(
-            "Replay Queue Length", 0, 10, eg_options, integer_valued=True
+            "Replay Queue Length", 1, 10, eg_options, integer_valued=True
         ),
         HyperParameter.learning_rate: HyperParameterDescription(
             "Learning Rate",
             0.1**3,
-            0.1,
+            1,
             eg_options,
         ),
         HyperParameter.discount_rate: HyperParameterDescription(
             "Discount Rate", 0.5, 1, eg_options
         ),
-        HyperParameter.eg_exploration_ratio: HyperParameterDescription(
-            "Epsilon-greedy Exploration Ratio",
+        HyperParameter.eg_initial_exploration_ratio: HyperParameterDescription(
+            "EG Initial Exploration Ratio",
             0,
             1,
             eg_options,
-            display_name=r"$\epsilon$-greedy Exploration Ratio",
+            display_name=r"$\epsilon$-greedy Initial Exploration Ratio",
+        ),
+        HyperParameter.eg_decay_rate: HyperParameterDescription(
+            "EG Decay Rate",
+            0.5,
+            1,
+            eg_options,
+            display_name=r"$\epsilon$-greedy Decay Rate",
         ),
         HyperParameter.ucb_exploration_bias: HyperParameterDescription(
             "UCB Exploration Bias", 0, 5, ucb_options

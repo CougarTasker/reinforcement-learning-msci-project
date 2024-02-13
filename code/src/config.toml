@@ -12,11 +12,12 @@ discount_rate = 0.9
 sample_count = 100
 stopping_epsilon = 0.0001
 [agent.q_learning]
-learning_rate = 0.02
+learning_rate = 0.8
 initial_optimism = 10.0
 replay_queue_length = 10
 [agent.q_learning.epsilon_greedy]
-exploration_ratio = 0.35
+initial_exploration_ratio = 0.7
+decay_rate = 0.9
 [agent.q_learning.upper_confidence_bound]
 exploration_bias = 2.0
 

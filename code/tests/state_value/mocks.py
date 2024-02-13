@@ -103,8 +103,12 @@ class SimpleTestDynamics(BaseDynamics):
 
 class TestEpsilonGreedyStrategyConfig(EpsilonGreedyStrategyConfig):
     @property
-    def exploration_ratio(self) -> float:
+    def initial_exploration_ratio(self) -> float:
         return 0.5
+
+    @property
+    def decay_rate(self) -> float:
+        return 0.95
 
 
 class TestUCBStrategyConfig(UCBStrategyConfig):

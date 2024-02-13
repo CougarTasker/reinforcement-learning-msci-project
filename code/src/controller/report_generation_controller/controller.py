@@ -85,6 +85,7 @@ class ReportGeneratorController(object):
                 case None:
                     continue
                 case ReportRequestMessage(request=ReportRequest.end):
+                    self.report_generator.shutdown()
                     break
                 case ReportRequestMessage(
                     request=ReportRequest.generate_report, payload=parameter

@@ -1433,9 +1433,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.exploration_ratio" class="md-nav__link">
+  <a href="#src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.decay_rate" class="md-nav__link">
     <span class="md-ellipsis">
-      exploration_ratio
+      decay_rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.initial_exploration_ratio" class="md-nav__link">
+    <span class="md-ellipsis">
+      initial_exploration_ratio
     </span>
   </a>
   
@@ -3752,9 +3761,18 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.exploration_ratio" class="md-nav__link">
+  <a href="#src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.decay_rate" class="md-nav__link">
     <span class="md-ellipsis">
-      exploration_ratio
+      decay_rate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.initial_exploration_ratio" class="md-nav__link">
+    <span class="md-ellipsis">
+      initial_exploration_ratio
     </span>
   </a>
   
@@ -3853,22 +3871,36 @@
 <span class="normal">24</span>
 <span class="normal">25</span>
 <span class="normal">26</span>
-<span class="normal">27</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EpsilonGreedyStrategyConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EpsilonGreedyStrategyConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets configuration related to the epsilon greedy exploration strategy.&quot;&quot;&quot;</span>
 
-    <span class="n">exploration_ratio_property</span> <span class="o">=</span> <span class="s2">&quot;exploration_ratio&quot;</span>
+    <span class="n">exploration_ratio_property</span> <span class="o">=</span> <span class="s2">&quot;initial_exploration_ratio&quot;</span>
+    <span class="n">decay_rate_property</span> <span class="o">=</span> <span class="s2">&quot;decay_rate&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate epsilon greedy section config.&quot;&quot;&quot;</span>
         <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">exploration_ratio_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">decay_rate_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;epsilon_greedy&quot;</span><span class="p">,</span> <span class="n">data_schema</span><span class="p">,</span> <span class="p">[])</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">exploration_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the ratio the agent should explore vs exploit.</span>
+    <span class="k">def</span> <span class="nf">initial_exploration_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the ratio the agent should explore vs exploit initially.</span>
 
 <span class="sd">        also known as epsilon in epsilon greedy and soft strategies</span>
 
@@ -3877,6 +3909,16 @@
 <span class="sd">                never exploring.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">exploration_ratio_property</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">decay_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the rate at witch the exploration rate should decay.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: the ratio for decay, 1 represents no decay 0.1 represents a</span>
+<span class="sd">                quick decay.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">decay_rate_property</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -3895,8 +3937,8 @@
 
 
 
-<h3 id="src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.exploration_ratio" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">exploration_ratio</span><span class="p">:</span> <span class="nb">float</span></code>
+<h3 id="src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.decay_rate" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">decay_rate</span><span class="p">:</span> <span class="nb">float</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
@@ -3907,7 +3949,54 @@
 
   <div class="doc doc-contents ">
   
-      <p>Get the ratio the agent should explore vs exploit.</p>
+      <p>Get the rate at witch the exploration rate should decay.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the ratio for decay, 1 represents no decay 0.1 represents a
+quick decay.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.model.config.agent_section.epsilon_greedy.EpsilonGreedyStrategyConfig.initial_exploration_ratio" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">initial_exploration_ratio</span><span class="p">:</span> <span class="nb">float</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get the ratio the agent should explore vs exploit initially.</p>
 <p>also known as epsilon in epsilon greedy and soft strategies</p>
 
 
@@ -3958,16 +4047,18 @@ never exploring.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/config/agent_section/epsilon_greedy.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
-<span class="normal">10</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate epsilon greedy section config.&quot;&quot;&quot;</span>
     <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exploration_ratio_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decay_rate_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;epsilon_greedy&quot;</span><span class="p">,</span> <span class="n">data_schema</span><span class="p">,</span> <span class="p">[])</span>

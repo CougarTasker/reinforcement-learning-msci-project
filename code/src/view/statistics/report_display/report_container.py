@@ -1,5 +1,6 @@
 from typing import Optional
 
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QLabel, QStackedWidget, QWidget
 from typing_extensions import override
 
@@ -67,6 +68,7 @@ class MainWidgetSwitcher(QStackedWidget, BaseReportObserver):
         super().__init__(parent)
 
         placeholder_text = QLabel("Select parameter to analyse.")
+        placeholder_text.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.addWidget(placeholder_text)
 
         self.progress_bar = ProgressIndicator(self)

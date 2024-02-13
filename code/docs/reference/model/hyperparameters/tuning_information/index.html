@@ -4431,7 +4431,14 @@ between zero and one.</p>
 <span class="normal">147</span>
 <span class="normal">148</span>
 <span class="normal">149</span>
-<span class="normal">150</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">TuningInformation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">TuningInformation</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for containing the meta information about tuning parameters.&quot;&quot;&quot;</span>
 
     <span class="n">eg_options</span> <span class="o">=</span> <span class="n">TopEntitiesOptions</span><span class="p">(</span>
@@ -4454,23 +4461,30 @@ between zero and one.</p>
             <span class="n">eg_options</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">replay_queue_length</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
-            <span class="s2">&quot;Replay Queue Length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">eg_options</span><span class="p">,</span> <span class="n">integer_valued</span><span class="o">=</span><span class="kc">True</span>
+            <span class="s2">&quot;Replay Queue Length&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">eg_options</span><span class="p">,</span> <span class="n">integer_valued</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">),</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
             <span class="s2">&quot;Learning Rate&quot;</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span>
-            <span class="mf">0.1</span><span class="p">,</span>
+            <span class="mi">1</span><span class="p">,</span>
             <span class="n">eg_options</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
             <span class="s2">&quot;Discount Rate&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">eg_options</span>
         <span class="p">),</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_exploration_ratio</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
-            <span class="s2">&quot;Epsilon-greedy Exploration Ratio&quot;</span><span class="p">,</span>
+        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_initial_exploration_ratio</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
+            <span class="s2">&quot;EG Initial Exploration Ratio&quot;</span><span class="p">,</span>
             <span class="mi">0</span><span class="p">,</span>
             <span class="mi">1</span><span class="p">,</span>
             <span class="n">eg_options</span><span class="p">,</span>
-            <span class="n">display_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\epsilon$-greedy Exploration Ratio&quot;</span><span class="p">,</span>
+            <span class="n">display_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\epsilon$-greedy Initial Exploration Ratio&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_decay_rate</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
+            <span class="s2">&quot;EG Decay Rate&quot;</span><span class="p">,</span>
+            <span class="mf">0.5</span><span class="p">,</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="n">eg_options</span><span class="p">,</span>
+            <span class="n">display_name</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\epsilon$-greedy Decay Rate&quot;</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">ucb_exploration_bias</span><span class="p">:</span> <span class="n">HyperParameterDescription</span><span class="p">(</span>
             <span class="s2">&quot;UCB Exploration Bias&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ucb_options</span>
@@ -4624,14 +4638,7 @@ between zero and one.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/tuning_information.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
@@ -4646,7 +4653,14 @@ between zero and one.</p>
 <span class="normal">147</span>
 <span class="normal">148</span>
 <span class="normal">149</span>
-<span class="normal">150</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">get_parameter_details</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HyperParameterDescription</span><span class="p">:</span>
@@ -4721,14 +4735,14 @@ between zero and one.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/tuning_information.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">tunable_parameters</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all parameters that are tunable.</span>
 

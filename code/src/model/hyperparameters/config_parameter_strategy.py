@@ -33,8 +33,11 @@ class ParameterConfigStrategy(BaseHyperParameterStrategy):
             ),
             HyperParameter.learning_rate: q_learning_config.learning_rate,
             HyperParameter.discount_rate: agent_config.discount_rate,
-            HyperParameter.eg_exploration_ratio: (
-                q_learning_config.epsilon_greedy.exploration_ratio
+            HyperParameter.eg_initial_exploration_ratio: (
+                q_learning_config.epsilon_greedy.initial_exploration_ratio
+            ),
+            HyperParameter.eg_decay_rate: (
+                q_learning_config.epsilon_greedy.decay_rate
             ),
             HyperParameter.ucb_exploration_bias: (
                 q_learning_config.upper_confidence_bound.exploration_bias
