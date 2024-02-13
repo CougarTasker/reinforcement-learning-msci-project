@@ -1,16 +1,21 @@
-from typing import Optional
+from typing import Dict, Optional
 
 from PySide6.QtWidgets import QComboBox, QWidget
+from typing_extensions import override
 
 from src.controller.report_generation_controller.controller import (
     ReportGeneratorController,
 )
+from src.model.hyperparameters.base_parameter_strategy import HyperParameter
+from src.model.hyperparameters.report_data import ReportState
 from src.model.hyperparameters.tuning_information import TuningInformation
 from src.view.report_state_publisher import BaseReportObserver
 
 
 class ReportSelector(QComboBox, BaseReportObserver):
     """Widget to allow the user to select a hyper parameter for analysis."""
+
+    none_selected_text = "None Selected"
 
     def __init__(
         self,
@@ -33,7 +38,7 @@ class ReportSelector(QComboBox, BaseReportObserver):
             for parameter in hyper_parameters
         }
 
-        self.addItems(list(self.options.keys()))
+        self.reset_guard = False
 
         self.currentTextChanged.connect(self.update_handler)
 
@@ -43,4 +48,27 @@ class ReportSelector(QComboBox, BaseReportObserver):
         Args:
             text (str): the option that has been selected.
         """
+        if self.reset_guard:
+            return
+        if text is self.none_selected_text:
+            return
         self.controller.report_request_bridge.request_report(self.options[text])
+
+    @override
+    def report_state_updated(self, state: ReportState) -> None:
+        """Update the figure when a new report is provided.
+
+        Args:
+            state (ReportState): the new report information.
+        """
+        self.reset_guard = True
+
+        update_options: Dict[Optional[HyperParameter], str] = {
+            option: name for name, option in self.options.items()
+        }
+        if state.current_report is None:
+            update_options[None] = self.none_selected_text
+        self.clear()
+        self.addItems(list(update_options.values()))
+        self.setCurrentText(update_options[state.current_report])
+        self.reset_guard = False

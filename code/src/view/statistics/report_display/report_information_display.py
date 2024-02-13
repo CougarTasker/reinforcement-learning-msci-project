@@ -6,10 +6,8 @@ from matplotlib.figure import Figure
 from PySide6.QtWidgets import QGridLayout, QWidget
 from typing_extensions import override
 
-from src.model.hyperparameters.report_data import (
-    HyperParameterReport,
-    ReportState,
-)
+from src.model.hyperparameters.base_parameter_strategy import HyperParameter
+from src.model.hyperparameters.report_data import ReportState
 from src.model.hyperparameters.tuning_information import TuningInformation
 from src.view.report_state_publisher import BaseReportObserver
 from src.view.statistics.matplotlib_setup import create_canvas
@@ -44,7 +42,7 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
             raise RuntimeError("Incorrect axis object")
 
         self.axes = axes
-        self.current_report: Optional[HyperParameterReport] = None
+        self.current_parameter: Optional[HyperParameter] = None
 
     @override
     def report_state_updated(self, state: ReportState) -> None:
@@ -56,12 +54,12 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
         report_parameter = state.current_report
         if report_parameter is None:
             return
+        if report_parameter is self.current_parameter:
+            return
+        self.current_parameter = report_parameter
         report_data = state.available_reports.get(report_parameter, None)
         if report_data is None:
             return
-        if report_data is self.current_report:
-            return
-        self.current_report = report_data
 
         details = TuningInformation.get_parameter_details(report_parameter)
 
@@ -74,7 +72,10 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
         best_result = report_data.y_axis[best_index]
 
         self.axes.plot([best_value], [best_result], "r*")
-
+        self.axes.annotate(
+            f"({best_value:.3g}, {best_result:.3g})",
+            (best_value, best_result),
+        )
         self.canvas.draw()
 
     def __reset_plot(self, name: str):

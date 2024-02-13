@@ -90,7 +90,7 @@ class ReportGeneratorController(object):
                     request=ReportRequest.generate_report, payload=parameter
                 ):
                     report_generator.generate_report(parameter)
-
+                    self.send_current_state()
                 case ReportRequestMessage(
                     request=ReportRequest.fetch_current_state
                 ):

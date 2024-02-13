@@ -4003,13 +4003,18 @@
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameterReportGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameterReportGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for creating hyper parameter tuning reports.&quot;&quot;&quot;</span>
 
     <span class="n">worker_count</span> <span class="o">=</span> <span class="mi">8</span>
-    <span class="n">iterations_per_worker</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">samples</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">runs</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">iterations_per_worker</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">runs</span> <span class="o">=</span> <span class="mi">3</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the report generator.&quot;&quot;&quot;</span>
@@ -4072,10 +4077,12 @@
         <span class="n">progress_steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
         <span class="n">interpolate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">details</span><span class="o">.</span><span class="n">interpolate_value</span><span class="p">)</span>
         <span class="n">x_axis</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">progress_steps</span><span class="p">)</span>
+        <span class="n">run_progress</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">worker_count</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
             <span class="n">y_axis</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_value</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_value</span><span class="p">,</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">repeat</span><span class="p">(</span><span class="n">run_progress</span><span class="p">)),</span>
             <span class="p">)</span>
 
             <span class="n">report</span> <span class="o">=</span> <span class="n">HyperParameterReport</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">)</span>
@@ -4085,13 +4092,18 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">complete_request</span><span class="p">(</span><span class="n">report</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">evaluate_value</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span>
+        <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">run_progress_amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate a parameter and value combination.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            parameter (HyperParameter): the parameter to test</span>
 <span class="sd">            parameter_value (float): the value for this parameter to assume</span>
+<span class="sd">            run_progress_amount (float): the amount of progress made in a single</span>
+<span class="sd">                run.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            float: the total reward under these conditions.</span>
@@ -4100,8 +4112,6 @@
         <span class="n">hyper_parameters</span> <span class="o">=</span> <span class="n">ParameterTuningStrategy</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span>
 
         <span class="n">total_reward</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="n">run_progress_amount</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
             <span class="n">entities</span> <span class="o">=</span> <span class="n">EntityFactory</span><span class="o">.</span><span class="n">create_entities</span><span class="p">(</span>
@@ -4182,7 +4192,7 @@
 
 
 <h3 id="src.model.hyperparameters.report_generator.HyperParameterReportGenerator.evaluate_value" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">evaluate_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="n">evaluate_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">,</span> <span class="n">run_progress_amount</span><span class="p">)</span></code>
 
 </h3>
 
@@ -4232,6 +4242,21 @@
               <em>required</em>
           </td>
         </tr>
+        <tr>
+          <td><code>run_progress_amount</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the amount of progress made in a single
+run.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
     </tbody>
   </table>
 
@@ -4261,9 +4286,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/report_generator.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
@@ -4301,14 +4324,24 @@
 <span class="normal">139</span>
 <span class="normal">140</span>
 <span class="normal">141</span>
-<span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_value</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_value</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">,</span>
+    <span class="n">parameter_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">run_progress_amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate a parameter and value combination.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        parameter (HyperParameter): the parameter to test</span>
 <span class="sd">        parameter_value (float): the value for this parameter to assume</span>
+<span class="sd">        run_progress_amount (float): the amount of progress made in a single</span>
+<span class="sd">            run.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: the total reward under these conditions.</span>
@@ -4317,8 +4350,6 @@
     <span class="n">hyper_parameters</span> <span class="o">=</span> <span class="n">ParameterTuningStrategy</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">)</span>
 
     <span class="n">total_reward</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="n">run_progress_amount</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
         <span class="n">entities</span> <span class="o">=</span> <span class="n">EntityFactory</span><span class="o">.</span><span class="n">create_entities</span><span class="p">(</span>
@@ -4559,7 +4590,9 @@ thread. the public method should do all of the validation.</p>
 <span class="normal"> 97</span>
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
-<span class="normal">100</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_report_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">):</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate_report_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a report for a given parameter.</span>
 
 <span class="sd">    this is the internal method that does the heavy lifting in a separate</span>
@@ -4573,10 +4606,12 @@ thread. the public method should do all of the validation.</p>
     <span class="n">progress_steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
     <span class="n">interpolate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">details</span><span class="o">.</span><span class="n">interpolate_value</span><span class="p">)</span>
     <span class="n">x_axis</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">progress_steps</span><span class="p">)</span>
+    <span class="n">run_progress</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">samples</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">runs</span><span class="p">)</span>
 
     <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">worker_count</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
         <span class="n">y_axis</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_value</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evaluate_value</span><span class="p">,</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">repeat</span><span class="p">(</span><span class="n">parameter</span><span class="p">),</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">repeat</span><span class="p">(</span><span class="n">run_progress</span><span class="p">)),</span>
         <span class="p">)</span>
 
         <span class="n">report</span> <span class="o">=</span> <span class="n">HyperParameterReport</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">y_axis</span><span class="p">)</span>

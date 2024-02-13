@@ -22,9 +22,9 @@ class HyperParameterReportGenerator(object):
     """Class for creating hyper parameter tuning reports."""
 
     worker_count = 8
-    iterations_per_worker = 100
-    samples = 100
-    runs = 5
+    iterations_per_worker = 200
+    samples = 200
+    runs = 3
 
     def __init__(self) -> None:
         """Initialise the report generator."""
@@ -87,10 +87,12 @@ class HyperParameterReportGenerator(object):
         progress_steps = np.linspace(0, 1, samples)
         interpolate = np.vectorize(details.interpolate_value)
         x_axis = interpolate(progress_steps)
+        run_progress = 1 / (samples * self.runs)
 
         with Pool(processes=self.worker_count) as pool:
             y_axis = pool.starmap(
-                self.evaluate_value, zip(repeat(parameter), x_axis)
+                self.evaluate_value,
+                zip(repeat(parameter), x_axis, repeat(run_progress)),
             )
 
             report = HyperParameterReport(parameter, x_axis, y_axis)
@@ -100,13 +102,18 @@ class HyperParameterReportGenerator(object):
                 self.state.set(state.complete_request(report))
 
     def evaluate_value(
-        self, parameter: HyperParameter, parameter_value: float
+        self,
+        parameter: HyperParameter,
+        parameter_value: float,
+        run_progress_amount: float,
     ) -> float:
         """Evaluate a parameter and value combination.
 
         Args:
             parameter (HyperParameter): the parameter to test
             parameter_value (float): the value for this parameter to assume
+            run_progress_amount (float): the amount of progress made in a single
+                run.
 
         Returns:
             float: the total reward under these conditions.
@@ -115,8 +122,6 @@ class HyperParameterReportGenerator(object):
         hyper_parameters = ParameterTuningStrategy(parameter, parameter_value)
 
         total_reward = 0
-
-        run_progress_amount = 1 / (self.samples * self.runs)
 
         for _ in range(self.runs):
             entities = EntityFactory.create_entities(

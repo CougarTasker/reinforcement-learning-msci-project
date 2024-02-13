@@ -45,6 +45,7 @@ class ReportContainer(QWidget):
 
         selector = ReportSelector(self, report_controller)
         self.layout_manager.addWidget(selector, 0, 0)
+        self.publisher.subscribe(selector)
 
         self.main_widget_area = MainWidgetSwitcher(self, self.publisher)
         self.layout_manager.addWidget(self.main_widget_area, 1, 0)
