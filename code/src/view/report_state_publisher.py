@@ -3,20 +3,20 @@ from typing import Optional
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QWidget
 
-from src.controller.report_generation_controller.controller import (
-    ReportGeneratorController,
+from src.controller.hyper_parameter_controller.controller import (
+    HyperParameterController,
 )
-from src.model.hyperparameters.report_data import ReportState
+from src.model.hyperparameters.hyper_parameter_system import HyperParameterState
 
 
 class BaseReportObserver(object):
     """The base class for report state observers."""
 
-    def report_state_updated(self, state: ReportState) -> None:
+    def report_state_updated(self, state: HyperParameterState) -> None:
         """Handle report state update events.
 
         Args:
-            state (ReportState): the new report state
+            state (HyperParameterState): the new hyper parameter state
 
         Raises:
             NotImplementedError: If the method is not overridden by a concrete
@@ -34,14 +34,14 @@ class ReportStatePublisher(object):
     """Publisher class for state updates."""
 
     def __init__(
-        self, parent: QWidget, controller: ReportGeneratorController
+        self, parent: QWidget, controller: HyperParameterController
     ) -> None:
         """Initialise a new state publisher.
 
         Args:
             parent (QWidget): the widget that this publisher is associated with.
                 timers do not work without this.
-            controller (ReportGeneratorController): the controller to listen for
+            controller (HyperParameterController): the controller to listen for
                 state update from.
         """
         timer = QTimer(parent)
@@ -49,15 +49,15 @@ class ReportStatePublisher(object):
         # slow update cycle not performance critical
         timer.start(100)
 
-        self.update_bridge = controller.report_update_bridge
+        self.update_bridge = controller.update_bridge
 
         self.observers: list[BaseReportObserver] = []
 
         # used to provided initial state
-        self.latest_state: Optional[ReportState] = None
+        self.latest_state: Optional[HyperParameterState] = None
 
         # start updates
-        controller.report_request_bridge.request_current_state()
+        controller.request_bridge.request_current_state()
 
     def subscribe(self, observer: BaseReportObserver) -> None:
         """Subscribe a new observer to state updates.

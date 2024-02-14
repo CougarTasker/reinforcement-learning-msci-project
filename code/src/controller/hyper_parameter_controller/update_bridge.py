@@ -1,27 +1,27 @@
 from typing import Optional
 
-from src.model.hyperparameters.report_data import ReportState
+from src.model.hyperparameters.hyper_parameter_system import HyperParameterState
 
 from ..base_bridge import BaseBridge
 
 
-class ReportUpdateBridge(BaseBridge):
+class HyperParameterUpdateBridge(BaseBridge):
     """Bridge for passing report updates to the view."""
 
-    def update_report_state(self, state: ReportState):
+    def update_state(self, state: HyperParameterState):
         """Set the new state to be displayed.
 
         Args:
-            state (ReportState): The new report state.
+            state (HyperParameterState): The new hyper parameter state.
         """
         self.add_item(state)
 
-    def get_latest_state(self) -> Optional[ReportState]:
+    def get_latest_state(self) -> Optional[HyperParameterState]:
         """Get the last (most recent) new report state.
 
         Returns:
-            Optional[ReportState]: the new state, none if there has been no
-                change.
+            Optional[HyperParameterState]: the new state, none if there has not
+                been any changes.
         """
         latest_state = None
         state = self.get_item_non_blocking()

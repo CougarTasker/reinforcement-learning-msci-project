@@ -2,8 +2,8 @@ from typing import Optional
 
 from PySide6.QtWidgets import QTabWidget, QWidget
 
-from src.controller.report_generation_controller.controller import (
-    ReportGeneratorController,
+from src.controller.hyper_parameter_controller.controller import (
+    HyperParameterController,
 )
 from src.view.display_state_v2.display import DisplayState
 from src.view.state_publisher import StatePublisher
@@ -18,7 +18,7 @@ class MainTabArea(QTabWidget):
         self,
         parent: Optional[QWidget],
         state_publisher: StatePublisher,
-        report_controller: ReportGeneratorController,
+        report_controller: HyperParameterController,
     ) -> None:
         """Initialise the tab widget.
 
@@ -26,7 +26,7 @@ class MainTabArea(QTabWidget):
             parent (Optional[QWidget]): the parent of the tab widget.
             state_publisher (StatePublisher): the state publisher for the live
                 updating tabs.
-            report_controller (ReportGeneratorController): the controller for
+            report_controller (HyperParameterController): the controller for
                 the report display tab.
         """
         super().__init__(parent)

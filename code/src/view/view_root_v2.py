@@ -2,11 +2,11 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QWidget
 from qdarktheme import setup_theme
 
+from src.controller.hyper_parameter_controller.controller import (
+    HyperParameterController,
+)
 from src.controller.learning_system_controller.controller import (
     LearningSystemController,
-)
-from src.controller.report_generation_controller.controller import (
-    ReportGeneratorController,
 )
 from src.model.config.reader import ConfigReader
 from src.view.controls.control_factory import ControlFactory
@@ -22,14 +22,14 @@ class ReinforcementLearningApp(QWidget):
     def __init__(
         self,
         main_controller: LearningSystemController,
-        report_controller: ReportGeneratorController,
+        report_controller: HyperParameterController,
     ) -> None:
         """Instantiate the applications user interface.
 
         Args:
             main_controller (LearningSystemController): the controller
                 responsible for managing the main learning system.
-            report_controller (ReportGeneratorController): the controller
+            report_controller (HyperParameterController): the controller
                 responsible for creating reports.
         """
         super().__init__(parent=None, f=Qt.WindowType.Window)

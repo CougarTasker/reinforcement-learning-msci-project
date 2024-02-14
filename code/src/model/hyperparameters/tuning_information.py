@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from random import random
 from typing import Optional
 
 from src.model.agents.q_learning.exploration_strategies.options import (
@@ -25,6 +26,14 @@ class HyperParameterDescription(object):
     tuning_options: TopEntitiesOptions
     integer_valued: bool = False
     display_name: Optional[str] = None
+
+    def get_random_value(self) -> float:
+        """Get a random value in this parameters range.
+
+        Returns:
+            float: Random value for this parameter in its range.
+        """
+        return self.interpolate_value(random())
 
     def get_display_name(self) -> str:
         """Get the name of the parameter for display purposes.

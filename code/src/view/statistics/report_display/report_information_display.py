@@ -1,13 +1,12 @@
 from typing import Optional
 
-import numpy as np
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure
 from PySide6.QtWidgets import QGridLayout, QWidget
 from typing_extensions import override
 
 from src.model.hyperparameters.base_parameter_strategy import HyperParameter
-from src.model.hyperparameters.report_data import ReportState
+from src.model.hyperparameters.hyper_parameter_system import HyperParameterState
 from src.model.hyperparameters.tuning_information import TuningInformation
 from src.view.report_state_publisher import BaseReportObserver
 from src.view.statistics.matplotlib_setup import create_canvas
@@ -45,18 +44,19 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
         self.current_parameter: Optional[HyperParameter] = None
 
     @override
-    def report_state_updated(self, state: ReportState) -> None:
+    def report_state_updated(self, state: HyperParameterState) -> None:
         """Handle when the report progress is updated.
 
         Args:
-            state (ReportState): the new state encompassing the current progress
+            state (HyperParameterState): the new state encompassing the current
+                progress
         """
-        report_parameter = state.current_report
+        report_parameter = state.report.current_report
         if report_parameter is None:
             return
         if report_parameter is self.current_parameter:
             return
-        report_data = state.available_reports.get(report_parameter, None)
+        report_data = state.report.available_reports.get(report_parameter, None)
         if report_data is None:
             return
 
@@ -66,15 +66,6 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
 
         self.axes.plot(report_data.x_axis, report_data.y_axis, "b-")
 
-        best_index = np.argmax(report_data.y_axis)
-        best_value = report_data.x_axis[best_index]
-        best_result = report_data.y_axis[best_index]
-
-        self.axes.plot([best_value], [best_result], "r*")
-        self.axes.annotate(
-            f"({best_value:.3g}, {best_result:.3g})",
-            (best_value, best_result),
-        )
         self.canvas.draw()
         self.current_parameter = report_parameter
 

@@ -7,32 +7,35 @@ from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 from ..base_bridge import BaseBridge
 
 
-class ReportRequest(Enum):
+class HyperParameterRequest(Enum):
     """Enumerate all possible user actions."""
 
     end = 0
     generate_report = 1
     fetch_current_state = 2
+    set_searching_state = 3
 
 
 @dataclass(frozen=True, slots=True)
 class ReportRequestMessage(object):
     """Encapsulates a user action and its data."""
 
-    request: ReportRequest
+    request: HyperParameterRequest
     payload: Any = None
 
 
-class ReportRequestBridge(BaseBridge):
+class HyperParameterRequestBridge(BaseBridge):
     """Bridge for passing the report requests from the view to the model."""
 
     def request_current_state(self) -> None:
         """Request to receive the current state."""
-        self.add_item(ReportRequestMessage(ReportRequest.fetch_current_state))
+        self.add_item(
+            ReportRequestMessage(HyperParameterRequest.fetch_current_state)
+        )
 
     def request_shutdown(self) -> None:
         """Request to shutdown the report generator."""
-        self.add_item(ReportRequestMessage(ReportRequest.end))
+        self.add_item(ReportRequestMessage(HyperParameterRequest.end))
 
     def request_report(self, parameter: HyperParameter) -> None:
         """Request report from the generator.
@@ -42,7 +45,9 @@ class ReportRequestBridge(BaseBridge):
                 report for.
         """
         self.add_item(
-            ReportRequestMessage(ReportRequest.generate_report, parameter)
+            ReportRequestMessage(
+                HyperParameterRequest.generate_report, parameter
+            )
         )
 
     def get_request(self) -> Optional[ReportRequestMessage]:

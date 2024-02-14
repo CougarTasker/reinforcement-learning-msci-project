@@ -6,14 +6,14 @@ import pstats
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication
 
+from src.controller.hyper_parameter_controller.controller import (
+    HyperParameterController,
+)
 from src.controller.learning_system_controller.controller import (
     LearningSystemController,
 )
 from src.controller.learning_system_controller.user_action_bridge import (
     UserAction,
-)
-from src.controller.report_generation_controller.controller import (
-    ReportGeneratorController,
 )
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
@@ -79,7 +79,7 @@ def profiled_code():
     The code in this method will be profiled by the application.
     """
     with LearningSystemController() as main_controller:
-        with ReportGeneratorController() as report_controller:
+        with HyperParameterController() as report_controller:
             main_controller.user_action_bridge.submit_action(
                 UserAction.select_auto, AutomaticOptions.automatic_playing
             )

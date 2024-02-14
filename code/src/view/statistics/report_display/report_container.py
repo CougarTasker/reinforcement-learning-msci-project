@@ -4,10 +4,10 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QGridLayout, QLabel, QStackedWidget, QWidget
 from typing_extensions import override
 
-from src.controller.report_generation_controller.controller import (
-    ReportGeneratorController,
+from src.controller.hyper_parameter_controller.controller import (
+    HyperParameterController,
 )
-from src.model.hyperparameters.report_data import ReportState
+from src.model.hyperparameters.hyper_parameter_system import HyperParameterState
 from src.view.report_state_publisher import (
     BaseReportObserver,
     ReportStatePublisher,
@@ -27,15 +27,15 @@ class ReportContainer(QWidget):
     def __init__(
         self,
         parent: Optional[QWidget],
-        report_controller: ReportGeneratorController,
+        report_controller: HyperParameterController,
     ) -> None:
         """Initialise the report display widget.
 
         uses matplotlib to create graphs.
 
         Args:
-            parent (Optional[QWidget]): the parent of this widget
-            report_controller (ReportGeneratorController): the controller to
+            parent (Optional[QWidget]): the parent of this widget.
+            report_controller (HyperParameterController): the controller to
                 interact with the report information.
 
         """
@@ -82,18 +82,19 @@ class MainWidgetSwitcher(QStackedWidget, BaseReportObserver):
         publisher.subscribe(self)
 
     @override
-    def report_state_updated(self, state: ReportState) -> None:
+    def report_state_updated(self, state: HyperParameterState) -> None:
         """Update the figure when a new report is provided.
 
         Args:
-            state (ReportState): the new report information.
+            state (HyperParameterState): the new report information.
         """
-        report_parameter = state.current_report
+        report = state.report
+        report_parameter = report.current_report
         if report_parameter is None:
             return
 
-        if report_parameter in state.pending_requests:
+        if report_parameter in report.pending_requests:
             self.setCurrentWidget(self.progress_bar)
 
-        if report_parameter in state.available_reports:
+        if report_parameter in report.available_reports:
             self.setCurrentWidget(self.information_display)

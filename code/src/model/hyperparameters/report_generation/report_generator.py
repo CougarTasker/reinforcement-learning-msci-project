@@ -4,18 +4,11 @@ from multiprocessing import Manager, Pool, Process
 import numpy as np
 
 from src.model.hyperparameters.base_parameter_strategy import HyperParameter
-from src.model.hyperparameters.report_data import (
-    HyperParameterReport,
-    ReportState,
-)
+from src.model.hyperparameters.parameter_evaluator import ParameterEvaluator
 from src.model.hyperparameters.tuning_information import TuningInformation
-from src.model.hyperparameters.tuning_parameter_strategy import (
-    ParameterTuningStrategy,
-)
-from src.model.learning_system.learning_instance.learning_instance import (
-    LearningInstance,
-)
-from src.model.learning_system.top_level_entities.factory import EntityFactory
+
+from .report_data import HyperParameterReport, ReportState
+from .tuning_parameter_strategy import ParameterTuningStrategy
 
 
 class HyperParameterReportGenerator(object):
@@ -130,20 +123,14 @@ class HyperParameterReportGenerator(object):
         details = TuningInformation.get_parameter_details(parameter)
         hyper_parameters = ParameterTuningStrategy(parameter, parameter_value)
 
-        total_reward = 0
+        total_reward = float(0)
 
         for _ in range(self.runs):
             if not self.running.get():
                 return 0
-            entities = EntityFactory.create_entities(
+            stats = ParameterEvaluator.single_run(
                 details.tuning_options, hyper_parameters
             )
-
-            learning_instance = LearningInstance(entities)
-
-            for _ in range(self.iterations_per_worker):
-                learning_instance.perform_action()
-            stats = entities.statistics.get_statistics()
             total_reward += stats.total_reward
 
             with self.state_lock:

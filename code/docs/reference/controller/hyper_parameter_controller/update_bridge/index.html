@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../learning_system_controller/user_action_handlers/standard_handler/">
+        <link rel="prev" href="../request_bridge/">
       
       
-        <link rel="next" href="controller/">
+        <link rel="next" href="../../learning_system_controller/">
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
-        <title>Report Generation Controller - Reinforcement Learning App</title>
+        <title>Update Bridge - Reinforcement Learning App</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.50c56a3b.min.css">
       
       
 
@@ -43,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#src.controller.report_generation_controller" class="md-skip">
+        <a href="#src.controller.hyper_parameter_controller.update_bridge" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Report Generation Controller
+              Update Bridge
             
           </span>
         </div>
@@ -175,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -209,7 +209,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -256,7 +256,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -287,7 +287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base_bridge/" class="md-nav__link">
+      <a href="../../base_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -296,6 +296,202 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Hyper Parameter Controller
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_1_2" id="__nav_1_1_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_1_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            Hyper Parameter Controller
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controller/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controller
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../request_bridge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Request Bridge
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Update Bridge
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Update Bridge
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_bridge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      HyperParameterUpdateBridge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HyperParameterUpdateBridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge.get_latest_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_latest_state()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge.update_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_state()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -317,12 +513,12 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1_3" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../learning_system_controller/" class="md-nav__link ">
+            <a href="../../learning_system_controller/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -333,14 +529,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_1_2" id="__nav_1_1_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_1_3" id="__nav_1_1_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_1_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_1_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1_3">
             <span class="md-nav__icon md-icon"></span>
             Learning System Controller
           </label>
@@ -353,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/controller/" class="md-nav__link">
+      <a href="../../learning_system_controller/controller/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -374,7 +570,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/state_update_bridge/" class="md-nav__link">
+      <a href="../../learning_system_controller/state_update_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -395,7 +591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_bridge/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -425,12 +621,12 @@
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1_2_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1_3_4" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../learning_system_controller/user_action_handlers/" class="md-nav__link ">
+            <a href="../../learning_system_controller/user_action_handlers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -441,14 +637,14 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_1_1_2_4" id="__nav_1_1_2_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_1_1_3_4" id="__nav_1_1_3_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_1_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_1_2_4">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_1_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1_3_4">
             <span class="md-nav__icon md-icon"></span>
             User Action Handlers
           </label>
@@ -461,7 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_handlers/auto_progress_handler/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_handlers/auto_progress_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -482,7 +678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_handlers/base_handler/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_handlers/base_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -503,7 +699,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_handlers/progress_handler/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_handlers/progress_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -524,7 +720,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_handlers/responsibility_chain/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_handlers/responsibility_chain/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -545,7 +741,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_handlers/set_options_handler/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_handlers/set_options_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -566,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../learning_system_controller/user_action_handlers/standard_handler/" class="md-nav__link">
+      <a href="../../learning_system_controller/user_action_handlers/standard_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -596,124 +792,6 @@
 
               
             
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1_3" checked>
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
-              
-  
-  <span class="md-ellipsis">
-    Report Generation Controller
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link md-nav__link--active" for="__nav_1_1_3" id="__nav_1_1_3_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_1_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_1_1_3">
-            <span class="md-nav__icon md-icon"></span>
-            Report Generation Controller
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="controller/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Controller
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="report_request_bridge/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Report Request Bridge
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="report_update_bridge/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Report Update Bridge
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -729,7 +807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../main/" class="md-nav__link">
+      <a href="../../../main/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -764,7 +842,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/" class="md-nav__link ">
+            <a href="../../../model/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -809,7 +887,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/agents/" class="md-nav__link ">
+            <a href="../../../model/agents/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -840,7 +918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/base_agent/" class="md-nav__link">
+      <a href="../../../model/agents/base_agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -875,7 +953,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/agents/q_learning/" class="md-nav__link ">
+            <a href="../../../model/agents/q_learning/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -906,7 +984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/agent/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -927,7 +1005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/dynamic_q_table/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/dynamic_q_table/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -962,7 +1040,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/agents/q_learning/exploration_strategies/" class="md-nav__link ">
+            <a href="../../../model/agents/q_learning/exploration_strategies/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -993,7 +1071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1014,7 +1092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1035,7 +1113,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/exploration_strategies/options/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/exploration_strategies/options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1056,7 +1134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/exploration_strategies/upper_confidence_bound/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/exploration_strategies/upper_confidence_bound/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1085,7 +1163,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/q_learning/reward_replay_queue/" class="md-nav__link">
+      <a href="../../../model/agents/q_learning/reward_replay_queue/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1128,7 +1206,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/agents/value_iteration/" class="md-nav__link ">
+            <a href="../../../model/agents/value_iteration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1159,7 +1237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/value_iteration/agent/" class="md-nav__link">
+      <a href="../../../model/agents/value_iteration/agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1180,7 +1258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/value_iteration/agent_optimised/" class="md-nav__link">
+      <a href="../../../model/agents/value_iteration/agent_optimised/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1201,7 +1279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/value_iteration/dynamics_distribution/" class="md-nav__link">
+      <a href="../../../model/agents/value_iteration/dynamics_distribution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1222,7 +1300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/agents/value_iteration/types/" class="md-nav__link">
+      <a href="../../../model/agents/value_iteration/types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1273,7 +1351,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/config/" class="md-nav__link ">
+            <a href="../../../model/config/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1318,7 +1396,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/config/agent_section/" class="md-nav__link ">
+            <a href="../../../model/config/agent_section/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1349,7 +1427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/agent_section/agent_section/" class="md-nav__link">
+      <a href="../../../model/config/agent_section/agent_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1370,7 +1448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/agent_section/epsilon_greedy/" class="md-nav__link">
+      <a href="../../../model/config/agent_section/epsilon_greedy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1391,7 +1469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/agent_section/q_learning/" class="md-nav__link">
+      <a href="../../../model/config/agent_section/q_learning/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1412,7 +1490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/agent_section/upper_confidence_bound/" class="md-nav__link">
+      <a href="../../../model/config/agent_section/upper_confidence_bound/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1433,7 +1511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/agent_section/value_iteration/" class="md-nav__link">
+      <a href="../../../model/config/agent_section/value_iteration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1462,7 +1540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/base_section/" class="md-nav__link">
+      <a href="../../../model/config/base_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1483,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/grid_world_section/" class="md-nav__link">
+      <a href="../../../model/config/grid_world_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1504,7 +1582,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/gui_section/" class="md-nav__link">
+      <a href="../../../model/config/gui_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1525,7 +1603,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/config/reader/" class="md-nav__link">
+      <a href="../../../model/config/reader/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1568,7 +1646,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/dynamics/" class="md-nav__link ">
+            <a href="../../../model/dynamics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1599,7 +1677,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/dynamics/actions/" class="md-nav__link">
+      <a href="../../../model/dynamics/actions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1620,7 +1698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/dynamics/base_dynamics/" class="md-nav__link">
+      <a href="../../../model/dynamics/base_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1641,7 +1719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/dynamics/cliff_dynamics/" class="md-nav__link">
+      <a href="../../../model/dynamics/cliff_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1662,7 +1740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/dynamics/collection_dynamics/" class="md-nav__link">
+      <a href="../../../model/dynamics/collection_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1683,7 +1761,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/dynamics/grid_world/" class="md-nav__link">
+      <a href="../../../model/dynamics/grid_world/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1726,7 +1804,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/hyperparameters/" class="md-nav__link ">
+            <a href="../../../model/hyperparameters/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1757,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/hyperparameters/base_parameter_strategy/" class="md-nav__link">
+      <a href="../../../model/hyperparameters/base_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1778,7 +1856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/hyperparameters/config_parameter_strategy/" class="md-nav__link">
+      <a href="../../../model/hyperparameters/config_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1799,7 +1877,210 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/hyperparameters/report_data/" class="md-nav__link">
+      <a href="../../../model/hyperparameters/hyper_parameter_system/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hyper Parameter System
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model/hyperparameters/parameter_evaluator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parameter Evaluator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../model/hyperparameters/random_search/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Random Search
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_3_4_5" id="__nav_1_3_4_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Random Search
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model/hyperparameters/random_search/random_parameter_strategy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Random Parameter Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model/hyperparameters/random_search/random_search/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Random Search
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model/hyperparameters/random_search/random_search_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Random Search Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_4_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../model/hyperparameters/report_generation/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Report Generation
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1_3_4_6" id="__nav_1_3_4_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_3_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            Report Generation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model/hyperparameters/report_generation/report_data/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1820,7 +2101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/hyperparameters/report_generator/" class="md-nav__link">
+      <a href="../../../model/hyperparameters/report_generation/report_generator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1841,15 +2122,23 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/hyperparameters/tuning_information/" class="md-nav__link">
+      <a href="../../../model/hyperparameters/report_generation/tuning_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Tuning Information
+    Tuning Parameter Strategy
   </span>
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -1862,11 +2151,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/hyperparameters/tuning_parameter_strategy/" class="md-nav__link">
+      <a href="../../../model/hyperparameters/tuning_information/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Tuning Parameter Strategy
+    Tuning Information
   </span>
   
 
@@ -1905,7 +2194,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/learning_system/" class="md-nav__link ">
+            <a href="../../../model/learning_system/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1936,7 +2225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/base_entity_decorator/" class="md-nav__link">
+      <a href="../../../model/learning_system/base_entity_decorator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1971,7 +2260,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/learning_system/cell_configuration/" class="md-nav__link ">
+            <a href="../../../model/learning_system/cell_configuration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2002,7 +2291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/cell_configuration/cell_configuration/" class="md-nav__link">
+      <a href="../../../model/learning_system/cell_configuration/cell_configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2023,7 +2312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/cell_configuration/cell_configuration_factory/" class="md-nav__link">
+      <a href="../../../model/learning_system/cell_configuration/cell_configuration_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2044,7 +2333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/cell_configuration/cell_state_lookup/" class="md-nav__link">
+      <a href="../../../model/learning_system/cell_configuration/cell_state_lookup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2073,7 +2362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/global_options/" class="md-nav__link">
+      <a href="../../../model/learning_system/global_options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2108,7 +2397,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/learning_system/learning_instance/" class="md-nav__link ">
+            <a href="../../../model/learning_system/learning_instance/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2139,7 +2428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/learning_instance/learning_instance/" class="md-nav__link">
+      <a href="../../../model/learning_system/learning_instance/learning_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2160,7 +2449,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/learning_instance/statistics_record/" class="md-nav__link">
+      <a href="../../../model/learning_system/learning_instance/statistics_record/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2181,7 +2470,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/learning_instance/statistics_recorder/" class="md-nav__link">
+      <a href="../../../model/learning_system/learning_instance/statistics_recorder/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2210,7 +2499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/learning_system/" class="md-nav__link">
+      <a href="../../../model/learning_system/learning_system/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2245,7 +2534,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/learning_system/state_description/" class="md-nav__link ">
+            <a href="../../../model/learning_system/state_description/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2276,7 +2565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/state_description/state_description/" class="md-nav__link">
+      <a href="../../../model/learning_system/state_description/state_description/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2297,7 +2586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/state_description/state_description_factory/" class="md-nav__link">
+      <a href="../../../model/learning_system/state_description/state_description_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2340,7 +2629,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/learning_system/top_level_entities/" class="md-nav__link ">
+            <a href="../../../model/learning_system/top_level_entities/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2371,7 +2660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/top_level_entities/cache/" class="md-nav__link">
+      <a href="../../../model/learning_system/top_level_entities/cache/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2392,7 +2681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/top_level_entities/container/" class="md-nav__link">
+      <a href="../../../model/learning_system/top_level_entities/container/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2413,7 +2702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/top_level_entities/factory/" class="md-nav__link">
+      <a href="../../../model/learning_system/top_level_entities/factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2434,7 +2723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/top_level_entities/options/" class="md-nav__link">
+      <a href="../../../model/learning_system/top_level_entities/options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2477,7 +2766,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/learning_system/value_standardisation/" class="md-nav__link ">
+            <a href="../../../model/learning_system/value_standardisation/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2508,7 +2797,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/value_standardisation/normaliser/" class="md-nav__link">
+      <a href="../../../model/learning_system/value_standardisation/normaliser/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2529,7 +2818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
+      <a href="../../../model/learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2550,7 +2839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/learning_system/value_standardisation/value_range/" class="md-nav__link">
+      <a href="../../../model/learning_system/value_standardisation/value_range/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2601,7 +2890,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../model/state/" class="md-nav__link ">
+            <a href="../../../model/state/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2632,7 +2921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/state/cell_entities/" class="md-nav__link">
+      <a href="../../../model/state/cell_entities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2653,7 +2942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/state/state_builder/" class="md-nav__link">
+      <a href="../../../model/state/state_builder/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2674,7 +2963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/state/state_instance/" class="md-nav__link">
+      <a href="../../../model/state/state_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2695,7 +2984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../model/state/state_pool/" class="md-nav__link">
+      <a href="../../../model/state/state_pool/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2732,7 +3021,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../profile/" class="md-nav__link">
+      <a href="../../../profile/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2767,7 +3056,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/" class="md-nav__link ">
+            <a href="../../../view/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2812,7 +3101,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/controls/" class="md-nav__link ">
+            <a href="../../../view/controls/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2843,7 +3132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/controls/control_factory/" class="md-nav__link">
+      <a href="../../../view/controls/control_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2864,7 +3153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/controls/custom_button_widget/" class="md-nav__link">
+      <a href="../../../view/controls/custom_button_widget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2885,7 +3174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/controls/custom_combo_widget/" class="md-nav__link">
+      <a href="../../../view/controls/custom_combo_widget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2928,7 +3217,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/display_state_v2/" class="md-nav__link ">
+            <a href="../../../view/display_state_v2/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2973,7 +3262,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/display_state_v2/cell/" class="md-nav__link ">
+            <a href="../../../view/display_state_v2/cell/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3004,7 +3293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/cell/arrow_layer/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/cell/arrow_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3025,7 +3314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/cell/background_layer/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/cell/background_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3046,7 +3335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/cell/base_layer/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/cell/base_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3067,7 +3356,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/cell/cell/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/cell/cell/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3088,7 +3377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/cell/cell_layout/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/cell/cell_layout/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3109,7 +3398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3138,7 +3427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/display_state_v2/display/" class="md-nav__link">
+      <a href="../../../view/display_state_v2/display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3181,7 +3470,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/icons/" class="md-nav__link ">
+            <a href="../../../view/icons/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3212,7 +3501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/icons/load_icon/" class="md-nav__link">
+      <a href="../../../view/icons/load_icon/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3241,7 +3530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/interaction_controls/" class="md-nav__link">
+      <a href="../../../view/interaction_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3262,7 +3551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/main_tab_area/" class="md-nav__link">
+      <a href="../../../view/main_tab_area/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3283,7 +3572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/option_controls/" class="md-nav__link">
+      <a href="../../../view/option_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3304,7 +3593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/report_state_publisher/" class="md-nav__link">
+      <a href="../../../view/report_state_publisher/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3325,7 +3614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/state_publisher/" class="md-nav__link">
+      <a href="../../../view/state_publisher/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3360,7 +3649,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/statistics/" class="md-nav__link ">
+            <a href="../../../view/statistics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3391,7 +3680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/statistics/matplotlib_setup/" class="md-nav__link">
+      <a href="../../../view/statistics/matplotlib_setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3426,7 +3715,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../view/statistics/report_display/" class="md-nav__link ">
+            <a href="../../../view/statistics/report_display/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3457,7 +3746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3478,7 +3767,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/statistics/report_display/report_container/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_container/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3499,7 +3788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3520,7 +3809,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/statistics/report_display/report_selector/" class="md-nav__link">
+      <a href="../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3549,7 +3838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/statistics/reward_history/" class="md-nav__link">
+      <a href="../../../view/statistics/reward_history/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3578,7 +3867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/view_root_v2/" class="md-nav__link">
+      <a href="../../../view/view_root_v2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3599,7 +3888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../view/visibility_observer/" class="md-nav__link">
+      <a href="../../../view/visibility_observer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3653,11 +3942,44 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#src.controller.report_generation_controller" class="md-nav__link">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge" class="md-nav__link">
     <span class="md-ellipsis">
-      report_generation_controller
+      update_bridge
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge" class="md-nav__link">
+    <span class="md-ellipsis">
+      HyperParameterUpdateBridge
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HyperParameterUpdateBridge">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge.get_latest_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_latest_state()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge.update_state" class="md-nav__link">
+    <span class="md-ellipsis">
+      update_state()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3676,18 +3998,14 @@
                   
 
 
-  <h1>Report Generation Controller</h1>
+  <h1>Update Bridge</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="src.controller.report_generation_controller"></a>
+<a id="src.controller.hyper_parameter_controller.update_bridge"></a>
   <div class="doc doc-contents first">
-  
-      <p>This package contains the controller for the report generation.</p>
-<p>This controller is separate due to its long running nature so it can
-avoid blocking the traditional functionality.</p>
 
   
 
@@ -3699,6 +4017,238 @@ avoid blocking the traditional functionality.</p>
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h2 id="src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge" class="doc doc-heading">
+          <code>HyperParameterUpdateBridge</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="src.controller.base_bridge.BaseBridge" href="../../base_bridge/#src.controller.base_bridge.BaseBridge">BaseBridge</a></code></p>
+
+  
+      <p>Bridge for passing report updates to the view.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>src/controller/hyper_parameter_controller/update_bridge.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">HyperParameterUpdateBridge</span><span class="p">(</span><span class="n">BaseBridge</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bridge for passing report updates to the view.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">update_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">HyperParameterState</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the new state to be displayed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state (HyperParameterState): The new hyper parameter state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_latest_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HyperParameterState</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the last (most recent) new report state.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Optional[HyperParameterState]: the new state, none if there has not</span>
+<span class="sd">                been any changes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">latest_state</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_non_blocking</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">latest_state</span> <span class="o">=</span> <span class="n">state</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_non_blocking</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">latest_state</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge.get_latest_state" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">get_latest_state</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get the last (most recent) new report state.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="src.model.hyperparameters.hyper_parameter_system.HyperParameterState" href="../../../model/hyperparameters/hyper_parameter_system/#src.model.hyperparameters.hyper_parameter_system.HyperParameterState">HyperParameterState</a>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Optional[HyperParameterState]: the new state, none if there has not
+been any changes.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/controller/hyper_parameter_controller/update_bridge.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_latest_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HyperParameterState</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the last (most recent) new report state.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Optional[HyperParameterState]: the new state, none if there has not</span>
+<span class="sd">            been any changes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">latest_state</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_non_blocking</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">latest_state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_non_blocking</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">latest_state</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.controller.hyper_parameter_controller.update_bridge.HyperParameterUpdateBridge.update_state" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">update_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Set the new state to be displayed.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>state</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.hyper_parameter_system.HyperParameterState" href="../../../model/hyperparameters/hyper_parameter_system/#src.model.hyperparameters.hyper_parameter_system.HyperParameterState">HyperParameterState</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The new hyper parameter state.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/controller/hyper_parameter_controller/update_bridge.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">HyperParameterState</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the new state to be displayed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (HyperParameterState): The new hyper parameter state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
@@ -3754,10 +4304,10 @@ avoid blocking the traditional functionality.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
     
   </body>
