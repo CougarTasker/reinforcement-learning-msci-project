@@ -11,6 +11,7 @@ from src.model.hyperparameters.random_search.random_search_data import (
     RandomSearchState,
     SearchArea,
 )
+from src.model.hyperparameters.tuning_information import TuningInformation
 from src.model.learning_system.top_level_entities.options import (
     AgentOptions,
     DynamicsOptions,
@@ -23,7 +24,7 @@ class RandomSearch(object):
 
     worker_count = 8
     iterations_per_worker = 1000
-    runs = 50
+    runs = 5
 
     def __init__(self) -> None:
         """Initialise random search runner."""
@@ -52,9 +53,14 @@ class RandomSearch(object):
             ),
         ]
 
+        initial_params = {
+            tunable_parameter: None
+            for tunable_parameter in TuningInformation.tunable_parameters()
+        }
+
         initial_data = RandomSearchState(
             {
-                options: SearchArea(options, {}, -float("inf"), 0)
+                options: SearchArea(options, initial_params, None, 0)
                 for options in self.search_options
             },
             searching=False,

@@ -27,20 +27,22 @@ from .state_description.state_description_factory import StateDescriptionFactory
 class LearningSystem(object):
     """Controller for managing one pair of agent and dynamics."""
 
+    initial_top_options = TopEntitiesOptions(
+        AgentOptions.value_iteration_optimised,
+        DynamicsOptions.collection,
+        ExplorationStrategyOptions.not_applicable,
+    )
+    initial_global_options = GlobalOptions(
+        initial_top_options,
+        DisplayMode.default,
+        AutomaticOptions.manual,
+    )
+
     def __init__(self) -> None:
         """Class for managing a complete learning system."""
-        top_level_options = TopEntitiesOptions(
-            AgentOptions.value_iteration_optimised,
-            DynamicsOptions.collection,
-            ExplorationStrategyOptions.not_applicable,
-        )
-        self.options = GlobalOptions(
-            top_level_options,
-            DisplayMode.default,
-            AutomaticOptions.manual,
-        )
+        self.options = self.initial_global_options
         self.entity_cache = TopEntitiesCache()
-        self.entities = self.entity_cache.get_entities(top_level_options)
+        self.entities = self.entity_cache.get_entities(self.initial_top_options)
         self.learning_instance = LearningInstance(self.entities)
         self.state_description_factory = StateDescriptionFactory(
             self.entities, self.options

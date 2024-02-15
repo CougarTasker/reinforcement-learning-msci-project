@@ -1,4 +1,7 @@
+from time import time
 from typing import Optional, Set, Tuple
+
+import numpy as np
 
 from src.model.config.grid_world_section import GridWorldConfig
 
@@ -13,6 +16,8 @@ spawn_positions_type = Set[Tuple[int, int]]
 
 class CollectionDynamics(BaseDynamics):
     """Simple Dynamics where the agent can move to cells to collect goals."""
+
+    location_seed = int(time() * 10)
 
     def __init__(self, config: GridWorldConfig) -> None:
         """Initialise collection dynamics.
@@ -41,12 +46,13 @@ class CollectionDynamics(BaseDynamics):
             spawn_positions_type: the set of positions where goals can be
             spawned.
         """
+        generator = np.random.default_rng(self.location_seed)
         if self.spawn_positions is not None:
             return self.spawn_positions
         agent_location = self.config.agent_location
         self.spawn_positions = set()
         while len(self.spawn_positions) < self.config.entity_count:
-            location = self.grid_world.random_in_bounds_cell()
+            location = self.grid_world.random_in_bounds_cell(generator)
             if location != agent_location:
                 self.spawn_positions.add(location)
         return self.spawn_positions

@@ -3,41 +3,22 @@ from PySide6.QtWidgets import QGridLayout, QGroupBox, QWidget
 from src.controller.learning_system_controller.user_action_bridge import (
     UserAction,
 )
-from src.model.learning_system.cell_configuration.cell_configuration import (
-    DisplayMode,
-)
 from src.model.learning_system.global_options import AutomaticOptions
+from src.model.learning_system.learning_system import LearningSystem
 from src.model.learning_system.state_description.state_description import (
     StateDescription,
 )
 from src.view.controls.control_factory import ControlFactory
+from src.view.controls.custom_combo_widget import ComboWidgetState
+from src.view.option_display_text import OptionDisplayText
 
 
 class InteractionControls(QGroupBox):
     """Widget that contains the controls for interacting with the grid world."""
 
-    display_mode_options = {
-        "default": DisplayMode.default,
-        "best action": DisplayMode.best_action,
-        "state value": DisplayMode.state_value,
-        "action value": DisplayMode.action_value_global,
-        "action value local": DisplayMode.action_value_local,
-    }
-
-    auto_speed_options = {
-        "Manual": AutomaticOptions.manual,
-        "Auto": AutomaticOptions.automatic_playing,
-    }
-
     reset_button_text = "Reset"
 
     group_title = "Simulation Interaction Controls"
-
-    progress_button_text = {
-        AutomaticOptions.manual: "Next",
-        AutomaticOptions.automatic_playing: "Pause",
-        AutomaticOptions.automatic_paused: "Play",
-    }
 
     def __init__(
         self, parent: QWidget, control_factory: ControlFactory
@@ -54,7 +35,13 @@ class InteractionControls(QGroupBox):
         layout = QGridLayout(self)
 
         display_mode = control_factory.create_combo(
-            self, self.display_mode_options, UserAction.set_display_mode
+            self,
+            ComboWidgetState(
+                OptionDisplayText.display_mode_options,
+                LearningSystem.initial_global_options.display_mode,
+            ),
+            UserAction.set_display_mode,
+            self.__display_responsive_options,
         )
         layout.addWidget(display_mode, 0, 0)
 
@@ -64,13 +51,21 @@ class InteractionControls(QGroupBox):
         layout.addWidget(reset_button, 0, 1)
 
         auto_mode = control_factory.create_combo(
-            self, self.auto_speed_options, UserAction.select_auto
+            self,
+            ComboWidgetState(
+                OptionDisplayText.auto_selector_options,
+                LearningSystem.initial_global_options.automatic,
+            ),
+            UserAction.select_auto,
+            self.__auto_responsive_options,
         )
         layout.addWidget(auto_mode, 0, 2)
 
         progress_button = control_factory.create_button(
             self,
-            self.progress_button_text[AutomaticOptions.manual],
+            OptionDisplayText.progress_button_text.get_text(
+                LearningSystem.initial_global_options.automatic
+            ),
             UserAction.progress,
             self.__progress_button_responsive_text,
         )
@@ -85,4 +80,28 @@ class InteractionControls(QGroupBox):
         Returns:
             str: the string to show on the button.
         """
-        return self.progress_button_text[state.global_options.automatic]
+        return OptionDisplayText.progress_button_text.get_text(
+            state.global_options.automatic
+        )
+
+    def __auto_responsive_options(
+        self, state: StateDescription
+    ) -> ComboWidgetState:
+        # limited subset of modes for simplicity.
+        mode = (
+            AutomaticOptions.manual
+            if state.global_options.automatic == AutomaticOptions.manual
+            else AutomaticOptions.automatic_playing
+        )
+        return ComboWidgetState(
+            OptionDisplayText.auto_selector_options,
+            mode,
+        )
+
+    def __display_responsive_options(
+        self, state: StateDescription
+    ) -> ComboWidgetState:
+        return ComboWidgetState(
+            OptionDisplayText.display_mode_options,
+            state.global_options.display_mode,
+        )

@@ -28,6 +28,7 @@ class ReportContainer(QWidget):
         self,
         parent: Optional[QWidget],
         report_controller: HyperParameterController,
+        publisher: ReportStatePublisher,
     ) -> None:
         """Initialise the report display widget.
 
@@ -37,18 +38,19 @@ class ReportContainer(QWidget):
             parent (Optional[QWidget]): the parent of this widget.
             report_controller (HyperParameterController): the controller to
                 interact with the report information.
+            publisher (ReportStatePublisher): the publisher that notifies the
+                report to updates.
 
         """
         super().__init__(parent)
 
         self.layout_manager = QGridLayout(self)
-        self.publisher = ReportStatePublisher(self, report_controller)
 
         selector = ReportSelector(self, report_controller)
         self.layout_manager.addWidget(selector, 0, 0)
-        self.publisher.subscribe(selector)
+        publisher.subscribe(selector)
 
-        self.main_widget_area = MainWidgetSwitcher(self, self.publisher)
+        self.main_widget_area = MainWidgetSwitcher(self, publisher)
         self.layout_manager.addWidget(self.main_widget_area, 1, 0)
 
 

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Optional
 
 from PySide6.QtWidgets import QWidget
 
@@ -67,12 +67,12 @@ class ControlFactory(object):
             self.state_update_publisher.subscribe(widget)
         return widget
 
-    def create_combo_state(
+    def create_combo(
         self,
         parent: QWidget,
         state: ComboWidgetState,
         action: UserAction,
-        responsive_options_handler: Optional[handler_type] = None,
+        responsive_options_handler: handler_type,
     ) -> CustomComboWidget:
         """Create combo box widget with given state.
 
@@ -81,7 +81,7 @@ class ControlFactory(object):
                 into.
             state (ComboWidgetState): the initial state of the widget
             action (UserAction): The user action this combo box corresponds to
-            responsive_options_handler (Optional[handler_type]): an optional
+            responsive_options_handler (handler_type): an optional
                 handler to make this combo box responsive to state updates.
 
         Returns:
@@ -93,33 +93,3 @@ class ControlFactory(object):
             self.state_update_publisher.subscribe(widget)
 
         return widget
-
-    def create_combo(
-        self,
-        parent: QWidget,
-        options: Dict[str, Any],
-        action: UserAction,
-        responsive_options_handler: Optional[handler_type] = None,
-    ) -> CustomComboWidget:
-        """Create combo box widget with options.
-
-        The first option will be selected as the default. and the widget will be
-        enabled.
-
-        Args:
-            parent (QWidget): the parent widget this widget should be rendered
-                into.
-            options (Dict[str, Any]): the options to pick between.
-            action (UserAction): The user action this combo box corresponds to
-            responsive_options_handler (Optional[handler_type]): an optional
-                handler to make this combo box responsive to state updates.
-
-        Returns:
-            CustomComboWidget: the connected widget.
-        """
-        first_option = list(options)[0]
-
-        state = ComboWidgetState(options, first_option, enabled=True)
-        return self.create_combo_state(
-            parent, state, action, responsive_options_handler
-        )

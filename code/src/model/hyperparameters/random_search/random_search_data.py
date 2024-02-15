@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Dict
+from typing import Dict, Optional, Union
 
 from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 from src.model.hyperparameters.random_search.random_parameter_strategy import (
@@ -15,8 +15,10 @@ class SearchArea(object):
     """Represents the results of a search in a particular area."""
 
     options: TopEntitiesOptions
-    best_parameters: Dict[HyperParameter, float]
-    best_value: float
+    best_parameters: Union[
+        Dict[HyperParameter, float], Dict[HyperParameter, None]
+    ]
+    best_value: Optional[float]
     combinations_tried: int
 
     def record_result(
@@ -34,7 +36,7 @@ class SearchArea(object):
         """
         combinations_tried = self.combinations_tried + 1
 
-        if recorded_value > self.best_value:
+        if self.best_value is None or recorded_value > self.best_value:
             return SearchArea(
                 self.options,
                 hyper_parameters.get_parameters(),

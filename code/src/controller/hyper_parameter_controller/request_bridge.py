@@ -50,6 +50,18 @@ class HyperParameterRequestBridge(BaseBridge):
             )
         )
 
+    def set_search_state(self, running: bool) -> None:
+        """Request to set the searching state.
+
+        Args:
+            running (bool): the new search state.
+        """
+        self.add_item(
+            ReportRequestMessage(
+                HyperParameterRequest.set_searching_state, running
+            )
+        )
+
     def get_request(self) -> Optional[ReportRequestMessage]:
         """Get the latest requested report if there is one.
 

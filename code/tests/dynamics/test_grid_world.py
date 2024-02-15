@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.random import Generator
 from pytest import raises
 
 from src.model.dynamics.actions import Action
@@ -34,18 +35,27 @@ def test_in_bounds():
     assert not test.is_in_bounds((3, 3))
 
 
+class MockGenerator(Generator):
+    def __init__(self, return_value) -> None:
+        self.return_value = return_value
+        self.args = None
+
+    def random(self, *args):
+        self.args = args
+        return self.return_value
+
+
 def test_random_gen(mocker):
-    mock_random = mocker.patch("numpy.random.rand")
 
     test = GridWorld(3, 3)
-    mock_random.return_value = np.array([0, 0])
-    min_pos = test.random_in_bounds_cell()
+    mock_generator = MockGenerator(np.array([0, 0]))
+    min_pos = test.random_in_bounds_cell(mock_generator)
 
     assert min_pos == (0, 0)
     almost_one = 1 - np.finfo(float).eps
 
-    mock_random.return_value = np.array([almost_one, almost_one])
-    max_pos = test.random_in_bounds_cell()
+    mock_generator = MockGenerator(np.array([almost_one, almost_one]))
+    max_pos = test.random_in_bounds_cell(mock_generator)
 
     assert max_pos == (2, 2)
 

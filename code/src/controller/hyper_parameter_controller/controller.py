@@ -110,7 +110,7 @@ class HyperParameterController(object):
                     random_search.start_search()
                 case ReportRequestMessage(
                     request=HyperParameterRequest.set_searching_state,
-                    payload=True,
+                    payload=False,
                 ):
                     random_search.stop_search()
                 case _:
@@ -127,7 +127,7 @@ class HyperParameterController(object):
         """
         state = self.system.get_state()
 
-        report_in_progress = not state.report.pending_requests
+        report_in_progress = bool(state.report.pending_requests)
         search_in_progress = state.search.searching
 
         work_in_progress = report_in_progress or search_in_progress
