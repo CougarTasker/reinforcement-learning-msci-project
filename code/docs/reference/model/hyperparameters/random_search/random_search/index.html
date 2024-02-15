@@ -1988,6 +1988,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.random_search.random_search.RandomSearch.run_optimal_search" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_optimal_search()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.hyperparameters.random_search.random_search.RandomSearch.run_search_inner" class="md-nav__link">
     <span class="md-ellipsis">
       run_search_inner()
@@ -4145,6 +4154,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.random_search.random_search.RandomSearch.run_optimal_search" class="md-nav__link">
+    <span class="md-ellipsis">
+      run_optimal_search()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.hyperparameters.random_search.random_search.RandomSearch.run_search_inner" class="md-nav__link">
     <span class="md-ellipsis">
       run_search_inner()
@@ -4232,11 +4250,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
-<span class="normal"> 26</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 26</span>
 <span class="normal"> 27</span>
 <span class="normal"> 28</span>
 <span class="normal"> 29</span>
@@ -4339,7 +4353,42 @@
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">RandomSearch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">RandomSearch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for performing a random search.&quot;&quot;&quot;</span>
 
     <span class="n">worker_count</span> <span class="o">=</span> <span class="mi">8</span>
@@ -4379,6 +4428,7 @@
         <span class="p">}</span>
 
         <span class="n">initial_data</span> <span class="o">=</span> <span class="n">RandomSearchState</span><span class="p">(</span>
+            <span class="kc">None</span><span class="p">,</span>
             <span class="p">{</span>
                 <span class="n">options</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">initial_params</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_options</span>
@@ -4408,6 +4458,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">set_searching</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
 
+        <span class="n">optimal_runner</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span>
+            <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run_optimal_search</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;optimal rewards search&quot;</span>
+        <span class="p">)</span>
+        <span class="n">optimal_runner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
         <span class="k">for</span> <span class="n">runner_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">worker_count</span><span class="p">):</span>
             <span class="n">search_runner</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span>
                 <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run_search_inner</span><span class="p">,</span>
@@ -4420,6 +4475,31 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">set_searching</span><span class="p">(</span><span class="kc">False</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">run_optimal_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run a search for the optimal reward under the given conditions.</span>
+
+<span class="sd">        This is done with value iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">optimal_rewards</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">DynamicsOptions</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">dynamics</span> <span class="ow">in</span> <span class="n">DynamicsOptions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+                <span class="k">return</span>
+            <span class="n">options</span> <span class="o">=</span> <span class="n">TopEntitiesOptions</span><span class="p">(</span>
+                <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">,</span>
+                <span class="n">dynamics</span><span class="p">,</span>
+                <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">normal_parameters</span> <span class="o">=</span> <span class="n">ParameterConfigStrategy</span><span class="p">()</span>
+            <span class="n">optimal_rewards</span><span class="p">[</span><span class="n">dynamics</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParameterEvaluator</span><span class="o">.</span><span class="n">evaluate_reward</span><span class="p">(</span>
+                <span class="n">options</span><span class="p">,</span> <span class="n">normal_parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">set_optimal_rewards</span><span class="p">(</span><span class="n">optimal_rewards</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">run_search_inner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the actual search.</span>
@@ -4480,11 +4560,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
@@ -4523,7 +4599,12 @@
 <span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise random search runner.&quot;&quot;&quot;</span>
     <span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
 
@@ -4556,6 +4637,7 @@
     <span class="p">}</span>
 
     <span class="n">initial_data</span> <span class="o">=</span> <span class="n">RandomSearchState</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
         <span class="p">{</span>
             <span class="n">options</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">initial_params</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">options</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">search_options</span>
@@ -4615,14 +4697,14 @@
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RandomSearchState</span><span class="p">:</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_progress</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RandomSearchState</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current state of the search if there is one.</span>
 
 <span class="sd">    Returns:</span>
@@ -4630,6 +4712,78 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.hyperparameters.random_search.random_search.RandomSearch.run_optimal_search" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">run_optimal_search</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Run a search for the optimal reward under the given conditions.</p>
+<p>This is done with value iteration.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_optimal_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a search for the optimal reward under the given conditions.</span>
+
+<span class="sd">    This is done with value iteration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">optimal_rewards</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">DynamicsOptions</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">dynamics</span> <span class="ow">in</span> <span class="n">DynamicsOptions</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">TopEntitiesOptions</span><span class="p">(</span>
+            <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">,</span>
+            <span class="n">dynamics</span><span class="p">,</span>
+            <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">normal_parameters</span> <span class="o">=</span> <span class="n">ParameterConfigStrategy</span><span class="p">()</span>
+        <span class="n">optimal_rewards</span><span class="p">[</span><span class="n">dynamics</span><span class="p">]</span> <span class="o">=</span> <span class="n">ParameterEvaluator</span><span class="o">.</span><span class="n">evaluate_reward</span><span class="p">(</span>
+            <span class="n">options</span><span class="p">,</span> <span class="n">normal_parameters</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">return</span>
+
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">set_optimal_rewards</span><span class="p">(</span><span class="n">optimal_rewards</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4656,32 +4810,32 @@ start the search from another class.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_search_inner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_search_inner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the actual search.</span>
 
 <span class="sd">    this method is used internally please use `start_search` to actually</span>
@@ -4731,26 +4885,36 @@ start the search from another class.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span>
-<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">start_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">start_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the searching process.&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="o">.</span><span class="n">set_searching</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+
+    <span class="n">optimal_runner</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span>
+        <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run_optimal_search</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;optimal rewards search&quot;</span>
+    <span class="p">)</span>
+    <span class="n">optimal_runner</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">runner_id</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">worker_count</span><span class="p">):</span>
         <span class="n">search_runner</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span>
@@ -4782,11 +4946,11 @@ start the search from another class.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">stop_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">stop_search</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Stop the searching process.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">state_lock</span><span class="p">:</span>

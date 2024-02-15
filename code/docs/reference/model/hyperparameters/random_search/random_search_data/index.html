@@ -2000,6 +2000,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.random_search.random_search_data.RandomSearchState.set_optimal_rewards" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_optimal_rewards()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.hyperparameters.random_search.random_search_data.RandomSearchState.set_searching" class="md-nav__link">
     <span class="md-ellipsis">
       set_searching()
@@ -4133,6 +4142,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#src.model.hyperparameters.random_search.random_search_data.RandomSearchState.set_optimal_rewards" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_optimal_rewards()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#src.model.hyperparameters.random_search.random_search_data.RandomSearchState.set_searching" class="md-nav__link">
     <span class="md-ellipsis">
       set_searching()
@@ -4230,50 +4248,68 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/hyperparameters/random_search/random_search_data.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span>
-<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">RandomSearchState</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to contain the state of a random search.&quot;&quot;&quot;</span>
 
+    <span class="n">optimal_rewards</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">DynamicsOptions</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span>
     <span class="n">search_areas</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">TopEntitiesOptions</span><span class="p">,</span> <span class="n">SearchArea</span><span class="p">]</span>
     <span class="n">searching</span><span class="p">:</span> <span class="nb">bool</span>
 
@@ -4299,7 +4335,7 @@
             <span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">recorded_value</span>
         <span class="p">)</span>
         <span class="n">search_areas</span><span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_search_area</span>
-        <span class="k">return</span> <span class="n">RandomSearchState</span><span class="p">(</span><span class="n">search_areas</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">searching</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_areas</span><span class="o">=</span><span class="n">search_areas</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_searching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searching</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RandomSearchState&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the searching property.</span>
@@ -4310,7 +4346,23 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            RandomSearchState: The new state with the updated value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">RandomSearchState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">search_areas</span><span class="p">,</span> <span class="n">searching</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searching</span><span class="o">=</span><span class="n">searching</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_optimal_rewards</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">optimal_rewards</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">DynamicsOptions</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RandomSearchState&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the optimal reward for a given dynamics.</span>
+
+<span class="sd">        sets a listing of the best reward possible for each dynamics.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            optimal_rewards (Dict[DynamicsOptions, float]): the best reward</span>
+<span class="sd">                possible.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            RandomSearchState: the state that includes this information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimal_rewards</span><span class="o">=</span><span class="n">optimal_rewards</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -4427,9 +4479,7 @@ were tested.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search_data.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
@@ -4449,7 +4499,9 @@ were tested.</p>
 <span class="normal">81</span>
 <span class="normal">82</span>
 <span class="normal">83</span>
-<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_result</span><span class="p">(</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_result</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">,</span>
     <span class="n">hyper_parameters</span><span class="p">:</span> <span class="n">RandomParameterStrategy</span><span class="p">,</span>
@@ -4471,7 +4523,116 @@ were tested.</p>
         <span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">recorded_value</span>
     <span class="p">)</span>
     <span class="n">search_areas</span><span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_search_area</span>
-    <span class="k">return</span> <span class="n">RandomSearchState</span><span class="p">(</span><span class="n">search_areas</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">searching</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_areas</span><span class="o">=</span><span class="n">search_areas</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.hyperparameters.random_search.random_search_data.RandomSearchState.set_optimal_rewards" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">set_optimal_rewards</span><span class="p">(</span><span class="n">optimal_rewards</span><span class="p">)</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Set the optimal reward for a given dynamics.</p>
+<p>sets a listing of the best reward possible for each dynamics.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>optimal_rewards</code></td>
+          <td>
+                <code><span title="typing.Dict">Dict</span>[<a class="autorefs autorefs-internal" title="src.model.learning_system.top_level_entities.options.DynamicsOptions" href="../../../learning_system/top_level_entities/options/#src.model.learning_system.top_level_entities.options.DynamicsOptions">DynamicsOptions</a>, float]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the best reward
+possible.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>RandomSearchState</code></td>          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.random_search.random_search_data.RandomSearchState" href="#src.model.hyperparameters.random_search.random_search_data.RandomSearchState">RandomSearchState</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the state that includes this information.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>src/model/hyperparameters/random_search/random_search_data.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_optimal_rewards</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">optimal_rewards</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">DynamicsOptions</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RandomSearchState&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the optimal reward for a given dynamics.</span>
+
+<span class="sd">    sets a listing of the best reward possible for each dynamics.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        optimal_rewards (Dict[DynamicsOptions, float]): the best reward</span>
+<span class="sd">            possible.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        RandomSearchState: the state that includes this information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimal_rewards</span><span class="o">=</span><span class="n">optimal_rewards</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4550,16 +4711,16 @@ were tested.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search_data.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span>
 <span class="normal">94</span>
-<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_searching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searching</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RandomSearchState&quot;</span><span class="p">:</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_searching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searching</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;RandomSearchState&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the searching property.</span>
 
 <span class="sd">    Args:</span>
@@ -4568,7 +4729,7 @@ were tested.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        RandomSearchState: The new state with the updated value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">RandomSearchState</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">search_areas</span><span class="p">,</span> <span class="n">searching</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">searching</span><span class="o">=</span><span class="n">searching</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4608,8 +4769,7 @@ were tested.</p>
 
             <details class="quote">
               <summary>Source code in <code>src/model/hyperparameters/random_search/random_search_data.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
-<span class="normal">14</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
@@ -4647,7 +4807,8 @@ were tested.</p>
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">SearchArea</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the results of a search in a particular area.&quot;&quot;&quot;</span>
 
@@ -4789,8 +4950,7 @@ were tested.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/random_search/random_search_data.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
-<span class="normal">25</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
@@ -4817,7 +4977,8 @@ were tested.</p>
 <span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
-<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_result</span><span class="p">(</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_result</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">hyper_parameters</span><span class="p">:</span> <span class="n">RandomParameterStrategy</span><span class="p">,</span> <span class="n">recorded_value</span><span class="p">:</span> <span class="nb">float</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SearchArea&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the new search area state after recording a new value.</span>

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Dict, Optional, Union
 
 from src.model.hyperparameters.base_parameter_strategy import HyperParameter
@@ -6,6 +6,7 @@ from src.model.hyperparameters.random_search.random_parameter_strategy import (
     RandomParameterStrategy,
 )
 from src.model.learning_system.top_level_entities.options import (
+    DynamicsOptions,
     TopEntitiesOptions,
 )
 
@@ -56,6 +57,7 @@ class SearchArea(object):
 class RandomSearchState(object):
     """Class to contain the state of a random search."""
 
+    optimal_rewards: Optional[Dict[DynamicsOptions, float]]
     search_areas: Dict[TopEntitiesOptions, SearchArea]
     searching: bool
 
@@ -81,7 +83,7 @@ class RandomSearchState(object):
             hyper_parameters, recorded_value
         )
         search_areas[options] = new_search_area
-        return RandomSearchState(search_areas, self.searching)
+        return replace(self, search_areas=search_areas)
 
     def set_searching(self, searching: bool) -> "RandomSearchState":
         """Set the searching property.
@@ -92,4 +94,20 @@ class RandomSearchState(object):
         Returns:
             RandomSearchState: The new state with the updated value.
         """
-        return RandomSearchState(self.search_areas, searching)
+        return replace(self, searching=searching)
+
+    def set_optimal_rewards(
+        self, optimal_rewards: Dict[DynamicsOptions, float]
+    ) -> "RandomSearchState":
+        """Set the optimal reward for a given dynamics.
+
+        sets a listing of the best reward possible for each dynamics.
+
+        Args:
+            optimal_rewards (Dict[DynamicsOptions, float]): the best reward
+                possible.
+
+        Returns:
+            RandomSearchState: the state that includes this information.
+        """
+        return replace(self, optimal_rewards=optimal_rewards)

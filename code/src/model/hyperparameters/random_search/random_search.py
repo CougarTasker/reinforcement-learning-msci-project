@@ -1,7 +1,11 @@
 from multiprocessing import Manager, Process
+from typing import Dict
 
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
+)
+from src.model.hyperparameters.config_parameter_strategy import (
+    ParameterConfigStrategy,
 )
 from src.model.hyperparameters.parameter_evaluator import ParameterEvaluator
 from src.model.hyperparameters.random_search.random_parameter_strategy import (
@@ -59,6 +63,7 @@ class RandomSearch(object):
         }
 
         initial_data = RandomSearchState(
+            None,
             {
                 options: SearchArea(options, initial_params, None, 0)
                 for options in self.search_options
@@ -88,6 +93,11 @@ class RandomSearch(object):
             self.running.set(True)
             self.state.set(self.state.get().set_searching(True))
 
+        optimal_runner = Process(
+            target=self.run_optimal_search, name="optimal rewards search"
+        )
+        optimal_runner.start()
+
         for runner_id in range(self.worker_count):
             search_runner = Process(
                 target=self.run_search_inner,
@@ -100,6 +110,31 @@ class RandomSearch(object):
         self.running.set(False)
         with self.state_lock:
             self.state.set(self.state.get().set_searching(False))
+
+    def run_optimal_search(self):
+        """Run a search for the optimal reward under the given conditions.
+
+        This is done with value iteration.
+        """
+        optimal_rewards: Dict[DynamicsOptions, float] = {}
+        for dynamics in DynamicsOptions:
+            if not self.running.get():
+                return
+            options = TopEntitiesOptions(
+                AgentOptions.value_iteration_optimised,
+                dynamics,
+                ExplorationStrategyOptions.not_applicable,
+            )
+            normal_parameters = ParameterConfigStrategy()
+            optimal_rewards[dynamics] = ParameterEvaluator.evaluate_reward(
+                options, normal_parameters, self.running
+            )
+        if not self.running.get():
+            return
+
+        with self.state_lock:
+            state = self.state.get()
+            self.state.set(state.set_optimal_rewards(optimal_rewards))
 
     def run_search_inner(self):
         """Run the actual search.

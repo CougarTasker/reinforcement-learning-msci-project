@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from random import random
-from typing import Optional
+from typing import Iterable, Optional
 
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
@@ -133,13 +133,13 @@ class TuningInformation(object):
     }
 
     @classmethod
-    def tunable_parameters(cls) -> set[HyperParameter]:
+    def tunable_parameters(cls) -> Iterable[HyperParameter]:
         """Get all parameters that are tunable.
 
         Returns:
-            set[HyperParameter]: the parameters that can be tuned.
+            Iterable[HyperParameter]: the parameters that can be tuned.
         """
-        return set(cls.parameter_details.keys())
+        return cls.parameter_details.keys()
 
     @classmethod
     def get_parameter_details(

@@ -1,5 +1,6 @@
-from typing import Optional
+from typing import Optional, Union
 
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QFrame, QGridLayout, QLabel, QWidget
 
 from src.model.hyperparameters.random_search.random_search_data import (
@@ -18,7 +19,9 @@ class SearchDisplaySection(QFrame):
 
     best_value_text = "Best Total Reward"
     total_attempts_text = "Total Attempts"
-    missing_value_text = "-"
+    potential_reward_text = "Potential Reward"
+    regret = "Regret"
+    missing_value_text = "—"
 
     top_title = "Configuration"
     middle_title = "Statistics"
@@ -27,12 +30,14 @@ class SearchDisplaySection(QFrame):
     def __init__(
         self,
         parent: Optional[QWidget],
+        search_state: RandomSearchState,
         search_area: SearchArea,
     ) -> None:
         """Initialise the display.
 
         Args:
             parent (Optional[QWidget]): the parent of this widget.
+            search_state (RandomSearchState): the search state information.
             search_area (SearchArea): the search area to display.
         """
         super().__init__(parent)
@@ -40,74 +45,98 @@ class SearchDisplaySection(QFrame):
         self.setFrameShape(self.Shape.Box)
         self.layout_manager = QGridLayout(self)
         self.row: int = 0
-        self.__populate_rows(search_area)
 
-    def __populate_rows(self, search_area: SearchArea):
+        potential_reward = None
+        if search_state.optimal_rewards is not None:
+            potential_reward = search_state.optimal_rewards[
+                search_area.options.dynamics
+            ]
+
+        self.__populate_config(search_area)
+        self.__populate_stats(search_area, potential_reward)
+        self.__populate_parameters(search_area)
+
+    def __populate_config(self, search_area: SearchArea):
         options = search_area.options
 
         self.__add_title(self.top_title)
-
         self.__add_row(
             self.exploration_strategy_text,
             OptionDisplayText.full_exploration_options.get_text(
                 options.exploration_strategy
             ),
         )
-
         self.__add_row(
             self.dynamics_used_text,
             OptionDisplayText.dynamics_options.get_text(options.dynamics),
         )
+
+    def __populate_stats(
+        self, search_area: SearchArea, potential_reward: Optional[float]
+    ):
         self.__add_title(self.middle_title)
+        self.__add_row(self.best_value_text, search_area.best_value)
+        self.__add_row(self.potential_reward_text, potential_reward)
 
-        best_value = (
-            self.missing_value_text
-            if search_area.best_value is None
-            else f"{search_area.best_value:.3f}"
-        )
+        if potential_reward is None or search_area.best_value is None:
+            self.__add_row(self.regret, None)
+        else:
+            self.__add_row(
+                self.regret, potential_reward - search_area.best_value
+            )
 
-        self.__add_row(self.best_value_text, best_value)
+        self.__add_row(self.total_attempts_text, search_area.combinations_tried)
 
-        self.__add_row(
-            self.total_attempts_text, str(search_area.combinations_tried)
-        )
+    def __populate_parameters(self, search_area: SearchArea):
         self.__add_title(self.parameters_title)
         best_parameters = search_area.best_parameters
 
         for parameter, parameter_value in best_parameters.items():
             details = TuningInformation.get_parameter_details(parameter)
 
-            if parameter_value is None:
-                self.__add_row(details.name, self.missing_value_text)
-                continue
-
-            text_value = (
-                f"{parameter_value:d}"
-                if details.integer_valued
-                else f"{parameter_value:.3f}"
+            self.__add_row(
+                details.name, parameter_value, details.integer_valued
             )
-            self.__add_row(details.name, text_value)
 
     def __add_title(self, title: str):
         title_label = QLabel(title, self)
 
         current_font = title_label.font()
         current_font.setBold(True)
-        current_font.setPointSize(current_font.pointSize() + 1)
+        current_font.setPointSize(current_font.pointSize() + 2)
         title_label.setFont(current_font)
         self.layout_manager.addWidget(title_label, self.row, 0, 1, 2)
         self.row += 1
 
-    def __add_row(self, label: str, text: str):
+    def __add_row(
+        self,
+        label: str,
+        text_or_number: Union[float, int, str, None],
+        display_as_int: bool = False,
+    ):
         self.layout_manager.addWidget(
             QLabel(label, self),
             self.row,
             0,
         )
+        text = None
+
+        if text_or_number is None:
+            text = self.missing_value_text
+        elif isinstance(text_or_number, int) or display_as_int:
+            text = f"{text_or_number: d}"
+        elif isinstance(text_or_number, float):
+            text = f"{text_or_number: .3f}"
+        else:
+            text = text_or_number
+
+        alignment = (
+            Qt.AlignmentFlag.AlignCenter
+            if text_or_number is None
+            else Qt.AlignmentFlag.AlignLeft
+        )
         self.layout_manager.addWidget(
-            QLabel(text, self),
-            self.row,
-            1,
+            QLabel(text, self), self.row, 1, alignment
         )
         self.row += 1
 
@@ -136,5 +165,5 @@ class SearchDisplayInstance(QWidget):
         columns = 2
 
         for index, search_area in enumerate(search_state.search_areas.values()):
-            section = SearchDisplaySection(self, search_area)
+            section = SearchDisplaySection(self, search_state, search_area)
             layout.addWidget(section, index // columns, index % columns)

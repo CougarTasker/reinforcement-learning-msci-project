@@ -4935,13 +4935,13 @@ between zero and one.</p>
     <span class="p">}</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">tunable_parameters</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">tunable_parameters</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all parameters that are tunable.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            set[HyperParameter]: the parameters that can be tuned.</span>
+<span class="sd">            Iterable[HyperParameter]: the parameters that can be tuned.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">parameter_details</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">parameter_details</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_parameter_details</span><span class="p">(</span>
@@ -5165,11 +5165,11 @@ between zero and one.</p>
     <tbody>
         <tr>
           <td>
-                <code>set[<a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.HyperParameter" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.HyperParameter">HyperParameter</a>]</code>
+                <code><span title="typing.Iterable">Iterable</span>[<a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.HyperParameter" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.HyperParameter">HyperParameter</a>]</code>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>set[HyperParameter]: the parameters that can be tuned.</p>
+              <p>Iterable[HyperParameter]: the parameters that can be tuned.</p>
             </div>
           </td>
         </tr>
@@ -5186,13 +5186,13 @@ between zero and one.</p>
 <span class="normal">140</span>
 <span class="normal">141</span>
 <span class="normal">142</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">tunable_parameters</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">tunable_parameters</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">HyperParameter</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get all parameters that are tunable.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        set[HyperParameter]: the parameters that can be tuned.</span>
+<span class="sd">        Iterable[HyperParameter]: the parameters that can be tuned.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">parameter_details</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">parameter_details</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>

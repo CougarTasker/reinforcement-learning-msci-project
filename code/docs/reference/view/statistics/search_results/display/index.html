@@ -4208,32 +4208,32 @@
 
             <details class="quote">
               <summary>Source code in <code>src/view/statistics/search_results/display.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SearchDisplayInstance</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SearchDisplayInstance</span><span class="p">(</span><span class="n">QWidget</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Display the results of a random search.&quot;&quot;&quot;</span>
 
     <span class="n">dynamics_used_text</span> <span class="o">=</span> <span class="s2">&quot;Dynamics&quot;</span>
@@ -4257,7 +4257,7 @@
         <span class="n">columns</span> <span class="o">=</span> <span class="mi">2</span>
 
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">search_area</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">search_state</span><span class="o">.</span><span class="n">search_areas</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
-            <span class="n">section</span> <span class="o">=</span> <span class="n">SearchDisplaySection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_area</span><span class="p">)</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="n">SearchDisplaySection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_state</span><span class="p">,</span> <span class="n">search_area</span><span class="p">)</span>
             <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">index</span> <span class="o">//</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="n">columns</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -4336,23 +4336,23 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/statistics/search_results/display.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QWidget</span><span class="p">],</span> <span class="n">search_state</span><span class="p">:</span> <span class="n">RandomSearchState</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the display.</span>
@@ -4367,7 +4367,7 @@
     <span class="n">columns</span> <span class="o">=</span> <span class="mi">2</span>
 
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">search_area</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">search_state</span><span class="o">.</span><span class="n">search_areas</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
-        <span class="n">section</span> <span class="o">=</span> <span class="n">SearchDisplaySection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_area</span><span class="p">)</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">SearchDisplaySection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_state</span><span class="p">,</span> <span class="n">search_area</span><span class="p">)</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">index</span> <span class="o">//</span> <span class="n">columns</span><span class="p">,</span> <span class="n">index</span> <span class="o">%</span> <span class="n">columns</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
@@ -4404,8 +4404,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/view/statistics/search_results/display.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 13</span>
-<span class="normal"> 14</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 14</span>
 <span class="normal"> 15</span>
 <span class="normal"> 16</span>
 <span class="normal"> 17</span>
@@ -4503,7 +4502,36 @@
 <span class="normal">109</span>
 <span class="normal">110</span>
 <span class="normal">111</span>
-<span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SearchDisplaySection</span><span class="p">(</span><span class="n">QFrame</span><span class="p">):</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SearchDisplaySection</span><span class="p">(</span><span class="n">QFrame</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Display the results of a random search.&quot;&quot;&quot;</span>
 
     <span class="n">dynamics_used_text</span> <span class="o">=</span> <span class="s2">&quot;Dynamics&quot;</span>
@@ -4511,7 +4539,9 @@
 
     <span class="n">best_value_text</span> <span class="o">=</span> <span class="s2">&quot;Best Total Reward&quot;</span>
     <span class="n">total_attempts_text</span> <span class="o">=</span> <span class="s2">&quot;Total Attempts&quot;</span>
-    <span class="n">missing_value_text</span> <span class="o">=</span> <span class="s2">&quot;-&quot;</span>
+    <span class="n">potential_reward_text</span> <span class="o">=</span> <span class="s2">&quot;Potential Reward&quot;</span>
+    <span class="n">regret</span> <span class="o">=</span> <span class="s2">&quot;Regret&quot;</span>
+    <span class="n">missing_value_text</span> <span class="o">=</span> <span class="s2">&quot;—&quot;</span>
 
     <span class="n">top_title</span> <span class="o">=</span> <span class="s2">&quot;Configuration&quot;</span>
     <span class="n">middle_title</span> <span class="o">=</span> <span class="s2">&quot;Statistics&quot;</span>
@@ -4520,12 +4550,14 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QWidget</span><span class="p">],</span>
+        <span class="n">search_state</span><span class="p">:</span> <span class="n">RandomSearchState</span><span class="p">,</span>
         <span class="n">search_area</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the display.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            parent (Optional[QWidget]): the parent of this widget.</span>
+<span class="sd">            search_state (RandomSearchState): the search state information.</span>
 <span class="sd">            search_area (SearchArea): the search area to display.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -4533,74 +4565,98 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setFrameShape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Shape</span><span class="o">.</span><span class="n">Box</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_manager</span> <span class="o">=</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__populate_rows</span><span class="p">(</span><span class="n">search_area</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__populate_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_area</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">):</span>
+        <span class="n">potential_reward</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">search_state</span><span class="o">.</span><span class="n">optimal_rewards</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">potential_reward</span> <span class="o">=</span> <span class="n">search_state</span><span class="o">.</span><span class="n">optimal_rewards</span><span class="p">[</span>
+                <span class="n">search_area</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">dynamics</span>
+            <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__populate_config</span><span class="p">(</span><span class="n">search_area</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__populate_stats</span><span class="p">(</span><span class="n">search_area</span><span class="p">,</span> <span class="n">potential_reward</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__populate_parameters</span><span class="p">(</span><span class="n">search_area</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__populate_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_area</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">):</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">search_area</span><span class="o">.</span><span class="n">options</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__add_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_title</span><span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">exploration_strategy_text</span><span class="p">,</span>
             <span class="n">OptionDisplayText</span><span class="o">.</span><span class="n">full_exploration_options</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span>
                 <span class="n">options</span><span class="o">.</span><span class="n">exploration_strategy</span>
             <span class="p">),</span>
         <span class="p">)</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dynamics_used_text</span><span class="p">,</span>
             <span class="n">OptionDisplayText</span><span class="o">.</span><span class="n">dynamics_options</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">dynamics</span><span class="p">),</span>
         <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__populate_stats</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">search_area</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">,</span> <span class="n">potential_reward</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__add_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">middle_title</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_value_text</span><span class="p">,</span> <span class="n">search_area</span><span class="o">.</span><span class="n">best_value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">potential_reward_text</span><span class="p">,</span> <span class="n">potential_reward</span><span class="p">)</span>
 
-        <span class="n">best_value</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">missing_value_text</span>
-            <span class="k">if</span> <span class="n">search_area</span><span class="o">.</span><span class="n">best_value</span> <span class="ow">is</span> <span class="kc">None</span>
-            <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">search_area</span><span class="o">.</span><span class="n">best_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">potential_reward</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">search_area</span><span class="o">.</span><span class="n">best_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">regret</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">regret</span><span class="p">,</span> <span class="n">potential_reward</span> <span class="o">-</span> <span class="n">search_area</span><span class="o">.</span><span class="n">best_value</span>
+            <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_value_text</span><span class="p">,</span> <span class="n">best_value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">total_attempts_text</span><span class="p">,</span> <span class="n">search_area</span><span class="o">.</span><span class="n">combinations_tried</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_attempts_text</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">search_area</span><span class="o">.</span><span class="n">combinations_tried</span><span class="p">)</span>
-        <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__populate_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_area</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__add_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters_title</span><span class="p">)</span>
         <span class="n">best_parameters</span> <span class="o">=</span> <span class="n">search_area</span><span class="o">.</span><span class="n">best_parameters</span>
 
         <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">parameter_value</span> <span class="ow">in</span> <span class="n">best_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">details</span> <span class="o">=</span> <span class="n">TuningInformation</span><span class="o">.</span><span class="n">get_parameter_details</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">parameter_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="n">details</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing_value_text</span><span class="p">)</span>
-                <span class="k">continue</span>
-
-            <span class="n">text_value</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parameter_value</span><span class="si">:</span><span class="s2">d</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="k">if</span> <span class="n">details</span><span class="o">.</span><span class="n">integer_valued</span>
-                <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parameter_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span>
+                <span class="n">details</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">parameter_value</span><span class="p">,</span> <span class="n">details</span><span class="o">.</span><span class="n">integer_valued</span>
             <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__add_row</span><span class="p">(</span><span class="n">details</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">text_value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__add_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">title_label</span> <span class="o">=</span> <span class="n">QLabel</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 
         <span class="n">current_font</span> <span class="o">=</span> <span class="n">title_label</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
         <span class="n">current_font</span><span class="o">.</span><span class="n">setBold</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">current_font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">current_font</span><span class="o">.</span><span class="n">pointSize</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">current_font</span><span class="o">.</span><span class="n">setPointSize</span><span class="p">(</span><span class="n">current_font</span><span class="o">.</span><span class="n">pointSize</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">title_label</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">current_font</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_manager</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">title_label</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">def</span> <span class="nf">__add_row</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__add_row</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">text_or_number</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">display_as_int</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_manager</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="n">QLabel</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">,</span>
             <span class="mi">0</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">text_or_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">missing_value_text</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text_or_number</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">display_as_int</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text_or_number</span><span class="si">:</span><span class="s2"> d</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text_or_number</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text_or_number</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text_or_number</span>
+
+        <span class="n">alignment</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Qt</span><span class="o">.</span><span class="n">AlignmentFlag</span><span class="o">.</span><span class="n">AlignCenter</span>
+            <span class="k">if</span> <span class="n">text_or_number</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">Qt</span><span class="o">.</span><span class="n">AlignmentFlag</span><span class="o">.</span><span class="n">AlignLeft</span>
+        <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout_manager</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
-            <span class="n">QLabel</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">,</span>
-            <span class="mi">1</span><span class="p">,</span>
+            <span class="n">QLabel</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alignment</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
@@ -4625,7 +4681,7 @@
 
 
 <h3 id="src.view.statistics.search_results.display.SearchDisplaySection.__init__" class="doc doc-heading">
-          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">search_area</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">search_state</span><span class="p">,</span> <span class="n">search_area</span><span class="p">)</span></code>
 
 </h3>
 
@@ -4662,6 +4718,20 @@
           </td>
         </tr>
         <tr>
+          <td><code>search_state</code></td>
+          <td>
+                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.random_search.random_search_data.RandomSearchState" href="../../../../model/hyperparameters/random_search/random_search_data/#src.model.hyperparameters.random_search.random_search_data.RandomSearchState">RandomSearchState</a></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>the search state information.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
           <td><code>search_area</code></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.random_search.random_search_data.SearchArea" href="../../../../model/hyperparameters/random_search/random_search_data/#src.model.hyperparameters.random_search.random_search_data.SearchArea">SearchArea</a></code>
@@ -4680,10 +4750,7 @@
 
           <details class="quote">
             <summary>Source code in <code>src/view/statistics/search_results/display.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
@@ -4696,15 +4763,31 @@
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
-<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QWidget</span><span class="p">],</span>
+    <span class="n">search_state</span><span class="p">:</span> <span class="n">RandomSearchState</span><span class="p">,</span>
     <span class="n">search_area</span><span class="p">:</span> <span class="n">SearchArea</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the display.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        parent (Optional[QWidget]): the parent of this widget.</span>
+<span class="sd">        search_state (RandomSearchState): the search state information.</span>
 <span class="sd">        search_area (SearchArea): the search area to display.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -4712,7 +4795,16 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">setFrameShape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Shape</span><span class="o">.</span><span class="n">Box</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">layout_manager</span> <span class="o">=</span> <span class="n">QGridLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">__populate_rows</span><span class="p">(</span><span class="n">search_area</span><span class="p">)</span>
+
+    <span class="n">potential_reward</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">search_state</span><span class="o">.</span><span class="n">optimal_rewards</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">potential_reward</span> <span class="o">=</span> <span class="n">search_state</span><span class="o">.</span><span class="n">optimal_rewards</span><span class="p">[</span>
+            <span class="n">search_area</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">dynamics</span>
+        <span class="p">]</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">__populate_config</span><span class="p">(</span><span class="n">search_area</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__populate_stats</span><span class="p">(</span><span class="n">search_area</span><span class="p">,</span> <span class="n">potential_reward</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__populate_parameters</span><span class="p">(</span><span class="n">search_area</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
