@@ -1,5 +1,5 @@
 import random
-from typing import Optional
+from typing import Any, Optional
 
 import numpy as np
 
@@ -194,22 +194,13 @@ class ValueIterationAgent(BaseAgent):
 
         return best_action
 
-    def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
-    ) -> None:
+    def record_transition(self, *args: Any) -> None:
         """Provide the agent with the information from a transition.
 
         (not used by this agent)
 
         Args:
-            previous_state (int): the state before the action was taken
-            previous_action (Action): the action that was taken.
-            new_state (int): The resulting state after the action has been taken
-            reward (float): the reward for performing this action
+            args (Any): not used.
 
         """
         # not used as the agent learns from the dynamics directly

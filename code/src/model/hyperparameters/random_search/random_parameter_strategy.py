@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Optional
 
 from typing_extensions import override
 
@@ -17,14 +17,13 @@ class RandomParameterStrategy(BaseHyperParameterStrategy):
 
         This is where the parameter manager picks the random values
         """
-        self.parameter_values = {
-            hyper_parameter: TuningInformation.get_parameter_details(
-                hyper_parameter
-            ).get_random_value()
-            for hyper_parameter in TuningInformation.tunable_parameters()
+        # make the parameters are demand driven to avoid redundant values.
+        self.parameter_values: Dict[HyperParameter, Optional[float]] = {
+            parameter: None
+            for parameter in TuningInformation.tunable_parameters()
         }
 
-    def get_parameters(self) -> Dict[HyperParameter, float]:
+    def get_parameters(self) -> Dict[HyperParameter, Optional[float]]:
         """Get the parameters used by this strategy.
 
         Returns:
@@ -45,7 +44,15 @@ class RandomParameterStrategy(BaseHyperParameterStrategy):
         Returns:
             float: the value of this parameter.
         """
-        parameter_value = self.parameter_values.get(parameter, None)
-        if parameter_value is None:
+        if parameter not in TuningInformation.tunable_parameters():
             raise ValueError(f'parameter "{parameter.name}" is not known')
-        return parameter_value
+
+        parameter_value = self.parameter_values.get(parameter, None)
+        if parameter_value is not None:
+            return parameter_value
+
+        new_value = TuningInformation.get_parameter_details(
+            parameter
+        ).get_random_value()
+        self.parameter_values[parameter] = new_value
+        return new_value

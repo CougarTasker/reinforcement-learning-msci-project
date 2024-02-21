@@ -188,13 +188,7 @@ class MockAgent(BaseAgent):
     def evaluate_policy(self, state: int) -> Action:
         return Action.down
 
-    def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
-    ) -> None:
+    def record_transition(self, *args) -> None:
         # record
         pass
 

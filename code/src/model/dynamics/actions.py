@@ -1,10 +1,12 @@
 from enum import Enum
 
 
+# it is important the actions be zero based it is an assumption used by the
+# q-learning agent.
 class Action(Enum):
     """Enumerates all possible actions."""
 
-    up = 1
-    down = 2
-    left = 3
-    right = 4
+    up = 0
+    down = 1
+    left = 2
+    right = 3

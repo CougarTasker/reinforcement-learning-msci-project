@@ -1,5 +1,5 @@
 from dataclasses import dataclass, replace
-from typing import Dict, Optional, Union
+from typing import Dict, Optional
 
 from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 from src.model.hyperparameters.random_search.random_parameter_strategy import (
@@ -16,9 +16,7 @@ class SearchArea(object):
     """Represents the results of a search in a particular area."""
 
     options: TopEntitiesOptions
-    best_parameters: Union[
-        Dict[HyperParameter, float], Dict[HyperParameter, None]
-    ]
+    best_parameters: Dict[HyperParameter, Optional[float]]
     best_value: Optional[float]
     combinations_tried: int
 

@@ -29,7 +29,7 @@ class EntityFactory(object):
         cls,
         options: TopEntitiesOptions,
         hyper_parameters: BaseHyperParameterStrategy,
-    ):
+    ) -> EntityContainer:
         """Create new entities from the given options.
 
         Args:

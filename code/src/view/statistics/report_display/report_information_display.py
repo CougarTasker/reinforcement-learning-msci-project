@@ -1,18 +1,19 @@
 from typing import Optional
 
 from matplotlib.axes import Axes
-from matplotlib.figure import Figure
 from PySide6.QtWidgets import QGridLayout, QWidget
 from typing_extensions import override
 
-from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 from src.model.hyperparameters.hyper_parameter_system import HyperParameterState
+from src.model.hyperparameters.report_generation.report_data import (
+    HyperParameterReport,
+)
 from src.model.hyperparameters.tuning_information import TuningInformation
 from src.view.report_state_publisher import BaseReportObserver
-from src.view.statistics.matplotlib_setup import create_canvas
+from src.view.statistics.plotting import BasePlotter, PlottingCanvas
 
 
-class ReportInformationDisplay(QWidget, BaseReportObserver):
+class ReportInformationDisplay(QWidget, BaseReportObserver, BasePlotter):
     """This widget displays to the user the information from the report."""
 
     progress_bar_steps = 100
@@ -31,17 +32,10 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
 
         layout = QGridLayout(self)
 
-        figure = Figure()
-        self.canvas = create_canvas(figure)
-
+        self.canvas = PlottingCanvas(self, self)
         layout.addWidget(self.canvas, 0, 0)
 
-        axes = figure.subplots()
-        if not isinstance(axes, Axes):
-            raise RuntimeError("Incorrect axis object")
-
-        self.axes = axes
-        self.current_parameter: Optional[HyperParameter] = None
+        self.current_report: Optional[HyperParameterReport] = None
 
     @override
     def report_state_updated(self, state: HyperParameterState) -> None:
@@ -54,23 +48,42 @@ class ReportInformationDisplay(QWidget, BaseReportObserver):
         report_parameter = state.report.current_report
         if report_parameter is None:
             return
-        if report_parameter is self.current_parameter:
+
+        report_unchanged = (
+            self.current_report is not None
+            and report_parameter is self.current_report.parameter
+        )
+
+        if report_unchanged:
             return
         report_data = state.report.available_reports.get(report_parameter, None)
         if report_data is None:
             return
 
-        details = TuningInformation.get_parameter_details(report_parameter)
+        self.current_report = report_data
+        self.canvas.request_update()
 
-        self.__reset_plot(details.get_display_name())
+    @override
+    def plot_data(self, axes: Axes):
+        """Get the content for the plotting canvas.
 
-        self.axes.plot(report_data.x_axis, report_data.y_axis, "b-")
+        Args:
+            axes (Axes): the axes to plot to.
+        """
+        if self.current_report is None:
+            return
 
-        self.canvas.draw()
-        self.current_parameter = report_parameter
-
-    def __reset_plot(self, name: str):
-        self.axes.clear()
-        self.axes.set_xlabel(f"{name} Value")
-        self.axes.set_ylabel("Total Reward")
-        self.axes.set_title(f"{name} vs Total Reward")
+        details = TuningInformation.get_parameter_details(
+            self.current_report.parameter
+        )
+        axes.set_title(f"{details.get_display_name()} vs Total Reward")
+        axes.set_xlabel(f"{details.get_display_name()} Value")
+        axes.set_ylabel("Total Reward")
+        axes.fill_between(
+            self.current_report.x_axis,
+            self.current_report.lower_confidence_bound,
+            self.current_report.upper_confidence_bound,
+            color="b",
+            alpha=0.1 * 3,
+        )
+        axes.plot(self.current_report.x_axis, self.current_report.y_axis, "r-")

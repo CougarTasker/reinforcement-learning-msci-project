@@ -41,10 +41,11 @@ class StatePool(object):
         Returns:
             int: the id for this state
         """
-        if self.is_existing_state(state):
-            return self.state_to_id[state]
-        new_id = len(self.state_to_id)
-        self.state_to_id[state] = new_id
+        state_to_id = self.state_to_id
+        if state in state_to_id:
+            return state_to_id[state]  # noqa: WPS529 get is too slow
+        new_id = len(state_to_id)
+        state_to_id[state] = new_id
         self.id_to_state[new_id] = state
         return new_id
 

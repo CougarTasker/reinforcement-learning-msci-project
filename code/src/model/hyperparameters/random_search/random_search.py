@@ -1,9 +1,10 @@
 from multiprocessing import Manager, Process
-from typing import Dict
+from typing import Dict, Optional
 
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
+from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 from src.model.hyperparameters.config_parameter_strategy import (
     ParameterConfigStrategy,
 )
@@ -57,7 +58,7 @@ class RandomSearch(object):
             ),
         ]
 
-        initial_params = {
+        initial_params: Dict[HyperParameter, Optional[float]] = {
             tunable_parameter: None
             for tunable_parameter in TuningInformation.tunable_parameters()
         }

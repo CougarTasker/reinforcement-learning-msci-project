@@ -1,5 +1,6 @@
 from itertools import repeat
 from multiprocessing import Manager, Pool, Process
+from typing import Tuple
 
 import numpy as np
 
@@ -7,6 +8,7 @@ from src.model.hyperparameters.base_parameter_strategy import HyperParameter
 from src.model.hyperparameters.parameter_evaluator import ParameterEvaluator
 from src.model.hyperparameters.tuning_information import TuningInformation
 
+from .compute_confidence_interval import compute_confidence_interval
 from .report_data import HyperParameterReport, ReportState
 from .tuning_parameter_strategy import ParameterTuningStrategy
 
@@ -89,25 +91,34 @@ class HyperParameterReportGenerator(object):
         run_progress = 1 / (samples * self.runs)
 
         with Pool(processes=self.worker_count) as pool:
-            y_axis = pool.starmap(
+            simulation_results = pool.starmap(
                 self.evaluate_value,
                 zip(repeat(parameter), x_axis, repeat(run_progress)),
             )
             if not self.running:
                 return
 
-            report = HyperParameterReport(parameter, x_axis, y_axis)
+            lower_bounds, y_axis, upper_bounds = map(
+                list, zip(*simulation_results)
+            )
+
+            report = HyperParameterReport(
+                parameter, x_axis, lower_bounds, y_axis, upper_bounds
+            )
 
             with self.state_lock:
                 state = self.state.get()
                 self.state.set(state.complete_request(report))
+
+    confidence_level = 0.95
+    confidence_iterations = 1000
 
     def evaluate_value(
         self,
         parameter: HyperParameter,
         parameter_value: float,
         run_progress_amount: float,
-    ) -> float:
+    ) -> Tuple[float, float, float]:
         """Evaluate a parameter and value combination.
 
         Args:
@@ -123,15 +134,15 @@ class HyperParameterReportGenerator(object):
         details = TuningInformation.get_parameter_details(parameter)
         hyper_parameters = ParameterTuningStrategy(parameter, parameter_value)
 
-        total_reward = float(0)
+        rewards = []
 
         for _ in range(self.runs):
             if not self.running.get():
-                return 0
+                return 0, 0, 0
             stats = ParameterEvaluator.single_run(
                 details.tuning_options, hyper_parameters
             )
-            total_reward += stats.total_reward
+            rewards.append(stats.total_reward)
 
             with self.state_lock:
                 state = self.state.get()
@@ -142,4 +153,9 @@ class HyperParameterReportGenerator(object):
                 self.state.set(
                     state.update_report_progress(parameter, new_progress)
                 )
-        return total_reward / self.runs
+
+        return compute_confidence_interval(
+            np.array(rewards, dtype=np.float64),
+            self.confidence_level,
+            self.confidence_iterations,
+        )

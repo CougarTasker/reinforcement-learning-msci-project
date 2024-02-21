@@ -2,6 +2,7 @@
 
 import cProfile
 import pstats
+from random import seed
 
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication
@@ -18,6 +19,11 @@ from src.controller.learning_system_controller.user_action_bridge import (
 from src.model.agents.q_learning.exploration_strategies.options import (
     ExplorationStrategyOptions,
 )
+from src.model.hyperparameters.parameter_evaluator import ParameterEvaluator
+from src.model.hyperparameters.random_search.random_parameter_strategy import (
+    RandomParameterStrategy,
+)
+from src.model.hyperparameters.random_search.random_search import RandomSearch
 from src.model.learning_system.cell_configuration.cell_configuration import (
     DisplayMode,
 )
@@ -73,7 +79,7 @@ def one_process_profiling():
     qt.exec()
 
 
-def profiled_code():
+def end_to_end_profiling():
     """Run the profiled code.
 
     The code in this method will be profiled by the application.
@@ -87,6 +93,35 @@ def profiled_code():
             app = ReinforcementLearningApp(main_controller, report_controller)
             app.show()
             qt.exec()
+
+
+def profiled_code():
+    """Run the profiled code.
+
+    The code in this method will be profiled by the application.
+    """
+    rs = RandomSearch()
+    rs.running.set(True)
+    seed(10)
+    for i in range(5):
+        print(i)
+        for options in rs.search_options:
+            if not rs.running.get():
+                return
+            hyper_parameters = RandomParameterStrategy()
+
+            total_reward = ParameterEvaluator.evaluate_reward(
+                options, hyper_parameters, rs.running
+            )
+
+            if not rs.running.get():
+                return
+
+            with rs.state_lock:
+                state = rs.state.get()
+                rs.state.set(
+                    state.record_result(options, hyper_parameters, total_reward)
+                )
 
 
 def profile():

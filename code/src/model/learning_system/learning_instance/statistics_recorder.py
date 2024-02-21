@@ -1,4 +1,4 @@
-from src.model.dynamics.actions import Action
+from src.model.transition_information import TransitionInformation
 
 from .statistics_record import StatisticsRecord
 
@@ -18,21 +18,13 @@ class StatisticsRecorder(object):
         """
         return self.statistics
 
-    def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
-    ) -> None:
+    def record_transition(self, transition: TransitionInformation) -> None:
         """Record the information from a transition.
 
         Args:
-            previous_state (int): the state before the action was taken
-            previous_action (Action): the action that was taken.
-            new_state (int): The resulting state after the action has been taken
-            reward (float): the reward for performing this action
+            transition (TransitionInformation) : the transition information.
         """
+        reward = transition.reward
         stats = self.statistics
         self.statistics = StatisticsRecord(
             stats.time_step + 1,

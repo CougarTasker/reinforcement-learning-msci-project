@@ -10,7 +10,9 @@ class HyperParameterReport(object):
 
     parameter: HyperParameter
     x_axis: List
+    lower_confidence_bound: List
     y_axis: List
+    upper_confidence_bound: List
 
 
 incomplete_progress_cap = 0.99

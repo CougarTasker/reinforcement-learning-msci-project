@@ -66,7 +66,7 @@ class GridWorld(object):
         position_integer = np.floor(position_float).astype(int)
         return (position_integer[0], position_integer[1])
 
-    action_direction: Dict[Action, Tuple[int, int]] = {
+    action_direction: Dict[Action, integer_position] = {
         Action.up: (0, -1),
         Action.down: (0, 1),
         Action.right: (1, 0),
@@ -99,10 +99,6 @@ class GridWorld(object):
         Returns:
             integer_position: The position after moving.
         """
-        if action not in self.action_direction:
-            raise ValueError(
-                f"Action {action.name} is not a known movement action"
-            )
         x_pos, y_pos = current_position
         dir_x, dir_y = self.action_direction[action]
         return (x_pos + dir_x * distance, y_pos + dir_y * distance)

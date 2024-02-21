@@ -111,7 +111,7 @@ class SearchDisplaySection(QFrame):
     def __add_row(
         self,
         label: str,
-        text_or_number: Union[float, int, str, None],
+        row_data: Union[float, int, str, None],
         display_as_int: bool = False,
     ):
         self.layout_manager.addWidget(
@@ -121,24 +121,32 @@ class SearchDisplaySection(QFrame):
         )
         text = None
 
-        if text_or_number is None:
+        if row_data is None:
             text = self.missing_value_text
-        elif isinstance(text_or_number, int) or display_as_int:
-            text = f"{text_or_number: d}"
-        elif isinstance(text_or_number, float):
-            text = f"{text_or_number: .3f}"
+        elif isinstance(row_data, int) or display_as_int:
+            text = f"{row_data: d}"
+        elif isinstance(row_data, float):
+            text = f"{row_data: .3f}"
         else:
-            text = text_or_number
+            text = row_data
 
         alignment = (
             Qt.AlignmentFlag.AlignCenter
-            if text_or_number is None
+            if row_data is None
             else Qt.AlignmentFlag.AlignLeft
         )
-        self.layout_manager.addWidget(
-            QLabel(text, self), self.row, 1, alignment
-        )
+        data_label = self.__add_selection(QLabel(text, self))
+
+        self.layout_manager.addWidget(data_label, self.row, 1, alignment)
         self.row += 1
+
+    def __add_selection(self, label: QLabel) -> QLabel:
+        flags = (
+            Qt.TextInteractionFlag.TextSelectableByMouse
+            | Qt.TextInteractionFlag.TextSelectableByKeyboard
+        )
+        label.setTextInteractionFlags(flags)
+        return label
 
 
 class SearchDisplayInstance(QWidget):

@@ -1,12 +1,12 @@
-from typing import Optional, Tuple
+from typing import Optional
 
 from typing_extensions import override
 
-from src.model.dynamics.actions import Action
 from src.model.learning_system.base_entity_decorator import BaseEntityDecorator
 from src.model.learning_system.top_level_entities.container import (
     EntityContainer,
 )
+from src.model.transition_information import TransitionInformation
 
 
 class LearningInstance(BaseEntityDecorator):
@@ -57,26 +57,23 @@ class LearningInstance(BaseEntityDecorator):
 
     def perform_action(
         self,
-    ) -> Tuple[int, Action, int, float]:
+    ) -> TransitionInformation:
         """Perform one action chosen by the agent.
 
         Returns:
-            Tuple[int, Action, int, float]: the transition information, the last
+            TransitionInformation: the transition information, the last
             state, the action chosen, the next state, the reward received for
             this action.
         """
         last_state = self.get_current_state()
-
-        action = self.agent.evaluate_policy(last_state)
+        agent = self.agent
+        action = agent.evaluate_policy(last_state)
         next_state, reward = self.dynamics.next_state_id(last_state, action)
-        self.agent.record_transition(last_state, action, next_state, reward)
-        self.statistics.record_transition(
+
+        transition = TransitionInformation(
             last_state, action, next_state, reward
         )
+        agent.record_transition(transition)
+        self.statistics.record_transition(transition)
         self._current_state = next_state
-        return (
-            last_state,
-            action,
-            next_state,
-            reward,
-        )
+        return transition

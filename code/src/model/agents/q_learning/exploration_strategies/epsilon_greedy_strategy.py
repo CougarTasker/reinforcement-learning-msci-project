@@ -1,4 +1,5 @@
 from random import choice, random
+from typing import Any
 
 import numpy as np
 
@@ -19,6 +20,8 @@ class EpsilonGreedyStrategy(BaseExplorationStrategy):
 
     In the case of ties this strategy selects randomly between the best options.
     """
+
+    min_safe_exploration_ratio = float(np.finfo(float).eps) * 100
 
     def __init__(self, agent: BaseAgent) -> None:
         """Initialise the Epsilon greedy strategy.
@@ -46,38 +49,25 @@ class EpsilonGreedyStrategy(BaseExplorationStrategy):
         Returns:
             Action: the action the agent should select.
         """
-        best_action = choice(list(Action))
         if random() < self.exploration_ratio:
-            return best_action
+            return choice(list(Action))
 
-        best_action_value = -float("inf")
-        for action in Action:
-            action_value = self.agent.get_state_action_value(state, action)
-            if action_value > best_action_value:
-                best_action_value = action_value
-                best_action = action
-        return best_action
+        state_action_value = self.agent.get_state_action_value
 
-    def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
-    ) -> None:
+        def key(action: Action) -> float:
+            return state_action_value(state, action)
+
+        return max(Action, key=key)
+
+    def record_transition(self, *args: Any) -> None:
         """Record that a transition has taken place.
 
         this is used by this strategy to discount its parameter.
 
         Args:
-            previous_state (int): not used.
-            previous_action (Action): not used.
-            new_state (int): not used.
-            reward (float): not used.
+            args (Any): not used.
         """
-        self.exploration_ratio = self.exploration_ratio * self.decay_rate
-        # avoid potential precision issues.
         self.exploration_ratio = max(
-            self.exploration_ratio,
-            float(np.finfo(float).eps) * 100,
+            self.exploration_ratio * self.decay_rate,
+            self.min_safe_exploration_ratio,
         )

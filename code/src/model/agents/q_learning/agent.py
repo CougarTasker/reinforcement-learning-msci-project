@@ -1,11 +1,14 @@
+from collections import defaultdict
+from typing import Dict, List
+
 from src.model.hyperparameters.base_parameter_strategy import (
     BaseHyperParameterStrategy,
     HyperParameter,
 )
+from src.model.transition_information import TransitionInformation
 
 from ...dynamics.actions import Action
 from ..base_agent import BaseAgent
-from .dynamic_q_table import DynamicQTable
 from .exploration_strategies.base_strategy import BaseExplorationStrategy
 from .exploration_strategies.epsilon_greedy_strategy import (
     EpsilonGreedyStrategy,
@@ -14,11 +17,12 @@ from .exploration_strategies.options import ExplorationStrategyOptions
 from .exploration_strategies.upper_confidence_bound import (
     UpperConfidenceBoundStrategy,
 )
-from .reward_replay_queue import RewardReplayQueue
 
 
 class QLearningAgent(BaseAgent):
     """Agent that learns q-value table to make decisions."""
+
+    action_count = len(Action)
 
     def __init__(
         self,
@@ -35,20 +39,21 @@ class QLearningAgent(BaseAgent):
         """
         super().__init__(hyper_parameters)
 
-        replay_queue_length = hyper_parameters.get_integer_value(
+        self.max_queue_length = hyper_parameters.get_integer_value(
             HyperParameter.replay_queue_length
         )
-        learning_rate = hyper_parameters.get_value(HyperParameter.learning_rate)
-        discount_rate = hyper_parameters.get_value(HyperParameter.discount_rate)
+        self.learning_rate = hyper_parameters.get_value(
+            HyperParameter.learning_rate
+        )
+        self.discount_rate = hyper_parameters.get_value(
+            HyperParameter.discount_rate
+        )
         initial_optimism = hyper_parameters.get_value(
             HyperParameter.initial_optimism
         )
-
+        self.queue: List[TransitionInformation] = []
+        self.table: Dict[int, float] = defaultdict(lambda: initial_optimism)
         self.strategy = self.set_exploration_strategy(strategy)
-        self.table = DynamicQTable(learning_rate, initial_optimism)
-        self.observation_queue = RewardReplayQueue(
-            self.table, replay_queue_length, discount_rate
-        )
 
     def set_exploration_strategy(
         self, strategy: ExplorationStrategyOptions
@@ -86,7 +91,7 @@ class QLearningAgent(BaseAgent):
         Returns:
             float: the expected value for this state and action
         """
-        return self.table.get_value(state, action)
+        return self.table[state * self.action_count + action.value]
 
     def get_state_value(self, state: int) -> float:
         """Get the agents interpretation of the value of this state.
@@ -97,7 +102,12 @@ class QLearningAgent(BaseAgent):
         Returns:
             float: the agents interpretation of the value of this state
         """
-        return self.table.calculate_state_value(state)
+        table = self.table
+        action_count = self.action_count
+        state_index = state * action_count
+        return max(
+            table[state_index + offset] for offset in range(action_count)
+        )
 
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.
@@ -110,25 +120,38 @@ class QLearningAgent(BaseAgent):
         """
         return self.strategy.select_action(state)
 
-    def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
-    ) -> None:
+    def record_transition(self, transition: TransitionInformation) -> None:
         """Provide the agent with the information from a transition.
 
         Args:
-            previous_state (int): the state before the action was taken
-            previous_action (Action): the action that was taken.
-            new_state (int): The resulting state after the action has been taken
-            reward (float): the reward for performing this action
+            transition (TransitionInformation): The transition information.
 
         """
-        self.strategy.record_transition(
-            previous_state, previous_action, new_state, reward
-        )
-        self.observation_queue.add_observation(
-            previous_state, previous_action, new_state, reward
-        )
+        self.strategy.record_transition(transition)
+
+        table = self.table
+        learning_rate = self.learning_rate
+        queue = self.queue
+        table = self.table
+        discount_rate = self.discount_rate
+        action_count = self.action_count
+
+        queue.insert(0, transition)
+        if len(queue) > self.max_queue_length:
+            queue.pop()
+
+        for obs in queue:
+            new_state_index = obs.new_state * action_count
+            new_state_value = max(
+                table[new_state_index + index] for index in range(action_count)
+            )
+
+            observed_value = obs.reward + discount_rate * new_state_value
+            index = (
+                obs.previous_state * action_count + obs.previous_action.value
+            )
+
+            existing_value = table[index]
+            table[index] = existing_value + learning_rate * (
+                observed_value - existing_value
+            )
