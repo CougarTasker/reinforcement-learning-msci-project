@@ -1130,6 +1130,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../exploration_strategies/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../exploration_strategies/options/" class="md-nav__link">
         
   
@@ -1449,6 +1470,27 @@
   
   <span class="md-ellipsis">
     Epsilon Greedy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../config/agent_section/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
   </span>
   
 
@@ -4271,10 +4313,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 22</span>
-<span class="normal"> 23</span>
-<span class="normal"> 24</span>
-<span class="normal"> 25</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 25</span>
 <span class="normal"> 26</span>
 <span class="normal"> 27</span>
 <span class="normal"> 28</span>
@@ -4406,7 +4445,14 @@
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
-<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningAgent</span><span class="p">(</span><span class="n">BaseAgent</span><span class="p">):</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningAgent</span><span class="p">(</span><span class="n">BaseAgent</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Agent that learns q-value table to make decisions.&quot;&quot;&quot;</span>
 
     <span class="n">action_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Action</span><span class="p">)</span>
@@ -4415,6 +4461,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hyper_parameters</span><span class="p">:</span> <span class="n">BaseHyperParameterStrategy</span><span class="p">,</span>
         <span class="n">strategy</span><span class="p">:</span> <span class="n">ExplorationStrategyOptions</span><span class="p">,</span>
+        <span class="n">max_state_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the agent.</span>
 
@@ -4423,8 +4470,10 @@
 <span class="sd">                the agent should use.</span>
 <span class="sd">            strategy (ExplorationStrategyOptions): The strategy the agent should</span>
 <span class="sd">                use to select actions.</span>
+<span class="sd">            max_state_count (int): maximum number of states this agent may need</span>
+<span class="sd">                to handle with.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">max_state_count</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">max_queue_length</span> <span class="o">=</span> <span class="n">hyper_parameters</span><span class="o">.</span><span class="n">get_integer_value</span><span class="p">(</span>
             <span class="n">HyperParameter</span><span class="o">.</span><span class="n">replay_queue_length</span>
@@ -4460,9 +4509,10 @@
         <span class="k">match</span> <span class="n">strategy</span><span class="p">:</span>
             <span class="k">case</span> <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">EpsilonGreedyStrategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
             <span class="k">case</span> <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">UpperConfidenceBoundStrategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">mf_bpi</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">MFBPIStrategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown strategy provided </span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -4564,7 +4614,7 @@
 
 
 <h3 id="src.model.agents.q_learning.agent.QLearningAgent.__init__" class="doc doc-heading">
-          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">strategy</span><span class="p">)</span></code>
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="n">max_state_count</span><span class="p">)</span></code>
 
 </h3>
 
@@ -4616,15 +4666,27 @@ use to select actions.</p>
               <em>required</em>
           </td>
         </tr>
+        <tr>
+          <td><code>max_state_count</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>maximum number of states this agent may need
+to handle with.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
     </tbody>
   </table>
 
           <details class="quote">
             <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
@@ -4650,10 +4712,17 @@ use to select actions.</p>
 <span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
-<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">hyper_parameters</span><span class="p">:</span> <span class="n">BaseHyperParameterStrategy</span><span class="p">,</span>
     <span class="n">strategy</span><span class="p">:</span> <span class="n">ExplorationStrategyOptions</span><span class="p">,</span>
+    <span class="n">max_state_count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the agent.</span>
 
@@ -4662,8 +4731,10 @@ use to select actions.</p>
 <span class="sd">            the agent should use.</span>
 <span class="sd">        strategy (ExplorationStrategyOptions): The strategy the agent should</span>
 <span class="sd">            use to select actions.</span>
+<span class="sd">        max_state_count (int): maximum number of states this agent may need</span>
+<span class="sd">            to handle with.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">)</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">max_state_count</span><span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">max_queue_length</span> <span class="o">=</span> <span class="n">hyper_parameters</span><span class="o">.</span><span class="n">get_integer_value</span><span class="p">(</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">replay_queue_length</span>
@@ -4758,16 +4829,16 @@ use to select actions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
 <span class="normal">120</span>
-<span class="normal">121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">evaluate_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Action</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Decide on the action this agent would take in a given state.</span>
 
 <span class="sd">    Args:</span>
@@ -4869,17 +4940,17 @@ use to select actions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span>
-<span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_state_action_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_state_action_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the agents interpretation value of a given state-action.</span>
 
 <span class="sd">    Args:</span>
@@ -4968,21 +5039,21 @@ use to select actions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">103</span>
 <span class="normal">104</span>
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_state_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_state_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the agents interpretation of the value of this state.</span>
 
 <span class="sd">    Args:</span>
@@ -5051,14 +5122,7 @@ use to select actions.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
@@ -5085,7 +5149,14 @@ use to select actions.</p>
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
-<span class="normal">157</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition</span><span class="p">:</span> <span class="n">TransitionInformation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">record_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transition</span><span class="p">:</span> <span class="n">TransitionInformation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide the agent with the information from a transition.</span>
 
 <span class="sd">    Args:</span>
@@ -5223,13 +5294,7 @@ use.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/agents/q_learning/agent.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
@@ -5247,7 +5312,14 @@ use.</p>
 <span class="normal">79</span>
 <span class="normal">80</span>
 <span class="normal">81</span>
-<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_exploration_strategy</span><span class="p">(</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_exploration_strategy</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="n">ExplorationStrategyOptions</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseExplorationStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the current strategy used by the agent.</span>
@@ -5265,9 +5337,10 @@ use.</p>
     <span class="k">match</span> <span class="n">strategy</span><span class="p">:</span>
         <span class="k">case</span> <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">EpsilonGreedyStrategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
         <span class="k">case</span> <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">UpperConfidenceBoundStrategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">case</span> <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">mf_bpi</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">MFBPIStrategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown strategy provided </span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 

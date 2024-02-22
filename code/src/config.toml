@@ -20,6 +20,9 @@ initial_exploration_ratio = 0.7
 decay_rate = 0.9
 [agent.q_learning.upper_confidence_bound]
 exploration_bias = 2.0
+[agent.q_learning.mf_bpi]
+kbar=1
+ensemble_size=50
 [gui]
 appearance_mode = "dark"
 color_theme = "blue"

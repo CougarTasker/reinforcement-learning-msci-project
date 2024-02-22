@@ -1010,6 +1010,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../model/agents/q_learning/exploration_strategies/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../model/agents/q_learning/exploration_strategies/options/" class="md-nav__link">
         
   
@@ -1329,6 +1350,27 @@
   
   <span class="md-ellipsis">
     Epsilon Greedy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model/config/agent_section/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
   </span>
   
 
@@ -5012,7 +5054,11 @@ found.</p>
 <span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OptionDisplayText</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">OptionDisplayText</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for containing all of the display text listings.&quot;&quot;&quot;</span>
 
     <span class="n">agent_options</span> <span class="o">=</span> <span class="n">DisplayTextListing</span><span class="p">(</span>
@@ -5027,7 +5073,10 @@ found.</p>
             <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">not_applicable</span><span class="p">:</span> <span class="s2">&quot;Not Applicable&quot;</span><span class="p">,</span>
             <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">:</span> <span class="s2">&quot;Epsilon Greedy&quot;</span><span class="p">,</span>
             <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">:</span> <span class="p">(</span>
-                <span class="s2">&quot;Upper Confidence Bound&quot;</span>
+                <span class="s2">&quot;(UCB) Upper Confidence Bound&quot;</span>
+            <span class="p">),</span>
+            <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">mf_bpi</span><span class="p">:</span> <span class="p">(</span>
+                <span class="s2">&quot;(MF-BPI) Model-Free Best Policy Identification&quot;</span>
             <span class="p">),</span>
         <span class="p">}</span>
     <span class="p">)</span>
@@ -5039,6 +5088,7 @@ found.</p>
     <span class="n">applicable_exploration_option</span> <span class="o">=</span> <span class="n">full_exploration_options</span><span class="o">.</span><span class="n">create_subset</span><span class="p">(</span>
         <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span>
         <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">,</span>
+        <span class="n">ExplorationStrategyOptions</span><span class="o">.</span><span class="n">mf_bpi</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">dynamics_options</span> <span class="o">=</span> <span class="n">DisplayTextListing</span><span class="p">(</span>

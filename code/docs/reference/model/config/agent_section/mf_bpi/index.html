@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../base_parameter_strategy/">
+        <link rel="prev" href="../epsilon_greedy/">
       
       
-        <link rel="next" href="../hyper_parameter_system/">
+        <link rel="next" href="../q_learning/">
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.2">
     
     
       
-        <title>Config Parameter Strategy - Reinforcement Learning App</title>
+        <title>Mf Bpi - Reinforcement Learning App</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.50c56a3b.min.css">
       
       
 
@@ -43,9 +43,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#src.model.hyperparameters.config_parameter_strategy" class="md-skip">
+        <a href="#src.model.config.agent_section.mf_bpi" class="md-skip">
           Skip to content
         </a>
       
@@ -80,7 +80,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../../.." title="Reinforcement Learning App" class="md-header__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Config Parameter Strategy
+              Mf Bpi
             
           </span>
         </div>
@@ -175,7 +175,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
+    <a href="../../../../.." title="Reinforcement Learning App" class="md-nav__button md-logo" aria-label="Reinforcement Learning App" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -209,7 +209,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -254,7 +254,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../controller/" class="md-nav__link ">
+            <a href="../../../../controller/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -285,7 +285,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/base_bridge/" class="md-nav__link">
+      <a href="../../../../controller/base_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -320,7 +320,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../controller/hyper_parameter_controller/" class="md-nav__link ">
+            <a href="../../../../controller/hyper_parameter_controller/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -351,7 +351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/hyper_parameter_controller/controller/" class="md-nav__link">
+      <a href="../../../../controller/hyper_parameter_controller/controller/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -372,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/hyper_parameter_controller/request_bridge/" class="md-nav__link">
+      <a href="../../../../controller/hyper_parameter_controller/request_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -393,7 +393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/hyper_parameter_controller/update_bridge/" class="md-nav__link">
+      <a href="../../../../controller/hyper_parameter_controller/update_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -436,7 +436,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../controller/learning_system_controller/" class="md-nav__link ">
+            <a href="../../../../controller/learning_system_controller/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -467,7 +467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/controller/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/controller/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -488,7 +488,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/state_update_bridge/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/state_update_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -509,7 +509,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_bridge/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_bridge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -544,7 +544,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../controller/learning_system_controller/user_action_handlers/" class="md-nav__link ">
+            <a href="../../../../controller/learning_system_controller/user_action_handlers/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -575,7 +575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_handlers/auto_progress_handler/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_handlers/auto_progress_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -596,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_handlers/base_handler/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_handlers/base_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -617,7 +617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_handlers/progress_handler/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_handlers/progress_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -638,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_handlers/responsibility_chain/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_handlers/responsibility_chain/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -659,7 +659,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_handlers/set_options_handler/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_handlers/set_options_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -680,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../controller/learning_system_controller/user_action_handlers/standard_handler/" class="md-nav__link">
+      <a href="../../../../controller/learning_system_controller/user_action_handlers/standard_handler/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -725,7 +725,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../main/" class="md-nav__link">
+      <a href="../../../../main/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -762,7 +762,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -807,7 +807,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../agents/" class="md-nav__link ">
+            <a href="../../../agents/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -838,7 +838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/base_agent/" class="md-nav__link">
+      <a href="../../../agents/base_agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -873,7 +873,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../agents/q_learning/" class="md-nav__link ">
+            <a href="../../../agents/q_learning/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -904,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/q_learning/agent/" class="md-nav__link">
+      <a href="../../../agents/q_learning/agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -939,7 +939,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../agents/q_learning/exploration_strategies/" class="md-nav__link ">
+            <a href="../../../agents/q_learning/exploration_strategies/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -970,7 +970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
+      <a href="../../../agents/q_learning/exploration_strategies/base_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -991,7 +991,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
+      <a href="../../../agents/q_learning/exploration_strategies/epsilon_greedy_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1012,7 +1012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/q_learning/exploration_strategies/mf_bpi/" class="md-nav__link">
+      <a href="../../../agents/q_learning/exploration_strategies/mf_bpi/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1033,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/q_learning/exploration_strategies/options/" class="md-nav__link">
+      <a href="../../../agents/q_learning/exploration_strategies/options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1054,7 +1054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/q_learning/exploration_strategies/upper_confidence_bound/" class="md-nav__link">
+      <a href="../../../agents/q_learning/exploration_strategies/upper_confidence_bound/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1105,7 +1105,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../agents/value_iteration/" class="md-nav__link ">
+            <a href="../../../agents/value_iteration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1136,7 +1136,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/value_iteration/agent/" class="md-nav__link">
+      <a href="../../../agents/value_iteration/agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1157,7 +1157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/value_iteration/agent_optimised/" class="md-nav__link">
+      <a href="../../../agents/value_iteration/agent_optimised/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1178,7 +1178,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/value_iteration/dynamics_distribution/" class="md-nav__link">
+      <a href="../../../agents/value_iteration/dynamics_distribution/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1199,7 +1199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../agents/value_iteration/types/" class="md-nav__link">
+      <a href="../../../agents/value_iteration/types/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1233,24 +1233,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_2" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../config/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1267,7 +1269,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_2">
             <span class="md-nav__icon md-icon"></span>
             Config
@@ -1278,24 +1280,26 @@
                 
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_2_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_2_1" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../config/agent_section/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1312,7 +1316,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_3_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_3_2_1">
             <span class="md-nav__icon md-icon"></span>
             Agent Section
@@ -1326,7 +1330,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/agent_section/agent_section/" class="md-nav__link">
+      <a href="../agent_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1347,7 +1351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/agent_section/epsilon_greedy/" class="md-nav__link">
+      <a href="../epsilon_greedy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1365,10 +1369,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../config/agent_section/mf_bpi/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Mf Bpi
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -1377,6 +1399,75 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      mf_bpi
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      MFBPIConfig
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MFBPIConfig">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.ensemble_size" class="md-nav__link">
+    <span class="md-ellipsis">
+      ensemble_size
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.kbar" class="md-nav__link">
+    <span class="md-ellipsis">
+      kbar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1389,7 +1480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/agent_section/q_learning/" class="md-nav__link">
+      <a href="../q_learning/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1410,7 +1501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/agent_section/upper_confidence_bound/" class="md-nav__link">
+      <a href="../upper_confidence_bound/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1431,7 +1522,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/agent_section/value_iteration/" class="md-nav__link">
+      <a href="../value_iteration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1460,7 +1551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/base_section/" class="md-nav__link">
+      <a href="../../base_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1481,7 +1572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/grid_world_section/" class="md-nav__link">
+      <a href="../../grid_world_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1502,7 +1593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/gui_section/" class="md-nav__link">
+      <a href="../../gui_section/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1523,7 +1614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../config/reader/" class="md-nav__link">
+      <a href="../../reader/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1566,7 +1657,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../dynamics/" class="md-nav__link ">
+            <a href="../../../dynamics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1597,7 +1688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/actions/" class="md-nav__link">
+      <a href="../../../dynamics/actions/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1618,7 +1709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/base_dynamics/" class="md-nav__link">
+      <a href="../../../dynamics/base_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1639,7 +1730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/cliff_dynamics/" class="md-nav__link">
+      <a href="../../../dynamics/cliff_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1660,7 +1751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/collection_dynamics/" class="md-nav__link">
+      <a href="../../../dynamics/collection_dynamics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1681,7 +1772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../dynamics/grid_world/" class="md-nav__link">
+      <a href="../../../dynamics/grid_world/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1707,26 +1798,24 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_3_4" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../hyperparameters/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1743,7 +1832,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_3_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1_3_4">
             <span class="md-nav__icon md-icon"></span>
             Hyperparameters
@@ -1757,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../base_parameter_strategy/" class="md-nav__link">
+      <a href="../../../hyperparameters/base_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1775,28 +1864,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Config Parameter Strategy
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../hyperparameters/config_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1805,66 +1876,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      config_parameter_strategy
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy" class="md-nav__link">
-    <span class="md-ellipsis">
-      ParameterConfigStrategy
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="ParameterConfigStrategy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy.__init__" class="md-nav__link">
-    <span class="md-ellipsis">
-      __init__()
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy.get_value" class="md-nav__link">
-    <span class="md-ellipsis">
-      get_value()
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1877,7 +1888,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../hyper_parameter_system/" class="md-nav__link">
+      <a href="../../../hyperparameters/hyper_parameter_system/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1898,7 +1909,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../parameter_evaluator/" class="md-nav__link">
+      <a href="../../../hyperparameters/parameter_evaluator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1933,7 +1944,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../random_search/" class="md-nav__link ">
+            <a href="../../../hyperparameters/random_search/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1964,7 +1975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../random_search/random_parameter_strategy/" class="md-nav__link">
+      <a href="../../../hyperparameters/random_search/random_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1985,7 +1996,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../random_search/random_search/" class="md-nav__link">
+      <a href="../../../hyperparameters/random_search/random_search/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2006,7 +2017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../random_search/random_search_data/" class="md-nav__link">
+      <a href="../../../hyperparameters/random_search/random_search_data/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2049,7 +2060,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../report_generation/" class="md-nav__link ">
+            <a href="../../../hyperparameters/report_generation/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2080,7 +2091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../report_generation/compute_confidence_interval/" class="md-nav__link">
+      <a href="../../../hyperparameters/report_generation/compute_confidence_interval/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2101,7 +2112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../report_generation/report_data/" class="md-nav__link">
+      <a href="../../../hyperparameters/report_generation/report_data/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2122,7 +2133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../report_generation/report_generator/" class="md-nav__link">
+      <a href="../../../hyperparameters/report_generation/report_generator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2143,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../report_generation/tuning_parameter_strategy/" class="md-nav__link">
+      <a href="../../../hyperparameters/report_generation/tuning_parameter_strategy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2172,7 +2183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tuning_information/" class="md-nav__link">
+      <a href="../../../hyperparameters/tuning_information/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2215,7 +2226,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/" class="md-nav__link ">
+            <a href="../../../learning_system/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2246,7 +2257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/base_entity_decorator/" class="md-nav__link">
+      <a href="../../../learning_system/base_entity_decorator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2281,7 +2292,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/cell_configuration/" class="md-nav__link ">
+            <a href="../../../learning_system/cell_configuration/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2312,7 +2323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/cell_configuration/cell_configuration/" class="md-nav__link">
+      <a href="../../../learning_system/cell_configuration/cell_configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2333,7 +2344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/cell_configuration/cell_configuration_factory/" class="md-nav__link">
+      <a href="../../../learning_system/cell_configuration/cell_configuration_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2354,7 +2365,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/cell_configuration/cell_state_lookup/" class="md-nav__link">
+      <a href="../../../learning_system/cell_configuration/cell_state_lookup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2383,7 +2394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/global_options/" class="md-nav__link">
+      <a href="../../../learning_system/global_options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2418,7 +2429,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/learning_instance/" class="md-nav__link ">
+            <a href="../../../learning_system/learning_instance/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2449,7 +2460,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/learning_instance/learning_instance/" class="md-nav__link">
+      <a href="../../../learning_system/learning_instance/learning_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2470,7 +2481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/learning_instance/statistics_record/" class="md-nav__link">
+      <a href="../../../learning_system/learning_instance/statistics_record/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2491,7 +2502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/learning_instance/statistics_recorder/" class="md-nav__link">
+      <a href="../../../learning_system/learning_instance/statistics_recorder/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2520,7 +2531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/learning_system/" class="md-nav__link">
+      <a href="../../../learning_system/learning_system/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2555,7 +2566,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/state_description/" class="md-nav__link ">
+            <a href="../../../learning_system/state_description/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2586,7 +2597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/state_description/state_description/" class="md-nav__link">
+      <a href="../../../learning_system/state_description/state_description/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2607,7 +2618,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/state_description/state_description_factory/" class="md-nav__link">
+      <a href="../../../learning_system/state_description/state_description_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2650,7 +2661,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/top_level_entities/" class="md-nav__link ">
+            <a href="../../../learning_system/top_level_entities/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2681,7 +2692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/top_level_entities/cache/" class="md-nav__link">
+      <a href="../../../learning_system/top_level_entities/cache/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2702,7 +2713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/top_level_entities/container/" class="md-nav__link">
+      <a href="../../../learning_system/top_level_entities/container/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2723,7 +2734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/top_level_entities/factory/" class="md-nav__link">
+      <a href="../../../learning_system/top_level_entities/factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2744,7 +2755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/top_level_entities/options/" class="md-nav__link">
+      <a href="../../../learning_system/top_level_entities/options/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2787,7 +2798,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../learning_system/value_standardisation/" class="md-nav__link ">
+            <a href="../../../learning_system/value_standardisation/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2818,7 +2829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/value_standardisation/normaliser/" class="md-nav__link">
+      <a href="../../../learning_system/value_standardisation/normaliser/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2839,7 +2850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
+      <a href="../../../learning_system/value_standardisation/normaliser_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2860,7 +2871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../learning_system/value_standardisation/value_range/" class="md-nav__link">
+      <a href="../../../learning_system/value_standardisation/value_range/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2911,7 +2922,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../state/" class="md-nav__link ">
+            <a href="../../../state/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -2942,7 +2953,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/cell_entities/" class="md-nav__link">
+      <a href="../../../state/cell_entities/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2963,7 +2974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/state_builder/" class="md-nav__link">
+      <a href="../../../state/state_builder/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2984,7 +2995,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/state_instance/" class="md-nav__link">
+      <a href="../../../state/state_instance/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3005,7 +3016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../state/state_pool/" class="md-nav__link">
+      <a href="../../../state/state_pool/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3034,7 +3045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../transition_information/" class="md-nav__link">
+      <a href="../../../transition_information/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3063,7 +3074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../profile/" class="md-nav__link">
+      <a href="../../../../profile/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3098,7 +3109,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/" class="md-nav__link ">
+            <a href="../../../../view/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3143,7 +3154,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/controls/" class="md-nav__link ">
+            <a href="../../../../view/controls/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3174,7 +3185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/controls/control_factory/" class="md-nav__link">
+      <a href="../../../../view/controls/control_factory/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3195,7 +3206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/controls/custom_button_widget/" class="md-nav__link">
+      <a href="../../../../view/controls/custom_button_widget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3216,7 +3227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/controls/custom_combo_widget/" class="md-nav__link">
+      <a href="../../../../view/controls/custom_combo_widget/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3259,7 +3270,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/display_state_v2/" class="md-nav__link ">
+            <a href="../../../../view/display_state_v2/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3304,7 +3315,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/display_state_v2/cell/" class="md-nav__link ">
+            <a href="../../../../view/display_state_v2/cell/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3335,7 +3346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/arrow_layer/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/cell/arrow_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3356,7 +3367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/background_layer/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/cell/background_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3377,7 +3388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/base_layer/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/cell/base_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3398,7 +3409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/cell/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/cell/cell/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3419,7 +3430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/cell_layout/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/cell/cell_layout/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3440,7 +3451,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/cell/main_icon_layer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3469,7 +3480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/display_state_v2/display/" class="md-nav__link">
+      <a href="../../../../view/display_state_v2/display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3512,7 +3523,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/icons/" class="md-nav__link ">
+            <a href="../../../../view/icons/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3543,7 +3554,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/icons/load_icon/" class="md-nav__link">
+      <a href="../../../../view/icons/load_icon/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3572,7 +3583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/interaction_controls/" class="md-nav__link">
+      <a href="../../../../view/interaction_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3593,7 +3604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/main_tab_area/" class="md-nav__link">
+      <a href="../../../../view/main_tab_area/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3614,7 +3625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/option_controls/" class="md-nav__link">
+      <a href="../../../../view/option_controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3635,7 +3646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/option_display_text/" class="md-nav__link">
+      <a href="../../../../view/option_display_text/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3656,7 +3667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/report_state_publisher/" class="md-nav__link">
+      <a href="../../../../view/report_state_publisher/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3677,7 +3688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/state_publisher/" class="md-nav__link">
+      <a href="../../../../view/state_publisher/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3712,7 +3723,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/statistics/" class="md-nav__link ">
+            <a href="../../../../view/statistics/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3743,7 +3754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/matplotlib_setup/" class="md-nav__link">
+      <a href="../../../../view/statistics/matplotlib_setup/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3764,7 +3775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/plotting/" class="md-nav__link">
+      <a href="../../../../view/statistics/plotting/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3799,7 +3810,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/statistics/report_display/" class="md-nav__link ">
+            <a href="../../../../view/statistics/report_display/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3830,7 +3841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
+      <a href="../../../../view/statistics/report_display/progress_indicator/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3851,7 +3862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/report_container/" class="md-nav__link">
+      <a href="../../../../view/statistics/report_display/report_container/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3872,7 +3883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
+      <a href="../../../../view/statistics/report_display/report_information_display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3893,7 +3904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/report_display/report_selector/" class="md-nav__link">
+      <a href="../../../../view/statistics/report_display/report_selector/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3922,7 +3933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/reward_history/" class="md-nav__link">
+      <a href="../../../../view/statistics/reward_history/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -3957,7 +3968,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../view/statistics/search_results/" class="md-nav__link ">
+            <a href="../../../../view/statistics/search_results/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -3988,7 +3999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/search_results/container/" class="md-nav__link">
+      <a href="../../../../view/statistics/search_results/container/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4009,7 +4020,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/search_results/display/" class="md-nav__link">
+      <a href="../../../../view/statistics/search_results/display/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4030,7 +4041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/statistics/search_results/start_button/" class="md-nav__link">
+      <a href="../../../../view/statistics/search_results/start_button/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4067,7 +4078,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/view_root_v2/" class="md-nav__link">
+      <a href="../../../../view/view_root_v2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4088,7 +4099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../view/visibility_observer/" class="md-nav__link">
+      <a href="../../../../view/visibility_observer/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -4142,37 +4153,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy" class="md-nav__link">
+  <a href="#src.model.config.agent_section.mf_bpi" class="md-nav__link">
     <span class="md-ellipsis">
-      config_parameter_strategy
+      mf_bpi
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy" class="md-nav__link">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig" class="md-nav__link">
     <span class="md-ellipsis">
-      ParameterConfigStrategy
+      MFBPIConfig
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="ParameterConfigStrategy">
+    <nav class="md-nav" aria-label="MFBPIConfig">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy.__init__" class="md-nav__link">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.ensemble_size" class="md-nav__link">
     <span class="md-ellipsis">
-      __init__()
+      ensemble_size
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy.get_value" class="md-nav__link">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.kbar" class="md-nav__link">
     <span class="md-ellipsis">
-      get_value()
+      kbar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__()
     </span>
   </a>
   
@@ -4198,13 +4218,13 @@
                   
 
 
-  <h1>Config Parameter Strategy</h1>
+  <h1>Mf Bpi</h1>
 
 <div class="doc doc-object doc-module">
 
 
 
-<a id="src.model.hyperparameters.config_parameter_strategy"></a>
+<a id="src.model.config.agent_section.mf_bpi"></a>
   <div class="doc doc-contents first">
 
   
@@ -4223,8 +4243,8 @@
 
 
 
-<h2 id="src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy" class="doc doc-heading">
-          <code>ParameterConfigStrategy</code>
+<h2 id="src.model.config.agent_section.mf_bpi.MFBPIConfig" class="doc doc-heading">
+          <code>MFBPIConfig</code>
 
 
 </h2>
@@ -4232,14 +4252,23 @@
 
   <div class="doc doc-contents ">
           <p class="doc doc-class-bases">
-            Bases: <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.BaseHyperParameterStrategy" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.BaseHyperParameterStrategy">BaseHyperParameterStrategy</a></code></p>
+            Bases: <code><a class="autorefs autorefs-internal" title="src.model.config.base_section.BaseConfigSection" href="../../base_section/#src.model.config.base_section.BaseConfigSection">BaseConfigSection</a></code></p>
 
   
-      <p>This class provides hyperparameter values from the configuration.</p>
+      <p>Gets configuration related to the value iteration agent.</p>
 
             <details class="quote">
-              <summary>Source code in <code>src/model/hyperparameters/config_parameter_strategy.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+              <summary>Source code in <code>src/model/config/agent_section/mf_bpi.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -4264,100 +4293,41 @@
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParameterConfigStrategy</span><span class="p">(</span><span class="n">BaseHyperParameterStrategy</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class provides hyperparameter values from the configuration.&quot;&quot;&quot;</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MFBPIConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets configuration related to the value iteration agent.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AgentConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialise the parameter manager.</span>
+    <span class="n">kbar_property</span> <span class="o">=</span> <span class="s2">&quot;kbar&quot;</span>
+    <span class="n">ensemble_size_property</span> <span class="o">=</span> <span class="s2">&quot;ensemble_size&quot;</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            agent_config (Optional[AgentConfig]): the configuration reader the</span>
-<span class="sd">                hyper-parameters should use, if not provided the default one</span>
-<span class="sd">                will be used.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">agent_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">agent_config</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">()</span><span class="o">.</span><span class="n">agent</span>
-        <span class="n">q_learning_config</span> <span class="o">=</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">q_learning</span>
-        <span class="n">value_iteration_config</span> <span class="o">=</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">value_iteration</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">parameter_values</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">initial_optimism</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">initial_optimism</span><span class="p">,</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">replay_queue_length</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">replay_queue_length</span>
-            <span class="p">),</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">:</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">,</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_initial_exploration_ratio</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">initial_exploration_ratio</span>
-            <span class="p">),</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_decay_rate</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">decay_rate</span>
-            <span class="p">),</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">ucb_exploration_bias</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="o">.</span><span class="n">exploration_bias</span>
-            <span class="p">),</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">stopping_epsilon</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">value_iteration_config</span><span class="o">.</span><span class="n">stopping_epsilon</span>
-            <span class="p">),</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">sample_count</span><span class="p">:</span> <span class="n">value_iteration_config</span><span class="o">.</span><span class="n">sample_count</span><span class="p">,</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">mf_bpi_kbar</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">mf_bpi</span><span class="o">.</span><span class="n">kbar</span><span class="p">,</span>
-            <span class="n">HyperParameter</span><span class="o">.</span><span class="n">mf_bpi_ensemble_size</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">q_learning_config</span><span class="o">.</span><span class="n">mf_bpi</span><span class="o">.</span><span class="n">ensemble_size</span>
-            <span class="p">),</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate value iteration section config.&quot;&quot;&quot;</span>
+        <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kbar_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="p">}</span>
 
-    <span class="nd">@override</span>
-    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the value of a given hyper parameter.</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;mf_bpi&quot;</span><span class="p">,</span> <span class="n">data_schema</span><span class="p">,</span> <span class="p">[])</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            parameter (HyperParameter): the parameter to access.</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">kbar</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the kbar.</span>
 
-<span class="sd">        Raises:</span>
-<span class="sd">            ValueError: if the parameter provided is not known.</span>
+<span class="sd">        Not sure what the kbar is but it is used in initialisation and is just</span>
+<span class="sd">        set to one by the authors.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            float: the value of this parameter.</span>
+<span class="sd">            int: unknown meaning.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">parameter_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">parameter_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;parameter &quot;</span><span class="si">{</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot; is not known&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">parameter_value</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">kbar_property</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ensemble_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the number of Q-value tables to maintain in the ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: the number of Q-value tables.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -4371,210 +4341,24 @@
 
 
 
-
-
-
-<div class="doc doc-object doc-function">
+<div class="doc doc-object doc-attribute">
 
 
 
 
-<h3 id="src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy.__init__" class="doc doc-heading">
-          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">agent_config</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<h3 id="src.model.config.agent_section.mf_bpi.MFBPIConfig.ensemble_size" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">ensemble_size</span><span class="p">:</span> <span class="nb">int</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
 
 </h3>
 
 
   <div class="doc doc-contents ">
   
-      <p>Initialise the parameter manager.</p>
-
-
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>agent_config</code></td>
-          <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="src.model.config.agent_section.agent_section.AgentConfig" href="../../config/agent_section/agent_section/#src.model.config.agent_section.agent_section.AgentConfig">AgentConfig</a>]</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>the configuration reader the
-hyper-parameters should use, if not provided the default one
-will be used.</p>
-            </div>
-          </td>
-          <td>
-                <code>None</code>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-          <details class="quote">
-            <summary>Source code in <code>src/model/hyperparameters/config_parameter_strategy.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span>
-<span class="normal">39</span>
-<span class="normal">40</span>
-<span class="normal">41</span>
-<span class="normal">42</span>
-<span class="normal">43</span>
-<span class="normal">44</span>
-<span class="normal">45</span>
-<span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span>
-<span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AgentConfig</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialise the parameter manager.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        agent_config (Optional[AgentConfig]): the configuration reader the</span>
-<span class="sd">            hyper-parameters should use, if not provided the default one</span>
-<span class="sd">            will be used.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">agent_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">agent_config</span> <span class="o">=</span> <span class="n">ConfigReader</span><span class="p">()</span><span class="o">.</span><span class="n">agent</span>
-    <span class="n">q_learning_config</span> <span class="o">=</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">q_learning</span>
-    <span class="n">value_iteration_config</span> <span class="o">=</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">value_iteration</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">parameter_values</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">initial_optimism</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">initial_optimism</span><span class="p">,</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">replay_queue_length</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">replay_queue_length</span>
-        <span class="p">),</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">learning_rate</span><span class="p">,</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">:</span> <span class="n">agent_config</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">,</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_initial_exploration_ratio</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">initial_exploration_ratio</span>
-        <span class="p">),</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">eg_decay_rate</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="o">.</span><span class="n">decay_rate</span>
-        <span class="p">),</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">ucb_exploration_bias</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="o">.</span><span class="n">exploration_bias</span>
-        <span class="p">),</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">stopping_epsilon</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">value_iteration_config</span><span class="o">.</span><span class="n">stopping_epsilon</span>
-        <span class="p">),</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">sample_count</span><span class="p">:</span> <span class="n">value_iteration_config</span><span class="o">.</span><span class="n">sample_count</span><span class="p">,</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">mf_bpi_kbar</span><span class="p">:</span> <span class="n">q_learning_config</span><span class="o">.</span><span class="n">mf_bpi</span><span class="o">.</span><span class="n">kbar</span><span class="p">,</span>
-        <span class="n">HyperParameter</span><span class="o">.</span><span class="n">mf_bpi_ensemble_size</span><span class="p">:</span> <span class="p">(</span>
-            <span class="n">q_learning_config</span><span class="o">.</span><span class="n">mf_bpi</span><span class="o">.</span><span class="n">ensemble_size</span>
-        <span class="p">),</span>
-    <span class="p">}</span>
-</code></pre></div></td></tr></table></div>
-          </details>
-  </div>
-
-</div>
-
-
-<div class="doc doc-object doc-function">
-
-
-
-
-<h3 id="src.model.hyperparameters.config_parameter_strategy.ParameterConfigStrategy.get_value" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">get_value</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span></code>
-
-</h3>
-
-
-  <div class="doc doc-contents ">
-  
-      <p>Get the value of a given hyper parameter.</p>
-
-
-
-  <p><strong>Parameters:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Default</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><code>parameter</code></td>
-          <td>
-                <code><a class="autorefs autorefs-internal" title="src.model.hyperparameters.base_parameter_strategy.HyperParameter" href="../base_parameter_strategy/#src.model.hyperparameters.base_parameter_strategy.HyperParameter">HyperParameter</a></code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>the parameter to access.</p>
-            </div>
-          </td>
-          <td>
-              <em>required</em>
-          </td>
-        </tr>
-    </tbody>
-  </table>
-
-
-
-  <p><strong>Raises:</strong></p>
-  <table>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>
-                <code>ValueError</code>
-          </td>
-          <td>
-            <div class="doc-md-description">
-              <p>if the parameter provided is not known.</p>
-            </div>
-          </td>
-        </tr>
-    </tbody>
-  </table>
+      <p>Get the number of Q-value tables to maintain in the ensemble.</p>
 
 
 
@@ -4588,53 +4372,104 @@ will be used.</p>
     </thead>
     <tbody>
         <tr>
-<td><code>float</code></td>          <td>
-                <code>float</code>
+<td><code>int</code></td>          <td>
+                <code>int</code>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>the value of this parameter.</p>
+              <p>the number of Q-value tables.</p>
             </div>
           </td>
         </tr>
     </tbody>
   </table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.model.config.agent_section.mf_bpi.MFBPIConfig.kbar" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">kbar</span><span class="p">:</span> <span class="nb">int</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get the kbar.</p>
+<p>Not sure what the kbar is but it is used in initialisation and is just
+set to one by the authors.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>int</code></td>          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>unknown meaning.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="src.model.config.agent_section.mf_bpi.MFBPIConfig.__init__" class="doc doc-heading">
+          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Instantiate value iteration section config.</p>
 
           <details class="quote">
-            <summary>Source code in <code>src/model/hyperparameters/config_parameter_strategy.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
-<span class="normal">57</span>
-<span class="normal">58</span>
-<span class="normal">59</span>
-<span class="normal">60</span>
-<span class="normal">61</span>
-<span class="normal">62</span>
-<span class="normal">63</span>
-<span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@override</span>
-<span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="n">HyperParameter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the value of a given hyper parameter.</span>
+            <summary>Source code in <code>src/model/config/agent_section/mf_bpi.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate value iteration section config.&quot;&quot;&quot;</span>
+    <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kbar_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">}</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        parameter (HyperParameter): the parameter to access.</span>
-
-<span class="sd">    Raises:</span>
-<span class="sd">        ValueError: if the parameter provided is not known.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        float: the value of this parameter.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">parameter_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">parameter_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;parameter &quot;</span><span class="si">{</span><span class="n">parameter</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot; is not known&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">parameter_value</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;mf_bpi&quot;</span><span class="p">,</span> <span class="n">data_schema</span><span class="p">,</span> <span class="p">[])</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4703,10 +4538,10 @@ will be used.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "search": "../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
       
     
   </body>

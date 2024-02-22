@@ -1012,6 +1012,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../agents/q_learning/exploration_strategies/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../agents/q_learning/exploration_strategies/options/" class="md-nav__link">
         
   
@@ -1331,6 +1352,27 @@
   
   <span class="md-ellipsis">
     Epsilon Greedy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../config/agent_section/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
   </span>
   
 
@@ -4301,7 +4343,8 @@
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EntityFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EntityFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory class for creating entities from the given options.&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -4359,6 +4402,7 @@
                 <span class="k">return</span> <span class="n">QLearningAgent</span><span class="p">(</span>
                     <span class="n">hyper_parameters</span><span class="p">,</span>
                     <span class="n">options</span><span class="o">.</span><span class="n">exploration_strategy</span><span class="p">,</span>
+                    <span class="n">dynamics</span><span class="o">.</span><span class="n">state_count_upper_bound</span><span class="p">(),</span>
                 <span class="p">)</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown agent </span><span class="si">{</span><span class="n">options</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -4577,7 +4621,8 @@ iteration agent.</p>
 <span class="normal">81</span>
 <span class="normal">82</span>
 <span class="normal">83</span>
-<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">create_agent</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">,</span>
@@ -4610,6 +4655,7 @@ iteration agent.</p>
             <span class="k">return</span> <span class="n">QLearningAgent</span><span class="p">(</span>
                 <span class="n">hyper_parameters</span><span class="p">,</span>
                 <span class="n">options</span><span class="o">.</span><span class="n">exploration_strategy</span><span class="p">,</span>
+                <span class="n">dynamics</span><span class="o">.</span><span class="n">state_count_upper_bound</span><span class="p">(),</span>
             <span class="p">)</span>
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown agent </span><span class="si">{</span><span class="n">options</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -4730,8 +4776,7 @@ dynamics to create.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/learning_system/top_level_entities/factory.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 86</span>
-<span class="normal"> 87</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 87</span>
 <span class="normal"> 88</span>
 <span class="normal"> 89</span>
 <span class="normal"> 90</span>
@@ -4752,7 +4797,8 @@ dynamics to create.</p>
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">create_dynamics</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDynamics</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the dynamics appropriate for these options.</span>
 

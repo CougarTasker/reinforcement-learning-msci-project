@@ -34,7 +34,7 @@ class ValueIterationAgent(BaseAgent):
             dynamics (BaseDynamics): the dynamics function used to build the
                 value table and pick optimal actions
         """
-        super().__init__(hyper_parameters)
+        super().__init__(hyper_parameters, dynamics.state_count_upper_bound())
         self.dynamics = dynamics
         self.stopping_epsilon = hyper_parameters.get_value(
             HyperParameter.stopping_epsilon

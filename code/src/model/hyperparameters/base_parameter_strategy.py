@@ -13,6 +13,8 @@ class HyperParameter(Enum):
     ucb_exploration_bias = 6
     stopping_epsilon = 7
     sample_count = 8
+    mf_bpi_kbar = 9
+    mf_bpi_ensemble_size = 10
 
 
 class BaseHyperParameterStrategy(object):

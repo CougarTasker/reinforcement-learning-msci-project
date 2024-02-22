@@ -3,6 +3,7 @@ from src.model.config.agent_section.agent_section import AgentConfig
 from src.model.config.agent_section.epsilon_greedy import (
     EpsilonGreedyStrategyConfig,
 )
+from src.model.config.agent_section.mf_bpi import MFBPIConfig
 from src.model.config.agent_section.q_learning import QLearningConfig
 from src.model.config.agent_section.upper_confidence_bound import (
     UCBStrategyConfig,
@@ -124,10 +125,22 @@ class TestUCBStrategyConfig(UCBStrategyConfig):
         return 0.5
 
 
+class TestMFBPIConfig(MFBPIConfig):
+
+    @property
+    def kbar(self) -> int:
+        return 1
+
+    @property
+    def ensemble_size(self) -> int:
+        return 1
+
+
 class TestQLearningConfig(QLearningConfig):
     def __init__(self):
         self.epsilon_greedy = TestEpsilonGreedyStrategyConfig()
         self.upper_confidence_bound = TestUCBStrategyConfig()
+        self.mf_bpi = TestMFBPIConfig()
 
     @property
     def learning_rate(self) -> float:

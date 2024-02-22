@@ -9,14 +9,19 @@ from ..dynamics.actions import Action
 class BaseAgent(object):
     """Provides the common base for different learning agents."""
 
-    def __init__(self, hyper_parameters: BaseHyperParameterStrategy) -> None:
+    def __init__(
+        self, hyper_parameters: BaseHyperParameterStrategy, max_state_count: int
+    ) -> None:
         """Initialise an agent.
 
         Args:
             hyper_parameters (BaseHyperParameterStrategy): the hyper parameters
                 the agent should use.
+            max_state_count (int): maximum number of states this agent may need
+                to handle with.
         """
         self.hyper_parameters = hyper_parameters
+        self.max_state_count = max_state_count
 
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.

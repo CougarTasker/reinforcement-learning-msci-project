@@ -1,6 +1,9 @@
 from collections import defaultdict
 from typing import Dict, List
 
+from src.model.agents.q_learning.exploration_strategies.mf_bpi import (
+    MFBPIStrategy,
+)
 from src.model.hyperparameters.base_parameter_strategy import (
     BaseHyperParameterStrategy,
     HyperParameter,
@@ -28,6 +31,7 @@ class QLearningAgent(BaseAgent):
         self,
         hyper_parameters: BaseHyperParameterStrategy,
         strategy: ExplorationStrategyOptions,
+        max_state_count: int,
     ) -> None:
         """Initialise the agent.
 
@@ -36,8 +40,10 @@ class QLearningAgent(BaseAgent):
                 the agent should use.
             strategy (ExplorationStrategyOptions): The strategy the agent should
                 use to select actions.
+            max_state_count (int): maximum number of states this agent may need
+                to handle with.
         """
-        super().__init__(hyper_parameters)
+        super().__init__(hyper_parameters, max_state_count)
 
         self.max_queue_length = hyper_parameters.get_integer_value(
             HyperParameter.replay_queue_length
@@ -73,9 +79,10 @@ class QLearningAgent(BaseAgent):
         match strategy:
             case ExplorationStrategyOptions.epsilon_greedy:
                 self.strategy = EpsilonGreedyStrategy(self)
-
             case ExplorationStrategyOptions.upper_confidence_bound:
                 self.strategy = UpperConfidenceBoundStrategy(self)
+            case ExplorationStrategyOptions.mf_bpi:
+                self.strategy = MFBPIStrategy(self)
             case _:
                 raise ValueError(f"Unknown strategy provided {strategy}")
 

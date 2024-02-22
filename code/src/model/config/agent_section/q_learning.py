@@ -1,6 +1,7 @@
 from src.model.config.agent_section.epsilon_greedy import (
     EpsilonGreedyStrategyConfig,
 )
+from src.model.config.agent_section.mf_bpi import MFBPIConfig
 from src.model.config.agent_section.upper_confidence_bound import (
     UCBStrategyConfig,
 )
@@ -25,10 +26,11 @@ class QLearningConfig(BaseConfigSection):
 
         self.epsilon_greedy = EpsilonGreedyStrategyConfig()
         self.upper_confidence_bound = UCBStrategyConfig()
+        self.mf_bpi = MFBPIConfig()
         super().__init__(
             "q_learning",
             data_schema,
-            [self.epsilon_greedy, self.upper_confidence_bound],
+            [self.epsilon_greedy, self.upper_confidence_bound, self.mf_bpi],
         )
 
     @property

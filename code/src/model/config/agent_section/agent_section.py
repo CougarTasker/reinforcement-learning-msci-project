@@ -18,7 +18,9 @@ class AgentConfig(BaseConfigSection):
         self.value_iteration = ValueIterationConfig()
 
         super().__init__(
-            "agent", data_schema, [self.q_learning, self.value_iteration]
+            "agent",
+            data_schema,
+            [self.q_learning, self.value_iteration],
         )
 
     @property

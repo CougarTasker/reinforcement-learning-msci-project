@@ -31,6 +31,16 @@ class CliffDynamics(BaseDynamics):
         """
         return False
 
+    def state_count_upper_bound(self) -> int:
+        """Get an upper bound on the number of states.
+
+        used for pre-allocating memory.
+
+        Returns:
+            int: an upper bound on the number of state.
+        """
+        return self.grid_world.width * self.grid_world.height
+
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.
 

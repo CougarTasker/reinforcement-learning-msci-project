@@ -1014,6 +1014,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../q_learning/exploration_strategies/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../q_learning/exploration_strategies/options/" class="md-nav__link">
         
   
@@ -1476,6 +1497,27 @@
   
   <span class="md-ellipsis">
     Epsilon Greedy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../config/agent_section/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
   </span>
   
 
@@ -4532,7 +4574,7 @@
 <span class="sd">            dynamics (BaseDynamics): the dynamics function used to build the</span>
 <span class="sd">                value table and pick optimal actions</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">state_count_upper_bound</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="n">dynamics</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stopping_epsilon</span> <span class="o">=</span> <span class="n">hyper_parameters</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span>
             <span class="n">HyperParameter</span><span class="o">.</span><span class="n">stopping_epsilon</span>
@@ -4821,7 +4863,7 @@ value table and pick optimal actions</p>
 <span class="sd">        dynamics (BaseDynamics): the dynamics function used to build the</span>
 <span class="sd">            value table and pick optimal actions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">)</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="o">.</span><span class="n">state_count_upper_bound</span><span class="p">())</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="n">dynamics</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">stopping_epsilon</span> <span class="o">=</span> <span class="n">hyper_parameters</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span>
         <span class="n">HyperParameter</span><span class="o">.</span><span class="n">stopping_epsilon</span>

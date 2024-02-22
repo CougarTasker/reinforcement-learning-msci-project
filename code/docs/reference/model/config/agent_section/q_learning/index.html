@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../epsilon_greedy/">
+        <link rel="prev" href="../mf_bpi/">
       
       
         <link rel="next" href="../upper_confidence_bound/">
@@ -1012,6 +1012,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../agents/q_learning/exploration_strategies/mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../agents/q_learning/exploration_strategies/options/" class="md-nav__link">
         
   
@@ -1335,6 +1356,27 @@
   
   <span class="md-ellipsis">
     Epsilon Greedy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mf_bpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mf Bpi
   </span>
   
 
@@ -4235,8 +4277,7 @@
 
             <details class="quote">
               <summary>Source code in <code>src/model/config/agent_section/q_learning.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
-<span class="normal">12</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
@@ -4287,7 +4328,9 @@
 <span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
-<span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QLearningConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets configuration related to Q learning.&quot;&quot;&quot;</span>
 
     <span class="n">learning_rate_property</span> <span class="o">=</span> <span class="s2">&quot;learning_rate&quot;</span>
@@ -4304,10 +4347,11 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_greedy</span> <span class="o">=</span> <span class="n">EpsilonGreedyStrategyConfig</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span> <span class="o">=</span> <span class="n">UCBStrategyConfig</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mf_bpi</span> <span class="o">=</span> <span class="n">MFBPIConfig</span><span class="p">()</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="s2">&quot;q_learning&quot;</span><span class="p">,</span>
             <span class="n">data_schema</span><span class="p">,</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mf_bpi</span><span class="p">],</span>
         <span class="p">)</span>
 
     <span class="nd">@property</span>
@@ -4514,8 +4558,7 @@ world view.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/config/agent_section/q_learning.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
-<span class="normal">19</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -4528,7 +4571,9 @@ world view.</p>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
-<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate q-learning section config.&quot;&quot;&quot;</span>
     <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">learning_rate_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -4538,10 +4583,11 @@ world view.</p>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">epsilon_greedy</span> <span class="o">=</span> <span class="n">EpsilonGreedyStrategyConfig</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span> <span class="o">=</span> <span class="n">UCBStrategyConfig</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mf_bpi</span> <span class="o">=</span> <span class="n">MFBPIConfig</span><span class="p">()</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
         <span class="s2">&quot;q_learning&quot;</span><span class="p">,</span>
         <span class="n">data_schema</span><span class="p">,</span>
-        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">],</span>
+        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">epsilon_greedy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_confidence_bound</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mf_bpi</span><span class="p">],</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>

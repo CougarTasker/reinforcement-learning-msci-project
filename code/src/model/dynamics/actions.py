@@ -1,9 +1,9 @@
-from enum import Enum
+from enum import IntEnum
 
 
 # it is important the actions be zero based it is an assumption used by the
 # q-learning agent.
-class Action(Enum):
+class Action(IntEnum):
     """Enumerates all possible actions."""
 
     up = 0

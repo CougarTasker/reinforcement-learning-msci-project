@@ -99,7 +99,10 @@ class OptionDisplayText(object):
             ExplorationStrategyOptions.not_applicable: "Not Applicable",
             ExplorationStrategyOptions.epsilon_greedy: "Epsilon Greedy",
             ExplorationStrategyOptions.upper_confidence_bound: (
-                "Upper Confidence Bound"
+                "(UCB) Upper Confidence Bound"
+            ),
+            ExplorationStrategyOptions.mf_bpi: (
+                "(MF-BPI) Model-Free Best Policy Identification"
             ),
         }
     )
@@ -111,6 +114,7 @@ class OptionDisplayText(object):
     applicable_exploration_option = full_exploration_options.create_subset(
         ExplorationStrategyOptions.epsilon_greedy,
         ExplorationStrategyOptions.upper_confidence_bound,
+        ExplorationStrategyOptions.mf_bpi,
     )
 
     dynamics_options = DisplayTextListing(

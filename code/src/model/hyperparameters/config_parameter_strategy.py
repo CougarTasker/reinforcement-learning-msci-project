@@ -26,6 +26,7 @@ class ParameterConfigStrategy(BaseHyperParameterStrategy):
             agent_config = ConfigReader().agent
         q_learning_config = agent_config.q_learning
         value_iteration_config = agent_config.value_iteration
+
         self.parameter_values = {
             HyperParameter.initial_optimism: q_learning_config.initial_optimism,
             HyperParameter.replay_queue_length: (
@@ -46,6 +47,10 @@ class ParameterConfigStrategy(BaseHyperParameterStrategy):
                 value_iteration_config.stopping_epsilon
             ),
             HyperParameter.sample_count: value_iteration_config.sample_count,
+            HyperParameter.mf_bpi_kbar: q_learning_config.mf_bpi.kbar,
+            HyperParameter.mf_bpi_ensemble_size: (
+                q_learning_config.mf_bpi.ensemble_size
+            ),
         }
 
     @override

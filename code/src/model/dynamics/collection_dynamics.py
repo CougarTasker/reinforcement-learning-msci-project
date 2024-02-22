@@ -36,6 +36,20 @@ class CollectionDynamics(BaseDynamics):
         """
         return False
 
+    def state_count_upper_bound(self) -> int:
+        """Get an upper bound on the number of states.
+
+        used for pre-allocating memory.
+
+        Returns:
+            int: an upper bound on the number of state.
+        """
+        return (
+            self.grid_world.width
+            * self.grid_world.height
+            * (2**self.config.entity_count)
+        )
+
     def get_spawn_positions(self) -> spawn_positions_type:
         """Get the positions where flags can be spawned.
 

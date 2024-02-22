@@ -7,3 +7,4 @@ class ExplorationStrategyOptions(Enum):
     not_applicable = 0
     epsilon_greedy = 1
     upper_confidence_bound = 2
+    mf_bpi = 3

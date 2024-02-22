@@ -79,6 +79,7 @@ class EntityFactory(object):
                 return QLearningAgent(
                     hyper_parameters,
                     options.exploration_strategy,
+                    dynamics.state_count_upper_bound(),
                 )
             case _:
                 raise ValueError(f"unknown agent {options.agent.name}")
