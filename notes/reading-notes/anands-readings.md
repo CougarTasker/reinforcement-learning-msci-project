@@ -41,7 +41,7 @@ what this M measure is? -> statistical moments of the value function
 why and how they are using bootstrapping (ensemble methods) 
 
 where the appendix is? 
-
+[it's here](https://openreview.net/attachment?id=YEtstXIpP3&name=supplementary_material)
 how exactly are you supposed to learn this allocation 
 
 ## My notes
@@ -74,3 +74,16 @@ this paper extends a proof that this approach will be stable under many differen
 https://arxiv.org/abs/1802.01561
 
 this framework seems so different from my current work it would require substantial changes
+
+
+## Hierarchical RL
+
+
+https://proceedings.neurips.cc/paper_files/paper/2022/hash/a766f56d2da42cae20b5652970ec04ef-Abstract-Conference.html
+
+https://thegradient.pub/the-promise-of-hierarchical-reinforcement-learning/
+
+ 
+## Model-based Deep RL
+http://proceedings.mlr.press/v97/hafner19a.html
+https://danijar.com/project/dreamer/
