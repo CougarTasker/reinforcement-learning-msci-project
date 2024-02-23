@@ -1442,9 +1442,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.kbar" class="md-nav__link">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.error_sensitivity" class="md-nav__link">
     <span class="md-ellipsis">
-      kbar
+      error_sensitivity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.exploration_parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      exploration_parameter
     </span>
   </a>
   
@@ -4181,9 +4190,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.kbar" class="md-nav__link">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.error_sensitivity" class="md-nav__link">
     <span class="md-ellipsis">
-      kbar
+      error_sensitivity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#src.model.config.agent_section.mf_bpi.MFBPIConfig.exploration_parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      exploration_parameter
     </span>
   </a>
   
@@ -4293,32 +4311,47 @@
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MFBPIConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MFBPIConfig</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets configuration related to the value iteration agent.&quot;&quot;&quot;</span>
 
-    <span class="n">kbar_property</span> <span class="o">=</span> <span class="s2">&quot;kbar&quot;</span>
+    <span class="n">error_sensitivity_property</span> <span class="o">=</span> <span class="s2">&quot;error_sensitivity&quot;</span>
     <span class="n">ensemble_size_property</span> <span class="o">=</span> <span class="s2">&quot;ensemble_size&quot;</span>
+    <span class="n">exploration_parameter_property</span> <span class="o">=</span> <span class="s2">&quot;exploration_parameter&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiate value iteration section config.&quot;&quot;&quot;</span>
         <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">kbar_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_sensitivity_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">exploration_parameter_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="p">}</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;mf_bpi&quot;</span><span class="p">,</span> <span class="n">data_schema</span><span class="p">,</span> <span class="p">[])</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">kbar</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the kbar.</span>
+    <span class="k">def</span> <span class="nf">error_sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the error sensitivity. Measure that effects uncertainty.</span>
 
-<span class="sd">        Not sure what the kbar is but it is used in initialisation and is just</span>
-<span class="sd">        set to one by the authors.</span>
+<span class="sd">        higher error sensitivity increases uncertainty, therefore more</span>
+<span class="sd">        exploration. although becomes more sensitive to noise.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            int: unknown meaning.</span>
+<span class="sd">            int: the sensitivity to TD errors.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">kbar_property</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error_sensitivity_property</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ensemble_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -4326,6 +4359,17 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            int: the number of Q-value tables.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">exploration_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the amount of forced exploration.</span>
+
+<span class="sd">        Recommended value is 1, higher values equate to more exploration.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: exploration amount.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
@@ -4392,8 +4436,8 @@
 
 
 
-<h3 id="src.model.config.agent_section.mf_bpi.MFBPIConfig.kbar" class="doc doc-heading">
-          <code class="highlight language-python"><span class="n">kbar</span><span class="p">:</span> <span class="nb">int</span></code>
+<h3 id="src.model.config.agent_section.mf_bpi.MFBPIConfig.error_sensitivity" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">error_sensitivity</span><span class="p">:</span> <span class="nb">int</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-property"><code>property</code></small>
@@ -4404,9 +4448,9 @@
 
   <div class="doc doc-contents ">
   
-      <p>Get the kbar.</p>
-<p>Not sure what the kbar is but it is used in initialisation and is just
-set to one by the authors.</p>
+      <p>Get the error sensitivity. Measure that effects uncertainty.</p>
+<p>higher error sensitivity increases uncertainty, therefore more
+exploration. although becomes more sensitive to noise.</p>
 
 
 
@@ -4425,7 +4469,54 @@ set to one by the authors.</p>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>unknown meaning.</p>
+              <p>the sensitivity to TD errors.</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-attribute">
+
+
+
+
+<h3 id="src.model.config.agent_section.mf_bpi.MFBPIConfig.exploration_parameter" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">exploration_parameter</span><span class="p">:</span> <span class="nb">float</span></code>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
+  </span>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get the amount of forced exploration.</p>
+<p>Recommended value is 1, higher values equate to more exploration.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>float</code></td>          <td>
+                <code>float</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>exploration amount.</p>
             </div>
           </td>
         </tr>
@@ -4455,18 +4546,20 @@ set to one by the authors.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/config/agent_section/mf_bpi.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
-<span class="normal">11</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Instantiate value iteration section config.&quot;&quot;&quot;</span>
     <span class="n">data_schema</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">kbar_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_sensitivity_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ensemble_size_property</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exploration_parameter_property</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;mf_bpi&quot;</span><span class="p">,</span> <span class="n">data_schema</span><span class="p">,</span> <span class="p">[])</span>

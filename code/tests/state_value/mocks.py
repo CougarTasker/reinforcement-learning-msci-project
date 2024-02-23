@@ -128,11 +128,15 @@ class TestUCBStrategyConfig(UCBStrategyConfig):
 class TestMFBPIConfig(MFBPIConfig):
 
     @property
-    def kbar(self) -> int:
+    def error_sensitivity(self) -> int:
         return 1
 
     @property
     def ensemble_size(self) -> int:
+        return 1
+
+    @property
+    def exploration_parameter(self) -> float:
         return 1
 
 

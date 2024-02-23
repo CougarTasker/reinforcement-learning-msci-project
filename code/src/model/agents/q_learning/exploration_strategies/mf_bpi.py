@@ -1,4 +1,5 @@
-# flake8: noqa
+from typing import Any, Tuple
+
 import numpy as np
 
 from src.model.agents.base_agent import BaseAgent
@@ -13,6 +14,9 @@ golden_ratio = (1 + np.sqrt(5)) / 2
 golden_ratio_sq = golden_ratio**2
 
 
+Q_table_type = np.ndarray[Any, np.dtype[np.floating[Any]]]
+
+
 class MFBPIStrategy(BaseExplorationStrategy):
     """Model Free best policy identification strategy.
 
@@ -23,8 +27,10 @@ class MFBPIStrategy(BaseExplorationStrategy):
 
     """
 
-    suggested_exploration_parameter = 1
-    dim_action_space = len(Action)
+    float_min = 1e-8
+    m_table_learning_rate_factor = 1.1
+    action_count = len(Action)
+    ensemble_subset_factor = 0.7
 
     def __init__(self, agent: BaseAgent):
         """Initialise the MFBPI strategy.
@@ -36,103 +42,91 @@ class MFBPIStrategy(BaseExplorationStrategy):
         super().__init__(agent)
 
         # Initialize parent class with agent parameters
-        self.dim_state_space = agent.max_state_count
+        self.state_count = agent.max_state_count
         self.discount_factor = self.agent.hyper_parameters.get_value(
             HyperParameter.discount_rate
         )
         self.ensemble_size = self.agent.hyper_parameters.get_integer_value(
             HyperParameter.mf_bpi_ensemble_size
         )
-
-        self.kbar = self.agent.hyper_parameters.get_integer_value(
-            HyperParameter.mf_bpi_kbar
+        error_sensitivity_parameter = (
+            self.agent.hyper_parameters.get_integer_value(
+                HyperParameter.mf_error_sensitivity
+            )
+        )
+        self.error_sensitivity: int = 2**error_sensitivity_parameter
+        self.exploration_parameter = self.agent.hyper_parameters.get_value(
+            HyperParameter.mf_exploration_parameter
         )
 
-        self.exp_visits = np.zeros((self.ns, self.na, self.ns))
-        self.state_action_visits = np.zeros((self.ns, self.na))
-        self.total_state_visits = np.zeros((self.ns))
-        self.greedy_policy = np.zeros((self.ns), dtype=np.int64)
-        self.omega = np.ones((self.ns, self.na))
-        self.exploration_parameter = self.suggested_exploration_parameter
+        self._state_visits = np.zeros(self.state_count)
 
-        # Create a uniform policy matrix
-        self.uniform_policy = np.ones((self.ns, self.na)) / (self.ns * self.na)
-
-        # Initialize Q_greedy matrix
-        self.Q_greedy = (
-            np.ones((self.ns, self.na))
-            / (self.ns * self.na)
-            / (1 - self.discount_factor)
+        # Initialize a visits matrix for each ensemble member
+        self._ensemble_state_action_visits = np.zeros(
+            (
+                self.ensemble_size,
+                self.state_count,
+                self.action_count,
+                self.state_count,
+            )
+        )
+        # Initialize policy matrix
+        self._policy = np.ones(shape=(self.state_count, self.action_count)) / (
+            self.action_count
         )
 
         # Initialize Q-table and M-table for each ensemble member
-        if self.ensemble_size > 1:
-            self.Q = np.tile(
-                np.linspace(0, 1, self.ensemble_size)[:, None, None],
-                (1, self.ns, self.na),
-            ) / (1 - self.discount_factor)
-            self.M = np.tile(
-                np.linspace(0, 1, self.ensemble_size)[:, None, None],
-                (1, self.ns, self.na),
-            ) / ((1 - self.discount_factor) ** (2**self.kbar))
+        # Q -> the understanding of value like normal
+        # M -> the amount of uncertainty based on TD errors
 
-            self.Q = self.Q.flatten()
-            self.M = self.M.flatten()
+        tables = self.q_m_initial_value()
+        self._q_table = tables[0]
+        self._m_table = tables[1]
 
-            # Shuffle the Q and M matrices
-            np.random.shuffle(self.Q)
-            np.random.shuffle(self.M)
-            self.Q = self.Q.reshape(self.ensemble_size, self.ns, self.na)
-            self.M = self.M.reshape(self.ensemble_size, self.ns, self.na)
-        else:
-            self.Q = np.ones((1, self.ns, self.na)) / (1 - self.discount_factor)
-            self.M = np.ones((1, self.ns, self.na)) / (
-                (1 - self.discount_factor) ** (2**self.kbar)
+    def q_m_initial_value(self) -> Tuple[Q_table_type, Q_table_type]:
+        """Get the initial values for the Q and M table.
+
+        Returns:
+            Tuple[Q_table_type, Q_table_type]: the initial table values. The
+                first table is the Q table and the second is the M table.
+        """
+        non_discounted_factor = 1 - self.discount_factor
+        if self.ensemble_size == 1:
+            q_table = (
+                np.ones((1, self.state_count, self.action_count))
+                / non_discounted_factor
             )
+            m_table = np.ones((1, self.state_count, self.action_count)) / (
+                non_discounted_factor**self.error_sensitivity
+            )
+            return q_table, m_table
 
-        # Initialize omega and policy matrices
-        self.omega = np.ones(shape=(self.ns, self.na)) / (self.ns * self.na)
-        self.policy = np.ones(shape=(self.ns, self.na)) / (self.na)
-
-        # Initialize a visits matrix for each ensemble member
-        self._visits = np.zeros((self.ensemble_size, self.ns, self.na, self.ns))
-
-    @property
-    def ns(self) -> int:
-        """Shorthand property for the number of states.
-
-        Returns:
-            int: the maximum number of states.
-        """
-        return self.dim_state_space
-
-    @property
-    def na(self) -> int:
-        """Shorthand property for the number of actions.
-
-        Returns:
-            int: The number of actions.
-        """
-        return self.dim_action_space
-
-    def forced_exploration_callable(
-        self, state: int, minimum_exploration: float = 0.1
-    ) -> float:
-        """Compute the forced exploration probability.
-
-        Args:
-            state (int): The state that we are exploring from.
-            minimum_exploration (float): the minimal amount of
-                exploration. Defaults to 0.1.
-
-        Returns:
-            float: forced exploration probability.
-        """
-        return max(
-            minimum_exploration,
-            (1 / max(1, self.total_state_visits[state]))
-            ** self.exploration_parameter,
+        q_table = (
+            np.tile(
+                np.linspace(0, 1, self.ensemble_size)[:, None, None],
+                (1, self.state_count, self.action_count),
+            )
+            / non_discounted_factor
         )
+        m_table = np.tile(
+            np.linspace(0, 1, self.ensemble_size)[:, None, None],
+            (1, self.state_count, self.action_count),
+        ) / (non_discounted_factor**self.error_sensitivity)
+
+        q_table = q_table.flatten()
+        m_table = m_table.flatten()
+
+        # Shuffle the Q and M matrices
+        np.random.shuffle(q_table)
+        np.random.shuffle(m_table)
+
+        q_table = q_table.reshape(
+            self.ensemble_size, self.state_count, self.action_count
+        )
+        m_table = m_table.reshape(
+            self.ensemble_size, self.state_count, self.action_count
+        )
+        return q_table, m_table
 
     def select_action(self, state: int) -> Action:
         """Select the action for this agent to explore.
@@ -145,14 +139,18 @@ class MFBPIStrategy(BaseExplorationStrategy):
         Returns:
             Action: the action to be chosen.
         """
-        epsilon = self.forced_exploration_callable(
-            state, minimum_exploration=1e-3
+        forced_exploration_probability = max(
+            self.float_min,
+            (1 / max(1, self._state_visits[state]))
+            ** self.exploration_parameter,
         )
-        omega = (1 - epsilon) * self.policy[state] + epsilon * np.ones(
-            (self.na)
-        ) / (self.na)
+        omega = (1 - forced_exploration_probability) * self._policy[
+            state
+        ] + forced_exploration_probability * np.ones((self.action_count)) / (
+            self.action_count
+        )
 
-        action_value = np.random.choice(self.na, p=omega)
+        action_value = np.random.choice(self.action_count, p=omega)
         return Action(action_value)
 
     def record_transition(self, experience: TransitionInformation) -> None:
@@ -164,82 +162,64 @@ class MFBPIStrategy(BaseExplorationStrategy):
             experience (TransitionInformation): the information from a
                 transition.
         """
-        # Increment visit count for the current state-action pair
-        self.exp_visits[
-            experience.previous_state,
-            experience.previous_action.value,
-            experience.new_state,
-        ] += 1
-        self.state_action_visits[
-            experience.previous_state, experience.previous_action.value
-        ] += 1
-
-        # Update last visit time and total state visits count for the next state
-
-        self.total_state_visits[experience.new_state] += 1
-
-        # If this is the first time step, update last visit time and total
-        # state visits count for the current state
-        if self.total_state_visits[experience.previous_state] == 0:
-            self.total_state_visits[experience.previous_state] = 1
-
-        # Process the experience to update the agent's internal model
-        self.__process_experience(experience)
-
-    def __process_experience(self, experience: TransitionInformation) -> None:
-        # Unpack the experience tuple
-        s, a, r, sp = (
+        state, action, reward, new_state = (
             experience.previous_state,
             experience.previous_action.value,
             experience.reward,
             experience.new_state,
         )
 
+        # Increment visit count for the current state pair
+        self._state_visits[state] += 1
+
         # Randomly select a subset of the ensemble
-        idxs = np.random.choice(
+        indexes = np.random.choice(
             self.ensemble_size,
-            size=int(0.7 * self.ensemble_size),
+            size=int(self.ensemble_subset_factor * self.ensemble_size),
             replace=False,
         )
 
         # Update visit counts
-        self._visits[idxs, s, a, sp] += 1
-        k = self._visits[idxs, s, a].sum(-1)
-        H = 1 / (1 - self.discount_factor)
-        alpha_t = (H + 1) / (H + k)
+        self._ensemble_state_action_visits[
+            indexes, state, action, new_state
+        ] += 1
+        current_visit_count = (
+            self._ensemble_state_action_visits[  # noqa: WPS204
+                indexes, state, action
+            ].sum(-1)
+        )
+        # visit count horizon exploration vs exploration
+        visit_count_horizon = 1 / (1 - self.discount_factor)
+        # learning rate for Q-values
+        q_learning_rate = (visit_count_horizon + 1) / (
+            visit_count_horizon + current_visit_count
+        )
 
         # Compute beta_t
-        beta_t = alpha_t**1.1
+        m_learning_rate = q_learning_rate**self.m_table_learning_rate_factor
 
         # Calculate target Q value
-        target = r + self.discount_factor * self.Q[idxs, sp].max(-1)
-        self.Q[idxs, s, a] = (1 - alpha_t) * self.Q[
-            idxs, s, a
-        ] + alpha_t * target
-
-        # Update Q_greedy
-        k = self.exp_visits[s, a].sum()
-        alpha_t = (H + 1) / (H + k)
-        target = r + self.discount_factor * self.Q_greedy[sp].max(-1)
-        self.Q_greedy[s, a] = (1 - alpha_t) * self.Q_greedy[
-            s, a
-        ] + alpha_t * target
+        target_q_value = reward + self.discount_factor * self._q_table[
+            indexes, new_state
+        ].max(-1)
+        self._q_table[indexes, state, action] = (
+            1 - q_learning_rate
+        ) * self._q_table[
+            indexes, state, action
+        ] + q_learning_rate * target_q_value
 
         # Update M values
         delta = (
-            r
-            + self.discount_factor * self.Q[idxs, sp].max(-1)
-            - self.Q[idxs, s, a]
+            reward
+            + self.discount_factor * self._q_table[indexes, new_state].max(-1)
+            - self._q_table[indexes, state, action]
         ) / self.discount_factor
-        self.M[idxs, s, a] = (1 - beta_t) * self.M[idxs, s, a] + beta_t * (
-            delta ** (2**self.kbar)
-        )
 
-        # Update the greedy policy
-        self.greedy_policy = (
-            np.random.random(self.Q_greedy.shape)
-            * (self.Q_greedy == self.Q_greedy.max(-1, keepdims=True))
-        ).argmax(-1)
+        self._m_table[indexes, state, action] = (
+            1 - m_learning_rate
+        ) * self._m_table[indexes, state, action] + m_learning_rate * (
+            delta**self.error_sensitivity
+        )
 
         # Update the ensemble head
         self._head = np.random.choice(self.ensemble_size)
@@ -248,63 +228,73 @@ class MFBPIStrategy(BaseExplorationStrategy):
         self.__compute_omega()
 
     def __compute_omega(self):
-        # If there's only one ensemble member, use its Q and M values
+        """Compute the omega values.
+
+        which are used to weight different actions in the policy based on their
+        estimated value and uncertainty.
+        """
         if self.ensemble_size == 1:
-            q_values = self.Q[0]
-            m_values = self.M[0]
+            # If there's only one ensemble member, use its Q and M values
+            q_values = self._q_table[0]
+            m_values = self._m_table[0]
         else:
             # If there are multiple ensemble members, sample a random value from
             # the uniform distribution
-            x = np.random.uniform()
-            q_values = np.quantile(self.Q, x, axis=0)
-            m_values = np.quantile(self.M, x, axis=0)
+            table_quantile = np.random.uniform()
+            q_values = np.quantile(self._q_table, table_quantile, axis=0)
+            m_values = np.quantile(self._m_table, table_quantile, axis=0)
 
         # Compute the greedy policy
         greedy_policy = q_values.argmax(1)
 
         # Identify the suboptimal actions
-        idxs_subopt_actions = np.array(
+        subopt_action_indexes = np.array(
             [
                 [
-                    False if greedy_policy[s] == a else True
-                    for a in range(self.na)
+                    greedy_policy[state] != action
+                    for action in range(self.action_count)
                 ]
-                for s in range(self.ns)
+                for state in range(self.state_count)
             ]
         ).astype(np.bool_)
 
         # Compute Delta
         delta = np.clip(
-            (q_values.max(-1, keepdims=True) - q_values), a_min=1e-8, a_max=None
+            (q_values.max(-1, keepdims=True) - q_values),
+            a_min=self.float_min,
+            a_max=None,
+            out=None,
         )
-        delta_subopt = delta[idxs_subopt_actions]
+        delta_subopt = delta[subopt_action_indexes]
         delta_min = delta_subopt.min()
 
         # Update Delta for optimal actions
-        delta[~idxs_subopt_actions] = (
+        delta[~subopt_action_indexes] = (
             delta_min * (1 - self.discount_factor) / (1 + self.discount_factor)
         )
 
         # Compute Hsa
+        # h_sa = how long the state action should
+        # be explored.
         h_sa = (2 + 8 * golden_ratio_sq * m_values) / (delta**2)
 
         c_value = np.max(
             np.maximum(
                 4,
-                16
+                (4**2)
                 * (self.discount_factor**2)
                 * golden_ratio_sq
-                * m_values[~idxs_subopt_actions],
+                * m_values[~subopt_action_indexes],
             )
         )
 
-        h_opt = c_value / (delta[~idxs_subopt_actions] ** 2)
+        h_opt = c_value / (delta[~subopt_action_indexes] ** 2)
 
         # Update Hsa for optimal actions
-        h_sa[~idxs_subopt_actions] = np.sqrt(
-            h_opt * h_sa[idxs_subopt_actions].sum() / self.ns,
+        h_sa[~subopt_action_indexes] = np.sqrt(
+            h_opt * h_sa[subopt_action_indexes].sum() / self.state_count,
         )
 
         # Compute omega and update policy
-        self.omega = h_sa / h_sa.sum()
-        self.policy = self.omega / self.omega.sum(-1, keepdims=True)
+        omega = h_sa / h_sa.sum()
+        self._policy = omega / omega.sum(-1, keepdims=True)

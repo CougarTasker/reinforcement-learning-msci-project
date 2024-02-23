@@ -47,9 +47,14 @@ class ParameterConfigStrategy(BaseHyperParameterStrategy):
                 value_iteration_config.stopping_epsilon
             ),
             HyperParameter.sample_count: value_iteration_config.sample_count,
-            HyperParameter.mf_bpi_kbar: q_learning_config.mf_bpi.kbar,
+            HyperParameter.mf_error_sensitivity: (
+                q_learning_config.mf_bpi.error_sensitivity
+            ),
             HyperParameter.mf_bpi_ensemble_size: (
                 q_learning_config.mf_bpi.ensemble_size
+            ),
+            HyperParameter.mf_exploration_parameter: (
+                q_learning_config.mf_bpi.exploration_parameter
             ),
         }
 
