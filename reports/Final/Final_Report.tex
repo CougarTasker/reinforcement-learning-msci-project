@@ -59,6 +59,8 @@ Signature: {\calligra \LARGE \studentname}
 
 \begin{abstract}
 
+\section{TODO - (Rework Rationale) Resourceful robots}
+
   To complete many objectives robotic agents need to adapt and learn new environments. This presents a problem for traditional supervised learning approaches that operate under the (IID) assumption\cite{bagnell2005robust}, training data may not apply to new environments. This report investigates reinforcement learning (RL) techniques as an alternative for this class of robotics. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent decides on the consequences of their actions. this is unlike supervised learning; there is no need for training in RL the agent will continuously learn from their successes and failures. Although RL does not need training data it is also unlike unsupervised learning, since RL agents learn to achieve more reward from within the system rather than observing underlying patterns.
   
   These unique benefits of reinforcement learning make this field applicable to many real-world problems. RL is built upon a strong mathematical foundation that allows us to make strong guarantees about solutions in the reinforcement learning domain. Furthermore, RL spans widely uniting together many important and diverse areas of study such as Economics, Optimisation, Game Theory, robotics and Cognitive Science.
@@ -69,15 +71,13 @@ Signature: {\calligra \LARGE \studentname}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Introduction
-% \chapter{Introduction}
 
-% \section{The Challenge}
-
-
-\addcontentsline{toc}{section}{Aims and Objectives}
-\section*{Aims and Objectives}
+\chapter{TODO - Introduction}
 
 
+
+
+\section{TODO (rework) - Aims and Objectives}
 \begin{itemize}
   \item Efficient Navigation: The agent must autonomously navigate a grid world while making decisions to optimise rewards. The robot should learn to prioritise efficient paths.
   \item Balancing Constraints: The agent must balance collecting resources with constraints such as energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
@@ -86,8 +86,7 @@ Signature: {\calligra \LARGE \studentname}
   \item Visualisation: The program should provide a GUI that visualises the operation of these agents interactively.
 \end{itemize}
 
-\addcontentsline{toc}{section}{Motivation}
-\section*{Motivation}
+\section{Motivation}
 
 My inspiration for studying for this degree, specialising in artificial intelligence, comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
 
@@ -103,9 +102,13 @@ Last year, I completed my year-long internship at Zing Dev (Zing), a digital com
 Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
 
 
-% \section{Literature Survey}
+\section{TODO - Literature Review}
 
-\chapter{Software Engineering}
+
+Full critical review of literature relevant to the study.
+
+
+\chapter{TODO (section introduction)- Software Engineering}
 
 \begin{figure}[H]
   \centering
@@ -131,6 +134,10 @@ The application has a complex GUI with controls that visualise the state of more
 
 The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application this is achieved by adhering to software engineering principles \cite{softwareEngineringPrinciples} and using software design patterns where applicable.
 
+\section{TODO - Technical Decisions}
+
+talk about the choice of gui, multiprocessing IPC, etc.
+
 \pagebreak
 \section{Workflow}
 
@@ -149,13 +156,8 @@ For the sake of consistency, the application itself has been configured with a d
 
 \section{Functionality and Usage}
 
-When starting the application you will be greeted by a window that is largely broken into three parts. At the top, there is a section which has the main controls for selecting the major options such as the dynamics, agent and if the agent is off-policy you can select its exploration strategy. 
+The application's functionality revolves around running reinforcement learning simulations and allowing the user to interact with and analyse the effects of different options. These simulations encompass two main units an agent and dynamics. The agent unit encompasses the functionality for learning and decision making while the dynamics unit encompasses a grid world Markov decision process. These units are interchangeable and configurable by the user dynamically through controls in the user interface and through a configuration file \path{config.toml}. The results of these learning experiments are expressed by the application in several fashions such as a state-by-state view, information displays and graphs.
 
-In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
-
-The main display on the first tab visualises the current state of the main simulation, each dynamics are based around a grid world and the display visualises this with a grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode, In the initial default display mode a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other Display modes arrows represent the agent's actions in each state and a color scale is used to represent the agent's interpretation of value. On this color scale hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
-
-At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
 
 \subsection{Getting Started}
 
@@ -169,8 +171,20 @@ python3 -m pipx run --spec . start
 
 You can find more information about this application and how to start it in the readme file in the code folder.
 
-\subsection{Controls and Operation}
+\section{User Interface}
 
+The user interface is not only a major component of the project's functionality but also the user's window into the entire application. When starting the application you will be greeted by a window that is largely broken into three components. At the top, there is a section which contains the main controls for selecting the most significant options of the main simulation; such as the agent and dynamics. If the agent is off-policy you can select its exploration strategy. 
+
+In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
+
+The main display on the first tab visualises the current state of the main simulation, each dynamics are based around a grid world and the display visualises this with a grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode, In the initial default display mode a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other Display modes arrows represent the agent's actions in each state and a color scale is used to represent the agent's interpretation of value. On this color scale hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
+
+At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
+
+\section{TODO - Professional Issues}
+
+
+https://moodle.royalholloway.ac.uk/mod/page/view.php?id=744455
 
 
 % \chapter{Timeline}
@@ -392,6 +406,27 @@ Picking the behavioural policy is important; it must balance exploring and gaini
 \end{itemize}
 
 Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
+
+\chapter{TODO - Exploration Strategy Effectiveness}
+
+% introduction into what exploration strategies are 
+
+\section{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy}
+
+\section{TODO - Upper Confidence Bound}
+
+\section{TODO - Model-Free Best Policy Identification}
+
+\section{TODO - Hyperparameter Selection}
+
+
+epsilon greedy on policy vs off policy
+
+
+over-optimistic values causing excessive exploration, and pessimistic initial values causing the development of superstitions.
+
+
+\section{TODO - Conclusions}
 
 
 
