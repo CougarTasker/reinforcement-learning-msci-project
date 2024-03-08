@@ -185,26 +185,8 @@ At the bottom are specific controls specific to the main simulation and its visu
 
 1000 words
 
-describe an example from the public domain of what can happen when professional issues are not properly addressed;
-
-
 https://moodle.royalholloway.ac.uk/mod/page/view.php?id=744455
 
-
-papers:
-
-\cite{AIRisksAndPrinciples}
-\cite{AISocialEthicalBiasPrivacyAccountability}
-\cite{LLMSocialEthicalRisks}
-
-\cite{legislatingRekognition}
-\cite{facialRecognitionEthicsSurvay}
-\cite{rekognitionOverview} -- done 
-case study:
-
-facial recognition biases and inaccuracies particularly in identifying individuals from different demographic groups
-
-2018  (Amazon's facial recognition tool "Rekognition") had been used by law enforcement agencies. 
 
 ---
 
@@ -219,7 +201,7 @@ criminals, of which thirteen were persons of colour \cite{facialRecognitionBias}
 While the intentions of operators and machine learning professionals may be for social good it is evident that without careful consideration machine learning systems may not be aligned with our goals\cite{AIAllignemnt}. In the context of FRT, it is clear there had been several compounding failures. Firstly it can be easy to believe that your ML system is unbiased and avoid responsibility when your algorithms are generalised and independent of any particular protected characteristic. However, vendors such as Amazon provide these ML systems pre-trained as a service. For ML models their training data can be the largest determinant of their functionality. 
 
 \begin{quote}
-  BIAS IN BIAS OUT \cite{facialRecognitionBias}
+  Bias in, Bias out \cite{facialRecognitionBias}
 \end{quote}
 
 \begin{quote}
@@ -227,16 +209,25 @@ While the intentions of operators and machine learning professionals may be for 
 the faces misgendered were individuals who were considered darker individuals\cite{facialRecognitionBias}
 \end{quote} 
 
-Biases in training datasets propagate to the decisions made by the model trained on it. These biases in the error rate are believed to result in the misrepresentation of people of colour in these training datasets. Gathering more data has been long considered the goal in ML for creating better models, particularly large language models which have been directly trained on large corpora of text from the internet. However, it's my belief that fair and equal representation of all protected characteristics should be a top priority even at the expense of discarding data. 
+Biases in training datasets propagate to the decisions made by the model trained on it. These biases in the error rate are believed to result in the misrepresentation of people of colour in these training datasets. Gathering more data has been long considered the goal in ML for creating better models, particularly large language models which have been directly trained on large corpora of text from the internet\cite{LLMSocialEthicalRisks}. However, it's my belief that fair and equal representation of all protected characteristics should be a top priority even at the expense of discarding data.
 
-While these 
+While reducing biases in training is incredibly important and achievable, with datasets at scale it may be impractical or impossible to truly remove all bias. We must acknowledge and account for the shortcomings of ML systems. This is especially important where AI systems make decisions that impact people. The FBI's system involved human oversight and intervention and yet people of colour were still disproportionately harmed. In fact in another example even a truly unbiased technology, automatic number plate recognition (ANPR) has been found to cause a disparate impact on people of color \cite{anprAccountability}. The implicit biases of the operators resulted in this technology being used in higher frequency in Black and Latinx communities \cite{anprAccountability}\cite{facialRecognitionBias}.
 
-
-// implicit bias 
+While the human factor of implicit biases makes them harder to tackle systematically, I believe several steps can be taken in machine learning to mitigate the aforementioned issues:
+\begin{itemize}
+  \item Unbiased systems as default, where protected characteristic data is not necessary or avoidable it should be removed or masked where possible
+  \item Active training management, ensuring equality in training datasets that include people's protected characteristics. This may be achieved by sampling and further models to categorise data. 
+  \item Algorithmic bias awareness, trained ML systems must have their bias quantified before their use and stakeholders must be made aware of the limitations of the system before it is approved.
+  \item Implicit bias awareness, operators of ML systems should receive continuous training and feedback to ensure that they are aware of their own implicit biases and the impact of their decisions.
+  \item Transparency and accountability: decision-makers at every stage of ML systems should be transparent about the decisions that they have made and accountable to the people that these decisions affect.
+\end{itemize}
 
 
 // what can be done to mitigate these issues
 
+
+\cite{AIRisksAndPrinciples}
+\cite{AISocialEthicalBiasPrivacyAccountability}
 
 // how does this relate to my project
 
