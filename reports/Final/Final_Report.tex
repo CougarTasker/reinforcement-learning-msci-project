@@ -181,11 +181,64 @@ The main display on the first tab visualises the current state of the main simul
 
 At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
 
-\section{TODO - Professional Issues}
+\chapter{TODO - Professional Issues In Machine Learning}
+
+1000 words
+
+describe an example from the public domain of what can happen when professional issues are not properly addressed;
 
 
 https://moodle.royalholloway.ac.uk/mod/page/view.php?id=744455
 
+
+papers:
+
+\cite{AIRisksAndPrinciples}
+\cite{AISocialEthicalBiasPrivacyAccountability}
+\cite{LLMSocialEthicalRisks}
+
+\cite{legislatingRekognition}
+\cite{facialRecognitionEthicsSurvay}
+\cite{rekognitionOverview} -- done 
+case study:
+
+facial recognition biases and inaccuracies particularly in identifying individuals from different demographic groups
+
+2018  (Amazon's facial recognition tool "Rekognition") had been used by law enforcement agencies. 
+
+---
+
+
+Machine learning programs and techniques, as explored in this project, possess immense potential for social benefit when managed judiciously, but they also risk significant social and ethical consequences. One prominent example of this dichotomy was \say{Rekognition}, Amazon's facial recognition tool (FRT)\cite{legislatingOG}. Rekognition is a cloud-based deep-learning application which can identify people, activities, objects, and more \cite{rekognitionOverview}. This powerful tool can bring societal benefit one example is an application that notifies professionals who are in high-risk sectors such as healthcare or construction\cite{rekognitionOverview}. Rekognition can make this possible by detecting Personal Protective Equipment. 
+
+Recent developments in AI have spurred many companies such as IBM, Microsoft, and Amazon to release FRTs, making identification more convenient than ever \cite{facialRecognitionEthicsSurvay}. While there have been many commercial applications, the most notable example from a moral, ethical and social standpoint was the use of Rekognition by US law enforcement agencies. From 2018-2020 the FBI trailed Rekognition to assist in searching video footage collected during investigations \cite{facialRecognitionBias}. Other agencies such as the DEA use FRTs to help identify criminals captured on surveillance cameras \cite{facialRecognitionBias}. 
+
+So why is this significant? Unfortunately, Rekognition's social impact has not been wholly positive; it has tended to falsely identify women and people of colour as criminals to a disproportionate degree\cite{legislatingRekognition}. Moreover, it falsely identified twenty-eight NFL players as
+criminals, of which thirteen were persons of colour \cite{facialRecognitionBias}. While human oversight may be used, it is not enough. These errors have already led to serious harm, and the significant bias to race and sex is discriminatory and unacceptable.
+
+While the intentions of operators and machine learning professionals may be for social good it is evident that without careful consideration machine learning systems may not be aligned with our goals\cite{AIAllignemnt}. In the context of FRT, it is clear there had been several compounding failures. Firstly it can be easy to believe that your ML system is unbiased and avoid responsibility when your algorithms are generalised and independent of any particular protected characteristic. However, vendors such as Amazon provide these ML systems pre-trained as a service. For ML models their training data can be the largest determinant of their functionality. 
+
+\begin{quote}
+  BIAS IN BIAS OUT \cite{facialRecognitionBias}
+\end{quote}
+
+\begin{quote}
+  For Microsoft, almost ninety-four percent of
+the faces misgendered were individuals who were considered darker individuals\cite{facialRecognitionBias}
+\end{quote} 
+
+Biases in training datasets propagate to the decisions made by the model trained on it. These biases in the error rate are believed to result in the misrepresentation of people of colour in these training datasets. Gathering more data has been long considered the goal in ML for creating better models, particularly large language models which have been directly trained on large corpora of text from the internet. However, it's my belief that fair and equal representation of all protected characteristics should be a top priority even at the expense of discarding data. 
+
+While these 
+
+
+// implicit bias 
+
+
+// what can be done to mitigate these issues
+
+
+// how does this relate to my project
 
 % \chapter{Timeline}
 
