@@ -21,6 +21,9 @@
 - [Week 19 (22/01/24)](#week-19-220124)
 - [Week 20 (29/01/24)](#week-20-290124)
 - [Week 21 (05/02/24)](#week-21-050224)
+- [Week 22 (12/02/24)](#week-22-120224)
+- [Week 23 (19/02/24)](#week-23-190224)
+- [Week 25 (04/03/24)](#week-25-040324)
 
 <!-- omit in toc -->
 ## Weeks
@@ -225,3 +228,32 @@ This week was spent on a major overhaul to the configuration system to support h
    - reworked top level entities to make it easier to inject different parameters
    - separated out top level entities to manage there complexity and to ease in their use separate from the main learning system
  - (Sat 10) Fixed teething issues, updated tests 
+
+### Week 22 (12/02/24)
+
+ - (Mon 12) Created UI for displaying the effect of hyper-parameters
+   - added control to pick a parameter to start report generation
+   - added progress feedback during the report generation
+ - (Tue 13) 
+   - Bug fixes
+   - added epsilon discounting to the epsilon greedy strategy, so that it can compete more fairly with UCB
+ - (Wed 14) Added hyper-parameter random search, to find the best parameters over time.
+ - (Thu 15) Created display for the random search results
+  
+### Week 23 (19/02/24)
+
+ - (Wed 21) 
+   - added functionality for saving graphs to disk for use in the report or otherwise.
+   - Researched the MF-BPI algorithm
+ - (Thu 22) Adapted the MF-BPI algorithm to work with my application 
+ - (Fri 23) Attended third term-two supervisor meeting 
+   - continued to analyse MF-BPI algorithm and better integrate it with the application.
+
+### Week 25 (04/03/24)
+
+ - (Wed 06) Started working on final report
+   - scaffolded the structure of the final report
+   - started researching professional issues found case study 
+ - (Thu 07) Worked on professional issues section
+   - wrote introduction and found sources 
+ - (Fri 08) Completed first draft of professional issues section
