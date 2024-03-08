@@ -181,17 +181,9 @@ The main display on the first tab visualises the current state of the main simul
 
 At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
 
-\chapter{TODO - Professional Issues In Machine Learning}
+\chapter{Professional Issues In Machine Learning}
 
-1000 words
-
-https://moodle.royalholloway.ac.uk/mod/page/view.php?id=744455
-
-
----
-
-
-Machine learning programs and techniques, as explored in this project, possess immense potential for social benefit when managed judiciously, but they also risk significant social and ethical consequences. One prominent example of this dichotomy was \say{Rekognition}, Amazon's facial recognition tool (FRT)\cite{legislatingOG}. Rekognition is a cloud-based deep-learning application which can identify people, activities, objects, and more \cite{rekognitionOverview}. This powerful tool can bring societal benefit one example is an application that notifies professionals who are in high-risk sectors such as healthcare or construction\cite{rekognitionOverview}. Rekognition can make this possible by detecting Personal Protective Equipment. 
+Machine learning programs and techniques, as explored in this project, possess immense potential for social benefit when managed judiciously, but they also risk significant social and ethical consequences\cite{AISocialImpactAndAccountability}. One concern is the ability of ML systems to reinforce and perpetuate societal biases in their decisions\cite{AISocialImpactAndAccountability}. One prominent example of this dichotomy of potential was \say{Rekognition}, Amazon's facial recognition tool (FRT)\cite{legislatingOG}. Rekognition is a cloud-based deep-learning application which can identify people, activities, objects, and more \cite{rekognitionOverview}. This powerful tool can bring societal benefit one example is an application that notifies professionals who are in high-risk sectors such as healthcare or construction\cite{rekognitionOverview}. Rekognition can make this possible by detecting Personal Protective Equipment. 
 
 Recent developments in AI have spurred many companies such as IBM, Microsoft, and Amazon to release FRTs, making identification more convenient than ever \cite{facialRecognitionEthicsSurvay}. While there have been many commercial applications, the most notable example from a moral, ethical and social standpoint was the use of Rekognition by US law enforcement agencies. From 2018-2020 the FBI trailed Rekognition to assist in searching video footage collected during investigations \cite{facialRecognitionBias}. Other agencies such as the DEA use FRTs to help identify criminals captured on surveillance cameras \cite{facialRecognitionBias}. 
 
@@ -209,27 +201,26 @@ While the intentions of operators and machine learning professionals may be for 
 the faces misgendered were individuals who were considered darker individuals\cite{facialRecognitionBias}
 \end{quote} 
 
-Biases in training datasets propagate to the decisions made by the model trained on it. These biases in the error rate are believed to result in the misrepresentation of people of colour in these training datasets. Gathering more data has been long considered the goal in ML for creating better models, particularly large language models which have been directly trained on large corpora of text from the internet\cite{LLMSocialEthicalRisks}. However, it's my belief that fair and equal representation of all protected characteristics should be a top priority even at the expense of discarding data.
+Biases in training datasets propagate to the decisions made by the model trained on it. These biases in the error rate are believed to be a consequence of an over-representation of some social identities in the training data\cite{LLMSocialEthicalRisks}. Gathering more data has been long considered the goal in ML for creating better models, particularly large language models which have been directly trained on large corpora of text from the internet\cite{LLMSocialEthicalRisks}. However, it's my belief that fair and equal representation of all protected characteristics should be a top priority even at the expense of discarding data.
 
-While reducing biases in training is incredibly important and achievable, with datasets at scale it may be impractical or impossible to truly remove all bias. We must acknowledge and account for the shortcomings of ML systems. This is especially important where AI systems make decisions that impact people. The FBI's system involved human oversight and intervention and yet people of colour were still disproportionately harmed. In fact in another example even a truly unbiased technology, automatic number plate recognition (ANPR) has been found to cause a disparate impact on people of color \cite{anprAccountability}. The implicit biases of the operators resulted in this technology being used in higher frequency in Black and Latinx communities \cite{anprAccountability}\cite{facialRecognitionBias}.
+\newpage
+While reducing biases in training is incredibly important and achievable, with datasets at scale it may be impractical or impossible to truly remove all bias. We must acknowledge and account for the shortcomings of ML systems. This is especially important where AI systems make decisions that impact people. The FBI's system involved human oversight and intervention and yet people of colour were still disproportionately harmed. In fact, in another example even a truly unbiased technology, automatic number plate recognition (ANPR) has been found to cause a disparate impact on people of colour \cite{anprAccountability}. The implicit biases of the operators resulted in this technology being used in higher frequency in Black and Latinx communities \cite{anprAccountability}\cite{facialRecognitionBias}.
 
-While the human factor of implicit biases makes them harder to tackle systematically, I believe several steps can be taken in machine learning to mitigate the aforementioned issues:
+While the human factor of implicit biases makes them harder to tackle systematically, I believe several steps can be taken in machine learning to reduce  the aforementioned issues:
 \begin{itemize}
-  \item Unbiased systems as default, where protected characteristic data is not necessary or avoidable it should be removed or masked where possible
-  \item Active training management, ensuring equality in training datasets that include people's protected characteristics. This may be achieved by sampling and further models to categorise data. 
-  \item Algorithmic bias awareness, trained ML systems must have their bias quantified before their use and stakeholders must be made aware of the limitations of the system before it is approved.
-  \item Implicit bias awareness, operators of ML systems should receive continuous training and feedback to ensure that they are aware of their own implicit biases and the impact of their decisions.
-  \item Transparency and accountability: decision-makers at every stage of ML systems should be transparent about the decisions that they have made and accountable to the people that these decisions affect.
+  \item Unbiased systems as default, where using protected characteristic data is not necessary or avoidable, then this information should be removed where possible \cite{AIRisksAndPrinciples}. This may be possible to achieve with redaction or masking in some contexts. 
+  \item Active training management, ensuring equality in training datasets that include people's protected characteristics. This may be achieved by sampling and further models to categorise data\cite{AIRisksAndPrinciples}. 
+  \item Algorithmic bias awareness, trained ML systems must have their bias quantified before their use and stakeholders must be made aware of the limitations of the system before it is approved\cite{AIRisksAndPrinciples}.
+  \item Implicit bias awareness, operators of ML systems should receive continuous training and feedback to ensure that they are aware of their own implicit biases and the impact of their decisions\cite{facialRecognitionBias}.
+  \item Transparency and accountability: decision-makers at every stage of ML systems should be transparent about the decisions that they have made and accountable to the people that these decisions affect\cite{AIRisksAndPrinciples}.
 \end{itemize}
+AI must be regulated in a fashion where we no longer perpetuate existing or create new social harms while not discouraging the potential societal benefits that it may bring\cite{AIRisksAndPrinciples}. 
 
 
-// what can be done to mitigate these issues
+In conclusion, this chapter has covered the relationships between machine learning applications and society from the perspective of the Rekognition case study. 
+This case study is one of many, that may highlight similar or different challenges and rewards that AI may bring. Hopefully, this review has provided a focused discussion of some of the core topics. The application in this project is exploratory and operates in simulated environments, and its actions have no direct consequences on anyone, in this sense, I believe it is insulated from bias and causing this type of social harm. 
 
 
-\cite{AIRisksAndPrinciples}
-\cite{AISocialEthicalBiasPrivacyAccountability}
-
-// how does this relate to my project
 
 % \chapter{Timeline}
 
