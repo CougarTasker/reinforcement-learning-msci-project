@@ -70,14 +70,14 @@ Signature: {\calligra \LARGE \studentname}
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%
-%%% Introduction
+%%% Introduction 
 
 \chapter{TODO - Introduction}
 
 
 
 
-\section{TODO (rework) - Aims and Objectives}
+\section{TODO (rework + extend) - Aims and Objectives}
 \begin{itemize}
   \item Efficient Navigation: The agent must autonomously navigate a grid world while making decisions to optimise rewards. The robot should learn to prioritise efficient paths.
   \item Balancing Constraints: The agent must balance collecting resources with constraints such as energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
@@ -427,7 +427,7 @@ Q-learning uses these observations to update its estimates with this formula:
 
 This formula can be thought of as interpolating the old estimate at the old state $Q(S_{t-1}, A_{t-1})$ with this new observed Q-value $R_t + \gamma \max_a(Q(S_t, a))$. When $\alpha = 1$, this formula replaces the existing value with the new observed Q-value.  When $\alpha = 0$, the observation is ignored like it never happened. The formula $R_t + \gamma \max_a(Q(S_t, a))$ calculates the new observed Q-value based upon the same principle as value iteration; the implicit policy is to pick the best possible action. 
 
-\subsection{Implementation conditions}
+\subsection{Implementation conditions}\label{sect:impl-conditions}
 
 Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal q values $q_\ast$ provided the behaviour function visits all state-action pairs infinitely often. In practice, these q-values do not need to be perfect to derive an optimal policy. However, it can still take many visits to converge enough. Many observations may be necessary to build up a picture of the probability distribution and isolate noise. However, another reason for repeated observations is that the behaviour policy moves the agent forward in time, but the Q-learning table updates the last state. This conflicts as information propagates in the opposite direction of the updates that spread it. For example, suppose a sequence of $n$ states-actions have no reward but lead to some large reward at the end. as the behaviour completes these actions. In that case, only the last action will be updated to reflect the potential value, and every time the sequence is repeated, some of the value will propagate back one step. Many Q-learning implementations like ours will replay recent observations in reverse order to improve this performance. This is called the action-replay process (ARP). Replaying observations can be particularly effective when getting new observations is costly or slow, allowing for quicker convergence.
 
@@ -442,15 +442,45 @@ Picking the behavioural policy is important; it must balance exploring and gaini
 
 Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
 
-\chapter{TODO - Exploration Strategy Effectiveness}
+\chapter{Exploration Strategy Effectiveness}
 
-% introduction into what exploration strategies are 
+Q-learning is an off-policy process, which means that the policy that the policy that it is learning and improving is not necessarily the same as the policy it is following during exploration. By this, the actions chosen by a Q-learning agent may be independent of its current beliefs of the values of each action. Off-policy learning has several advantages, it may explore more fairly and completely than an on-policy approach. An on-policy approach may be incentivised to explore thoroughly if its initial estimates are particularly optimistic. However, in a stochastic environment where rewards are random with a large degree of spread, it may still be difficult for an on-policy technique to properly assess the rewards before falling into an in-optimal pattern.  
+
+On-policy reinforcement learning algorithms such as SARSA do have many advantages in deep reinforcement learning (DRL). In DRL a deep artificial neural network is used to estimate the Q-values\cite{deepRLOverview}. DRL can help generalise reinforcement learning to larger state spaces than is possible with tabular methods. Typically in this context, fully off-policy methods do not perform as well as on-policy or hybrid methods \cite{deepOnVsOffPolicy}. since off-policy methods suffer from instability.
+
+In this project, I have focused on the off-policy Q-learning method. This chapter details the performance and effects of different exploration strategies. An exploration strategy is the policy that the agent follows during training as opposed to the learnt policy. This exploration strategy may be any method to select an action, however, to maintain the guarantees of convergence this policy must reach all states infinitely often (\ref{sect:impl-conditions}). While a random action section, a random walk, does meet the convergence criteria it is not efficient in terms of rewards received or information gained. As an improvement in these measures, more sophisticated strategies have been developed that take into account many factors.
+
+To assess the effectiveness of exploration strategies the optimal policy sets a benchmark that there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. The second measure is called best policy identification (BPI) this relates to the number of samples taken to identify a nearly optimal policy\cite{modelFree}. Reducing the BPI will in general reduce the regret. I believe with a suitably large time horizon, that the effects of reducing regret will correspond to a reduction in BPI since the benefits of an optimal policy will eventually pay off the costs associated with finding it. For consistency, this project will focus on regret minimisation.
+
 
 \section{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy}
 
+The $\varepsilon$-Greedy is the most straightforward strategy implemented in this project and it acts as a good baseline. In its basic form, there is a parameter $\varepsilon$ that controls the probability of the agent acting in two modes. The first and typically most common mode is where the agent selects the best action based on the current Q-estimates. In this first mode, the agent is essentially operating in an on-policy manner. In the second mode, the agent selects an action at random \ref{sect:impl-conditions}.
+
+This epsilon parameter controls the ratio between the agent's exploration and exploitation. Having high exploitation can garner more rewards in the short term but this has a large opportunity cost of not finding potentially lucrative strategies. On the other hand, if you are already following an optimal policy an exploratory action would not be optimal, and in the case of the cliff environment, it can be potentially devastating. In the beginning, higher exploration may be necessary to avoid local minima, but once the policy has started to converge higher exploitation can be more rewarding. To address this issue the $\varepsilon$ parameter can be dynamically adjusted during training. This project implements the traditional discounting with a fixed hyperparameter however more advanced reward-based techniques have been found more successful\cite{rewardEpsilonDecay}.
+
 \section{TODO - Upper Confidence Bound}
 
+The upper confidence bound (UCB) exploration strategy uses the current Q value estimates to direct its decisions however instead of using randomness to dictate exploration, it uses an informed method. UCB prioritises actions that have the highest potential for reward. The potential of value is determined from two factors the current value estimate and a measure of confidence in the value estimate. The key idea behind this confidence measure is that it relates to the number of samples that have been made of the state action\cite{sutton2018reinforcement}. This relationship is defined in the following rule:
+
+
+\begin{equation}
+  A_t \doteq \underset{a}{\operatorname{argmax}}\left [Q_t(a)+ c\sqrt{\frac{\ln t}{N_t(a)}} \ \right ]
+  \label{eqn:ucb}
+\end{equation}
+\cite{sutton2018reinforcement}
+
+where $A_t$ represents the action chosen at time $t$, and $N_t(a)$ represents the number of samples of action $a$ have been taken at the current time. 
+
+
+In essence, this equation is optimistic as it will never underestimate or explore an action. It also provides a natural balance between exploration and exploitation, Without a discount factor this strategy naturally tapers off exploration over time. Furthermore instead of even exploration like $\varepsilon$-Greedy; UCB avoids redundant exploration in areas that have already been covered. However, UCB is not without hyperparameters. $c$ controls the exploration balance; higher values encourage more exploration.
+
 \section{TODO - Model-Free Best Policy Identification}
+
+Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over other exploration strategies such as UCB \cite{modelFree}. 
+
+
+
 
 \section{TODO - Hyperparameter Selection}
 
