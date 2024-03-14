@@ -473,22 +473,42 @@ The upper confidence bound (UCB) exploration strategy uses the current Q value e
 where $A_t$ represents the action chosen at time $t$, and $N_t(a)$ represents the number of samples of action $a$ have been taken at the current time. 
 
 
-In essence, this equation is optimistic as it will never underestimate or explore an action. It also provides a natural balance between exploration and exploitation, Without a discount factor this strategy naturally tapers off exploration over time. Furthermore instead of even exploration like $\varepsilon$-Greedy; UCB avoids redundant exploration in areas that have already been covered. However, UCB is not without hyperparameters. $c$ controls the exploration balance; higher values encourage more exploration.
+In essence, this equation is optimistic as it will never underestimate or explore an action. It also provides a natural balance between exploration and exploitation, Without a discount factor this strategy naturally tapers off exploration over time. Furthermore instead of even exploration like $\varepsilon$-Greedy; UCB avoids redundant exploration in areas that have already been covered. However, UCB is not without hyper-parameters. $c$ controls the exploration balance; higher values encourage more exploration.
 
 \section{TODO - Model-Free Best Policy Identification}
 
-Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over other exploration strategies such as UCB \cite{modelFree}. 
-
-
+Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over its contemporaries such as UCB \cite{modelFree}. This exploration strategy uses an allocation vector $\omega$ that distributes the search effort across the state-action space. The MF-BPI algorithms aim to optimise this allocation vector for the BPI metric. To handle the uncertainty in the estimates MF-BPI maintains an ensemble of value tables to measure their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration.
 
 
 \section{TODO - Hyperparameter Selection}
 
+Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. These hyper-parameters can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the environment that it operates on so they are not transferable and must be found through exploration. Following this first issue, the cliff dynamics have been used for comparison unless stated otherwise. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\epsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
+
+
+
+For this reason, the application contains multiple systems for finding the appropriate values for these hyper-parameters. Firstly the hyper-parameters are configurable in the application's main configuration file. This configuration drives the parameters used by the main simulation and the defaults used in the report system. The hyper-parameter report system runs multiple simulations in the background and collates their results. This system allows the user to visualise and compare the effects of varying each parameter individually. 
+
+
+This report system overcomes the dimensionality visualisation issue by displaying a single axis-aligned slice of the space at a time. This approach is great for isolating the effects of a single parameter and fine-tuning parameters. Unfortunately, this approach cannot display the effects of any parameter combinations that do not coincide along one of the hyperparameter axes. Due to this limitation, the visualisations may display a local minimum and completely miss a global minimum. 
+
+A hyper-parameter search system is implemented to find the best baseline for fair comparisons. There are a few popular search strategies for hyperparameter optimization such as grid search, random search, and genetic algorithms \cite{searchStrategies}. Grid-search is a very popular approach for its advantages such as simplicity, uniformity and parallelisation \cite{searchStrategies}. however, it suffers from the curse of dimensionality\cite{searchStrategies} so it was not suitable for this application. Instead, the random search strategy has been implemented. This strategy is highly amenable to parallelisation, A number of workers are used and they pick the parameters at random and run simulations independently. In this manner, the random search strategy does not require orchestration of the parameters and is resumable, synchronisation is only necessary when collating results to avoid race conditions.
+
+\subsection{TODO - Initial Optimism}
+
+over-optimistic values causing excessive exploration, and pessimistic initial values causing the development of superstitions.
+
+negative values stopping learning
+
+\subsection{TODO - Learning Rate}
+
+stochastic vs non-stochastic dynamics
+
+\subsection{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}
 
 epsilon greedy on policy vs off policy
 
 
-over-optimistic values causing excessive exploration, and pessimistic initial values causing the development of superstitions.
+
 
 
 \section{TODO - Conclusions}
