@@ -135,7 +135,7 @@ class IconLoader(object):
     cell_entity_mapping = {
         CellEntity.agent: Icon.robot,
         CellEntity.goal: Icon.flag,
-        CellEntity.blocked: Icon.no_entry,
+        CellEntity.warning: Icon.no_entry,
         CellEntity.empty: Icon.empty,
     }
 

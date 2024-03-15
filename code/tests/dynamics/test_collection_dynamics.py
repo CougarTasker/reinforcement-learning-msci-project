@@ -1,6 +1,5 @@
 from itertools import cycle
 
-import numpy as np
 from pytest import fixture
 
 from src.model.dynamics.actions import Action
@@ -34,8 +33,8 @@ def dynamics(mocker):
 
 
 def test_fixture(dynamics: CollectionDynamics):
-    assert dynamics.grid_world.width == MockGridWorldConfig().width()
-    assert dynamics.grid_world.height == MockGridWorldConfig().height()
+    assert dynamics.grid_world.width == MockGridWorldConfig().width
+    assert dynamics.grid_world.height == MockGridWorldConfig().height
     test_gw = GridWorld(1, 1)
     assert test_gw.random_in_bounds_cell() == test_goal_a
     assert test_gw.random_in_bounds_cell() == test_goal_b
@@ -44,42 +43,46 @@ def test_fixture(dynamics: CollectionDynamics):
 def test_initial_state(dynamics: CollectionDynamics):
     start = dynamics.initial_state()
 
-    assert start.agent_location == MockGridWorldConfig().agent_location()
-    assert start.agent_energy == MockGridWorldConfig().initial_energy()
-    assert len(start.entities) == MockGridWorldConfig().entity_count()
+    assert start.agent_location == MockGridWorldConfig().agent_location
+    assert len(start.entities) == MockGridWorldConfig().entity_count
 
 
 def test_dynamics(dynamics: CollectionDynamics):
     start = dynamics.initial_state()
 
+    movement_reward = -1
+    goal_reward = 10
+
     start_down = dynamics.next(start, Action.down)
     assert start_down[0].agent_location == (2, 2)
-    assert start_down[1] == 0
+    assert start_down[1] == movement_reward
 
     start_up = dynamics.next(start, Action.up)
     assert start_up[0].agent_location == (2, 0)
-    assert start_up[1] == 0
+    assert start_up[1] == movement_reward
 
     start_left = dynamics.next(start, Action.left)
     assert start_left[0].agent_location == (1, 1)
-    assert start_left[1] == 0
+    assert start_left[1] == movement_reward
 
     start_right = dynamics.next(start, Action.right)
     assert start_right[0] == start
-    assert start_right[1] == 0
+    assert start_right[1] == movement_reward
 
     # goal a
 
     goal_a_state = dynamics.next(start_left[0], Action.down)
     assert goal_a_state[0].agent_location == test_goal_a
-    assert len(goal_a_state[0].entities) == 1
-    assert goal_a_state[1] == 1
+    assert len(goal_a_state[0].entities) == 2
+    assert goal_a_state[1] == movement_reward
 
     # test loop
 
-    top_right_with_goal = dynamics.next(goal_a_state[0], Action.right)[0]
-    assert top_right_with_goal != start_down[0]
-    assert top_right_with_goal.agent_location == start_down[0].agent_location
+    top_right_with_goal = dynamics.next(goal_a_state[0], Action.right)
+    assert top_right_with_goal[0] != start_down[0]
+    assert len(top_right_with_goal[0].entities) == 1
+    assert top_right_with_goal[0].agent_location == start_down[0].agent_location
+    assert top_right_with_goal[1] == goal_reward
 
     # get to goal b
     start_left_with_goal = dynamics.next(goal_a_state[0], Action.up)
@@ -88,24 +91,23 @@ def test_dynamics(dynamics: CollectionDynamics):
     assert (
         start_left_with_goal[0].agent_location == start_left[0].agent_location
     )
-    assert start_left_with_goal[1] == 0
+    assert start_left_with_goal[1] == goal_reward
 
     goal_b_state = dynamics.next(
         dynamics.next(start_left_with_goal[0], Action.left)[0], Action.up
-    )
+    )[0]
+
+    leave_goal_state = dynamics.next(goal_b_state, Action.up)
 
     # test final loops to beginning
-    assert goal_b_state[0] == start
-    assert goal_b_state[1] == 1
+    assert leave_goal_state[0] == start
+    assert leave_goal_state[1] == goal_reward
 
-
-
-    
 
 def expected_state_count():
     state_grid = 3 * 3
     # positions without collecting + collect a first + collect b first
-    return state_grid - 2 + (state_grid - 1) * 2
+    return state_grid * 3
 
 
 def test_state_count(dynamics: CollectionDynamics):

@@ -1,17 +1,27 @@
-from ..config.agent_section import AgentConfig
+from src.model.hyperparameters.base_parameter_strategy import (
+    BaseHyperParameterStrategy,
+)
+from src.model.transition_information import TransitionInformation
+
 from ..dynamics.actions import Action
 
 
 class BaseAgent(object):
     """Provides the common base for different learning agents."""
 
-    def __init__(self, config: AgentConfig) -> None:
+    def __init__(
+        self, hyper_parameters: BaseHyperParameterStrategy, max_state_count: int
+    ) -> None:
         """Initialise an agent.
 
         Args:
-            config (AgentConfig): the configuration for the agent.
+            hyper_parameters (BaseHyperParameterStrategy): the hyper parameters
+                the agent should use.
+            max_state_count (int): maximum number of states this agent may need
+                to handle with.
         """
-        self.config = config
+        self.hyper_parameters = hyper_parameters
+        self.max_state_count = max_state_count
 
     def evaluate_policy(self, state: int) -> Action:
         """Decide on the action this agent would take in a given state.
@@ -30,19 +40,13 @@ class BaseAgent(object):
         return Action.down
 
     def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
+        self, transition_information: TransitionInformation
     ) -> None:
         """Provide the agent with the information from a transition.
 
         Args:
-            previous_state (int): the state before the action was taken
-            previous_action (Action): the action that was taken.
-            new_state (int): The resulting state after the action has been taken
-            reward (float): the reward for performing this action
+            transition_information (TransitionInformation): The transition
+                information.
 
         Raises:
             NotImplementedError: If this method has not been overridden by

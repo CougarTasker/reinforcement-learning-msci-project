@@ -9,6 +9,7 @@
     ],
     "cSpell.language": "en-GB",
     "cSpell.words": [
+        "arange",
         "astype",
         "backpropagation",
         "chratrisitcs",
@@ -22,7 +23,10 @@
         "finfo",
         "flaticon",
         "fromarray",
+        "getchannel",
+        "kbar",
         "linters",
+        "MFBPI",
         "ndarray",
         "njit",
         "nopython",
@@ -88,5 +92,6 @@
             "language": "latex",
             "scheme": "file"
         }
-    ]
+    ],
+    "python.REPL.enableREPLSmartSend": false
 }

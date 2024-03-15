@@ -1,1 +1,4 @@
-"""This package encapsulates all information about a state in one place."""
+"""This package contains functionality around representing a state.
+
+This representation is necessary for the view so the format must be serialisable
+"""
