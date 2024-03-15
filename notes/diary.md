@@ -24,6 +24,7 @@
 - [Week 22 (12/02/24)](#week-22-120224)
 - [Week 23 (19/02/24)](#week-23-190224)
 - [Week 25 (04/03/24)](#week-25-040324)
+- [Week 26 (11/03/24)](#week-26-110324)
 
 <!-- omit in toc -->
 ## Weeks
@@ -257,3 +258,16 @@ This week was spent on a major overhaul to the configuration system to support h
  - (Thu 07) Worked on professional issues section
    - wrote introduction and found sources 
  - (Fri 08) Completed first draft of professional issues section
+
+### Week 26 (11/03/24)
+
+ - (Tue 12) Started writing the exploration strategy section
+   - added an introduction section
+ - (Wed 13) Started descriptions for each of the exploration strategies
+ - (Thu 14) Started hyper-parameter section
+   - created introduction to hyper parameter tuning
+   - final tweaks to graph generation 
+   - added hyper parameter graphs to the report 
+ - (Fri 15)
+   - Attended forth term-two supervisor meeting
+   - Completed first draft of the hyper parameter section. 
