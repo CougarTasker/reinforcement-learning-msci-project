@@ -510,9 +510,13 @@ Since the performance is highly dependent on the environment; the same cliff dyn
   \caption{\label{fig:inital-optimism}}
 \end{figure}
 
-over-optimistic values causing excessive exploration, and pessimistic initial values causing the development of superstitions.
 
-negative values stopping learning
+The initial optimism hyper-parameter determines the initial Q-value estimates. In essence, this is the agent's interpretation of the value of state actions before the agent has gained any experience of that state action. Since Q-learning is a bootstrapping method depending on parameters such as the learning rate, the discount factor and the rewards provided initial biases may persist through more or less updates. This can be an opportunity to provide information a-priori, value tables from previous agents can provide a head-start \cite{deathTransfer}. While realistic initial estimates are beneficial, figure~\ref{fig:inital-optimism} shows how excessive values can be cost performance. 
+
+When the initial estimate is larger than the actual value of each state this is optimistic. Optimism encourages the agent to try unknown states over known states since the optimistic initial values will be strictly better than the more realistic derived value. On the other hand, pessimistic values act oppositely, discouraging exploration as known states seem better than unknown states. You can see this demonstrated in figure~\ref{fig:inital-optimism}, in the pessimistic region (left of 100) the variability is higher because the agent relies entirely on the random forced exploration. 
+
+Increasing optimism gradually decreases performance as the agent over-explores and neglects exploitation. The effect is similar for pessimism however the performance hits a cliff after the initial estimates become negative. At this point, the agent gets stuck repeatedly choosing the same state or states. I believe this may be a consequence of several factors. Firstly the other parameters aren't configured for this degree of pessimism, so the agent can't reach the goal based on forced exploration alone, and the pessimism stops it from exploring enough to find it. Secondly, the discount factor works in reverse when all values are negative it encourages taking longer. Finally, Q-learning's maximisation bias may be inhibiting its ability to propagate these negative updates correctly \cite{doubleQLearning}\cite{sutton2018reinforcement}. 
+
 
 \subsection{TODO - Learning Rate \texorpdfstring{$\alpha$}{Lg}}
 
@@ -523,6 +527,8 @@ negative values stopping learning
   
   \caption{\label{fig:learning-rate}}
 \end{figure}
+
+The learning rate $alpha$ is another hyperparameter of Q-learning\ref{eqn:q-learning-update-formula}. This parameter controls how much each new TD estimate will update the current estimates. For stochastic environments getting this value right is crucial, If set too high the variability from the individual observations could lead to instability and the Q-table may not even converge at all. The cliff dynamics that are used in this demonstration are completely deterministic. Figure~\ref {fig:learning-rate} shows a plateau from learning rates $0.2$ to $1$. This is under 
 
 stochastic vs non-stochastic dynamics
 
