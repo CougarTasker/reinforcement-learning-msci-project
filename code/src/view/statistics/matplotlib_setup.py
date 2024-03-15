@@ -30,6 +30,7 @@ class ThemeContextManager(object):
         match desired_context:
             case ThemeContext.application:
                 sns.set_theme(
+                    context="notebook",
                     style="darkgrid",
                     rc={
                         "axes.edgecolor": "white",
@@ -41,11 +42,19 @@ class ThemeContextManager(object):
                         "xtick.color": "white",
                         "ytick.color": "white",
                         "figure.constrained_layout.use": True,
+                        "grid.linewidth": 2,
                     },
                 )
-                sns.set_context("notebook", rc={"grid.linewidth": 2})
             case ThemeContext.saving:
-                sns.set_theme(style="darkgrid")
+                sns.set_theme(
+                    context="notebook",
+                    style="darkgrid",
+                    rc={
+                        "font.family": "serif",
+                        "font.serif": "cmr10",
+                        "axes.formatter.use_mathtext": True,
+                    },
+                )
 
 
 def create_canvas(figure: Figure) -> FigureCanvasQTAgg:

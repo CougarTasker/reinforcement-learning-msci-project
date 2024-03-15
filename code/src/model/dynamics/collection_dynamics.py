@@ -1,3 +1,5 @@
+from ctypes import c_size_t
+from multiprocessing import Value
 from time import time
 from typing import Optional, Set, Tuple
 
@@ -17,7 +19,7 @@ spawn_positions_type = Set[Tuple[int, int]]
 class CollectionDynamics(BaseDynamics):
     """Simple Dynamics where the agent can move to cells to collect goals."""
 
-    location_seed = int(time() * 10)
+    location_seed = Value(c_size_t, int(time() * 10), lock=False)
 
     def __init__(self, config: GridWorldConfig) -> None:
         """Initialise collection dynamics.
@@ -60,7 +62,7 @@ class CollectionDynamics(BaseDynamics):
             spawn_positions_type: the set of positions where goals can be
             spawned.
         """
-        generator = np.random.default_rng(self.location_seed)
+        generator = np.random.default_rng(self.location_seed.value)
         if self.spawn_positions is not None:
             return self.spawn_positions
         agent_location = self.config.agent_location

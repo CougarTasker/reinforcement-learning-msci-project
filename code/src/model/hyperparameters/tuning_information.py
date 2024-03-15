@@ -111,7 +111,7 @@ class TuningInformation(object):
             eg_options,
         ),
         HyperParameter.discount_rate: HyperParameterDescription(
-            "Discount Rate", 0.5, 1, eg_options
+            "Discount Rate", 0, 1, eg_options
         ),
         HyperParameter.eg_initial_exploration_ratio: HyperParameterDescription(
             "EG Initial Exploration Ratio",
@@ -128,7 +128,7 @@ class TuningInformation(object):
             display_name=r"$\epsilon$-greedy Decay Rate",
         ),
         HyperParameter.ucb_exploration_bias: HyperParameterDescription(
-            "UCB Exploration Bias", 0, 5, ucb_options
+            "UCB Exploration Bias", 1, 10, ucb_options
         ),
     }
 

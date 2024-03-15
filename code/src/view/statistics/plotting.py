@@ -38,9 +38,9 @@ class PlottingCanvas(QWidget):
 
     save_text = "Save Plot"
     save_caption_text = "Save Plot Filename"
-    save_file_format = "png"
-    save_file_filter = "PNG (*.png)"
-    save_file_dpi = 400
+    save_file_format = "pdf"
+    save_file_filter = "PDF (*.pdf)"
+    save_size = 3
 
     def __init__(self, parent: Optional[QWidget], plotter: BasePlotter) -> None:
         """Initialise a plotting canvas.
@@ -82,7 +82,7 @@ class PlottingCanvas(QWidget):
             self, self.save_caption_text, os.getcwd(), self.save_file_filter
         )[0]
         ThemeContextManager.update_theme_context(ThemeContext.saving)
-        save_figure = Figure()
+        save_figure = Figure((self.save_size * 2, self.save_size))
         save_axes = save_figure.subplots()
         if not isinstance(save_axes, Axes):
             raise RuntimeError("Incorrect axes object")
@@ -90,6 +90,4 @@ class PlottingCanvas(QWidget):
 
         if not path.endswith(self.save_file_format):
             path = f"{path}.{self.save_file_format}"
-        save_figure.savefig(
-            path, pad_inches=0.5, bbox_inches="tight", dpi=self.save_file_dpi
-        )
+        save_figure.savefig(path, pad_inches=0.5, bbox_inches="tight")

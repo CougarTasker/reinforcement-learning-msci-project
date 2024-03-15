@@ -18,8 +18,8 @@ from src.model.learning_system.top_level_entities.options import (
 class ParameterEvaluator(object):
     """This class simulations and evaluates different configurations."""
 
-    runs = 5
-    iterations_per_run = 1500
+    runs = 25
+    iterations_per_run = 5000
 
     @classmethod
     def evaluate_reward(
