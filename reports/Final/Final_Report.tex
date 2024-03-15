@@ -59,8 +59,8 @@ Signature: {\calligra \LARGE \studentname}
 
 \begin{abstract}
 
-\section{TODO - (Rework Rationale) Resourceful robots}
-
+  \section{TODO - (Rework Rationale) Resourceful robots}
+  
   To complete many objectives robotic agents need to adapt and learn new environments. This presents a problem for traditional supervised learning approaches that operate under the (IID) assumption\cite{bagnell2005robust}, training data may not apply to new environments. This report investigates reinforcement learning (RL) techniques as an alternative for this class of robotics. Reinforcement Learning is a machine-learning paradigm where the learning component receives external judgment like supervised learning. However, in reinforcement learning this judgment is provided after the agent decides on the consequences of their actions. this is unlike supervised learning; there is no need for training in RL the agent will continuously learn from their successes and failures. Although RL does not need training data it is also unlike unsupervised learning, since RL agents learn to achieve more reward from within the system rather than observing underlying patterns.
   
   These unique benefits of reinforcement learning make this field applicable to many real-world problems. RL is built upon a strong mathematical foundation that allows us to make strong guarantees about solutions in the reinforcement learning domain. Furthermore, RL spans widely uniting together many important and diverse areas of study such as Economics, Optimisation, Game Theory, robotics and Cognitive Science.
@@ -166,7 +166,7 @@ The project is set up as a standard distribution package, poetry is the build ba
 Pipx is a simple build frontend that should be familiar if you have experience with pip. You can find instructions on how to \href{https://pipx.pypa.io/stable/installation/}{install Pipx for your platform here}. If you have installed pipx you can run the application with the following command:
 
 \begin{verbatim*}
-python3 -m pipx run --spec . start
+  python3 -m pipx run --spec . start
 \end{verbatim*}
 
 You can find more information about this application and how to start it in the readme file in the code folder.
@@ -198,8 +198,8 @@ While the intentions of operators and machine learning professionals may be for 
 
 \begin{quote}
   For Microsoft, almost ninety-four percent of
-the faces misgendered were individuals who were considered darker individuals\cite{facialRecognitionBias}
-\end{quote} 
+  the faces misgendered were individuals who were considered darker individuals\cite{facialRecognitionBias}
+\end{quote}
 
 Biases in training datasets propagate to the decisions made by the model trained on it. These biases in the error rate are believed to be a consequence of an over-representation of some social identities in the training data\cite{LLMSocialEthicalRisks}. Gathering more data has been long considered the goal in ML for creating better models, particularly large language models which have been directly trained on large corpora of text from the internet\cite{LLMSocialEthicalRisks}. However, it's my belief that fair and equal representation of all protected characteristics should be a top priority even at the expense of discarding data.
 
@@ -208,8 +208,8 @@ While reducing biases in training is incredibly important and achievable, with d
 
 While the human factor of implicit biases makes them harder to tackle systematically, I believe several steps can be taken in machine learning to reduce  the aforementioned issues:
 \begin{itemize}
-  \item Unbiased systems as default, where using protected characteristic data is not necessary or avoidable, then this information should be removed where possible \cite{AIRisksAndPrinciples}. This may be possible to achieve with redaction or masking in some contexts. 
-  \item Active training management, ensuring equality in training datasets that include people's protected characteristics. This may be achieved by sampling and further models to categorise data\cite{AIRisksAndPrinciples}. 
+  \item Unbiased systems as default, where using protected characteristic data is not necessary or avoidable, then this information should be removed where possible \cite{AIRisksAndPrinciples}. This may be possible to achieve with redaction or masking in some contexts.
+  \item Active training management, ensuring equality in training datasets that include people's protected characteristics. This may be achieved by sampling and further models to categorise data\cite{AIRisksAndPrinciples}.
   \item Algorithmic bias awareness, trained ML systems must have their bias quantified before their use and stakeholders must be made aware of the limitations of the system before it is approved\cite{AIRisksAndPrinciples}.
   \item Implicit bias awareness, operators of ML systems should receive continuous training and feedback to ensure that they are aware of their own implicit biases and the impact of their decisions\cite{facialRecognitionBias}.
   \item Transparency and accountability: decision-makers at every stage of ML systems should be transparent about the decisions that they have made and accountable to the people that these decisions affect\cite{AIRisksAndPrinciples}.
@@ -270,10 +270,9 @@ The function $p$ is an integral part of this definition; it fully describes how 
 
 \begin{figure}[H]
   \centering
-  \fboxsep 2mm
-  \framebox{
-    \includegraphics[width=6cm]{agent-enviroment}
-  }
+  
+  \includegraphics[width=8cm]{agent-enviroment-2}
+  
   \caption{\label{fig:agent-enviroment} The agent-environment interface}
 \end{figure}
 % stateDiagram-v2
@@ -300,19 +299,16 @@ After each action, a reward is received. It follows that the goal of an agent sh
 \end{itemize}
 
 
-% stateDiagram-v2
-%     a --> b : R = 0
-%     b --> b : R = 100
+
 \begin{figure}[H]
   \centering
-  \fboxsep 2mm
-  \framebox{
-    \includegraphics[width=6cm]{reward-example}
-  }
+  
+  \includegraphics[width=8cm]{reward-example-2}
+  
   \caption{\label{fig:reward-example} An example of transitive value of states $v(b) > v(a) > v(c)$}
 \end{figure}
 
-Intuitively, the value of being in a state is more than only its immediate reward that might be found from performing actions in that state. It is also related to the potential future reward that might be achieved in the reachable subsequent states. This can be demonstrated with two states $a$, and $b$, where there is a large reward at $b$ and the only way to reach $b$ is through $a$ then being at $a$ is also valuable regardless of the reward available at $a$. However, $a$ can be considered less valuable than $b$, because it always requires more steps to achieve the reward from $a$ than at $b$. To account for preferring more immediate rewards, the value function should also discount future value with a parameter $\gamma$. 
+Intuitively, the value of being in a state is more than only its immediate reward that might be found from performing actions in that state. It is also related to the potential future reward that might be achieved in the reachable subsequent states. This can be demonstrated with two states $a$, and $b$, where there is a large reward at $b$ and the only way to reach $b$ is through $a$. It is clear that despite the identical immediate rewards, the state $a$ is more valuable than $c$ due to future potential at $b$ available at $a$. However, $a$ can be considered less valuable than $b$, because it always requires more steps to achieve the reward from $a$ than at $b$. To account for our perchance for more immediate rewards, the value function should also discount future value with a parameter $\gamma$. 
 
 
 These value functions go hand in hand with an agent's policy; a good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards, which are in part determined by the actions the policy selects. Basing the policy on the value function gives the value function's definition impact over that agent's decision-making, in particular, the discount rate ($\gamma$). With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted, ignoring the potential long-term benefits of certain actions.
@@ -482,8 +478,15 @@ Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that
 
 \section{TODO - Hyperparameter Selection}
 
-Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. These hyper-parameters can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the environment that it operates on so they are not transferable and must be found through exploration. Following this first issue, the cliff dynamics have been used for comparison unless stated otherwise. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\epsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/ucb-exploration}
+  
+  \caption{\label{fig:ucb-exploration-bias}}
+\end{figure}
 
+Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. Figure~\ref{fig:ucb-exploration-bias} Demonstrates how hyper-parameter values can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the agent and the environment that it operates on so they are not transferable and must be found through experimentation. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\epsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
 
 
 For this reason, the application contains multiple systems for finding the appropriate values for these hyper-parameters. Firstly the hyper-parameters are configurable in the application's main configuration file. This configuration drives the parameters used by the main simulation and the defaults used in the report system. The hyper-parameter report system runs multiple simulations in the background and collates their results. This system allows the user to visualise and compare the effects of varying each parameter individually. 
@@ -493,21 +496,75 @@ This report system overcomes the dimensionality visualisation issue by displayin
 
 A hyper-parameter search system is implemented to find the best baseline for fair comparisons. There are a few popular search strategies for hyperparameter optimization such as grid search, random search, and genetic algorithms \cite{searchStrategies}. Grid-search is a very popular approach for its advantages such as simplicity, uniformity and parallelisation \cite{searchStrategies}. however, it suffers from the curse of dimensionality\cite{searchStrategies} so it was not suitable for this application. Instead, the random search strategy has been implemented. This strategy is highly amenable to parallelisation, A number of workers are used and they pick the parameters at random and run simulations independently. In this manner, the random search strategy does not require orchestration of the parameters and is resumable, synchronisation is only necessary when collating results to avoid race conditions.
 
+
+Since the performance is highly dependent on the environment; the same cliff dynamics have been used in all the graphs provided in this chapter. Furthermore, all of the episodes are equal in length so the cumulative reward achieved is comparable. An agent that directly follows the optimal policy without learning can achieve a cumulative reward of 45500 under the same conditions. This provides the upper bound on the agent's performance and the bar from which to determine regret. In the following sections, a Q-learning agent with the $\varepsilon$-greedy exploitation strategy is used for the evaluation. This strategy is stochastic and its variability affects the performance. To account for this influence many simulations are run for each configuration. Each graph plots the mean reward in red and a 95\% confidence interval in blue. The following sections will cover an interesting subset of the hyper-parameters and discuss my findings.
+
+
 \subsection{TODO - Initial Optimism}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip, width=\textwidth]{hyper-paramiters/inital-optimism}
+  
+  \caption{\label{fig:inital-optimism}}
+\end{figure}
 
 over-optimistic values causing excessive exploration, and pessimistic initial values causing the development of superstitions.
 
 negative values stopping learning
 
-\subsection{TODO - Learning Rate}
+\subsection{TODO - Learning Rate \texorpdfstring{$\alpha$}{Lg}}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/learning-rate}
+  
+  \caption{\label{fig:learning-rate}}
+\end{figure}
 
 stochastic vs non-stochastic dynamics
 
 \subsection{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}
 
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/epsilon-greedy-decay-full}
+  
+  \caption{\label{fig:epsilon-greedy-decay-full}Wide range $\varepsilon$-greedy decay rate graph.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip, width=\textwidth]{hyper-paramiters/epsilon-greedy-decay-top-half}
+  
+  \caption{\label{fig:epsilon-greedy-decay-zoomed}Narrow range $\varepsilon$-greedy decay rate graph.}
+\end{figure}
+
+
 epsilon greedy on policy vs off policy
 
 
+\subsection{TODO - Discount Rate \texorpdfstring{$\gamma$}{Lg}}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/discount-rate-full}
+  
+  \caption{\label{fig:discount-rate-full}Full range discount rate graph.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/discount-rate-top-half}
+  
+  \caption{\label{fig:discount-rate-zoomed}Reduced range discount rate graph.}
+\end{figure}
 
 
 
