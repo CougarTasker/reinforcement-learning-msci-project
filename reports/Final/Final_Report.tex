@@ -430,13 +430,13 @@ Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal
 
 In \ref{eqn:q-learning-update-formula}, we can see how $\alpha$ controls the influence of each observation. But how do we tune this hyper-parameter? One option is to treat it like other hyperparameters where possible and use previous experimentation to find a practical value. However, one of the main reasons to use RL is that it does not require prior knowledge, so this is not always suitable. A fixed learning rate may not also be suitable. Some observations may be more important than others; It has been observed that a decaying learning rate has been more effective. It is believed that a decaying learning rate allows for learning algorithms to avoid local minima at the beginning with the large learning rate and then settle on a global minima as the learning rate decays\cite{decayingLearningRates}. The paper \say{Learning Rates for Q-learning}\cite{even2003learning} derives how polynomial learning rates such as $\alpha = 1/t^\omega$ converge much better than linear ($\alpha = 1/t$) rates.
 
-Picking the behavioural policy is important; it must balance exploring and gaining rewards (exploitation). For some policies, the $\epsilon$ parameter determines the ratio of exploration and exploitation, a high $\epsilon$ would result in more exploration. There are two common behaviour policies for this:
+Picking the behavioural policy is important; it must balance exploring and gaining rewards (exploitation). For some policies, the $\varepsilon$ parameter determines the ratio of exploration and exploitation, a high $\varepsilon$ would result in more exploration. There are two common behaviour policies for this:
 \begin{itemize}
-  \item $\epsilon$-greedy: this policy randomly picks between (A) selecting the best action based on the current Q-table or (B) selecting another action. A or B is random with the ratio determined by $\epsilon$
-  \item $\epsilon$-soft: this policy assigns probabilities to all actions based upon their q-values, biased towards the higher Q-values by $\epsilon$. Then, random actions are chosen according to this probability distribution.
+  \item $\varepsilon$-greedy: this policy randomly picks between (A) selecting the best action based on the current Q-table or (B) selecting another action. A or B is random with the ratio determined by $\varepsilon$
+  \item $\varepsilon$-soft: this policy assigns probabilities to all actions based upon their q-values, biased towards the higher Q-values by $\varepsilon$. Then, random actions are chosen according to this probability distribution.
 \end{itemize}
 
-Both $\epsilon$-greedy and $\epsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
+Both $\varepsilon$-greedy and $\varepsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
 
 \chapter{Exploration Strategy Effectiveness}
 
@@ -476,7 +476,7 @@ In essence, this equation is optimistic as it will never underestimate or explor
 Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over its contemporaries such as UCB \cite{modelFree}. This exploration strategy uses an allocation vector $\omega$ that distributes the search effort across the state-action space. The MF-BPI algorithms aim to optimise this allocation vector for the BPI metric. To handle the uncertainty in the estimates MF-BPI maintains an ensemble of value tables to measure their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration.
 
 
-\section{TODO - Hyperparameter Selection}
+\section{Hyperparameter Selection}
 
 \begin{figure}[H]
   \centering
@@ -486,7 +486,7 @@ Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that
   \caption{\label{fig:ucb-exploration-bias}}
 \end{figure}
 
-Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. Figure~\ref{fig:ucb-exploration-bias} Demonstrates how hyper-parameter values can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the agent and the environment that it operates on so they are not transferable and must be found through experimentation. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\epsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
+Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. Figure~\ref{fig:ucb-exploration-bias} Demonstrates how hyper-parameter values can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the agent and the environment that it operates on so they are not transferable and must be found through experimentation. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\varepsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
 
 
 For this reason, the application contains multiple systems for finding the appropriate values for these hyper-parameters. Firstly the hyper-parameters are configurable in the application's main configuration file. This configuration drives the parameters used by the main simulation and the defaults used in the report system. The hyper-parameter report system runs multiple simulations in the background and collates their results. This system allows the user to visualise and compare the effects of varying each parameter individually. 
@@ -500,7 +500,7 @@ A hyper-parameter search system is implemented to find the best baseline for fai
 Since the performance is highly dependent on the environment; the same cliff dynamics have been used in all the graphs provided in this chapter. Furthermore, all of the episodes are equal in length so the cumulative reward achieved is comparable. An agent that directly follows the optimal policy without learning can achieve a cumulative reward of 45500 under the same conditions. This provides the upper bound on the agent's performance and the bar from which to determine regret. In the following sections, a Q-learning agent with the $\varepsilon$-greedy exploitation strategy is used for the evaluation. This strategy is stochastic and its variability affects the performance. To account for this influence many simulations are run for each configuration. Each graph plots the mean reward in red and a 95\% confidence interval in blue. The following sections will cover an interesting subset of the hyper-parameters and discuss my findings.
 
 
-\subsection{TODO - Initial Optimism}
+\subsection{Initial Optimism}
 
 \begin{figure}[H]
   \centering
@@ -518,7 +518,7 @@ When the initial estimate is larger than the actual value of each state this is 
 Increasing optimism gradually decreases performance as the agent over-explores and neglects exploitation. The effect is similar for pessimism however the performance hits a cliff after the initial estimates become negative. At this point, the agent gets stuck repeatedly choosing the same state or states. I believe this may be a consequence of several factors. Firstly the other parameters aren't configured for this degree of pessimism, so the agent can't reach the goal based on forced exploration alone, and the pessimism stops it from exploring enough to find it. Secondly, the discount factor works in reverse when all values are negative it encourages taking longer. Finally, Q-learning's maximisation bias may be inhibiting its ability to propagate these negative updates correctly \cite{doubleQLearning}\cite{sutton2018reinforcement}. 
 
 
-\subsection{TODO - Learning Rate \texorpdfstring{$\alpha$}{Lg}}
+\subsection{Learning Rate \texorpdfstring{$\alpha$}{Lg}}
 
 \begin{figure}[H]
   \centering
@@ -528,9 +528,11 @@ Increasing optimism gradually decreases performance as the agent over-explores a
   \caption{\label{fig:learning-rate}}
 \end{figure}
 
-The learning rate $alpha$ is another hyperparameter of Q-learning\ref{eqn:q-learning-update-formula}. This parameter controls how much each new TD estimate will update the current estimates. For stochastic environments getting this value right is crucial, If set too high the variability from the individual observations could lead to instability and the Q-table may not even converge at all. The cliff dynamics that are used in this demonstration are completely deterministic. Figure~\ref {fig:learning-rate} shows a plateau from learning rates $0.2$ to $1$. This is under 
+The learning rate $\alpha$ is another hyperparameter of Q-learning\ref{eqn:q-learning-update-formula}. This parameter controls how much each new TD estimate will update the current estimates. For stochastic environments getting this value right is crucial, If set too high the variability from the individual observations could lead to instability and the Q-table may not even converge at all. The cliff dynamics that are used in this demonstration are completely deterministic. 
+The larger the learning rate the less updates are necessary for the values to converge. However this can be a double edged sword because in the current configuration optimistic initial estimates drive the majority of the exploration. Therefore more smaller updates encourage more thorough but slower exploration whereas larger updates are more rapid but unstable exploration.
 
-stochastic vs non-stochastic dynamics
+
+Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this impacts performance. In the range $0.2$ to $1$ there is a plateau where the stability and speed of convergence are in balance. However as the learning rate approaches zero the performance diminishes rapidly as the time taken to learn anything extends. In this region the exploration period inhibits the agent's ability to exploit the environment.
 
 \subsection{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}
 
@@ -542,16 +544,42 @@ stochastic vs non-stochastic dynamics
   \caption{\label{fig:epsilon-greedy-decay-full}Wide range $\varepsilon$-greedy decay rate graph.}
 \end{figure}
 
+The $\varepsilon$-greedy decay rate (EGDR) parameter is an important an unique parameter. Figure~\ref{fig:epsilon-greedy-decay-full} demonstrates how just a miniscule amount of decay has a substantial improvement on the agent's regret completely changing the agents performance. Without EGDR the cumulative reward was negative. This follows from how $\varepsilon$-greedy acts in a partially off-policy, in the cliff dynamics the optimal policy is one that minimises the distance travelled and therefore travels right next to the cliff face. This becomes problematic when $\varepsilon$-greedy introduces its off-policy exploration actions, which randomly cause the agent to select the action to jump off the cliff incurring a large penalty.
+
+An on-policy method may account for the chance of selecting exploratory actions in its value estimates encouraging the agent to give the cliff a wide berth or choose to limit the exploratory actions. another approach is to reduce the exploration rate once the agent has had the opportunity to learn. This application has implemented exponential decay for the exploration ratio $\varepsilon$. This exponential decay is controlled via two hyperparameter the initial value and the decay rate. In this procedure the exploration ratio $\varepsilon$ can be computed as: 
+
+\begin{equation}
+  \varepsilon_t = \lambda^t \cdot \varepsilon_0
+\end{equation}
+
+Where $\varepsilon_t$ is the exploration ratio at the time step $t$ and $\lambda$ represents the EGDR.
+
+% \begin{figure}[H]
+%   \centering
+  
+%   \includegraphics[trim={0 1cm 0 1cm},clip, width=\textwidth]{hyper-paramiters/epsilon-greedy-decay-top-half}
+  
+%   \caption{\label{fig:epsilon-greedy-decay-zoomed}Narrow range $\varepsilon$-greedy decay rate graph.}
+% \end{figure}
+
 \begin{figure}[H]
   \centering
   
-  \includegraphics[trim={0 1cm 0 1cm},clip, width=\textwidth]{hyper-paramiters/epsilon-greedy-decay-top-half}
+  \includegraphics[trim={0 1cm 0 1cm},clip, width=\textwidth]{hyper-paramiters/example-curve.pdf}
   
-  \caption{\label{fig:epsilon-greedy-decay-zoomed}Narrow range $\varepsilon$-greedy decay rate graph.}
+  \caption{\label{fig:example-curve}}
 \end{figure}
 
 
-epsilon greedy on policy vs off policy
+EGDR has a very striking form as there is almost no variability in performance until approximately $>0.99$ where the performance almost immediately. This sharp corner follows from EGDR's compounding effects with respect to the time-step and the number of time-steps. Each simulation has 5000 time-steps, figure~\ref{fig:example-curve} demonstrates how with this number of time steps all but the most extreme values will not be reduced to near zero. The figure~\ref{fig:example-curve} also shows how the EGDR parameter can control how long the agent has foced exploration, on this graph a decay rate of $\lambda = 0.99$ would have a 0.6 exploration probability by timestep 50 whereas $\lambda < 0.6$ would have a probability if less than $1 \cdot 10^{-12}$ in other words the figure~\ref{fig:example-curve} shows that depending on the EGDR the exploration phase may take more or less than 50 time-steps. I derive this formula to predict the length of exploration:
+
+\begin{align}
+  t_{\text{exploration}} &= \log_{\lambda}(\frac{\varepsilon_{\text{min}}}{\varepsilon_0}) \\
+  \varepsilon_{\text{min}} &= 1 - (1-\alpha)^{\frac{1}{d}} \label{eqn:compound-adjustment} 
+\end{align}
+
+Where $\varepsilon_{\text{min}}$ is the minimum minimum chance of exploration to consider the agent is still exploring in each time step. This probability also compounds so you can use the equation~\ref{eqn:compound-adjustment} to compensate for the remaining duration of the episode, where $\alpha$ is probability of an exploratory action in the duration $d$ (number of time-steps). 
+
 
 
 \subsection{TODO - Discount Rate \texorpdfstring{$\gamma$}{Lg}}
@@ -576,7 +604,9 @@ epsilon greedy on policy vs off policy
 
 \section{TODO - Conclusions}
 
+\chapter{TODO - Project Analysis}
 
+Critical analysis and Discussion (10\%): A discussion of actual project achievements and how successful the project was. Clear evidence of reflection on the project process, its difficulties, successes and future enhancements. Any conclusions or results analysed or discussed appropriately;
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE

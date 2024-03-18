@@ -122,7 +122,7 @@ class TuningInformation(object):
         ),
         HyperParameter.eg_decay_rate: HyperParameterDescription(
             "EG Decay Rate",
-            0.5,
+            0,
             1,
             eg_options,
             display_name=r"$\epsilon$-greedy Decay Rate",

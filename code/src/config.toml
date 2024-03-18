@@ -7,13 +7,13 @@ x = 3
 y = 2
 
 [agent]
-discount_rate = 0.9
+discount_rate = 0.8
 [agent.value_iteration]
 sample_count = 100
 stopping_epsilon = 0.0001
 [agent.q_learning]
-learning_rate = 0.995
-initial_optimism = 50.0
+learning_rate = 0.2
+initial_optimism = 100.0
 replay_queue_length = 8
 [agent.q_learning.epsilon_greedy]
 initial_exploration_ratio = 0.6
