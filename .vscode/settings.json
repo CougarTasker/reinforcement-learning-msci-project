@@ -97,6 +97,11 @@
             "language": "latex",
             "scheme": "file",
             "pattern": "reports/Final/Final_Report.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "reports/Final/Final_Report.tex"
         }
     ],
     "python.REPL.enableREPLSmartSend": false

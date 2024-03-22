@@ -126,17 +126,31 @@ Full critical review of literature relevant to the study.
   \label{fig:app-ui}
 \end{figure}
 
+This chapter details the software engineering of the project and demonstrates how this allowed the project to succeed. Software engineering consists of methods and techniques to develop large and robust applications\cite{van2008software}.  
+
 \section{System Design}
 
-This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have moved the bulk of the computation onto libraries such as Numpy, Numba and Pillow. 
 
-The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. Due to the nature of the GUI framework, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view.
+This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have used libraries such as Numpy, Numba and Pillow that allow me to move the bulk of the computation out of Python.  
+
+The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. This has proved invaluable several times as I needed to change the GUI library several times to meet my requirements. Due to the nature of modern GUI frameworks, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view. 
 
 The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application this is achieved by adhering to software engineering principles \cite{softwareEngineringPrinciples} and using software design patterns where applicable.
 
 \section{TODO - Technical Decisions}
 
-talk about the choice of gui, multiprocessing IPC, etc.
+
+ - multiprocessing architecture the use of IPC + serialization
+
+talk about the choice of gui,  , etc.
+
+Are important (technical) decisions well made and **argued**? This includes:
+
+ - good design decisions
+ - choice or development of algorithms
+ - scope of the project.
+
+
 
 \pagebreak
 \section{Workflow}
@@ -221,6 +235,7 @@ In conclusion, this chapter has covered the relationships between machine learni
 This case study is one of many, that may highlight similar or different challenges and rewards that AI may bring. Hopefully, this review has provided a focused discussion of some of the core topics. The application in this project is exploratory and operates in simulated environments, and its actions have no direct consequences on anyone, in this sense, I believe it is insulated from bias and causing this type of social harm. 
 
 
+\section{TODO - link to RL}
 
 % \chapter{Timeline}
 
