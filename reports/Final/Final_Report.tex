@@ -160,7 +160,7 @@ All aspects of this project are stored under the Git version control system, and
 
 One key part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes firstly the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code ensuring 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command and most editors also integrate docstrings so they are accessible during development. Importantly this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date\cite{pythonAutoDoc} and covers all of the code. 
 
-Testing is integral to this project, as part of my workflow I write unit tests. Unit tests are pieces of code that perform validation and verification parts of the main application. A unit testing framework has been configured to run these tests and collate the results. All tests must pass before each commit can be made this means that regressions are spotted quickly. These tests are also integrated into the IDE providing feedback and easing debugging.  While testing can be valuable it can be costly, Daka et al found developers spent a substantial time writing tests \cite{unitTestingSurvey}. The returns from testing can be especially low for trivial code that can take several times longer to test than create. For this reason I have limited tests to all important areas or complex areas of the program.  
+Testing is integral to this project, as part of my workflow I write unit tests. Unit tests are pieces of code that perform validation and verification parts of the main application. A unit testing framework has been configured to run these tests and collate the results. All tests must pass before each commit can be made this means that regressions are spotted quickly. These tests are also integrated into the IDE providing feedback and easing debugging.  While testing can be valuable it can be costly, Daka et al found developers spent a substantial time writing tests \cite{unitTestingSurvey}. The returns from testing can be especially low for trivial code that can take several times longer to test than create. For this reason, I have limited tests to all important areas or complex areas of the program.  
 
 The development environment is the system of programs where this workflow takes place. This project is configured to work well with a particular Integrated development environment (IDE), for instance, the IDE will be able to start the application with a debugger attached allowing the user to step through the code in the editor. Code quality is maintained in this repository with several automated tools. Static code analysis tools enforce a consistent code style and check for typing errors. I have configured these tools to integrate with the IDE giving immediate feedback so issues can be addressed quickly. Furthermore, Git is configured with pre-commit hooks so these tools must run and validate the code before every commit is made. Furthermore, these tools can be integrated with CI/CD pipelines which is particularly useful for collaborative projects.
 
@@ -326,7 +326,7 @@ After each action, a reward is received. It follows that the goal of an agent sh
 Intuitively, the value of being in a state is more than only its immediate reward that might be found from performing actions in that state. It is also related to the potential future reward that might be achieved in the reachable subsequent states. This can be demonstrated with two states $a$, and $b$, where there is a large reward at $b$ and the only way to reach $b$ is through $a$. It is clear that despite the identical immediate rewards, the state $a$ is more valuable than $c$ due to future potential at $b$ available at $a$. However, $a$ can be considered less valuable than $b$, because it always requires more steps to achieve the reward from $a$ than at $b$. To account for our perchance for more immediate rewards, the value function should also discount future value with a parameter $\gamma$. 
 
 
-These value functions go hand in hand with an agent's policy; a good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards, which are in part determined by the actions the policy selects. Basing the policy on the value function gives the value function's definition impact over that agent's decision-making, in particular, the discount rate ($\gamma$). With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted, ignoring the potential long-term benefits of certain actions.
+These value functions go hand in hand with an agent's policy; a good policy maximises being in valuable states and performing valuable actions. On the other side of the coin, the value is determined by the subsequent states and rewards, which are in part determined by the actions the policy selects. Basing the policy on the value function gives the value function's definition impact over that agent's decision-making, in particular, the \label{discount-rate-introduction}discount rate ($\gamma$). With high discount rates $\gamma \approx 1$ the agent can be far-sighted and ignore short-term high-reward actions available to it and take longer to learn. With low discount rates $\gamma \approx 0$, the agent can be short-sighted, ignoring the potential long-term benefits of certain actions.
 
 While the policy is informally described at the end of chapter~\ref{policy-informal-definition}, a formal definition of a policy ($\pi$) is the probability distribution of an agent picking a given action in a given state:
 
@@ -544,24 +544,24 @@ Increasing optimism gradually decreases performance as the agent over-explores a
 \end{figure}
 
 The learning rate $\alpha$ is another hyperparameter of Q-learning\ref{eqn:q-learning-update-formula}. This parameter controls how much each new TD estimate will update the current estimates. For stochastic environments getting this value right is crucial, If set too high the variability from the individual observations could lead to instability and the Q-table may not even converge at all. The cliff dynamics that are used in this demonstration are completely deterministic. 
-The larger the learning rate the less updates are necessary for the values to converge. However this can be a double edged sword because in the current configuration optimistic initial estimates drive the majority of the exploration. Therefore more smaller updates encourage more thorough but slower exploration whereas larger updates are more rapid but unstable exploration.
+The larger the learning rate the fewer updates are necessary for the values to converge. However, this can be a double-edged sword because in the current configuration, optimistic initial estimates drive the majority of the exploration. Therefore smaller updates encourage more thorough but slower exploration whereas larger updates are more rapid but unstable exploration.
 
 
-Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this impacts performance. In the range $0.2$ to $1$ there is a plateau where the stability and speed of convergence are in balance. However as the learning rate approaches zero the performance diminishes rapidly as the time taken to learn anything extends. In this region the exploration period inhibits the agent's ability to exploit the environment.
+Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this impacts performance. In the range $0.2$ to $1$ there is a plateau where the stability and speed of convergence are in balance. However, as the learning rate approaches zero the performance diminishes rapidly as the time taken to learn anything extends. In this region, the exploration period inhibits the agent's ability to exploit the environment.
 
-\subsection{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}
+\subsection{\texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}
 
 \begin{figure}[H]
   \centering
   
   \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/epsilon-greedy-decay-full}
   
-  \caption{\label{fig:epsilon-greedy-decay-full}Wide range $\varepsilon$-greedy decay rate graph.}
+  \caption{\label{fig:epsilon-greedy-decay-full}}
 \end{figure}
 
-The $\varepsilon$-greedy decay rate (EGDR) parameter is an important an unique parameter. Figure~\ref{fig:epsilon-greedy-decay-full} demonstrates how just a miniscule amount of decay has a substantial improvement on the agent's regret completely changing the agents performance. Without EGDR the cumulative reward was negative. This follows from how $\varepsilon$-greedy acts in a partially off-policy, in the cliff dynamics the optimal policy is one that minimises the distance travelled and therefore travels right next to the cliff face. This becomes problematic when $\varepsilon$-greedy introduces its off-policy exploration actions, which randomly cause the agent to select the action to jump off the cliff incurring a large penalty.
+The $\varepsilon$-greedy decay rate (EGDR) parameter is an important and unique parameter. Figure~\ref{fig:epsilon-greedy-decay-full} demonstrates how just a minuscule amount of decay has a substantial improvement on the agent's regret completely changing the agents' performance. Without EGDR the cumulative reward was negative. This follows from how $\varepsilon$-greedy acts in a partially off-policy, in the cliff dynamics the optimal policy minimises the distance travelled and therefore travels right next to the cliff face. This becomes problematic when $\varepsilon$-greedy introduces its off-policy exploration actions, which randomly cause the agent to select the action to jump off the cliff incurring a large penalty.
 
-An on-policy method may account for the chance of selecting exploratory actions in its value estimates encouraging the agent to give the cliff a wide berth or choose to limit the exploratory actions. another approach is to reduce the exploration rate once the agent has had the opportunity to learn. This application has implemented exponential decay for the exploration ratio $\varepsilon$. This exponential decay is controlled via two hyperparameter the initial value and the decay rate. In this procedure the exploration ratio $\varepsilon$ can be computed as: 
+An on-policy method may account for the risks of selecting exploratory actions in its value estimates encouraging the agent to give the cliff a wide berth or choose to limit the exploratory actions. However, Q-learning is an off-policy technique so Another approach is necessary. An alternative is to reduce the exploration rate once the agent has had the opportunity to learn. This application has implemented exponential decay for the exploration ratio $\varepsilon$. This exponential decay is controlled via two hyperparameters the initial value and the decay rate. In this procedure, the exploration ratio $\varepsilon$ can be computed as: 
 
 \begin{equation}
   \varepsilon_t = \lambda^t \cdot \varepsilon_0
@@ -586,18 +586,21 @@ Where $\varepsilon_t$ is the exploration ratio at the time step $t$ and $\lambda
 \end{figure}
 
 
-EGDR has a very striking form as there is almost no variability in performance until approximately $>0.99$ where the performance almost immediately. This sharp corner follows from EGDR's compounding effects with respect to the time-step and the number of time-steps. Each simulation has 5000 time-steps, figure~\ref{fig:example-curve} demonstrates how with this number of time steps all but the most extreme values will not be reduced to near zero. The figure~\ref{fig:example-curve} also shows how the EGDR parameter can control how long the agent has foced exploration, on this graph a decay rate of $\lambda = 0.99$ would have a 0.6 exploration probability by timestep 50 whereas $\lambda < 0.6$ would have a probability if less than $1 \cdot 10^{-12}$ in other words the figure~\ref{fig:example-curve} shows that depending on the EGDR the exploration phase may take more or less than 50 time-steps. I derive this formula to predict the length of exploration:
+EGDR has a very striking form as there is almost no variability in performance until approximately $>0.99$ where the performance almost immediately plummets. This sharp corner follows from EGDR's compounding effects on the exploration probability. Each simulation has 5000 time steps, figure~\ref{fig:example-curve} demonstrates how with this number of time steps all but the most extreme values will not be reduced to near zero. The figure~\ref{fig:example-curve} also shows how the EGDR parameter can control how long the agent has forced exploration, on this graph a decay rate of $\lambda = 0.99$ would have a $60\%$ exploration probability by time step 50 whereas $\lambda < 0.6$ would have a probability if less than $1 \cdot 10^{-12}$, in other words, the figure~\ref{fig:example-curve} shows that depending on the EGDR the exploration phase may take more or less than 50 time-steps. 
+
+
+I derive this formula to predict the length of exploration:
 
 \begin{align}
   t_{\text{exploration}} &= \log_{\lambda}(\frac{\varepsilon_{\text{min}}}{\varepsilon_0}) \\
   \varepsilon_{\text{min}} &= 1 - (1-\alpha)^{\frac{1}{d}} \label{eqn:compound-adjustment} 
 \end{align}
 
-Where $\varepsilon_{\text{min}}$ is the minimum minimum chance of exploration to consider the agent is still exploring in each time step. This probability also compounds so you can use the equation~\ref{eqn:compound-adjustment} to compensate for the remaining duration of the episode, where $\alpha$ is probability of an exploratory action in the duration $d$ (number of time-steps). 
+Where $\varepsilon_{\text{min}}$ is the minimum chance of exploration to consider the agent is still exploring in each time step. This probability also compounds so you can use the equation~\ref{eqn:compound-adjustment} to compensate for the remaining duration of the episode, where $\alpha$ is the probability of an exploratory action in the duration $d$ (number of time-steps). 
 
 
 
-\subsection{TODO - Discount Rate \texorpdfstring{$\gamma$}{Lg}}
+\subsection{Discount Rate \texorpdfstring{$\gamma$}{Lg}}
 
 \begin{figure}[H]
   \centering
@@ -607,15 +610,17 @@ Where $\varepsilon_{\text{min}}$ is the minimum minimum chance of exploration to
   \caption{\label{fig:discount-rate-full}Full range discount rate graph.}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
+% \begin{figure}[H]
+%   \centering
   
-  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/discount-rate-top-half}
+%   \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/discount-rate-top-half}
   
-  \caption{\label{fig:discount-rate-zoomed}Reduced range discount rate graph.}
-\end{figure}
+%   \caption{\label{fig:discount-rate-zoomed}Reduced range discount rate graph.}
+% \end{figure}
 
+The discount rate hyperparameter affects how much future value propagates backwards. The larger the discount rate the more future rewards are considered and the more far-sighted the agent becomes, conversely the smaller the discount rate the more short-sighted the agent's actions become~\ref{discount-rate-introduction}. When the discount rate is $\gamma \approx 0$ the agent's actions have no foresight. Unfortunately, the cliff environment's reward is sparse and figure~\ref{fig:discount-rate-full} shows how having some foresight is necessary. without it, the agent is essentially lost. 
 
+On the other end of the spectrum when the discount factor is large $\gamma \approx 1$ this can encourage far-sighted behaviour such as waiting. However, for the cliff environment, far-sighted behaviour was not a concern, instead, the regret observed around $\gamma > 0.8$ in figure~\ref{fig:discount-rate-full} is explained by another factor. The bellman equations form a contraction mapping where $\gamma$ is the contraction factor\cite{QlearningConvergance}. The result is that the discount factor is inversely proportional to the rate of convergence. Figure~\ref{discount-rate-introduction} shows how at the extreme the slowed convergence noticeably increases the agent's regret as the time the agent takes to learn increases.
 
 \section{TODO - Conclusions}
 
