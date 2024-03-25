@@ -465,12 +465,17 @@ The second key challenge is RL's sensitivity to hyperparameters and factors of t
   Recent reproducibility analyses have shown that reported performance results are often inconsistent and difficult to replicate\cite{evaluatingRL}
 \end{quote}
 
-A third challenge is the metric by which the model is assessed, unlike supervised learning the agent receives its performance signal from the environment which means the objective and amount of reward can vary wildly between different environments. 
+A third challenge is the metric by which the model is assessed, unlike supervised learning the agent receives its performance signal from the environment which means the objective and amount of reward can vary wildly between different environments. This can complicate comparisons between different environments, however, these comparisons are necessary to measure how well the algorithm generalises. One solution is creating a standard testbed of varied environments and a protocol for exploration \cite{assessingDeepRL}\cite{evaluatingRL}. In this approach, the agent only receives meta information such as the size of the state space, the agent must be able to automatically adjust to the environment. In my opinion, this integrates naturally with the core philosophy of refinement learning. However, this is not compatible with the traditional algorithms explored in this project as they have hyperparameters.
 
+Another approach to address this third challenge is to use the optimal policy as a benchmark. That is to base the performance measures against the optimal policy. Of this kind, there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. Regret is a commonly used metric \cite{modelFree} however it requires the environment to have a cut-off for this calculation, while there may be a natural choice in episodic tasks this cut-off is yet another tunable parameter that contributes to the second problem. 
 
-To assess the effectiveness of exploration strategies the optimal policy sets a benchmark that there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. The second measure is called best policy identification (BPI) this relates to the number of samples taken to identify a nearly optimal policy\cite{modelFree}. Reducing the BPI will in general reduce the regret. I believe with a suitably large time horizon, that the effects of reducing regret will correspond to a reduction in BPI since the benefits of an optimal policy will eventually pay off the costs associated with finding it. For consistency, this project will focus on regret minimisation.
+The second measure is called the Characteristic Time $T^*$. If regret is to measure effective exploitation $T^*$ is a measure of efficient exploration. While I do not fully understand its definition or meaning $T^*$  essentially measures the minimal number of samples required to identify a a nearly optimal policy in an MDP\cite{characteristicTime}. A useful approximation of $T^*$ is the number of time-steps $t$ needed to maximise the following formula\cite{modelFree}:
 
-
+\begin{equation}
+  1- \frac{ \left\|V^\ast-V^{\pi_t} \right\|_\infty}{\left\|V^\ast\right\|_\infty}
+  \label{eqn:characteristic-time-aproximation}
+\end{equation}
+ 
 
 \chapter{Exploration Strategy Effectiveness}
 
