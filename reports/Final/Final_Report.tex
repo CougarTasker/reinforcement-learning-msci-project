@@ -453,6 +453,25 @@ Picking the behavioural policy is important; it must balance exploring and gaini
 
 Both $\varepsilon$-greedy and $\varepsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
 
+
+\newpage
+\section{TODO - Measuring Performance}\label{section:measuring-performance}
+
+Accurately measuring the effectiveness of machine learning algorithms is essential for guiding research and assessing the state-of-the-art. For supervised learning tasks such as classification, this can be relatively straightforward. The model can be assessed new data against its goal. However, in RL several important differences make assessment difficult. Firstly the agent's decisions influence the training data.  This creates a unique challenge: evaluating the performance of different algorithms becomes an apples-to-oranges comparison\cite{sutton2018reinforcement}.
+
+The second key challenge is RL's sensitivity to hyperparameters and factors of the environment. RL algorithm's behaviour can vary wildly and getting the right parameters can be make or break. This can lead to the \say{tune-and-report} method, where researchers tweak hyperparameters to achieve good performance\cite{evaluatingRL}. This can be misleading because is hard to know if an algorithm is truly better or simply benefited from extensive tuning for a specific environment. 
+
+\begin{quote}
+  Recent reproducibility analyses have shown that reported performance results are often inconsistent and difficult to replicate\cite{evaluatingRL}
+\end{quote}
+
+A third challenge is the metric by which the model is assessed, unlike supervised learning the agent receives its performance signal from the environment which means the objective and amount of reward can vary wildly between different environments. 
+
+
+To assess the effectiveness of exploration strategies the optimal policy sets a benchmark that there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. The second measure is called best policy identification (BPI) this relates to the number of samples taken to identify a nearly optimal policy\cite{modelFree}. Reducing the BPI will in general reduce the regret. I believe with a suitably large time horizon, that the effects of reducing regret will correspond to a reduction in BPI since the benefits of an optimal policy will eventually pay off the costs associated with finding it. For consistency, this project will focus on regret minimisation.
+
+
+
 \chapter{Exploration Strategy Effectiveness}
 
 Q-learning is an off-policy process, which means that the policy that the policy that it is learning and improving is not necessarily the same as the policy it is following during exploration. By this, the actions chosen by a Q-learning agent may be independent of its current beliefs of the values of each action. Off-policy learning has several advantages, it may explore more fairly and completely than an on-policy approach. An on-policy approach may be incentivised to explore thoroughly if its initial estimates are particularly optimistic. However, in a stochastic environment where rewards are random with a large degree of spread, it may still be difficult for an on-policy technique to properly assess the rewards before falling into an in-optimal pattern.  
@@ -461,16 +480,34 @@ On-policy reinforcement learning algorithms such as SARSA do have many advantage
 
 In this project, I have focused on the off-policy Q-learning method. This chapter details the performance and effects of different exploration strategies. An exploration strategy is the policy that the agent follows during training as opposed to the learnt policy. This exploration strategy may be any method to select an action, however, to maintain the guarantees of convergence this policy must reach all states infinitely often (\ref{sect:impl-conditions}). While a random action section, a random walk, does meet the convergence criteria it is not efficient in terms of rewards received or information gained. As an improvement in these measures, more sophisticated strategies have been developed that take into account many factors.
 
-To assess the effectiveness of exploration strategies the optimal policy sets a benchmark that there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. The second measure is called best policy identification (BPI) this relates to the number of samples taken to identify a nearly optimal policy\cite{modelFree}. Reducing the BPI will in general reduce the regret. I believe with a suitably large time horizon, that the effects of reducing regret will correspond to a reduction in BPI since the benefits of an optimal policy will eventually pay off the costs associated with finding it. For consistency, this project will focus on regret minimisation.
 
+\section{\texorpdfstring{$\varepsilon$}{Lg}-Greedy}
 
-\section{TODO - \texorpdfstring{$\varepsilon$}{Lg}-Greedy}
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{reward-history/EG.pdf}
+  
+  \caption{\label{fig:reward-history:eg} Reward history for an $\varepsilon$-Greedy exploration strategy instance}
+\end{figure}
+
 
 The $\varepsilon$-Greedy is the most straightforward strategy implemented in this project and it acts as a good baseline. In its basic form, there is a parameter $\varepsilon$ that controls the probability of the agent acting in two modes. The first and typically most common mode is where the agent selects the best action based on the current Q-estimates. In this first mode, the agent is essentially operating in an on-policy manner. In the second mode, the agent selects an action at random \ref{sect:impl-conditions}.
 
 This epsilon parameter controls the ratio between the agent's exploration and exploitation. Having high exploitation can garner more rewards in the short term but this has a large opportunity cost of not finding potentially lucrative strategies. On the other hand, if you are already following an optimal policy an exploratory action would not be optimal, and in the case of the cliff environment, it can be potentially devastating. In the beginning, higher exploration may be necessary to avoid local minima, but once the policy has started to converge higher exploitation can be more rewarding. To address this issue the $\varepsilon$ parameter can be dynamically adjusted during training. This project implements the traditional discounting with a fixed hyperparameter however more advanced reward-based techniques have been found more successful\cite{rewardEpsilonDecay}.
 
-\section{TODO - Upper Confidence Bound}
+Despite $\varepsilon$-Greedy's simplicity figure~\ref{fig:reward-history:eg} shows how competitive this strategy can be when tuned to the environment. A combination of optimistic initial estimates and forced exploration can be extremely efficient. Unfortunately, to achieve these extraordinary results, each hyperparameter needs to be "just right" for the environment; this doesn't generalise easily and can be thought of as a form of over-fitting. I cover the effects of the exploration decay rate parameter in more detail in section~\ref{edgr-section}.
+
+\section{Upper Confidence Bound}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{reward-history/UCB.pdf}
+  
+  \caption{\label{fig:reward-history:ucb} Reward history for an UCB exploration strategy instance}
+\end{figure}
+
 
 The upper confidence bound (UCB) exploration strategy uses the current Q value estimates to direct its decisions however instead of using randomness to dictate exploration, it uses an informed method. UCB prioritises actions that have the highest potential for reward. The potential of value is determined from two factors the current value estimate and a measure of confidence in the value estimate. The key idea behind this confidence measure is that it relates to the number of samples that have been made of the state action\cite{sutton2018reinforcement}. This relationship is defined in the following rule:
 
@@ -483,16 +520,6 @@ The upper confidence bound (UCB) exploration strategy uses the current Q value e
 
 where $A_t$ represents the action chosen at time $t$, and $N_t(a)$ represents the number of samples of action $a$ have been taken at the current time. 
 
-
-In essence, this equation is optimistic as it will never underestimate or explore an action. It also provides a natural balance between exploration and exploitation, Without a discount factor this strategy naturally tapers off exploration over time. Furthermore instead of even exploration like $\varepsilon$-Greedy; UCB avoids redundant exploration in areas that have already been covered. However, UCB is not without hyper-parameters. $c$ controls the exploration balance; higher values encourage more exploration.
-
-\section{TODO - Model-Free Best Policy Identification}
-
-Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over its contemporaries such as UCB \cite{modelFree}. This exploration strategy uses an allocation vector $\omega$ that distributes the search effort across the state-action space. The MF-BPI algorithms aim to optimise this allocation vector for the BPI metric. To handle the uncertainty in the estimates MF-BPI maintains an ensemble of value tables to measure their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration.
-
-
-\section{Hyperparameter Selection}
-
 \begin{figure}[H]
   \centering
   
@@ -501,7 +528,44 @@ Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that
   \caption{\label{fig:ucb-exploration-bias}}
 \end{figure}
 
-Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. Figure~\ref{fig:ucb-exploration-bias} Demonstrates how hyper-parameter values can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the agent and the environment that it operates on so they are not transferable and must be found through experimentation. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\varepsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
+
+In essence, this equation is optimistic as it will never underestimate or fail to explore an action. It also provides a natural balance between exploration and exploitation; Furthermore, Without a discount factor, this strategy naturally tapers off exploration over time. Instead of even exploration like $\varepsilon$-Greedy; UCB avoids redundant exploration in areas that have already been covered. However, UCB is not without hyper-parameters. $c$ controls the exploration balance; higher values encourage more exploration. Like $\varepsilon$ from $\varepsilon$-greedy, this parameter can have a profound impact on the strategy's performance. Figure~\ref{fig:ucb-exploration-bias} shows how a change in this balance can almost double the cumulative reward. 
+
+Figure~\ref{fig:ucb-exploration-bias} also illustrate how the effects of $c$ can be both gradual and abrupt. This stems from the relationship between the agent and environment and how they are both deterministic. Generally, the gradual improvement can be found in slight changes in the amount of exploration whereas abrupt changes happen if the agent discovers shortcuts or not.  From my experience, values $c<1$ operate in an on-policy fashion and $c>10$ over explore.
+
+$\epsilon$ greedy is able to get extraordinary results at the cost of under-exploration. UCB risks the opposite issue; it may over-explore. This is a consequence of its uncertainty term \ref{eqn:ucb}, it's optimistic and always growing, This guarantees the strategy will always explore enough to fully converge. Unfortunately, it is never truly done exploring. The $\ln t$ operator helps to mitigate this issue over time. However, at the beginning, the UCB is prone to re-exploring areas over new ones. I believe this behaviour explains some of the oscillations in figure~\ref{fig:reward-history:ucb}. In UCB's favour, it considers the estimated value in all of its exploration and has received the least penalty of any strategy.
+
+
+\section{TODO - Model-Free Best Policy Identification}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{reward-history/MF-BPI.pdf}
+  
+  \caption{\label{fig:reward-history:mfbpi} Reward history for an MF-BPI exploration strategy instance}
+\end{figure}
+
+
+Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over its contemporaries such as UCB \cite{modelFree}. This exploration strategy uses an allocation vector $\omega$ that distributes the search effort across the state-action space. The MF-BPI algorithms aim to optimise this allocation vector for the BPI metric. To handle the uncertainty in the estimates MF-BPI maintains an ensemble of value tables to measure their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration.
+
+
+
+goldy locks  - minmal number of parameters 
+
+generalises well, neither over explores or under explores 
+
+\section{Hyperparameter Selection}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 1cm 0 1cm},clip,width=\textwidth]{hyper-paramiters/replay-queue-length.pdf}
+  
+  \caption{\label{fig:replay-queue-length}}
+\end{figure}
+
+Q-learning itself and each exploration strategy require some parameters which are set outside of the learning process. Figure~\ref{fig:replay-queue-length} Demonstrates how hyper-parameter values can have a profound impact on the effectiveness of the agent. However, selecting the best parameters is not straightforward. The first difficulty is that the best parameter choice depends on the agent and the environment that it operates on so they are not transferable and must be found through experimentation. The second difficulty is that the hyper-parameters are not independent different choices may compound or interfere with each other.  Finally building on the second issue is the number of parameters, for Q-learning with $\varepsilon$-greedy there are 6 tunable parameters, This makes visualising the whole hyper-parameter space impossible. 
 
 
 For this reason, the application contains multiple systems for finding the appropriate values for these hyper-parameters. Firstly the hyper-parameters are configurable in the application's main configuration file. This configuration drives the parameters used by the main simulation and the defaults used in the report system. The hyper-parameter report system runs multiple simulations in the background and collates their results. This system allows the user to visualise and compare the effects of varying each parameter individually. 
@@ -512,7 +576,7 @@ This report system overcomes the dimensionality visualisation issue by displayin
 A hyper-parameter search system is implemented to find the best baseline for fair comparisons. There are a few popular search strategies for hyperparameter optimization such as grid search, random search, and genetic algorithms \cite{searchStrategies}. Grid-search is a very popular approach for its advantages such as simplicity, uniformity and parallelisation \cite{searchStrategies}. however, it suffers from the curse of dimensionality\cite{searchStrategies} so it was not suitable for this application. Instead, the random search strategy has been implemented. This strategy is highly amenable to parallelisation, A number of workers are used and they pick the parameters at random and run simulations independently. In this manner, the random search strategy does not require orchestration of the parameters and is resumable, synchronisation is only necessary when collating results to avoid race conditions.
 
 
-Since the performance is highly dependent on the environment; the same cliff dynamics have been used in all the graphs provided in this chapter. Furthermore, all of the episodes are equal in length so the cumulative reward achieved is comparable. An agent that directly follows the optimal policy without learning can achieve a cumulative reward of 45500 under the same conditions. This provides the upper bound on the agent's performance and the bar from which to determine regret. In the following sections, a Q-learning agent with the $\varepsilon$-greedy exploitation strategy is used for the evaluation. This strategy is stochastic and its variability affects the performance. To account for this influence many simulations are run for each configuration. Each graph plots the mean reward in red and a 95\% confidence interval in blue. The following sections will cover an interesting subset of the hyper-parameters and discuss my findings.
+Since the performance is highly dependent on the environment; the same cliff dynamics have been used in all the graphs provided in this chapter. Furthermore, all of the episodes are equal in length so the cumulative reward achieved is comparable. An agent that directly follows the optimal policy without learning can achieve a cumulative reward of 45500 under the same conditions. This provides the upper bound on the agent's performance and the bar from which to determine regret \ref{section:measuring-performance}. In the following sections, a Q-learning agent with the $\varepsilon$-greedy exploitation strategy is used for the evaluation. This strategy is stochastic and its variability affects the performance. To account for this influence many simulations are run for each configuration. Each graph plots the mean reward in red and a 95\% confidence interval in blue. The following sections will cover an interesting subset of the hyper-parameters and discuss my findings.
 
 
 \subsection{Initial Optimism}
@@ -544,12 +608,12 @@ Increasing optimism gradually decreases performance as the agent over-explores a
 \end{figure}
 
 The learning rate $\alpha$ is another hyperparameter of Q-learning\ref{eqn:q-learning-update-formula}. This parameter controls how much each new TD estimate will update the current estimates. For stochastic environments getting this value right is crucial, If set too high the variability from the individual observations could lead to instability and the Q-table may not even converge at all. The cliff dynamics that are used in this demonstration are completely deterministic. 
-The larger the learning rate the fewer updates are necessary for the values to converge. However, this can be a double-edged sword because in the current configuration, optimistic initial estimates drive the majority of the exploration. Therefore smaller updates encourage more thorough but slower exploration whereas larger updates are more rapid but unstable exploration.
+The larger the learning rate the fewer updates are necessary for the values to converge. However, this can be a double-edged sword because, in the current configuration, optimistic initial estimates drive the majority of the exploration. Therefore smaller updates encourage more thorough but slower exploration whereas larger updates are more rapid but unstable exploration.
 
 
-Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this impacts performance. In the range $0.2$ to $1$ there is a plateau where the stability and speed of convergence are in balance. However, as the learning rate approaches zero the performance diminishes rapidly as the time taken to learn anything extends. In this region, the exploration period inhibits the agent's ability to exploit the environment.
+Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this impacts performance. In the range of $0.2$ to $1$, there is a plateau where the stability and speed of convergence are in balance. However, as the learning rate approaches zero the performance diminishes rapidly as the time taken to learn anything extends. In this region, the exploration period inhibits the agent's ability to exploit the environment.
 
-\subsection{\texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}
+\subsection{\texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}\label{edgr-section}
 
 \begin{figure}[H]
   \centering

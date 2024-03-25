@@ -19,7 +19,7 @@ replay_queue_length = 8
 initial_exploration_ratio = 0.6
 decay_rate = 0.985
 [agent.q_learning.upper_confidence_bound]
-exploration_bias = 5.0
+exploration_bias = 20.0
 [agent.q_learning.mf_bpi]
 error_sensitivity=1
 ensemble_size=50
