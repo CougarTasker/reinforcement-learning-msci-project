@@ -49,6 +49,18 @@ Date of Submission: 08/12/2023
 Signature: {\calligra \LARGE \studentname}
 
 \newpage
+\vspace*{\fill}
+\begin{center}
+  \begin{minipage}{0.7\textwidth}
+    \raggedright % Left align the text
+    Dedicated to my partner, friends and family:\\
+    Thank you for your continued support and encouragement
+  \end{minipage}
+\end{center}
+
+
+\vspace*{\fill}
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Table of Contents
@@ -187,7 +199,54 @@ You can find more information about this application and how to start it in the 
 
 \section{User Interface}
 
+
+
+
+
 The user interface is not only a major component of the project's functionality but also the user's window into the entire application. When starting the application you will be greeted by a window that is largely broken into three components. At the top, there is a section which contains the main controls for selecting the most significant options of the main simulation; such as the agent and dynamics. If the agent is off-policy you can select its exploration strategy. 
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/state-value-2.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Current State" tab with optimal state-value visualisation of the cliff environment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/reward-history.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Reward history" tab with Q-learning agent in the cliff environment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/random-search.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Search" tab showing search results}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/loading-screen.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Tuning" tab loading screen}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/hyper-tuning.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Tuning" tab showing the results of tuning the reward queue length}
+\end{figure}
+
+
 
 In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
 
@@ -351,12 +410,12 @@ With a known policy and dynamics, the future state can be wholly determined, all
 
 These value functions are defined recursively in terms of each other; these definitions can be unrolled to only be in terms of themselves. The unrolled form of the state-value function is known as the Bellman equation. These equations are named Richard Bellman, who, in the process of developing the field of dynamic programming, created them\cite{bellman1957}.   
 
-These functions demonstrate the intertwined relationships between the policy chosen and the value of that state if there is a particularly valuable action $a^\ast$ such that $q_\pi(s,a^\ast)$ is far better than for all other actions. A policy $\pi(a^\ast\ |\ s) = 0$ would hamper the potential value of $s$. Therefore, the value function can be used to compare how well different policies perform. If for policy $\pi_a$ there does not exist another policy $\pi_b$ such that $\pi_b$ has a better value $v_{\pi_b}(s) > v_{\pi_a}(s)$ for all states $s \in \mathcal{S}$ then we can consider this policy $\pi_a$ an optimal policy. There may be many optimal policies; however, we often do not need to distinguish them, so we often denote any optimal policy with $\pi_\ast$. This is because all optimal policies share the same state-value, and by definition action-value, function, we denote this $ v_\ast$ and $q_\ast$. The optimal value function $v_\ast$ is known as the Bellman optimality equation. These optimal equations can be written formally as:
+These functions demonstrate the intertwined relationships between the policy chosen and the value of that state if there is a particularly valuable action $a^\star$ such that $q_\pi(s,a^\star)$ is far better than for all other actions. A policy $\pi(a^\star\ |\ s) = 0$ would hamper the potential value of $s$. Therefore, the value function can be used to compare how well different policies perform. If for policy $\pi_a$ there does not exist another policy $\pi_b$ such that $\pi_b$ has a better value $v_{\pi_b}(s) > v_{\pi_a}(s)$ for all states $s \in \mathcal{S}$ then we can consider this policy $\pi_a$ an optimal policy. There may be many optimal policies; however, we often do not need to distinguish them, so we often denote any optimal policy with $\pi_\star$. This is because all optimal policies share the same state-value, and by definition action-value, function, we denote this $ v_\star$ and $q_\star$. The optimal value function $v_\star$ is known as the Bellman optimality equation. These optimal equations can be written formally as:
 
 
 \begin{align}
-  q_\ast(s,a) & \doteq \max_\pi q_\pi(s,a)\label{eqn:q-optimal-def} \\
-  v_\ast(s)   & \doteq \max_\pi v_\pi(s) \label{eqn:v-optimal-def}
+  q_\star(s,a) & \doteq \max_\pi q_\pi(s,a)\label{eqn:q-optimal-def} \\
+  v_\star(s)   & \doteq \max_\pi v_\pi(s) \label{eqn:v-optimal-def}
 \end{align}
 
 
@@ -385,9 +444,9 @@ Although this policy improvement sounds computationally expensive, each state ca
 
 Policy iteration is a practical approach, for a finite MDP is guaranteed to finish in finite time. In practice, policy improvement does better and only takes a few iterations. However, in each iteration, multiple full sweeps of the state space are required. The idea of value iteration is to improve the policy within the value iteration step. This value iteration approach only requires one iteration. 
 
-The Bellman equation\ref{eqn:v-def} can be used as an update rule to compute the value function iteratively. A table of values is maintained for each state, initialised randomly. The value of each state can be updated based on the immediate reward and the current estimates of the subsequent states; this is guaranteed to reduce the error at that state because the $\gamma$ discount rate discounts the error at the subsequent state. This process is called bootstrapping; the smaller $\gamma$, the quicker the error rate will decrease, and the faster the process will converge. When the inconsistency at each state is suitable, the process will stop. 
+The Bellman equation~\ref{eqn:v-def} can be used as an update rule to compute the value function iteratively. A table of values is maintained for each state, initialised randomly. The value of each state can be updated based on the immediate reward and the current estimates of the subsequent states; this is guaranteed to reduce the error at that state because the $\gamma$ discount rate discounts the error at the subsequent state. This process is called bootstrapping; the smaller $\gamma$, the quicker the error rate will decrease, and the faster the process will converge. When the inconsistency at each state is suitable, the process will stop. 
 
-This standard approach uses the traditional value Bellman equation\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
+This standard approach uses the traditional value Bellman equation~\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
 
 \begin{align}
   q_{\text{max}}(s,a)          & \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \tag{from \ref{eqn:q-def}} \\
@@ -396,7 +455,7 @@ This standard approach uses the traditional value Bellman equation\ref{eqn:v-def
 \end{align}
 
 
-As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\ast$ function.$q_\ast$, can be derived from the $v_\ast$ with the dynamics $p$ function.
+As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\star$ function.$q_\star$, can be derived from the $v_\star$ with the dynamics $p$ function.
 
 
 \section{Learning as incrementally optimising policy in a MDP}
@@ -440,7 +499,7 @@ This formula can be thought of as interpolating the old estimate at the old stat
 
 \subsection{Implementation conditions}\label{sect:impl-conditions}
 
-Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal q values $q_\ast$ provided the behaviour function visits all state-action pairs infinitely often. In practice, these q-values do not need to be perfect to derive an optimal policy. However, it can still take many visits to converge enough. Many observations may be necessary to build up a picture of the probability distribution and isolate noise. However, another reason for repeated observations is that the behaviour policy moves the agent forward in time, but the Q-learning table updates the last state. This conflicts as information propagates in the opposite direction of the updates that spread it. For example, suppose a sequence of $n$ states-actions have no reward but lead to some large reward at the end. as the behaviour completes these actions. In that case, only the last action will be updated to reflect the potential value, and every time the sequence is repeated, some of the value will propagate back one step. Many Q-learning implementations like ours will replay recent observations in reverse order to improve this performance. This is called the action-replay process (ARP). Replaying observations can be particularly effective when getting new observations is costly or slow, allowing for quicker convergence.
+Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal q values $q_\star$ provided the behaviour function visits all state-action pairs infinitely often. In practice, these q-values do not need to be perfect to derive an optimal policy. However, it can still take many visits to converge enough. Many observations may be necessary to build up a picture of the probability distribution and isolate noise. However, another reason for repeated observations is that the behaviour policy moves the agent forward in time, but the Q-learning table updates the last state. This conflicts as information propagates in the opposite direction of the updates that spread it. For example, suppose a sequence of $n$ states-actions have no reward but lead to some large reward at the end. as the behaviour completes these actions. In that case, only the last action will be updated to reflect the potential value, and every time the sequence is repeated, some of the value will propagate back one step. Many Q-learning implementations like ours will replay recent observations in reverse order to improve this performance. This is called the action-replay process (ARP). Replaying observations can be particularly effective when getting new observations is costly or slow, allowing for quicker convergence.
 
 
 In \ref{eqn:q-learning-update-formula}, we can see how $\alpha$ controls the influence of each observation. But how do we tune this hyper-parameter? One option is to treat it like other hyperparameters where possible and use previous experimentation to find a practical value. However, one of the main reasons to use RL is that it does not require prior knowledge, so this is not always suitable. A fixed learning rate may not also be suitable. Some observations may be more important than others; It has been observed that a decaying learning rate has been more effective. It is believed that a decaying learning rate allows for learning algorithms to avoid local minima at the beginning with the large learning rate and then settle on a global minima as the learning rate decays\cite{decayingLearningRates}. The paper \say{Learning Rates for Q-learning}\cite{even2003learning} derives how polynomial learning rates such as $\alpha = 1/t^\omega$ converge much better than linear ($\alpha = 1/t$) rates.
@@ -454,8 +513,7 @@ Picking the behavioural policy is important; it must balance exploring and gaini
 Both $\varepsilon$-greedy and $\varepsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are kept, and actions are chosen based upon alternating tables this helps average out the bias and improves the accuracy of estimates.
 
 
-\newpage
-\section{TODO - Measuring Performance}\label{section:measuring-performance}
+\section{Measuring Performance}\label{section:measuring-performance}
 
 Accurately measuring the effectiveness of machine learning algorithms is essential for guiding research and assessing the state-of-the-art. For supervised learning tasks such as classification, this can be relatively straightforward. The model can be assessed new data against its goal. However, in RL several important differences make assessment difficult. Firstly the agent's decisions influence the training data.  This creates a unique challenge: evaluating the performance of different algorithms becomes an apples-to-oranges comparison\cite{sutton2018reinforcement}.
 
@@ -465,17 +523,20 @@ The second key challenge is RL's sensitivity to hyperparameters and factors of t
   Recent reproducibility analyses have shown that reported performance results are often inconsistent and difficult to replicate\cite{evaluatingRL}
 \end{quote}
 
+\newpage
 A third challenge is the metric by which the model is assessed, unlike supervised learning the agent receives its performance signal from the environment which means the objective and amount of reward can vary wildly between different environments. This can complicate comparisons between different environments, however, these comparisons are necessary to measure how well the algorithm generalises. One solution is creating a standard testbed of varied environments and a protocol for exploration \cite{assessingDeepRL}\cite{evaluatingRL}. In this approach, the agent only receives meta information such as the size of the state space, the agent must be able to automatically adjust to the environment. In my opinion, this integrates naturally with the core philosophy of refinement learning. However, this is not compatible with the traditional algorithms explored in this project as they have hyperparameters.
 
-Another approach to address this third challenge is to use the optimal policy as a benchmark. That is to base the performance measures against the optimal policy. Of this kind, there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. Regret is a commonly used metric \cite{modelFree} however it requires the environment to have a cut-off for this calculation, while there may be a natural choice in episodic tasks this cut-off is yet another tunable parameter that contributes to the second problem. 
+Another approach to address this third challenge is to use the optimal policy as a benchmark. That is to base the performance measures against the optimal policy. Of this kind, there are two main measures. The first measure is called regret, it is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. Regret is a commonly used metric \cite{modelFree} however it requires the environment to have a cut-off for this calculation, while there may be a natural choice in episodic tasks this cut-off is yet another tunable parameter that contributes to the second problem. Regret is important when you are interested in the reward gathered during learning, this is important for environments that are non-stationary and require continuous learning.
 
-The second measure is called the Characteristic Time $T^*$. If regret is to measure effective exploitation $T^*$ is a measure of efficient exploration. While I do not fully understand its definition or meaning $T^*$  essentially measures the minimal number of samples required to identify a a nearly optimal policy in an MDP\cite{characteristicTime}. A useful approximation of $T^*$ is the number of time-steps $t$ needed to maximise the following formula\cite{modelFree}:
+\label{bpi-introduction}
+The second measure is called the characteristic time $T^*$. This measure comes from the best policy identification (BPI) problem. In the BPI problem, there are two phases training and testing during the training phase the objective is the learn the best policy to maximise the reward in the testing phase. This model can be considered similar to supervised learning and can be applied to learning games such as Go or Chess. \cite{bestPolicyIdentifaction}. If regret is to measure effective exploitation $T^*$ is a measure of efficient exploration. the characteristic time is a complex formula that essentially measures the minimal number of samples required to identify a nearly optimal policy in an MDP\cite{characteristicTime}. A useful approximation of $T^*$ is the number of time-steps $t$ needed to maximise the following formula\cite{modelFree}:
 
 \begin{equation}
-  1- \frac{ \left\|V^\ast-V^{\pi_t} \right\|_\infty}{\left\|V^\ast\right\|_\infty}
+  1- \frac{ \left\|V^\star-V^{\pi_t} \right\|_\infty}{\left\|V^\star\right\|_\infty}
   \label{eqn:characteristic-time-aproximation}
 \end{equation}
  
+The characteristic time measure was developed on the multi-arm bandit problem\cite{characteristicTime}. It uses the Kullback-Leibler divergence between an allocation vector and the true distribution. Each MDP has a corresponding optimal allocation vector which represents the best allocation of samples (action-taking) to determine the underlying distribution. however, this problem is non-convex\cite{characteristicTimeNonConvex} and requires extensive knowledge of the MDP's underlying distribution.
 
 \chapter{Exploration Strategy Effectiveness}
 
@@ -541,7 +602,7 @@ Figure~\ref{fig:ucb-exploration-bias} also illustrate how the effects of $c$ can
 $\epsilon$ greedy is able to get extraordinary results at the cost of under-exploration. UCB risks the opposite issue; it may over-explore. This is a consequence of its uncertainty term \ref{eqn:ucb}, it's optimistic and always growing, This guarantees the strategy will always explore enough to fully converge. Unfortunately, it is never truly done exploring. The $\ln t$ operator helps to mitigate this issue over time. However, at the beginning, the UCB is prone to re-exploring areas over new ones. I believe this behaviour explains some of the oscillations in figure~\ref{fig:reward-history:ucb}. In UCB's favour, it considers the estimated value in all of its exploration and has received the least penalty of any strategy.
 
 
-\section{TODO - Model-Free Best Policy Identification}
+\section{Model-Free Best Policy Identification}
 
 \begin{figure}[H]
   \centering
@@ -552,13 +613,19 @@ $\epsilon$ greedy is able to get extraordinary results at the cost of under-expl
 \end{figure}
 
 
-Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over its contemporaries such as UCB \cite{modelFree}. This exploration strategy uses an allocation vector $\omega$ that distributes the search effort across the state-action space. The MF-BPI algorithms aim to optimise this allocation vector for the BPI metric. To handle the uncertainty in the estimates MF-BPI maintains an ensemble of value tables to measure their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration.
+Model-Free Best Policy Identification (MF-BPI) is a state-of-the-art method that has demonstrated an improvement in exploration over its contemporaries such as UCB \cite{modelFree}. This exploration strategy optimises for the best policy identification that was introduced in section~\ref{bpi-introduction}. Unfortunately, the characteristic time $T^*$ metric is non-convex\cite{characteristicTimeNonConvex} and requires extensive knowledge of the MDP's underlying distribution. Model-Free Best Policy Identification addresses both of these issues to make this approach practical.
+
+This exploration strategy uses an allocation vector $\omega$ that distributes the search effort across the state-action space, however instead of optimising this with respect to the characteristic time $T^*$ metric they derive a new tight convex upper bound $\tilde{U}$. 
+
+\begin{equation}
+  \tilde{U}(\omega) \doteq \max_{s,a \neq \pi^\star(s)} \frac{H(s,a)}{\omega(s,a)} + \frac{H}{\min_{s'} \omega(s',\pi^\star(s'))} \cite{modelFree} \label{eqn:upper-bound-def}
+\end{equation}
 
 
+This new metric overcomes the first challenge however in the equation~\ref{eqn:upper-bound-def} it is evident that it is still dependent on the optimal policy, and the optimal value function; something an agent would not have access to. Therefore to make this practical the MF-BPI strategy estimates these values by maintaining an ensemble of value tables, from which it can estimate their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration, Garivier et al. said \say{the forced exploration step are rarely useful, but in some cases really necessary and not only for the theorems}\cite{characteristicTime}
 
-goldy locks  - minmal number of parameters 
+MF-BPI strategy requires three hyperparameters: the ensemble size, the exploration parameter and what I call error sensitivity. however, the strategy does not seem to require extensive tuning and performs well with the provided values. While this strategy has not performed quite as well as a perfectly tuned $varepsilon$ -greedy it is nearly as good without any tuning. Notably, this strategy's regret is competitive despite not being the objective. Overall MF-BPI's incredible generalisation impresses me the most.
 
-generalises well, neither over explores or under explores 
 
 \section{Hyperparameter Selection}
 
@@ -692,6 +759,8 @@ The discount rate hyperparameter affects how much future value propagates backwa
 On the other end of the spectrum when the discount factor is large $\gamma \approx 1$ this can encourage far-sighted behaviour such as waiting. However, for the cliff environment, far-sighted behaviour was not a concern, instead, the regret observed around $\gamma > 0.8$ in figure~\ref{fig:discount-rate-full} is explained by another factor. The bellman equations form a contraction mapping where $\gamma$ is the contraction factor\cite{QlearningConvergance}. The result is that the discount factor is inversely proportional to the rate of convergence. Figure~\ref{discount-rate-introduction} shows how at the extreme the slowed convergence noticeably increases the agent's regret as the time the agent takes to learn increases.
 
 \section{TODO - Conclusions}
+
+Is this important or does the above provide the necessary take-aways? 
 
 \chapter{TODO - Project Analysis}
 

@@ -20,7 +20,7 @@ This application implements reinforcement learning agents in a grid world.
 
 > Note: This guide is for those only interested in using the application, see [Development](#development) for a development workflow.
 
-This project requires Python 3.10 and with Tkinter. Most distributions of Python include tkinter although it may need to be enabled in the installer. Python installers can be found [here](https://www.python.org/downloads/).
+This project requires Python 3.10. Python installers can be found [here](https://www.python.org/downloads/). The program has a GU
 
 > If you encounter issues or don't want to install this program locally there is a docker file [here](../.devcontainer/Dockerfile). This docker file specifies the environment and all the tooling for this project.
 
