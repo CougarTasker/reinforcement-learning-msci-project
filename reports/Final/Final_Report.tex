@@ -120,140 +120,6 @@ Through this project, I aim to improve my understanding of autonomous agents' be
 Full critical review of literature relevant to the study.
 
 
-\chapter{TODO (section introduction)- Software Engineering}
-
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=0.95\linewidth]{state_value}
-    \caption[width=0.5\linewidth]{\label{fig:screenshot:state-value-table} The V (state-value) table}
-  \end{subfigure}%
-  \begin{subfigure}{.5\textwidth}
-    \centering
-    \includegraphics[width=0.95\linewidth]{action_value}
-    \caption[width=0.5\linewidth]{\label{fig:screenshot:action-value-table} The Q (action-value) table}
-  \end{subfigure}
-  \caption{Two of the application's visualisations}
-  \label{fig:app-ui}
-\end{figure}
-
-This chapter details the software engineering of the project and demonstrates how this allowed the project to succeed. Software engineering consists of methods and techniques to develop large and robust applications\cite{van2008software}.  
-
-\section{System Design}
-
-
-This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have used libraries such as Numpy, Numba and Pillow that allow me to move the bulk of the computation out of Python.  
-
-The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. This has proved invaluable several times as I needed to change the GUI library several times to meet my requirements. Due to the nature of modern GUI frameworks, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view. 
-
-The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application this is achieved by adhering to software engineering principles \cite{softwareEngineringPrinciples} and using software design patterns where applicable.
-
-\section{TODO - Technical Decisions}
-
-
- - multiprocessing architecture the use of IPC + serialization
-
-talk about the choice of gui,  , etc.
-
-Are important (technical) decisions well made and **argued**? This includes:
-
- - good design decisions
- - choice or development of algorithms
- - scope of the project.
-
-
-
-\pagebreak
-\section{Workflow}
-
-
-All aspects of this project are stored under the Git version control system, and changes made on this project are grouped into small units called commits. Each commit belongs to a branch and has a message summarising the changes. Conventional commits \cite{conventionalCommitsOnline} is a standard for commit messages. In this project, I have followed this standard because it keeps the commit message consistent and enables the use of tools such as automated change log generation and versioning. As this project has a single author I have chosen to use branches to group together related work, instead of following a specific branching strategy. However, like most branching strategies the main branch represents the project after each stage of work is finalised and therefore main is always is complete and functional. 
-
-One key part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes firstly the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code ensuring 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command and most editors also integrate docstrings so they are accessible during development. Importantly this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date\cite{pythonAutoDoc} and covers all of the code. 
-
-Testing is integral to this project, as part of my workflow I write unit tests. Unit tests are pieces of code that perform validation and verification parts of the main application. A unit testing framework has been configured to run these tests and collate the results. All tests must pass before each commit can be made this means that regressions are spotted quickly. These tests are also integrated into the IDE providing feedback and easing debugging.  While testing can be valuable it can be costly, Daka et al found developers spent a substantial time writing tests \cite{unitTestingSurvey}. The returns from testing can be especially low for trivial code that can take several times longer to test than create. For this reason, I have limited tests to all important areas or complex areas of the program.  
-
-The development environment is the system of programs where this workflow takes place. This project is configured to work well with a particular Integrated development environment (IDE), for instance, the IDE will be able to start the application with a debugger attached allowing the user to step through the code in the editor. Code quality is maintained in this repository with several automated tools. Static code analysis tools enforce a consistent code style and check for typing errors. I have configured these tools to integrate with the IDE giving immediate feedback so issues can be addressed quickly. Furthermore, Git is configured with pre-commit hooks so these tools must run and validate the code before every commit is made. Furthermore, these tools can be integrated with CI/CD pipelines which is particularly useful for collaborative projects.
-
-While all of the tooling for this project improves many aspects of development this may be difficult to set up and provides many opportunities for discrepancies to emerge between different setups. For this reason, I have created a development container, This container fully specifies every tool and its version to be installed. This containerised environment makes it easy to set up the environment and consistent each time. Containers for development are rapidly growing in interest\cite{developmentContainers}. 
-
-For the sake of consistency, the application itself has been configured with a dependency management and packaging tool. All of the libraries the application relies upon are specified in the standard `pyproject.toml` and the tool manages their installation in an isolated virtual environment. This process makes it easy to distribute this application and avoids inconsistencies on different computers.
-
-\section{Functionality and Usage}
-
-The application's functionality revolves around running reinforcement learning simulations and allowing the user to interact with and analyse the effects of different options. These simulations encompass two main units an agent and dynamics. The agent unit encompasses the functionality for learning and decision making while the dynamics unit encompasses a grid world Markov decision process. These units are interchangeable and configurable by the user dynamically through controls in the user interface and through a configuration file \path{config.toml}. The results of these learning experiments are expressed by the application in several fashions such as a state-by-state view, information displays and graphs.
-
-
-\subsection{Getting Started}
-
-The project is set up as a standard distribution package, poetry is the build backend. While you may also use poetry as the build front-end if you have it installed however it may be excessive if you are only interested in starting the application.
-
-Pipx is a simple build frontend that should be familiar if you have experience with pip. You can find instructions on how to \href{https://pipx.pypa.io/stable/installation/}{install Pipx for your platform here}. If you have installed pipx you can run the application with the following command:
-
-\begin{verbatim*}
-  python3 -m pipx run --spec . start
-\end{verbatim*}
-
-You can find more information about this application and how to start it in the readme file in the code folder.
-
-\section{User Interface}
-
-
-
-
-
-The user interface is not only a major component of the project's functionality but also the user's window into the entire application. When starting the application you will be greeted by a window that is largely broken into three components. At the top, there is a section which contains the main controls for selecting the most significant options of the main simulation; such as the agent and dynamics. If the agent is off-policy you can select its exploration strategy. 
-
-\begin{figure}[H]
-  \centering
-  
-  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/state-value-2.png}
-  
-  \caption{\label{fig:screenshot:current-state} "Current State" tab with optimal state-value visualisation of the cliff environment}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  
-  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/reward-history.png}
-  
-  \caption{\label{fig:screenshot:current-state} "Reward history" tab with Q-learning agent in the cliff environment}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  
-  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/random-search.png}
-  
-  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Search" tab showing search results}
-\end{figure}
-
-
-\begin{figure}[H]
-  \centering
-  
-  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/loading-screen.png}
-  
-  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Tuning" tab loading screen}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  
-  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/hyper-tuning.png}
-  
-  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Tuning" tab showing the results of tuning the reward queue length}
-\end{figure}
-
-
-
-In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
-
-The main display on the first tab visualises the current state of the main simulation, each dynamics are based around a grid world and the display visualises this with a grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode, In the initial default display mode a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other Display modes arrows represent the agent's actions in each state and a color scale is used to represent the agent's interpretation of value. On this color scale hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
-
-At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
-
 \chapter{Professional Issues In Machine Learning}
 
 Machine learning programs and techniques, as explored in this project, possess immense potential for social benefit when managed judiciously, but they also risk significant social and ethical consequences\cite{AISocialImpactAndAccountability}. One concern is the ability of ML systems to reinforce and perpetuate societal biases in their decisions\cite{AISocialImpactAndAccountability}. One prominent example of this dichotomy of potential was \say{Rekognition}, Amazon's facial recognition tool (FRT)\cite{legislatingOG}. Rekognition is a cloud-based deep-learning application which can identify people, activities, objects, and more \cite{rekognitionOverview}. This powerful tool can bring societal benefit one example is an application that notifies professionals who are in high-risk sectors such as healthcare or construction\cite{rekognitionOverview}. Rekognition can make this possible by detecting Personal Protective Equipment. 
@@ -296,9 +162,6 @@ This case study is one of many, that may highlight similar or different challeng
 
 \section{TODO - link to RL}
 
-% \chapter{Timeline}
-
-% planning and time-scale; use project plan and compare with reality
 
 \chapter{Fundamental Concepts}
 \section{Markov Decision Processes}
@@ -537,6 +400,140 @@ The second measure is called the characteristic time $T^*$. This measure comes f
 \end{equation}
  
 The characteristic time measure was developed on the multi-arm bandit problem\cite{characteristicTime}. It uses the Kullback-Leibler divergence between an allocation vector and the true distribution. Each MDP has a corresponding optimal allocation vector which represents the best allocation of samples (action-taking) to determine the underlying distribution. however, this problem is non-convex\cite{characteristicTimeNonConvex} and requires extensive knowledge of the MDP's underlying distribution.
+
+\chapter{TODO (section introduction)- Software Engineering}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{state_value}
+    \caption[width=0.5\linewidth]{\label{fig:screenshot:state-value-table} The V (state-value) table}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=0.95\linewidth]{action_value}
+    \caption[width=0.5\linewidth]{\label{fig:screenshot:action-value-table} The Q (action-value) table}
+  \end{subfigure}
+  \caption{Two of the application's visualisations}
+  \label{fig:app-ui}
+\end{figure}
+
+This chapter details the software engineering of the project and demonstrates how this allowed the project to succeed. Software engineering consists of methods and techniques to develop large and robust applications\cite{van2008software}.  
+
+\section{System Design}
+
+
+This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have used libraries such as Numpy, Numba and Pillow that allow me to move the bulk of the computation out of Python.  
+
+The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. This has proved invaluable several times as I needed to change the GUI library several times to meet my requirements. Due to the nature of modern GUI frameworks, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view. 
+
+The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application this is achieved by adhering to software engineering principles \cite{softwareEngineringPrinciples} and using software design patterns where applicable.
+
+\section{TODO - Technical Decisions}
+
+
+ - multiprocessing architecture the use of IPC + serialization
+
+talk about the choice of gui,  , etc.
+
+Are important (technical) decisions well made and **argued**? This includes:
+
+ - good design decisions
+ - choice or development of algorithms
+ - scope of the project.
+
+
+
+\pagebreak
+\section{Workflow}
+
+
+All aspects of this project are stored under the Git version control system, and changes made on this project are grouped into small units called commits. Each commit belongs to a branch and has a message summarising the changes. Conventional commits \cite{conventionalCommitsOnline} is a standard for commit messages. In this project, I have followed this standard because it keeps the commit message consistent and enables the use of tools such as automated change log generation and versioning. As this project has a single author I have chosen to use branches to group together related work, instead of following a specific branching strategy. However, like most branching strategies the main branch represents the project after each stage of work is finalised and therefore main is always is complete and functional. 
+
+One key part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes firstly the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code ensuring 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command and most editors also integrate docstrings so they are accessible during development. Importantly this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date\cite{pythonAutoDoc} and covers all of the code. 
+
+Testing is integral to this project, as part of my workflow I write unit tests. Unit tests are pieces of code that perform validation and verification parts of the main application. A unit testing framework has been configured to run these tests and collate the results. All tests must pass before each commit can be made this means that regressions are spotted quickly. These tests are also integrated into the IDE providing feedback and easing debugging.  While testing can be valuable it can be costly, Daka et al found developers spent a substantial time writing tests \cite{unitTestingSurvey}. The returns from testing can be especially low for trivial code that can take several times longer to test than create. For this reason, I have limited tests to all important areas or complex areas of the program.  
+
+The development environment is the system of programs where this workflow takes place. This project is configured to work well with a particular Integrated development environment (IDE), for instance, the IDE will be able to start the application with a debugger attached allowing the user to step through the code in the editor. Code quality is maintained in this repository with several automated tools. Static code analysis tools enforce a consistent code style and check for typing errors. I have configured these tools to integrate with the IDE giving immediate feedback so issues can be addressed quickly. Furthermore, Git is configured with pre-commit hooks so these tools must run and validate the code before every commit is made. Furthermore, these tools can be integrated with CI/CD pipelines which is particularly useful for collaborative projects.
+
+While all of the tooling for this project improves many aspects of development this may be difficult to set up and provides many opportunities for discrepancies to emerge between different setups. For this reason, I have created a development container, This container fully specifies every tool and its version to be installed. This containerised environment makes it easy to set up the environment and consistent each time. Containers for development are rapidly growing in interest\cite{developmentContainers}. 
+
+For the sake of consistency, the application itself has been configured with a dependency management and packaging tool. All of the libraries the application relies upon are specified in the standard `pyproject.toml` and the tool manages their installation in an isolated virtual environment. This process makes it easy to distribute this application and avoids inconsistencies on different computers.
+
+\section{Functionality and Usage}
+
+The application's functionality revolves around running reinforcement learning simulations and allowing the user to interact with and analyse the effects of different options. These simulations encompass two main units an agent and dynamics. The agent unit encompasses the functionality for learning and decision making while the dynamics unit encompasses a grid world Markov decision process. These units are interchangeable and configurable by the user dynamically through controls in the user interface and through a configuration file \path{config.toml}. The results of these learning experiments are expressed by the application in several fashions such as a state-by-state view, information displays and graphs.
+
+
+\subsection{Getting Started}
+
+The project is set up as a standard distribution package, poetry is the build backend. While you may also use poetry as the build front-end if you have it installed however it may be excessive if you are only interested in starting the application.
+
+Pipx is a simple build frontend that should be familiar if you have experience with pip. You can find instructions on how to \href{https://pipx.pypa.io/stable/installation/}{install Pipx for your platform here}. If you have installed pipx you can run the application with the following command:
+
+\begin{verbatim*}
+  python3 -m pipx run --spec . start
+\end{verbatim*}
+
+You can find more information about this application and how to start it in the readme file in the code folder.
+
+\section{User Interface}
+
+
+
+
+
+The user interface is not only a major component of the project's functionality but also the user's window into the entire application. When starting the application you will be greeted by a window that is largely broken into three components. At the top, there is a section which contains the main controls for selecting the most significant options of the main simulation; such as the agent and dynamics. If the agent is off-policy you can select its exploration strategy. 
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/state-value-2.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Current State" tab with optimal state-value visualisation of the cliff environment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/reward-history.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Reward history" tab with Q-learning agent in the cliff environment}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/random-search.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Search" tab showing search results}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/loading-screen.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Tuning" tab loading screen}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  
+  \includegraphics[trim={0 0 0 6mm},clip,width=\textwidth]{ui-screenshots/hyper-tuning.png}
+  
+  \caption{\label{fig:screenshot:current-state} "Hyper-parameter Tuning" tab showing the results of tuning the reward queue length}
+\end{figure}
+
+
+
+In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
+
+The main display on the first tab visualises the current state of the main simulation, each dynamics are based around a grid world and the display visualises this with a grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode, In the initial default display mode a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other Display modes arrows represent the agent's actions in each state and a color scale is used to represent the agent's interpretation of value. On this color scale hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
+
+At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
 
 \chapter{Exploration Strategy Effectiveness}
 
