@@ -423,33 +423,40 @@ This chapter details the software engineering of the project and demonstrates ho
 
 \section{System Design}
 
+\begin{figure}
+  \centering
+  
+  \includegraphics[width=\textwidth]{package_diagram-2.pdf}
+  
+  \caption{\label{fig:package-diagram} UML package digram of core packages from the application}
+\end{figure}
 
 This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have used libraries such as Numpy, Numba and Pillow that allow me to move the bulk of the computation out of Python.  
 
-The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. This has proved invaluable several times as I needed to change the GUI library several times to meet my requirements. Due to the nature of modern GUI frameworks, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view. 
+The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements it helps to reduce the coupling between these two different but connected modules. This has proved invaluable several times as I needed to change the GUI library several times to meet my requirements. Due to the nature of modern GUI frameworks, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern \cite{webMVC}\cite{gamesMVC} where the controller acts as a bridge between the model and view. This is similar to the MVVM and MVP architectures\cite{mvvm}.
 
 The application has been written in an object-oriented fashion with modern software engineering principles in mind\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application this is achieved by adhering to software engineering principles \cite{softwareEngineringPrinciples} and using software design patterns where applicable.
 
 \section{TODO - Technical Decisions}
 
 
- - multiprocessing architecture the use of IPC + serialization
-
-talk about the choice of gui,  , etc.
+multiprocessing architecture the use of IPC + serialization
 
 Are important (technical) decisions well made and **argued**? This includes:
 
- - good design decisions
- - choice or development of algorithms
- - scope of the project.
+ - good design decisions -> multiprocessing 
+ - choice or development of algorithms -> Q learning vs sarsa vs ... 
+ - scope of the project. -> tabular vs deep reainforment learning
 
+
+Software development is made up of a large number of technical decisions. Most decisions are small and have a limited scope and consequences. In this section, I would like to highlight some of the key decisions and their impact on the project. 
 
 
 \pagebreak
 \section{Workflow}
 
 
-All aspects of this project are stored under the Git version control system, and changes made on this project are grouped into small units called commits. Each commit belongs to a branch and has a message summarising the changes. Conventional commits \cite{conventionalCommitsOnline} is a standard for commit messages. In this project, I have followed this standard because it keeps the commit message consistent and enables the use of tools such as automated change log generation and versioning. As this project has a single author I have chosen to use branches to group together related work, instead of following a specific branching strategy. However, like most branching strategies the main branch represents the project after each stage of work is finalised and therefore main is always is complete and functional. 
+All aspects of this project are stored under the Git version control system, and changes made on this project are grouped into small units called commits. Each commit belongs to a branch and has a message summarising the changes. Conventional commits \cite{conventionalCommitsOnline} is a standard for commit messages. In this project, I have followed this standard because it keeps the commit message consistent and enables the use of tools such as automated change log generation and versioning. As this project has a single author I have chosen to use branches to group together related work, instead of following a specific branching strategy. However, like most branching strategies the main branch represents the project after each stage of work is finalised and therefore main is always in a complete and functional state. 
 
 One key part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes firstly the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code ensuring 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command and most editors also integrate docstrings so they are accessible during development. Importantly this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date\cite{pythonAutoDoc} and covers all of the code. 
 
@@ -479,10 +486,6 @@ Pipx is a simple build frontend that should be familiar if you have experience w
 You can find more information about this application and how to start it in the readme file in the code folder.
 
 \section{User Interface}
-
-
-
-
 
 The user interface is not only a major component of the project's functionality but also the user's window into the entire application. When starting the application you will be greeted by a window that is largely broken into three components. At the top, there is a section which contains the main controls for selecting the most significant options of the main simulation; such as the agent and dynamics. If the agent is off-policy you can select its exploration strategy. 
 
@@ -560,6 +563,7 @@ The $\varepsilon$-Greedy is the most straightforward strategy implemented in thi
 This epsilon parameter controls the ratio between the agent's exploration and exploitation. Having high exploitation can garner more rewards in the short term but this has a large opportunity cost of not finding potentially lucrative strategies. On the other hand, if you are already following an optimal policy an exploratory action would not be optimal, and in the case of the cliff environment, it can be potentially devastating. In the beginning, higher exploration may be necessary to avoid local minima, but once the policy has started to converge higher exploitation can be more rewarding. To address this issue the $\varepsilon$ parameter can be dynamically adjusted during training. This project implements the traditional discounting with a fixed hyperparameter however more advanced reward-based techniques have been found more successful\cite{rewardEpsilonDecay}.
 
 Despite $\varepsilon$-Greedy's simplicity figure~\ref{fig:reward-history:eg} shows how competitive this strategy can be when tuned to the environment. A combination of optimistic initial estimates and forced exploration can be extremely efficient. Unfortunately, to achieve these extraordinary results, each hyperparameter needs to be "just right" for the environment; this doesn't generalise easily and can be thought of as a form of over-fitting. I cover the effects of the exploration decay rate parameter in more detail in section~\ref{edgr-section}.
+
 
 \section{Upper Confidence Bound}
 
