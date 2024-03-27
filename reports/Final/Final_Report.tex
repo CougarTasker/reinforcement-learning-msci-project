@@ -156,11 +156,11 @@ While the human factor of implicit biases makes them harder to tackle systematic
 AI must be regulated in a fashion where we no longer perpetuate existing or create new social harms while not discouraging the potential societal benefits that it may bring\cite{AIRisksAndPrinciples}. 
 
 
-In conclusion, this chapter has covered the relationships between machine learning applications and society from the perspective of the Rekognition case study. 
-This case study is one of many, that may highlight similar or different challenges and rewards that AI may bring. Hopefully, this review has provided a focused discussion of some of the core topics. The application in this project is exploratory and operates in simulated environments, and its actions have no direct consequences on anyone, in this sense, I believe it is insulated from bias and causing this type of social harm. 
+This case study is one of many, that may highlight similar or different challenges and benefits that AI may bring. Unlike the case study the application in this project is exploratory and operates in simulated environments, in this sense, I believe it is insulated from bias and causing this type of social harm. However, this is just one facet of how these systems incorporate with society. Like machine learning as a whole RL specifically deep reinforcement learning (DRL) increasing use to solve practical problems\cite{deepRLsocietalImpact}. One place DRL is being applied is in militaries across the world\cite{rlMilitaryReviewChina}\cite{DRLDrones}. Of these military applications, their use in UAVs has seen impressive success, In DARPA's AlphaDogfght competition an autonomous DRL agent beat a human F-16 pilot 5:0 and won the championship\cite{rlMilitaryReviewChina}. These UAVs have grown in there autonomous capabilities\cite{DRLDrones} and its clear that in conflicts these agents may operate weapons systems. When a reinforcement learning agent's action space included taking a human life, is this morally and ethically right?
 
 
-\section{TODO - link to RL}
+These systems may have been trained in simulation of military operations and rewarded for their actions that achieved military goals\cite{rlMilitaryReviewChina}. These experiences will shape the agents interpretation of value, however these experiences are unlike ours as humans. As humans we have a vast variety of experience including that of companion and kindness. In this respect the value a human and DRL combatant will assign to killing their opponents may differ vastly. I believe that there may be situations where an AI may pick actions that may lead to a large loss of life only for a miniscule increase in the chance of success. 
+
 
 
 \chapter{Fundamental Concepts}
@@ -401,7 +401,7 @@ The second measure is called the characteristic time $T^*$. This measure comes f
  
 The characteristic time measure was developed on the multi-arm bandit problem\cite{characteristicTime}. It uses the Kullback-Leibler divergence between an allocation vector and the true distribution. Each MDP has a corresponding optimal allocation vector which represents the best allocation of samples (action-taking) to determine the underlying distribution. however, this problem is non-convex\cite{characteristicTimeNonConvex} and requires extensive knowledge of the MDP's underlying distribution.
 
-\chapter{TODO (section introduction)- Software Engineering}
+\chapter{Software Engineering}
 
 \begin{figure}[H]
   \centering
@@ -419,7 +419,7 @@ The characteristic time measure was developed on the multi-arm bandit problem\ci
   \label{fig:app-ui}
 \end{figure}
 
-This chapter details the software engineering of the project and demonstrates how this allowed the project to succeed. Software engineering consists of methods and techniques to develop large and robust applications\cite{van2008software}.  
+This chapter details the software engineering of the project and demonstrates how this allowed the project to succeed. Software engineering consists of methods and techniques to develop large and robust applications\cite{van2008software}. Software engineering techniques are principally aimed at managing complexity and evolving requirements. As functionality and complexity have grown the software engineering consideration of this chapter has been crucial. At the time of writing the application is over 5300 lines of Python code across 150 files.
 
 \section{System Design}
 
@@ -440,13 +440,11 @@ The application has been written in an object-oriented fashion with modern softw
 \section{TODO - Technical Decisions}
 
 
-multiprocessing architecture the use of IPC + serialization
-
 Are important (technical) decisions well made and **argued**? This includes:
 
- - good design decisions -> multiprocessing 
+ - good design decisions -> multiprocessing IPC + serialization
  - choice or development of algorithms -> Q learning vs sarsa vs ... 
- - scope of the project. -> tabular vs deep reainforment learning
+ - scope of the project. -> tabular vs deep reinforcement learning
 
 
 Software development is made up of a large number of technical decisions. Most decisions are small and have a limited scope and consequences. In this section, I would like to highlight some of the key decisions and their impact on the project. 
@@ -478,11 +476,9 @@ The application's functionality revolves around running reinforcement learning s
 The project is set up as a standard distribution package, poetry is the build backend. While you may also use poetry as the build front-end if you have it installed however it may be excessive if you are only interested in starting the application.
 
 Pipx is a simple build frontend that should be familiar if you have experience with pip. You can find instructions on how to \href{https://pipx.pypa.io/stable/installation/}{install Pipx for your platform here}. If you have installed pipx you can run the application with the following command:
-
-\begin{verbatim*}
-  python3 -m pipx run --spec . start
-\end{verbatim*}
-
+\begin{verbatim}
+python3 -m pipx run --spec . start
+\end{verbatim}
 You can find more information about this application and how to start it in the readme file in the code folder.
 
 \section{User Interface}
