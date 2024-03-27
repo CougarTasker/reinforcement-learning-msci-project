@@ -25,6 +25,8 @@
 - [Week 23 (19/02/24)](#week-23-190224)
 - [Week 25 (04/03/24)](#week-25-040324)
 - [Week 26 (11/03/24)](#week-26-110324)
+- [Week 27 (18/03/24)](#week-27-180324)
+- [Week 28 (25/03/24)](#week-28-250324)
 
 <!-- omit in toc -->
 ## Weeks
@@ -271,3 +273,24 @@ This week was spent on a major overhaul to the configuration system to support h
  - (Fri 15)
    - Attended forth term-two supervisor meeting
    - Completed first draft of the hyper parameter section. 
+
+### Week 27 (18/03/24)
+
+ - (Mon 18) Extended learning rate and EGDR hyperparameter sections.
+ - (Fri 22) 
+   - Added introduction of the software engineering section 
+   - Started drawing package diagram
+
+### Week 28 (25/03/24)
+ - (Mon 25) 
+   - added measuring performance section to fundamentals chapter
+   - completed exploration strategies section
+ - (Tue 26) 
+   - Re-ordered the chapters 
+   - added screenshots 
+   - finished MF-BPI section
+   - finished measuring performance section
+   - finished package diagram and added it
+ - (Wed 27)
+   - Extended professional issues to focus on reinforcement learning.
+   - Attended final supervisor meeting
