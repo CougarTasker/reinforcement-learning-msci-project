@@ -15,7 +15,7 @@
 %%% Input project details
 \def\studentname{Cougar Tasker}
 \def\reportyear{2023-24}
-\def\projecttitle{Resourceful Robots}
+\def\projecttitle{Effective Exploration in a Markov Decision Process}
 \def\supervisorname{Dr. Anand Subramoney}
 \def\degree{MSci (Hons) in Computer Science (Artificial Intelligence)}
 \def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
@@ -482,6 +482,13 @@ You can find more information about this application and how to start it in the 
 
 The user interface is not only a major component of the project's functionality but also the user's window into the entire application. When starting the application you will be greeted by a window that is largely broken into three components. At the top, there is a section which contains the main controls for selecting the most significant options of the main simulation; such as the agent and dynamics. If the agent is off-policy you can select its exploration strategy. 
 
+In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
+
+The main display on the first tab visualises the current state of the main simulation, each dynamics are based around a grid world and the display visualises this with a grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode, In the initial default display mode a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other Display modes arrows represent the agent's actions in each state and a colour scale is used to represent the agent's interpretation of value. On this colour scale hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
+
+At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
+
+
 \begin{figure}[H]
   \centering
   
@@ -524,13 +531,6 @@ The user interface is not only a major component of the project's functionality 
 \end{figure}
 
 
-
-In the middle, there is a tabbed area the first tab is the main display this section visualises the state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. Finally, the fourth tab controls a random search procedure, starting this procedure searches for the best parameter choices for minimising regret. All of the graphs allow you to save their contents to a file of your choosing. 
-
-The main display on the first tab visualises the current state of the main simulation, each dynamics are based around a grid world and the display visualises this with a grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode, In the initial default display mode a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other Display modes arrows represent the agent's actions in each state and a color scale is used to represent the agent's interpretation of value. On this color scale hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
-
-At the bottom are specific controls specific to the main simulation and its visualisation. For example, there are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. 
-
 \chapter{Exploration Strategy Effectiveness}
 
 Q-learning is an off-policy process, which means that the policy that the policy that it is learning and improving is not necessarily the same as the policy it is following during exploration. By this, the actions chosen by a Q-learning agent may be independent of its current beliefs of the values of each action. Off-policy learning has several advantages, it may explore more fairly and completely than an on-policy approach. An on-policy approach may be incentivised to explore thoroughly if its initial estimates are particularly optimistic. However, in a stochastic environment where rewards are random with a large degree of spread, it may still be difficult for an on-policy technique to properly assess the rewards before falling into an in-optimal pattern.  
@@ -539,7 +539,7 @@ On-policy reinforcement learning algorithms such as SARSA do have many advantage
 
 In this project, I have focused on the off-policy Q-learning method. This chapter details the performance and effects of different exploration strategies. An exploration strategy is the policy that the agent follows during training as opposed to the learnt policy. This exploration strategy may be any method to select an action, however, to maintain the guarantees of convergence this policy must reach all states infinitely often (~\ref{sect:impl-conditions}). While a random action section, a random walk, does meet the convergence criteria it is not efficient in terms of rewards received or information gained. As an improvement in these measures, more sophisticated strategies have been developed that take into account many factors.
 
-
+\newpage
 \section{\texorpdfstring{$\varepsilon$}{Lg}-Greedy}
 
 \begin{figure}[H]
@@ -618,7 +618,7 @@ This exploration strategy uses an allocation vector $\omega$ that distributes th
 
 This new metric overcomes the first challenge however in the equation~\ref{eqn:upper-bound-def} it is evident that it is still dependent on the optimal policy, and the optimal value function; something an agent would not have access to. Therefore to make this practical the MF-BPI strategy estimates these values by maintaining an ensemble of value tables, from which it can estimate their variance. MF-BPI also uses a bootstrapping technique to ensure that the uncertainty decreases over time. Due to this bootstrapping, they claim that MF-BPI does not require forced exploration to ensure all state-action pairs are visited infinitely often however their implementations provided did include forced exploration, Garivier et al. said \say{the forced exploration step are rarely useful, but in some cases really necessary and not only for the theorems}~\cite{characteristicTime}
 
-MF-BPI strategy requires three hyperparameters: the ensemble size, the exploration parameter and what I call error sensitivity. however, the strategy does not seem to require extensive tuning and performs well with the provided values. While this strategy has not performed quite as well as a perfectly tuned $varepsilon$ -greedy it is nearly as good without any tuning. Notably, this strategy's regret is competitive despite not being the objective. Overall MF-BPI's incredible generalisation impresses me the most.
+MF-BPI strategy requires three hyperparameters: the ensemble size, the exploration parameter and what I call error sensitivity. however, the strategy does not seem to require extensive tuning and performs well with the provided values. While this strategy has not performed quite as well as a perfectly tuned $\varepsilon$-greedy it is nearly as good without any tuning. Notably, this strategy's regret is competitive despite not being the objective. Overall MF-BPI's incredible generalisation impresses me the most.
 
 
 \section{Hyperparameter Selection}
@@ -638,7 +638,7 @@ For this reason, the application contains multiple systems for finding the appro
 
 
 This report system overcomes the dimensionality visualisation issue by displaying a single axis-aligned slice of the space at a time. This approach is great for isolating the effects of a single parameter and fine-tuning parameters. Unfortunately, this approach cannot display the effects of any parameter combinations that do not coincide along one of the hyperparameter axes. Due to this limitation, the visualisations may display a local minimum and completely miss a global minimum. 
-
+\newpage
 A hyper-parameter search system is implemented to find the best baseline for fair comparisons. There are a few popular search strategies for hyperparameter optimization such as grid search, random search, and genetic algorithms~\cite{searchStrategies}. Grid-search is a very popular approach for its advantages such as simplicity, uniformity and parallelisation~\cite{searchStrategies}. however, it suffers from the curse of dimensionality~\cite{searchStrategies} so it was not suitable for this application. Instead, the random search strategy has been implemented. This strategy is highly amenable to parallelisation, A number of workers are used and they pick the parameters at random and run simulations independently. In this manner, the random search strategy does not require orchestration of the parameters and is resumable, synchronisation is only necessary when collating results to avoid race conditions.
 
 
@@ -676,7 +676,7 @@ Increasing optimism gradually decreases performance as the agent over-explores a
 The learning rate $\alpha$ is another hyperparameter of Q-learning~\ref{eqn:q-learning-update-formula}. This parameter controls how much each new TD estimate will update the current estimates. For stochastic environments getting this value right is crucial, If set too high the variability from the individual observations could lead to instability and the Q-table may not even converge at all. The cliff dynamics that are used in this demonstration are completely deterministic. 
 The larger the learning rate the fewer updates are necessary for the values to converge. However, this can be a double-edged sword because, in the current configuration, optimistic initial estimates drive the majority of the exploration. Therefore smaller updates encourage more thorough but slower exploration whereas larger updates are more rapid but unstable exploration.
 
-
+\newpage
 Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this impacts performance. In the range of $0.2$ to $1$, there is a plateau where the stability and speed of convergence are in balance. However, as the learning rate approaches zero the performance diminishes rapidly as the time taken to learn anything extends. In this region, the exploration period inhibits the agent's ability to exploit the environment.
 
 \subsection{\texorpdfstring{$\varepsilon$}{Lg}-Greedy Decay Rate}\label{edgr-section}
@@ -751,15 +751,23 @@ Where $\varepsilon_{\text{min}}$ is the minimum chance of exploration to conside
 The discount rate hyperparameter affects how much future value propagates backwards. The larger the discount rate the more future rewards are considered and the more far-sighted the agent becomes, conversely the smaller the discount rate the more short-sighted the agent's actions become~\ref{discount-rate-introduction}. When the discount rate is $\gamma \approx 0$ the agent's actions have no foresight. Unfortunately, the cliff environment's reward is sparse and figure~\ref{fig:discount-rate-full} shows how having some foresight is necessary. without it, the agent is essentially lost. 
 
 On the other end of the spectrum when the discount factor is large $\gamma \approx 1$ this can encourage far-sighted behaviour such as waiting. However, for the cliff environment, far-sighted behaviour was not a concern, instead, the regret observed around $\gamma > 0.8$ in figure~\ref{fig:discount-rate-full} is explained by another factor. The bellman equations form a contraction mapping where $\gamma$ is the contraction factor~\cite{QlearningConvergance}. The result is that the discount factor is inversely proportional to the rate of convergence. Figure~\ref{discount-rate-introduction} shows how at the extreme the slowed convergence noticeably increases the agent's regret as the time the agent takes to learn increases.
+\newpage
+\section{Conclusions}
 
-\section{TODO - Conclusions}
+In this chapter, we have discovered that each of these three model-free exploration strategies is capable of extremely efficient exploration and exploitation. It is clear that under the right conditions, regardless of a strategy's complexity or sophistication it can perform similarly. Furthermore, each exploration strategy's performance can be incredibly sensitive to its conditions such the the environment and hyperparameters. This sensitivity can make it easy to fall into the \say{tune-and-report} trap. Instead of focusing on concrete results, reporting on general trends may be more informative. 
 
-Is this important or does the above provide the necessary take-aways? 
+The parameter space has a high dimensionality and is heterogeneous so where possible a systematic search over the parameter space is advisable. Where this is not possible it seems a small, relative to rewards, amount of optimism is beneficial. A small but not negligible learning rate like $0.1$ is a good place to start. And finally, it seems the discount rate should be roughly proportional to how sparse rewards are. 
+
+The three strategies explored in this report vary from the simple to the state-of-the-art. On this scale the more advanced models demonstrated better generalisation, they perform better out-of-box and have less tunable parameters. However, these more sophisticated models can exhibit unusual behaviour and actions can be difficult to explain. It seems where generalisation to varied environments is important; advanced strategies are superior. However, if your environment is fixed a simpler strategy with tuned parameters can have similar performance and improved explainability.
+
+
 
 \chapter{TODO - Project Analysis}
 
 Critical analysis and Discussion (10\%): A discussion of actual project achievements and how successful the project was. Clear evidence of reflection on the project process, its difficulties, successes and future enhancements. Any conclusions or results analysed or discussed appropriately;
 
+
+would have been great to implement a wider range of environments including stochastic to challenge the stratries further
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
