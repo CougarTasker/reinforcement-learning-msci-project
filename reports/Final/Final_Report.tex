@@ -302,11 +302,11 @@ Although this policy improvement sounds computationally expensive, each state ca
 
 \subsubsection{Value Iteration}
 
-Policy iteration is a practical approach, for a finite MDP is guaranteed to finish in finite time. In practice, policy improvement does better and only takes a few iterations. However, in each iteration, multiple full sweeps of the state space are required. The idea of value iteration is to improve the policy within the value iteration step. This value iteration approach only requires one iteration. 
+Policy iteration is a practical approach, for a finite MDP is guaranteed to finish in finite time. In practice, policy improvement does better and only takes a few iterations. However, in each iteration, multiple full sweeps of the state space are required. The idea of Value Iteration is to improve the policy within the Value Iteration step. This Value Iteration approach only requires one iteration. 
 
 The Bellman equation~\ref{eqn:v-def} can be used as an update rule to compute the value function iteratively. A table of values is maintained for each state, initialised randomly. The value of each state can be updated based on the immediate reward and the current estimates of the subsequent states; this is guaranteed to reduce the error at that state because the $\gamma$ discount rate discounts the error at the subsequent state. This process is called bootstrapping; the smaller $\gamma$, the quicker the error rate will decrease, and the faster the process will converge. When the inconsistency at each state is suitable, the process will stop. 
 
-This standard approach uses the traditional value Bellman equation~\ref{eqn:v-def} to find the value for a given policy. In value iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the value iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
+This standard approach uses the traditional value Bellman equation~\ref{eqn:v-def} to find the value for a given policy. In Value Iteration, the policy is one that exclusively picks the action that has the maximum value. This policy is optimal for the optimal value function; when the Value Iteration converges, it must be optimal because of these conditions. This augmented update rule can be defined as:
 
 \begin{align}
   q_{\text{max}}(s,a)          & \doteq \sum_{s',r}p(s',r\ |\ s, a)[r + \gamma v_{\text{max}}(s')] \tag{from~\ref{eqn:q-def}} \\
@@ -315,7 +315,7 @@ This standard approach uses the traditional value Bellman equation~\ref{eqn:v-de
 \end{align}
 
 
-As this new update rule involves no explicit policy, a final step is required in value iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\star$ function.$q_\star$, can be derived from the $v_\star$ with the dynamics $p$ function.
+As this new update rule involves no explicit policy, a final step is required in Value Iteration to extract an explicit policy. In this step, the action that leads to the best value for each step, according to the $q_\star$ function.$q_\star$, can be derived from the $v_\star$ with the dynamics $p$ function.
 
 
 \section{Learning as incrementally optimising policy in a MDP}
@@ -355,9 +355,9 @@ Q-learning uses these observations to update its estimates with this formula:
 \end{equation}
 
 
-This formula can be thought of as interpolating the old estimate at the old state $Q(S_{t-1}, A_{t-1})$ with this new observed Q-value $R_t + \gamma \max_a(Q(S_t, a))$. When $\alpha = 1$, this formula replaces the existing value with the new observed Q-value.  When $\alpha = 0$, the observation is ignored like it never happened. The formula $R_t + \gamma \max_a(Q(S_t, a))$ calculates the new observed Q-value based upon the same principle as value iteration; the implicit policy is to pick the best possible action. 
+This formula can be thought of as interpolating the old estimate at the old state $Q(S_{t-1}, A_{t-1})$ with this new observed Q-value $R_t + \gamma \max_a(Q(S_t, a))$. When $\alpha = 1$, this formula replaces the existing value with the new observed Q-value.  When $\alpha = 0$, the observation is ignored like it never happened. The formula $R_t + \gamma \max_a(Q(S_t, a))$ calculates the new observed Q-value based upon the same principle as Value Iteration; the implicit policy is to pick the best possible action. 
 
-\subsection{Implementation conditions}\label{sect:impl-conditions}
+\subsection{Implementation conditions}\label{section:impl-conditions}
 
 Q-learning is guaranteed to eventually converge the $Q$ estimates to the optimal q values $q_\star$ provided the behaviour function visits all state-action pairs infinitely often. In practice, these q-values do not need to be perfect to derive an optimal policy. However, it can still take many visits to converge enough. Many observations may be necessary to build up a picture of the probability distribution and isolate noise. However, another reason for repeated observations is that the behaviour policy moves the agent forward in time, but the Q-learning table updates the last state. This conflicts as information propagates in the opposite direction of the updates that spread it. For example, suppose a sequence of $n$ states-actions have no reward but lead to some large reward at the end. as the behaviour completes these actions. In that case, only the last action will be updated to reflect the potential value, and every time the sequence is repeated, some of the value will propagate back one step. Many Q-learning implementations like ours will replay recent observations in reverse order to improve this performance. This is called the action-replay process (ARP). Replaying observations can be particularly effective when getting new observations is costly or slow, allowing for quicker convergence.
 
@@ -418,7 +418,7 @@ The characteristic time measure was developed on the multi-arm bandit problem~\c
 
 This chapter details the software engineering of the project and demonstrates how this allowed the project to succeed. Software engineering consists of methods and techniques to develop large and robust applications~\cite{van2008software}. Software engineering techniques are principally aimed at managing complexity and evolving requirements. As functionality and complexity have grown the software engineering consideration of this chapter has been crucial. At the time of writing the application is over 5300 lines of Python code across 150 files.
 
-\section{System Design}
+\section{System Design}\label{section:system-design}
 
 
 This application has been written in Python with the model-view-controller architecture. Python was chosen for many reasons such as it has a strong ecosystem of machine learning libraries that are crucial for performant deep reinforcement learning. Python is also a high-level language that is clear and readable. However, python has notable constraints.  The predominant Python interpreter, CPython, is substantially slower than other implementations~\cite{pythonMachineLearning}. For compatibility, I have chosen this interpreter. To mitigate the effects in the most performance-sensitive areas of the application I have used libraries such as Numpy, Numba and Pillow that allow me to move the bulk of the computation out of Python.  
@@ -427,7 +427,7 @@ The application has a complex GUI with controls that visualise the state of more
 
 Multiprocessing has been used to enable parallelisation, this allows the model to perform expensive computations without blocking the view. To the user, this means the application remains responsive at all times. Furthermore, this parallelisation allows the program to more effectively use the hardware available, therefore completing tasks sooner. Unfortunately, multithreading could not be used for this task since Python implements a global interpreter lock (GIL). This lock prevents an interpreter from executing Python code in parallel. 
 
-In this multiprocessing model, the program operates across multiple processes, each with its own address space. This presents an important challenge; for the program to work as one it must communicate between these processes, this is called inter-process communication (IPC)~\ref{section:technical-decsions}. Managing communication effectively is important to avoid race conditions. The MVC architecture provided a clean interface where the controller is responsible for transferring communications. At this boundary, to avoid race conditions, I use a request/response model where requests are queued and validated before being applied. On the response side, the model is considered a source of truth and the view represents the most recent snapshot available.  
+In this multiprocessing model, the program operates across multiple processes, each with its own address space. This presents an important challenge; for the program to work as one it must communicate between these processes, this is called inter-process communication~\ref{section:technical-decsions}. Managing communication effectively is important to avoid race conditions. The MVC architecture provided a clean interface where the controller is responsible for transferring communications. At this boundary, to avoid race conditions, I use a request/response model where requests are queued and validated before being applied. On the response side, the model is considered a source of truth and the view represents the most recent snapshot available.  
 
 The application has been written in an object-oriented fashion with modern software engineering principles in mind~\cite{van2008software}. Object-oriented code is a programming paradigm built around the idea of combining state and functionality into one entity called an object. The goal of object-oriented code in this project and software engineering is to reduce coupling and increase cohesion. Coupling describes how interrelated different objects are while cohesion describes how related code is within the same object. In this application, this is achieved by adhering to software engineering principles~\cite{softwareEngineringPrinciples} and using software design patterns where applicable.
 
@@ -445,15 +445,17 @@ In the middle of the figure~\ref{fig:package-diagram} the controllers connect th
 
 \section{TODO - Technical Decisions}\label{section:technical-decsions}
 
+Software development is made up of a large number of technical decisions. Most decisions are small and have a limited scope and consequences. In this section, I would like to highlight some of the key decisions and their impact on the project. The algorithms to analyse is central to the direction this project as a whole would take since it is the foundation upon which the rest of this project. Within reinforcement learning, there is a wide variety of available algorithms, these can widely be grouped into two main categories, tabular and function approximation. Of the latter category, there is deep refinement learning, which is one of the most cutting-edge areas of reinforcement learning research and where some of RL's biggest success stories and practical applications lie. 
 
-Are important (technical) decisions well made and **argued**? This includes:
+Deep reinforcement learning is the application of deep neural networks to reinforcement learning, which can be applied in many ways such as state representation or function approximation of value functions. While running these models can be straightforward training them can be challenging. The cutting-edge models are trained using custom hardware at an immense cost~\cite{DeepRLCost}. While this project was not going to operate at that scale even a modest network requires substantially more computation than a tabular method. Secondly, hyperparameter tuning is a significant challenge to these models~\cite{deepRLChallanges}. When combined slow iterations with a difficult search for good hyperparameters getting these algorithms running could be substantially time-consuming. With the potential risks of DRL, I chose tabular methods allowing for an expansion of the scope in other directions.
 
- - good design decisions -> multiprocessing IPC + serialization
- - choice or development of algorithms -> Q learning vs sarsa vs ... 
- - scope of the project. -> tabular vs deep reinforcement learning
+Of the tabular methods Value Iteration and Q-learning have been implemented. Value Iteration is a dynamic programming technique that efficiently solves the Bellman equations. This is an ideal starting point since it provides a baseline to which the other algorithms can be measured. Implementing Q-learning is important because it is a practical algorithm; it learns the environment. Secondly, Q-learning is off-policy allowing for the implementation and analysis of different exploration strategies. 
+
+As discussed in the system design section~\ref{section:system-design} the program requires a multiprocessing architecture to maintain a responsive user interface. Consequently, the application needs inter-process communication (IPC)
 
 
-Software development is made up of a large number of technical decisions. Most decisions are small and have a limited scope and consequences. In this section, I would like to highlight some of the key decisions and their impact on the project. 
+
+- good design decisions -> multiprocessing IPC + serialization
 
 
 \pagebreak
@@ -546,7 +548,7 @@ Q-learning is an off-policy process, which means that the policy that the policy
 
 On-policy reinforcement learning algorithms such as SARSA do have many advantages in deep reinforcement learning (DRL). In DRL a deep artificial neural network is used to estimate the Q-values~\cite{deepRLOverview}. DRL can help generalise reinforcement learning to larger state spaces than is possible with tabular methods. Typically in this context, fully off-policy methods do not perform as well as on-policy or hybrid methods~\cite{deepOnVsOffPolicy}. since off-policy methods suffer from instability.
 
-In this project, I have focused on the off-policy Q-learning method. This chapter details the performance and effects of different exploration strategies. An exploration strategy is the policy that the agent follows during training as opposed to the learnt policy. This exploration strategy may be any method to select an action, however, to maintain the guarantees of convergence this policy must reach all states infinitely often~\ref{sect:impl-conditions}. While a random action section, a random walk, does meet the convergence criteria it is not efficient in terms of rewards received or information gained. As an improvement in these measures, more sophisticated strategies have been developed that take into account many factors.
+In this project, I have focused on the off-policy Q-learning method. This chapter details the performance and effects of different exploration strategies. An exploration strategy is the policy that the agent follows during training as opposed to the learnt policy. This exploration strategy may be any method to select an action, however, to maintain the guarantees of convergence this policy must reach all states infinitely often~\ref{section:impl-conditions}. While a random action section, a random walk, does meet the convergence criteria it is not efficient in terms of rewards received or information gained. As an improvement in these measures, more sophisticated strategies have been developed that take into account many factors.
 
 \newpage
 \section{\texorpdfstring{$\varepsilon$}{Lg}-Greedy}
@@ -560,7 +562,7 @@ In this project, I have focused on the off-policy Q-learning method. This chapte
 \end{figure}
 
 
-The $\varepsilon$-Greedy is the most straightforward strategy implemented in this project and it acts as a good baseline. In its basic form, there is a parameter $\varepsilon$ that controls the probability of the agent acting in two modes. The first and typically most common mode is where the agent selects the best action based on the current Q-estimates. In this first mode, the agent is essentially operating in an on-policy manner. In the second mode, the agent selects an action at random~\ref{sect:impl-conditions}.
+The $\varepsilon$-Greedy is the most straightforward strategy implemented in this project and it acts as a good baseline. In its basic form, there is a parameter $\varepsilon$ that controls the probability of the agent acting in two modes. The first and typically most common mode is where the agent selects the best action based on the current Q-estimates. In this first mode, the agent is essentially operating in an on-policy manner. In the second mode, the agent selects an action at random~\ref{section:impl-conditions}.
 
 This epsilon parameter controls the ratio between the agent's exploration and exploitation. Having high exploitation can garner more rewards in the short term but this has a large opportunity cost of not finding potentially lucrative strategies. On the other hand, if you are already following an optimal policy an exploratory action would not be optimal, and in the case of the cliff environment, it can be potentially devastating. In the beginning, higher exploration may be necessary to avoid local minima, but once the policy has started to converge higher exploitation can be more rewarding. To address this issue the $\varepsilon$ parameter can be dynamically adjusted during training. This project implements the traditional discounting with a fixed hyperparameter however more advanced reward-based techniques have been found more successful~\cite{rewardEpsilonDecay}.
 
