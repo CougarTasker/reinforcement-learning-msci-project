@@ -82,27 +82,24 @@ Signature: {\calligra \LARGE \studentname}
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Introduction 
 
-\chapter{TODO - Introduction}
+\chapter{Introduction}
 
+This report documents a study into reinforcement learning and exploration of markov decision processes. This project can broadly be broken into three components: research, implementation and analysis. The report documents the research component in three main parts. The literature review section~(\ref{sect:literature-review}) covers all of the main literature used throughout the research. The professional issues chapter~(\ref{chap:professional-issues}) discusses social and ethical issues in reinforcement learning and the related research. The Fundamental Concepts chapter~(\ref{chap:fundamental-concepts}) explains reinforcement learning concepts with ties to the relevant literature. Details of the implementation are documented in the software engineering chapter~(\ref{chap:software-engineering}). There is two parts to the analysis component, firstly the exploration strategy effectiveness chapter~(\ref{chap:exploration-strategy-effectiveness}) documents an analysis of the results and the final chapter~(\ref{chap:project-analysis}) analyses the project as a whole.
 
 
 
 \section{TODO (rework + extend) - Aims and Objectives}
 \begin{itemize}
-  \item Efficient Navigation: The agent must autonomously navigate a grid world while making decisions to optimise rewards. The robot should learn to prioritise efficient paths.
-  \item Balancing Constraints: The agent must balance collecting resources with constraints such as energy expenditure. The robot should adapt its behaviour based on the availability of resources and its current energy levels.
+  \item implement learning agents
+  \item efficient exploration: 
   \item General Approach: The agent must not use any environment-specific techniques. It should learn from and function in any Markov environment.
-  \item Deep Reinforcement Learning: The program should integrate deep neural networks (DNN) with Q-learning.
   \item Visualisation: The program should provide a GUI that visualises the operation of these agents interactively.
+  \item analysis 
 \end{itemize}
 
-\section{Motivation}
+\section{Motivations}
 
 My inspiration for studying for this degree, specialising in artificial intelligence, comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
-
-What is unique about this resource-gathering robot project is its structured progression of complexity, Starting from fundamental concepts and culminating in advanced techniques. This gradient makes the complex nature of reinforcement learning more approachable than it may be in industry. 
-
-This project interests me because of its generality and applicability to many different scenarios. Resource-gathering has the potential to incorporate many real-world constraints like energy, visibility and obstacles. I would like to see how this impacts different exploration strategies.
 
 Last year, I completed my year-long internship at Zing Dev (Zing), a digital communications company that is progressively incorporating AI systems for its customers. This experience has demonstrated to me the value of understanding the internals of these AI systems. It is clear that AI is a clear focus for most companies, Ransbotham et al. said: 
 \begin{quote}
@@ -112,7 +109,7 @@ Last year, I completed my year-long internship at Zing Dev (Zing), a digital com
 Through this project, I aim to improve my understanding of autonomous agents' benefits, biases, and limitations. This knowledge will be desirable for many companies like Zing working with artificial agents.
 
 
-\section{Literature Review}
+\section{Literature Review}\label{sect:literature-review}
 
 This section reviews the relevant literature on Reinforcement Learning as well as some of the broader fields of Artificial Intelligence (AI) and Machine Learning (ML). The literature selection focuses on the foundations of RL and its potential ethical and societal implications.
 
@@ -126,7 +123,8 @@ Software engineering principles are essential to this project, providing a struc
 
 The following chapter~(\ref{chap:professional-issues}) will analyse the social and ethical implications of RL and the broader field of machine learning. Several studies provide a detailed examination of the Amazon \say{Rekognition} case study~\cite{facialRecognitionBias, legislatingRekognition, legislatingOG, rekognitionOverview}. A number of papers emphasise the potential social harms arising from biased and unbiased ML models~\cite{AISocialImpactAndAccountability,facialRecognitionBias, anprAccountability}. Several studies explore how ML programs inherit biases from their training data~\cite{LLMSocialEthicalRisks, AISocialImpactAndAccountability, facialRecognitionBias}. Two studies explore the military applications of RL, such as its use in unmanned aerial vehicles~\cite{rlMilitaryReviewChina, DRLDrones}. Finally, a select few papers discuss the potential benefits RL offers to society and propose principles that could aid in mitigating the risks associated with this technology~\cite{AIRisksAndPrinciples,deepRLsocietalImpact, ransbotham2017reshaping}.
 
-\chapter{Professional Issues in Machine Learning}\label{chap:professional-issues}
+\chapter{Professional Issues in Machine Learning}
+\label{chap:professional-issues}
 
 Machine learning programs and techniques, as explored in this project, possess immense potential for social benefit when managed judiciously, but they also risk significant social and ethical consequences~\cite{AISocialImpactAndAccountability}. One concern is the ability of ML systems to reinforce and perpetuate societal biases in their decisions~\cite{AISocialImpactAndAccountability}. One prominent example of this dichotomy of potential was \say{Rekognition}, Amazon's facial recognition tool (FRT)~\cite{legislatingOG}. Rekognition is a cloud-based deep-learning application which can identify people, activities, objects, and more~\cite{rekognitionOverview}. This powerful tool can bring societal benefit one example is an application that notifies professionals who are in high-risk sectors such as healthcare or construction~\cite{rekognitionOverview}. Rekognition can make this possible by detecting Personal Protective Equipment. 
 
@@ -167,11 +165,12 @@ This case study is one of many that may highlight similar or different challenge
 These systems may have been trained in a simulation of military operations and rewarded for their actions that achieved military goals~\cite{rlMilitaryReviewChina}. These experiences will shape the agent's interpretation of value. But, these experiences are unlike ours as humans. As humans, we have a vast variety of experiences, including companionship and kindness. In this respect, the value a human and DRL combatant will assign to killing their opponents may differ vastly. I believe there may be situations where an AI may pick actions that may lead to a devastating loss of life, for only a miniscule increase in the chance of success. 
 
 \chapter{Fundamental Concepts}
+\label{chap:fundamental-concepts}
 \section{Markov Decision Processes}
 
 Markov Decision Processes (MDP) provide a mathematical formalisation of decision-making problems. Markov Decision Processes provide the foundation for reinforcement learning (RL). This is because MDPs distil the fundamental parts of decision-making, allowing RL techniques built upon MDPs to generalise to learning in the real world and across different domains such as finance and robotics. 
 
-As a formal mathematical framework, MDPs allow us to derive and prove statements about our RL methods built upon them. An important example of this is that we can prove that Q-learning (an RL technique explained in chapter~\ref{chap:q-learning}) will converge to the true Q-values as long as each Action-State pair is visited infinitely often.~\cite{watkins1992q}. Furthermore, MDPs allow us to reason about problems with uncertainty, allowing RL agents to account for randomness in their environment. 
+As a formal mathematical framework, MDPs allow us to derive and prove statements about our RL methods built upon them. An important example of this is that we can prove that Q-learning (an RL technique explained in chapter~\ref{sect:q-learning}) will converge to the true Q-values as long as each Action-State pair is visited infinitely often.~\cite{watkins1992q}. Furthermore, MDPs allow us to reason about problems with uncertainty, allowing RL agents to account for randomness in their environment. 
 
 The standardisation of decision-making problems as MDPs allows for a uniform definition of optimality with the value functions. MDPs give a basis for assessing the performance of RL algorithms, facilitating like-for-like comparisons for different RL approaches. 
 
@@ -219,7 +218,7 @@ The function $p$ is an integral part of this definition; it fully describes how 
 The agent comprises the entire decision-making entity in an MDP; anything unknown or not wholly under the agent's control is called the agent's environment. In the context of reinforcement learning, the environment is essentially the dynamics of the MDP. Figure~\ref{fig:agent-enviroment} demonstrates how the agent and environments affect each other in an MDP. 
 
 \label{policy-informal-definition}
-For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning~\ref{chap:q-learning} or a more complex process such as deep Q-learning. A policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
+For learning agents, we wish to improve the agent's behaviour over time. For this purpose, we introduce a policy $\pi$. This policy defines the action chosen by an agent under a particular state. The policy can be represented with a lookup table like in Q-learning~(\ref{sect:q-learning}) or a more complex process such as deep Q-learning. A policy like this is not hard-coded, allowing the agent to update the policy based on the information the agent learns from the environment. 
 
 
 \section{Policy and Value Functions}
@@ -321,7 +320,7 @@ Learning is the process of acquiring new information and skills. There are many 
 
 To demonstrate learning as policy optimisation, consider an agent that is introduced to a new Markov environment. This agent has no prior knowledge; therefore, its initial policy is independent of the environment's features. Eventually, the agent will pick some action in a state and receive some reward from the environment. This information can be used to update the policy and prioritise one successful action. Since the environment obeys the Markov property, repeating this successful action will continue to reward. If the agent continues to optimise its policy as it finds rewards, then it can improve its average reward. Through incrementally optimising its policy, this agent has learnt which actions are more successful and improved its behaviour.
 
-\section{Q-Learning}\label{chap:q-learning}
+\section{Q-Learning}\label{sect:q-learning}
 
 
 Q-learning is like value and policy iteration; all search for an optimal value function. However, Q-learning operates under extra constraints. The value and policy iteration extensively use the MDP's dynamics ($p$). In most real-world problems, the dynamics are unknown or too complex to be represented accurately. Iteration approaches can be adapted using samples to work without $p$. Samples are captured from the environment when the agent performs actions, which can be chosen randomly or by following another policy. Monti-Carlo is another technique that uses samples to emulate the value functions more directly, but these approaches are inherently offline. While offline methods have many advantages, their shortcomings, such as the inability to adapt to changing environments, make them unsuitable for many applications. 
@@ -393,7 +392,7 @@ The second measure is called the characteristic time $T^*$. This measure comes f
 The characteristic time measure was developed on the multi-arm bandit problem~\cite{characteristicTime}. It uses the Kullback-Leibler divergence between an allocation vector and the true distribution. Each MDP has a corresponding optimal allocation vector, which represents the best allocation of samples (action-taking) to determine the underlying distribution. However, this problem is non-convex~\cite{characteristicTimeNonConvex} and requires extensive knowledge of the MDP's underlying distribution.
 
 \chapter{Software Engineering}
-
+\label{chap:software-engineering}
 \begin{figure}[H]
   \centering
   \begin{subfigure}{.5\textwidth}
@@ -540,7 +539,7 @@ At the bottom are specific controls specific to the main simulation and its visu
 
 
 \chapter{Exploration Strategy Effectiveness}
-
+\label{chap:exploration-strategy-effectiveness}
 Q-learning is an off-policy process, which means that the policy that the policy that it is learning and improving is not necessarily the same as the policy it is following during exploration. By this, the actions chosen by a Q-learning agent may be independent of its current beliefs of the values of each action. Off-policy learning has several advantages, such as the fact that it may explore more fairly and thoroughly than an on-policy approach. An on-policy approach may be incentivised to explore thoroughly if its initial estimates are particularly optimistic. However, in a stochastic environment where rewards are random with a large degree of spread, it may still be difficult for an on-policy technique to properly assess the rewards before falling into an in-optimal pattern.  
 
 On-policy reinforcement learning algorithms such as SARSA do have many advantages in deep reinforcement learning (DRL). In DRL, a deep artificial neural network is used to estimate the Q-values~\cite{deepRLOverview}. DRL can help generalise reinforcement learning to larger state spaces than is possible with tabular methods. Typically, in this context, fully off-policy methods do not perform as well as on-policy or hybrid methods~\cite{deepOnVsOffPolicy} since off-policy methods suffer from instability\cite{sutton2018reinforcement}.
@@ -768,9 +767,8 @@ The parameter space has a high dimensionality and is heterogeneous so where poss
 
 The three strategies explored in this report vary from the simple to the state-of-the-art. On this scale the more advanced models demonstrated better generalisation, they perform better out-of-box and have less tunable parameters. However, these more sophisticated models can exhibit unusual behaviour and actions can be difficult to explain. It seems where generalisation to varied environments is important; advanced strategies are superior. However, if your environment is fixed a simpler strategy with tuned parameters can have similar performance and improved explainability.
 
-
 \chapter{Project Analysis}
-
+\label{chap:project-analysis}
 In this project, I have created an application that implements a wide range of functionality. At its core, the application is made up of two environments and two agents. The Q-learning agent supports different exploration strategies and implements three varied strategies. Around this core, the application has many systems and functionalities that allow the user to examine and analyse the agents effectively. These systems include a fully featured graphical user interface and multiple hyperparameter tuning and report-generating systems. The GUI incorporated multiple displays, graphs and controls, and with these tools and in this project, I have been able to analyse how these agents explore. I have been able to put together this report with the background of existing research that I have explored and the analysis I have performed through this application. 
 
 \section{Reflection of the Project Process}
