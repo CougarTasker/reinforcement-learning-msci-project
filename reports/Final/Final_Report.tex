@@ -782,10 +782,24 @@ Critical analysis and Discussion (10\%): A discussion of actual project achievem
   - successes
   - future enhancements -- done
 
+In this project, I have created an application that implements a wide range of functionality. At its core the application is made up of two environments and two agents. The Q-learning agent supports different exploration strategies, and three varied strategies are implemented. Around this core, the application has many systems and functionalities that allow the user to examine and analyse the agents effectively. These systems include a fully featured graphical user interface and multiple hyperparameter tuning and report-generating systems. The GUI incorporated multiple displays, graphs and controls, and with these tools and in this project, I have been able to analyse how these agents explore. With a background of existing research that I have explored and the analysis I have performed through this application, I have put together this report. 
 
-introduction paragraph: list the project's achievements
+With these projects accomplishments in sight, it can be easy to lose sight of the process. This project has spanned the last six months, and over that time this report has been incrementally developed alongside the application. 
 
-two reflection paragraphs: what were the difficulties and successes 
+
+success -
+se extensibility
+milestones a regular meetging kept the project on time and on track
+
+
+
+difficulty - 
+pivoted to an exploration strategy focus
+gui rewrites
+performance bottlenecks
+
+
+one or two reflection paragraphs: what were the difficulties and successes  of the process. 
 
 
 The two environments implemented in this application have provided a good benchmark for testing an agent's ability to explore in the face of very sparse rewards and obstacles. These environments have a few commonalities; they are both a grid world and are fully deterministic. While these properties have there own merits and use-cases this project would be enhanced with a broader and more diverse collection of environments. Importantly, stochastic environments would test the exploration of these agents in a new way, and the effects of learning rates would change. There are many famous reinforcement learning environments; some are stochastic, such as river-swim, and many are not based in a grid world, like the cart pole balancing problem. Many RL environments such as these traditional ones, Atari games and many more are collated into a Python library called gymnasium\cite{gym}. If the application integrates the gymnasium library with its dynamics system, this would provide a substantial improvement. Firstly, the application would allow access to a wide range of environments. Secondly, these same environments are widely used in RL research, helping to standardise this work and allow for more direct comparisons. However, the gymnasium library would not just plug into the existing code. The interface is substantially different enough from the application that some structural changes must be made. While an adapter could shim the differences, a tight integration would really enrich this project. In summation, integrating the gymnasium library would provide the project a leap forward in terms of the number of environments and their variety; however, doing this right involves attention and has unfortunately fallen outside of this project's scope. 
