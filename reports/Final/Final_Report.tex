@@ -701,7 +701,7 @@ Figure~\ref {fig:learning-rate} shows the balance of learning rate and how this 
 
 The $\varepsilon$-greedy decay rate (EGDR) parameter is an important and unique parameter. Figure~\ref{fig:epsilon-greedy-decay-full} demonstrates how just a minuscule amount of decay has a substantial improvement on the agent's regret completely changing the agents' performance. Without EGDR the cumulative reward was negative. This follows from how $\varepsilon$-greedy acts in a partially off-policy, in the cliff dynamics the optimal policy minimises the distance travelled and therefore travels right next to the cliff face. This becomes problematic when $\varepsilon$-greedy introduces its off-policy exploration actions, which randomly cause the agent to select the action to jump off the cliff incurring a large penalty.
 
-An on-policy method may account for the risks of selecting exploratory actions in its value estimates encouraging the agent to give the cliff a wide berth or choose to limit the exploratory actions. However, Q-learning is an off-policy technique so Another approach is necessary. An alternative is to reduce the exploration rate once the agent has had the opportunity to learn. This application has implemented exponential decay for the exploration ratio $\varepsilon$. This exponential decay is controlled via two hyperparameters the initial value and the decay rate. In this procedure, the exploration ratio $\varepsilon$ can be computed as: 
+An on-policy method may account for the risks of selecting exploratory actions in its value estimates, encouraging the agent to give the cliff a wide berth or choose to limit the exploratory actions. However, Q-learning is an off-policy technique so Another approach is necessary. An alternative is to reduce the exploration rate once the agent has had the opportunity to learn. This application has implemented exponential decay for the exploration ratio $\varepsilon$. This exponential decay is controlled via two hyperparameters the initial value and the decay rate. In this procedure, the exploration ratio $\varepsilon$ can be computed as: 
 
 \begin{equation}
   \varepsilon_t = \lambda^t \cdot \varepsilon_0
@@ -771,13 +771,31 @@ The parameter space has a high dimensionality and is heterogeneous so where poss
 The three strategies explored in this report vary from the simple to the state-of-the-art. On this scale the more advanced models demonstrated better generalisation, they perform better out-of-box and have less tunable parameters. However, these more sophisticated models can exhibit unusual behaviour and actions can be difficult to explain. It seems where generalisation to varied environments is important; advanced strategies are superior. However, if your environment is fixed a simpler strategy with tuned parameters can have similar performance and improved explainability.
 
 
-
 \chapter{TODO - Project Analysis}
 
 Critical analysis and Discussion (10\%): A discussion of actual project achievements and how successful the project was. Clear evidence of reflection on the project process, its difficulties, successes and future enhancements. Any conclusions or results analysed or discussed appropriately;
 
 
-would have been great to implement a wider range of environments including stochastic to challenge the strategies further
+- actual project achievements:
+- reflection on the project process
+  - difficulties
+  - successes
+  - future enhancements -- done
+
+
+introduction paragraph: list the project's achievements
+
+two reflection paragraphs: what were the difficulties and successes 
+
+
+The two environments implemented in this application have provided a good benchmark for testing an agent's ability to explore in the face of very sparse rewards and obstacles. These environments have a few commonalities; they are both a grid world and are fully deterministic. While these properties have there own merits and use-cases this project would be enhanced with a broader and more diverse collection of environments. Importantly, stochastic environments would test the exploration of these agents in a new way, and the effects of learning rates would change. There are many famous reinforcement learning environments; some are stochastic, such as river-swim, and many are not based in a grid world, like the cart pole balancing problem. Many RL environments such as these traditional ones, Atari games and many more are collated into a Python library called gymnasium\cite{gym}. If the application integrates the gymnasium library with its dynamics system, this would provide a substantial improvement. Firstly, the application would allow access to a wide range of environments. Secondly, these same environments are widely used in RL research, helping to standardise this work and allow for more direct comparisons. However, the gymnasium library would not just plug into the existing code. The interface is substantially different enough from the application that some structural changes must be made. While an adapter could shim the differences, a tight integration would really enrich this project. In summation, integrating the gymnasium library would provide the project a leap forward in terms of the number of environments and their variety; however, doing this right involves attention and has unfortunately fallen outside of this project's scope. 
+
+Provided with enough time and resources, implementing deep reinforcement learning could provide this project with a new dimension of research and greater depth. An excellent place to start would be DBMF-BPI. This algorithm is a deep reinforcement learning extension to the MF-BPI strategy\cite{modelFree}. DBMF-BPI is already implemented in Python, and its relation to the MF-BPI strategy makes it a great candidate for incorporation into this application. This project would also benefit from a wider variety of reinforcement learning algorithms, such as Monti-carlo, Actor-Critic or even model-based algorithms. However, implementing and analysing these algorithms would substantially increase this project's scope, and they were unobtainable under the current time and resource constraints. That said, these extensions would benefit from the prior work done on this project. The foundations laid for the other algorithms would likely need only slight adaptations to support this new work. 
+
+Conclusion paragraph: 
+
+- wrap up the section
+- overall what were the success of the project
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
