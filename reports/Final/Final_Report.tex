@@ -10,42 +10,6 @@
 \usepackage{float}
 
 
-\usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
-\fi
-% Use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
-\usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
@@ -84,18 +48,10 @@
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
+
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 
 
 
@@ -122,7 +78,7 @@ This report has been prepared on the basis of my own work. Where other published
 
 \vskip3em
 
-Word Count: 14,055 ( including appendix)
+Word Count: 14,055 (16,043 including appendix)
 
 \vskip3em
 
@@ -130,7 +86,7 @@ Student Name: \studentname
 
 \vskip3em
 
-Date of Submission: 04/04/2024
+Date of Submission: 05/04/2024
 
 \vskip3em
 
@@ -279,6 +235,7 @@ To put the Markov property formally, $S_t$ represents the state at some time as 
 
 This definition demonstrates how the Markov property can hold in non-deterministic, stochastic processes. It also shows that predictions that are only based on the current state are just as good as those that record the history in a Markov process. The sequence of events in this definition, $S_t$, is called a Markov Chain~\cite{meyn2012markov}.
 
+\newpage
 \subsection{Extending Markov Chains}
 
 Markov Decision Processes extend Markov Chains in two important ways. Firstly, MDPs introduce decision-making through actions. Each state in an MDP has a set of actions available to it. In each state, an action is required to transition to the next state; this action with the current state can affect what the following state will be. Secondly, MDPs introduce a reward value. The reward is determined from the current state and action; it is produced simultaneously with the following state.
@@ -371,6 +328,7 @@ These functions demonstrate the intertwined relationships between the policy cho
 
 Although optimal policies exist, finding them is another matter. The policy search space is potentially infinite, so an intelligent method is required. An optimal policy can be extracted from an optimal value function and the dynamics of the MDP; the optimal policy would only select actions that result in the highest value. Finding the optimal value function with the optimal policy is straightforward, but this is a catch-22. The optimal value function must be self-consistent with the Bellman equations. One approach to solving these equations is iteration, for each step moving slightly closer to the optimal solution from an initial guess. 
 
+\newpage
 \subsubsection{Policy Iteration}
 
 In policy iteration, we improve a policy over time until it is optimal. Updating a policy like this is only possible because of the policy improvement theorem. This theorem considers if we have a policy $\pi_{\text{old}}$. We are at some state $s$, $\pi_{\text{old}}$ will pick the action $a$ under this state $\pi_{\text{old}}(a\ |\ s) = 1$ what happens if we consider some other action $a'$ but then continue to follow the original policy. Because we continue to follow the original policy, we can use the existing value function $v_{\pi_{\text{old}}}(S_{t+1})$ for the subsequent states. We call this slightly adjusted policy $\pi_{\text{new}}$. By applying the Bellman equations and the existing value function we can recalculate the value at $s$ of $\pi_{\text{new}}$ if this new value is better than the original policy then we know that $\pi_{\text{new}}$ must be as good if not better for all states $s \in \mathcal{S}$ than $\pi_{\text{old}}$ thus $\pi_{\text{new}}$ would be a better policy. 
@@ -455,7 +413,7 @@ Picking the behavioural policy is important; it must balance exploring and gaini
 
 Both $\varepsilon$-greedy and $\varepsilon$-soft policies utilise the current $Q$ value estimates, which can lead to bias. Incorrect over-optimistic and over-pessimistic estimates can lead to a poor distribution of observations, compounding these effects. One approach to limit bias is called double Q-learning. This is where two Q-learning tables are maintained, and actions are chosen based on alternating tables. This helps average out the bias and improves the accuracy of estimates.
 
-
+\newpage
 \section{Measuring Performance}\label{section:measuring-performance}
 
 Accurately measuring the effectiveness of machine learning algorithms is essential for guiding research and assessing the state-of-the-art. For supervised learning tasks such as classification, this can be relatively straightforward. The model can be assessed new data against its goal. However, in RL, several important differences make assessment difficult. Firstly, the agent's decisions influence the training data. This influence creates a unique challenge: evaluating the performance of different algorithms becomes an apples-to-oranges comparison~\cite{sutton2018reinforcement}.
@@ -466,13 +424,12 @@ The second key challenge is RL's sensitivity to hyperparameters and environmenta
   Recent reproducibility analyses have shown that reported performance results are often inconsistent and difficult to replicate~\cite{evaluatingRL}
 \end{quote}
 
-\newpage
 A third challenge is choosing which metric to assess the model; unlike supervised learning, the agent receives its performance signal from the environment, which means the objective and amount of reward can vary wildly between different environments. This dependency can complicate comparisons between different environments. However, these comparisons are necessary to measure how well the algorithm generalises. One solution is creating a standard testbed of varied environments and a protocol for exploration~\cite{assessingDeepRL, evaluatingRL}. In this approach, the agent only receives meta information such as the size of the state space. So, the agent must be able to adjust to the environment automatically. In my opinion, this integrates naturally with the core philosophy of refinement learning. LEO is an algorithm that learns its exploration strategies on-line and is an example of this parameter-free approach\cite{parameterFreeExploration}. LEO is able to generalise better to different environments than any single parameterised exploration approach and avoids the need for users to hand-tune exploration parameters\cite{parameterFreeExploration}. However, this is incompatible with the traditional algorithms explored in this project as they have hyperparameters.
 
 Another approach to address this third challenge is to use the optimal policy as a benchmark. That means that the performance measures should be relative to the optimal policy for that environment. There are two main measures of this kind. The first measure is called regret. It is the difference in cumulative reward between an optimal agent and the exploitation strategy during learning. Regret is a commonly used metric~\cite{modelFree}; however, it requires the environment to have a cut-off for this calculation. While there may be a natural choice in episodic tasks, this cut-off is yet another tunable parameter, thus contributing to the second problem. Regret is an important metric when the reward gathered during training is significant or where a distinction between training and evaluation cannot be made. Regret is especially relevant when continuous learning is required, such as for non-stationary environments. 
 
 
-
+\newpage
 \label{bpi-introduction}
 The second measure is called the characteristic time $T^*$. This measure comes from the best policy identification (BPI) problem. There are two phases of the BPI problem: training and testing. During the training phase, the objective is to learn the best policy to maximise the reward in the testing phase. This two-phase approach bears some similarity to supervised learning and can be applied to learning games such as Go or Chess~\cite{bestPolicyIdentifaction}. If regret is to measure effective exploitation, $T^*$ is a measure of efficient exploration. The characteristic time is a complex formula that aims to measure the minimal number of samples required to identify a nearly optimal policy in an MDP~\cite{characteristicTime}. A useful approximation of $T^*$ is the number of time-steps $t$ needed to maximise the following formula~\cite{modelFree}:
 
@@ -512,6 +469,7 @@ This application is written in Python with the model-view-controller architectur
 
 The application has a complex GUI with controls that visualise the state of more complex reinforcement models. The model-view-controller architecture is well suited for this application's requirements, as it helps to reduce the coupling between these two different but connected modules. This reduced coupling has proved invaluable as I needed to change the GUI library several times to meet my requirements. Due to the nature of modern GUI frameworks, the code traditionally considered the view receives update signals from the user. For this reason, this project requires the use of the layered MVC pattern~\cite{webMVC,gamesMVC}, where the controller acts as a bridge between the model and the view. This is similar to the MVVM and MVP architectures~\cite{mvvm}.
 
+\newpage
 Multiprocessing is a method used to enable parallelisation. This is used in the application to allow the model to perform expensive computations without blocking the view. To the user, this means the application remains responsive at all times. Furthermore, this parallelisation allows the program to use the available hardware more effectively, thereby allowing tasks to be completed sooner. Unfortunately, multithreading could not be used for this task since Python implements a global interpreter lock (GIL). This lock prevents an interpreter from executing Python code in parallel. 
 
 With multiprocessing, the program operates across multiple processes, each with its own address space. This separation presents an important challenge; for the program to work as one, it must communicate between these processes. This is called inter-process communication~(\ref{section:technical-decsions}). Managing communication effectively is vital to avoid race conditions. The MVC architecture provided a clean interface where the controller is responsible for transferring communications. At this boundary, to avoid race conditions, I use a request/response model where requests are queued and validated before being applied. On the response side, the model is considered a source of truth, and the view represents the most recent snapshot available.  
@@ -539,6 +497,7 @@ Deep reinforcement learning is the application of deep neural networks to reinfo
 Of the tabular methods, Value-Iteration and Q-learning have been implemented. Value iteration is a dynamic programming technique that efficiently solves the Bellman equations. Value iteration is an ideal starting point since it provides a baseline to measure other algorithms. Implementing Q-learning is essential because it is a practical algorithm and the basis of a lot of work in RL. Secondly, Q-learning is off-policy, allowing for different exploration strategies to be used while learning the optimal policy. This allows more flexibility and control in how the agent explores, and it is these exploration strategies that this project aims to analyse.  
 
 As discussed in the system design section~(\ref{section:system-design}), the program requires a multiprocessing architecture to maintain a responsive user interface. Consequently, the application needs inter-process communication (IPC). This IPC forms the backbone of the application, so managing what and how to communicate has wide-reaching implications. Many IPC mechanisms are available to Python applications, such as signals, message queues, and shared memory. Shared memory allows two different processes to access the same memory at the same time. This can be performant, but if not managed effectively, there may be many ways that new functionality can lead to race conditions. Signals can be used to avoid race conditions by blocking processes from accessing the same resources simultaneously. Due to these concerns, I decided not to directly use shared memory in my application. However, I do use shared values where appropriate. Shared values are used to build up the hyperparameter reports between the worker processes. Shared values are a managed alternative to shared memory provided by Python. These managed objects, like shared values and queues, help avoid some of the pitfalls of multiprocessing. Nevertheless, these managed objects have a performance and latency overhead. 
+\newpage
 
 The link between the primary model and view processes is the most critical across the application because the user will directly experience any latency. Furthermore, if this connection were severed, the program might not be able to recover; for instance, it is used to signal a graceful shutdown. With these concerns, I found that the built-in solutions were not appropriate due to their relatively large overhead and latency. Instead, I have chosen the ZeroMQ messaging library because of its focus on low-latency communication and its fantastic reputation. Many large companies use ZeroMQ, it has a large community and is very stable. With this stability, I feel confident I can use it to build the backbone of the application. Like the inbuilt queue, ZeroMQ provides IPC with a message queue; however, unlike the inbuilt option, it does so without a message broker.  ZeroMQ's improved performance is partially due to its lack of a message broker. This lack of a message broker is what the zero in its name stands for.
 
@@ -548,6 +507,7 @@ When communicating messages between processes, the data should be concise while 
 
 When serialising messages, compression should be a key consideration. Compression allows data to be reduced in size; this is done in two fashions: lossy and lossless. In lossy compression, uninformative, redundant or useless information is removed; however, this risks reducing the quality as well as size. A candidate for lossy compression would be the floating point values transferred since they rarely use the complete precision or range available. However, I have chosen to stick with a standard format for simplicity. Otherwise, due to the nature of the data of this application, there isn't any real opportunity for lossy compression. Lossless compression involves identifying patterns in data and representing these more concisely. This process could be used with this application's data. However, I have chosen not to use lossless compression since the size of messages is so small the lossless compression overheads are not worth the gains. 
 
+\newpage
 \section{Workflow}
 
 
@@ -555,16 +515,15 @@ All aspects of this project are stored under the Git version control system, and
 
 One essential part of this project and its workflow is documentation. The documentation is written alongside the code in what are called docstrings. This serves many purposes. Firstly, the co-location helps keep the documentation in sync with the application. Special linting rules ensure that these docstrings are written consistently for every piece of code, guaranteeing 100\% documentation coverage. Docstrings are also integrated into the Python language with the `help` command, and most editors integrate docstrings so they are accessible during development. Importantly, this documentation is made accessible as a documentation site. This site is generated automatically for these docstrings and other aspects of the code. This process results in a searchable, linked documentation page that is up-to-date~\cite{pythonAutoDoc} and covers all of the code. 
 
-\newpage
 Testing is integral to this project. As part of my workflow, I write unit tests. Unit tests are pieces of code that perform validation and verification parts of the main application. A unit testing framework has been configured to run these tests and collate the results. All tests must pass before each commit can be made, which means that regressions are spotted quickly. These tests are also integrated into the IDE to provide increased feedback and ease of debugging. While testing can be valuable, it can be costly. Daka et al. found developers spent a substantial amount of time writing tests~\cite{unitTestingSurvey}. The returns from testing can be especially low for trivial code that can take several times longer to test than create. For this reason, I have limited testing to the important and complex areas of the program.  
 
 The development environment is the system of programs where this workflow takes place. This project is configured to work well with a particular Integrated development environment (IDE); for instance, the IDE will be able to start the application with a debugger attached, allowing the user to step through the code in the editor. Code quality is maintained in this repository with several automated tools. Static code analysis tools enforce a consistent code style and check for typing errors. I have configured these tools to integrate with the IDE, giving immediate feedback so issues can be addressed quickly. Furthermore, Git is configured with pre-commit hooks, so these tools must run and validate the code before every commit. Furthermore, these tools can be integrated with CI/CD pipelines, which is particularly useful for collaborative projects.
 
 While all of the tooling for this project improves many aspects of development, this may be difficult to set up and provides many opportunities for discrepancies to emerge between different setups. For this reason, I have created a development container. This container fully specifies every tool and the version to be installed. This containerised environment makes it easy to set up the environment and consistent each time. Containers for development are rapidly growing in interest~\cite{developmentContainers}. 
-
+\newpage
 For the sake of consistency, the application itself has been configured with a dependency management and packaging tool. All of the libraries the application relies upon are specified in the standard `pyproject.toml`, and the tool manages their installation in an isolated virtual environment. This process makes it easy to distribute this application and avoids inconsistencies on different computers.
 
-\newpage
+
 \section{Functionality and Usage}
 
 The application's functionality revolves around running reinforcement learning simulations and allowing the user to interact with and analyse the effects of different options. These simulations encompass two main units: agent and dynamics. The agent unit encompasses the functionality for learning and decision making while the dynamics unit encompasses a grid world Markov decision process. These units are interchangeable and configurable by the user dynamically through controls in the user interface and through a configuration file \path{config.toml}. The results of these learning experiments are expressed by the application in several ways, such as a state-by-state view, information displays, and graphs.
@@ -579,13 +538,13 @@ Pipx is a simple build frontend that should be familiar to you if you have exper
 python3 -m pipx run --spec . start
 \end{verbatim}
 This command will take longer than usual for the first run as pipx sets up the application. You can find more information about this application and how to start it in the \say{readme} file in the code folder.
-
+\newpage
 \subsection{User Interface}
 
 The user interface is not only a significant component of the project's functionality but also the user's window into the entire application. When starting the application, you are greeted by a window composed of three main sections stacked vertically. At the top, there is a section that contains the main controls. These controls select the most significant options of the primary simulation, such as the agent and dynamics. If the agent is off-policy, you can select its own exploration strategy. There is also a reset button that will reset the agent's knowledge and, therefore its policy.
 
 In the middle, there is a tabbed area. The first tab is the primary display, which visualises the current state of the main simulation. The second tab displays the reward history of the simulation as a graph. The third and fourth tabs can run auxiliary simulations in the background to examine the effect of different hyperparameter choices. The third tab shows graphs of the effects of varying each hyperparameter and the reward achieved with 95\% confidence bounds. All graphs in the application have an option to save their contents as a portable document file. Once pressed, this save button will allow the user to provide where to save this graph. Finally, the fourth tab controls a random search procedure. The start/stop button controls this procedure. When running this system searches for the best parameter choices to minimise regret~(\ref{section:measuring-performance}).
-\newpage
+
 The main display on the first tab visualises the current state of the primary simulation. All of the environments that are implemented currently are based around a grid world. The display visualises this grid world with a corresponding grid of cells, each cell representing a possible position the agent can occupy. The function of this grid will vary based on the display mode. In the initial (default) display mode, a robot icon represents the agent's location, flags represent the agent's goals and stop icons represent obstacles. In other display modes, arrows represent the agent's actions in each state and a colour scale is used to represent the agent's interpretation of value. On this colour scale, hues vary from red to green, where red is the least valuable state and green is the most valuable state or state-action.
 
 At the bottom are specific controls specific to the primary simulation and visualisation. There are controls for selecting the display mode and allowing the user to step through the simulation manually or automatically. In this section there is also a secondary reset button, this button resets the current state of the agent to the initial state for the episode. Unlike the reset button at the top of the application, the agent will retain its knowledge.
