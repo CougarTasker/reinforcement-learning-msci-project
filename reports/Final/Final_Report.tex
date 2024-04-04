@@ -86,17 +86,15 @@ Signature: {\calligra \LARGE \studentname}
 
 This report documents a study into reinforcement learning and exploration of markov decision processes. This project can broadly be broken into three components: research, implementation and analysis. The report documents the research component in three main parts. The literature review section~(\ref{sect:literature-review}) covers all of the main literature used throughout the research. The professional issues chapter~(\ref{chap:professional-issues}) discusses social and ethical issues in reinforcement learning and the related research. The Fundamental Concepts chapter~(\ref{chap:fundamental-concepts}) explains reinforcement learning concepts with ties to the relevant literature. Details of the implementation are documented in the software engineering chapter~(\ref{chap:software-engineering}). There is two parts to the analysis component, firstly the exploration strategy effectiveness chapter~(\ref{chap:exploration-strategy-effectiveness}) documents an analysis of the results and the final chapter~(\ref{chap:project-analysis}) analyses the project as a whole.
 
+\section{Aims and Objectives}
 
+This section extends on the projects primary objective of understanding and implementing reinforcement learning from the abstract and covers the main deliverables from the project requirements. The main aim of this project is to implement agents that can learn to operate in a markov decision process. Each agent must be based on an existing algorithm in the reinforcement learning literature. These agents must be adaptable, they must not used any environment-specific techniques or knowledge. In other words these agents must generalise well, therefore they must be tested with different environments.
 
-\section{TODO (rework + extend) - Aims and Objectives}
-\begin{itemize}
-  \item implement learning agents
-  \item efficient exploration: 
-  \item General Approach: The agent must not use any environment-specific techniques. It should learn from and function in any Markov environment.
-  \item Visualisation: The program should provide a GUI that visualises the operation of these agents interactively.
-  \item analysis 
-\end{itemize}
+The program must make the learning system accessible to the user, The user must be able to interpret what is happening and be able to control factors of the system. This must be achieved with an animated user interface and configuration file. Furthermore the application must collate together results from the simulations and presents this to the user in a form that facilitates analysis. It must be possible to export these results for use in the report. 
 
+Finally with results drawn from this application an analysis and comparison of different exploration strategies should be performed. This analysis should cover the details of how efficient each agent has explored and provide the reader an understanding of any uncertainty in the results. This report should document all parts of the process, from background research to conclusions. This report must include an explanation of the reinforcement learning background as well as describing the software engineering processes involved.
+
+\newpage
 \section{Motivations}
 
 My inspiration for studying for this degree, specialising in artificial intelligence, comes in large part from my belief that AI is becoming increasingly pivotal in shaping the future of technology and industry. For this purpose, this project presents an invaluable opportunity for my personal and professional growth. It is a fantastic platform to improve my comprehension of reinforcement learning while offering hands-on experience. 
@@ -794,6 +792,11 @@ This project has explored reinforcement learning, some of the broader machine le
 \addcontentsline{toc}{chapter}{Bibliography}
 
 \appendix
+
+
+\chapter{User Manual}
+
+% \input{user_manual}
 
 \chapter{Diary}
 
