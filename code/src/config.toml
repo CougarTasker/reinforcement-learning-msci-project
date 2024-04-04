@@ -1,22 +1,32 @@
 [grid_world]
-width = 16
-height = 9
+width = 8
+height = 5
 entity_count = 3
-[grid_world.energy]
-energy_capacity=10
-initial_energy=10
 [grid_world.agent_location]
-x = 10
-y = 5
+x = 3
+y = 2
 
 [agent]
 discount_rate = 0.9
-stopping_epsilon = 0.0001
-learning_rate = 0.1
+[agent.value_iteration]
 sample_count = 100
-exploration_ratio = 0.5
-
+stopping_epsilon = 0.0001
+[agent.q_learning]
+learning_rate = 0.995
+initial_optimism = 50.0
+replay_queue_length = 8
+[agent.q_learning.epsilon_greedy]
+initial_exploration_ratio = 0.6
+decay_rate = 0.985
+[agent.q_learning.upper_confidence_bound]
+exploration_bias = 5.0
+[agent.q_learning.mf_bpi]
+error_sensitivity=1
+ensemble_size=50
+exploration_parameter=1.0
 [gui]
 appearance_mode = "dark"
 color_theme = "blue"
-initial_size = "800x600"
+[gui.initial_size]
+width = 800
+height = 600

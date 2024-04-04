@@ -1,5 +1,14 @@
 from src.model.agents.base_agent import BaseAgent
-from src.model.config.agent_section import AgentConfig
+from src.model.config.agent_section.agent_section import AgentConfig
+from src.model.config.agent_section.epsilon_greedy import (
+    EpsilonGreedyStrategyConfig,
+)
+from src.model.config.agent_section.mf_bpi import MFBPIConfig
+from src.model.config.agent_section.q_learning import QLearningConfig
+from src.model.config.agent_section.upper_confidence_bound import (
+    UCBStrategyConfig,
+)
+from src.model.config.agent_section.value_iteration import ValueIterationConfig
 from src.model.config.grid_world_section import GridWorldConfig
 from src.model.dynamics.actions import Action
 from src.model.dynamics.base_dynamics import BaseDynamics
@@ -15,23 +24,21 @@ from src.model.state.state_instance import StateInstance
 
 
 class TestGridWorldConfig(GridWorldConfig):
+    @property
     def width(self) -> int:
         return 2
 
+    @property
     def height(self) -> int:
         return 1
 
+    @property
     def agent_location(self) -> tuple[int, int]:
         return 0, 0
 
+    @property
     def entity_count(self) -> int:
         return 0
-
-    def energy_capacity(self) -> int:
-        return 10
-
-    def initial_energy(self) -> int:
-        return self.energy_capacity()
 
 
 class SimpleTestDynamics(BaseDynamics):
@@ -95,38 +102,81 @@ class SimpleTestDynamics(BaseDynamics):
         return next_state.build(), 0
 
 
-class TestAgentConfig(AgentConfig):
-    def discount_rate(self) -> float:
-        """Get the discount rate.
+class TestEpsilonGreedyStrategyConfig(EpsilonGreedyStrategyConfig):
+    @property
+    def initial_exploration_ratio(self) -> float:
+        return 0.5
+
+    @property
+    def decay_rate(self) -> float:
+        return 0.95
+
+
+class TestUCBStrategyConfig(UCBStrategyConfig):
+    @property
+    def exploration_bias(self) -> float:
+        """Weighting applied to the uncertainty in the recorded data.
+
+        Higher values encourage more exploration.
 
         Returns:
-            float: the amount to discount future reward
+            float: The value of potential reward.
         """
-        return 0.9
+        return 0.5
 
-    def stopping_epsilon(self) -> float:
-        """Get the stopping epsilon.
 
-        Returns:
-            float: the maximum error allowable in a value table
-        """
-        return 0.1
+class TestMFBPIConfig(MFBPIConfig):
 
+    @property
+    def error_sensitivity(self) -> int:
+        return 1
+
+    @property
+    def ensemble_size(self) -> int:
+        return 1
+
+    @property
+    def exploration_parameter(self) -> float:
+        return 1
+
+
+class TestQLearningConfig(QLearningConfig):
+    def __init__(self):
+        self.epsilon_greedy = TestEpsilonGreedyStrategyConfig()
+        self.upper_confidence_bound = TestUCBStrategyConfig()
+        self.mf_bpi = TestMFBPIConfig()
+
+    @property
     def learning_rate(self) -> float:
-        """Get the learning rate.
-
-        Returns:
-            float: the amount to update the value table with each observation
-        """
         return 0.1
 
-    def sample_count(self) -> int:
-        """Get the sample count.
+    @property
+    def initial_optimism(self) -> float:
+        return 1
 
-        Returns:
-            int: the number of samples to use for distribution analysis.
-        """
+    @property
+    def replay_queue_length(self) -> int:
+        return 5
+
+
+class TestValueIterationConfig(ValueIterationConfig):
+    @property
+    def stopping_epsilon(self) -> float:
+        return 0.0001
+
+    @property
+    def sample_count(self) -> int:
         return 100
+
+
+class TestAgentConfig(AgentConfig):
+    def __init__(self) -> None:
+        self.q_learning = TestQLearningConfig()
+        self.value_iteration = TestValueIterationConfig()
+
+    @property
+    def discount_rate(self) -> float:
+        return 0.9
 
 
 class MockAgent(BaseAgent):
@@ -139,7 +189,6 @@ class MockAgent(BaseAgent):
         min_action: float,
         max_action: float,
     ) -> None:
-        super().__init__(TestAgentConfig())
         self.state_values = {
             0: min_state,
             1: (min_state + max_state) / 2,
@@ -156,13 +205,7 @@ class MockAgent(BaseAgent):
     def evaluate_policy(self, state: int) -> Action:
         return Action.down
 
-    def record_transition(
-        self,
-        previous_state: int,
-        previous_action: Action,
-        new_state: int,
-        reward: float,
-    ) -> None:
+    def record_transition(self, *args) -> None:
         # record
         pass
 

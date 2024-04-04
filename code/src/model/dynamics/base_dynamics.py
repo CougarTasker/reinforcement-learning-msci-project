@@ -1,3 +1,5 @@
+import sys
+
 from ..config.grid_world_section import GridWorldConfig
 from ..state.state_instance import StateInstance
 from ..state.state_pool import StatePool
@@ -21,7 +23,7 @@ class BaseDynamics(object):
         """
         self.state_pool = StatePool()
         self.config = config
-        self.grid_world = GridWorld(config.width(), config.height())
+        self.grid_world = GridWorld(config.width, config.height)
 
     def is_stochastic(self) -> bool:
         """Determine weather the dynamics behave stochastically.
@@ -39,6 +41,16 @@ class BaseDynamics(object):
         raise NotImplementedError(
             "This method must be overridden by concrete dynamics classes"
         )
+
+    def state_count_upper_bound(self) -> int:
+        """Get an upper bound on the number of states.
+
+        used for pre-allocating memory.
+
+        Returns:
+            int: an upper bound on the number of state.
+        """
+        return sys.maxsize
 
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.

@@ -13,9 +13,6 @@ test_file = """
 width = 16
 height = 9
 entity_count = 5
-[grid_world.energy]
-energy_capacity=10
-initial_energy=10
 [grid_world.agent_location]
 x = 10
 y = 10
@@ -40,10 +37,8 @@ def test_load_config_correctly(mocker):
     assert mock_open.call_args.args[0].endswith(config.config_file_name)
     assert mock_open.call_args.args[1] == "r"
 
-    grid_config = config.grid_world()
-
-    assert grid_config.width() == 16
-    assert grid_config.height() == 9
+    assert config.grid_world.width == 16
+    assert config.grid_world.height == 9
 
 
 test_missing = """
@@ -59,7 +54,7 @@ def test_validate_missing_data(mocker):
     )
     config = ConfigReader()
     with pytest.raises(Exception):
-        config.grid_world()
+        config.grid_world
 
 
 test_incorrect_data = """
@@ -67,9 +62,6 @@ test_incorrect_data = """
 width = true
 height = false
 entity_count = 5
-[grid_world.energy]
-energy_capacity=10
-initial_energy=10
 [grid_world.agent_location]
 x = 10
 y = 10
@@ -83,4 +75,4 @@ def test_validate_incorrect_data(mocker):
     )
     config = ConfigReader()
     with pytest.raises(Exception):
-        config.grid_world()
+        config.grid_world

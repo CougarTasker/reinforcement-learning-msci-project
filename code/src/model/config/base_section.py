@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict, List
 
 from schema import Schema
 
@@ -9,18 +9,23 @@ class BaseConfigSection(object):
     def __init__(
         self,
         section_name: str,
-        schema: Schema,
+        schema: Dict[str, Any],
+        subsections: List["BaseConfigSection"],
     ) -> None:
         """Instantiate the basic data required for a config section.
 
         Args:
             section_name (str): the name of the section as it should appear in
                 the config file
-            schema (Schema): the schema to validate the data within this
+            schema (Dict): the schema to validate the data within this
+                section.
+            subsections (Dict[str, BaseConfigSection]): any subsections in this
                 section.
         """
         self.schema = schema
         self.section_name = section_name
+        self.subsections = subsections
+        self.configuration: Any = None
 
     def initialise(self, configuration: Any) -> None:
         """Populate section with data.
@@ -36,4 +41,15 @@ class BaseConfigSection(object):
             configuration (Any): the raw configuration data to be used thought
                 the application
         """
-        self.configuration = self.schema.validate(configuration)
+        # add the keys for the subsection so they dont cause an error
+        subsection_keys = {
+            subsection.section_name: object for subsection in self.subsections
+        }
+
+        self.configuration = Schema(
+            {**self.schema, **subsection_keys}
+        ).validate(configuration)
+
+        for subsection in self.subsections:
+            sub_configuration = configuration[subsection.section_name]
+            subsection.initialise(sub_configuration)

@@ -1,6 +1,7 @@
-from typing import Dict, Generator, Tuple
+from typing import Dict, Generator, Optional, Tuple
 
 import numpy as np
+from numpy.random import Generator as RandomGenerator
 
 from .actions import Action
 
@@ -46,18 +47,26 @@ class GridWorld(object):
         x_pos, y_pos = position
         return 0 <= x_pos < self.width and 0 <= y_pos < self.height
 
-    def random_in_bounds_cell(self) -> tuple[int, int]:
+    def random_in_bounds_cell(
+        self, random_generator: Optional[RandomGenerator] = None
+    ) -> tuple[int, int]:
         """Generate a random cell position that is within bounds.
+
+        Args:
+            random_generator (Optional[RandomGenerator]): an optional random
+                generator to pick the positions from.
 
         Returns:
             tuple[int, int]: the cell position within the grid.
         """
+        if random_generator is None:
+            random_generator = np.random.default_rng()
         dimensions = np.array([self.width, self.height])
-        position_float = np.random.rand(2) * dimensions
+        position_float = random_generator.random(2) * dimensions
         position_integer = np.floor(position_float).astype(int)
         return (position_integer[0], position_integer[1])
 
-    action_direction: Dict[Action, Tuple[int, int]] = {
+    action_direction: Dict[Action, integer_position] = {
         Action.up: (0, -1),
         Action.down: (0, 1),
         Action.right: (1, 0),
@@ -90,10 +99,6 @@ class GridWorld(object):
         Returns:
             integer_position: The position after moving.
         """
-        if action not in self.action_direction:
-            raise ValueError(
-                f"Action {action.name} is not a known movement action"
-            )
         x_pos, y_pos = current_position
         dir_x, dir_y = self.action_direction[action]
         return (x_pos + dir_x * distance, y_pos + dir_y * distance)

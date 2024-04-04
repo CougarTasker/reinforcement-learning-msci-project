@@ -1,8 +1,8 @@
 from enum import Enum
 
 import numpy as np
-from src.model.config.grid_world_section import GridWorldConfig
 
+from src.model.config.grid_world_section import GridWorldConfig
 from src.model.dynamics.actions import Action
 from src.model.dynamics.base_dynamics import BaseDynamics
 from tests.dynamics.mini_config import MockGridWorldConfig
@@ -79,37 +79,3 @@ class VacuumDynamics(BaseDynamics):
         if next_state is None:
             return current_state_id, 0
         return next_state
-
-
-class TestAgentConfig:
-    def discount_rate(self) -> float:
-        """Get the discount rate.
-
-        Returns:
-            float: the amount to discount future reward
-        """
-        return 0.9
-
-    def stopping_epsilon(self) -> float:
-        """Get the stopping epsilon.
-
-        Returns:
-            float: the maximum error allowable in a value table
-        """
-        return float(np.finfo(np.float64).eps) * 2
-
-    def learning_rate(self) -> float:
-        """Get the learning rate.
-
-        Returns:
-            float: the amount to update the value table with each observation
-        """
-        return 0.1
-
-    def sample_count(self) -> int:
-        """Get the sample count.
-
-        Returns:
-            int: the number of samples to use for distribution analysis.
-        """
-        return 1

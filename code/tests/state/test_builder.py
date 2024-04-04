@@ -19,45 +19,7 @@ def test_set_location():
     assert one.agent_location == loc_1
     assert two.agent_location == loc_2
     # test other properties are not changed
-    assert one.agent_energy == two.agent_energy
-
-
-def test_set_energy():
-    e_1 = 10
-    e_2 = 5
-    one = StateBuilder().set_energy(e_1).build()
-    two = StateBuilder().set_energy(e_2).build()
-
-    assert one.agent_energy == e_1
-    assert two.agent_energy == e_2
-
-    assert one.agent_location == two.agent_location
-
-
-def test_decrement_energy():
-    base = 8
-    offset = 5
-    goal = base - offset
-
-    start = StateBuilder().set_energy(base).build()
-    assert start.agent_energy == base
-
-    one_decrement = StateBuilder(start).decrement_energy(offset).build()
-
-    assert one_decrement.agent_energy == goal
-
-    reset_decrement = (
-        StateBuilder(one_decrement)
-        .set_energy(base)
-        .decrement_energy(offset)
-        .build()
-    )
-
-    assert one_decrement == reset_decrement
-
-    minimum_energy = StateBuilder().decrement_energy(base * 100).build()
-
-    assert minimum_energy.agent_energy == 0
+    assert one.entities == two.entities
 
 
 def test_set_entity():

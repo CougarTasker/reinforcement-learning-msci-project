@@ -7,4 +7,4 @@ class CellEntity(Enum):
     agent = 1
     goal = 2
     empty = 3
-    blocked = 4
+    warning = 4

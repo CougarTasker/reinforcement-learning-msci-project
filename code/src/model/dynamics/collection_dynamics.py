@@ -1,4 +1,9 @@
+from ctypes import c_size_t
+from multiprocessing import Value
+from time import time
 from typing import Optional, Set, Tuple
+
+import numpy as np
 
 from src.model.config.grid_world_section import GridWorldConfig
 
@@ -13,6 +18,8 @@ spawn_positions_type = Set[Tuple[int, int]]
 
 class CollectionDynamics(BaseDynamics):
     """Simple Dynamics where the agent can move to cells to collect goals."""
+
+    location_seed = Value(c_size_t, int(time() * 10), lock=False)
 
     def __init__(self, config: GridWorldConfig) -> None:
         """Initialise collection dynamics.
@@ -31,6 +38,20 @@ class CollectionDynamics(BaseDynamics):
         """
         return False
 
+    def state_count_upper_bound(self) -> int:
+        """Get an upper bound on the number of states.
+
+        used for pre-allocating memory.
+
+        Returns:
+            int: an upper bound on the number of state.
+        """
+        return (
+            self.grid_world.width
+            * self.grid_world.height
+            * (2**self.config.entity_count)
+        )
+
     def get_spawn_positions(self) -> spawn_positions_type:
         """Get the positions where flags can be spawned.
 
@@ -41,12 +62,13 @@ class CollectionDynamics(BaseDynamics):
             spawn_positions_type: the set of positions where goals can be
             spawned.
         """
+        generator = np.random.default_rng(self.location_seed.value)
         if self.spawn_positions is not None:
             return self.spawn_positions
-        agent_location = self.config.agent_location()
+        agent_location = self.config.agent_location
         self.spawn_positions = set()
-        while len(self.spawn_positions) < self.config.entity_count():
-            location = self.grid_world.random_in_bounds_cell()
+        while len(self.spawn_positions) < self.config.entity_count:
+            location = self.grid_world.random_in_bounds_cell(generator)
             if location != agent_location:
                 self.spawn_positions.add(location)
         return self.spawn_positions
@@ -62,13 +84,11 @@ class CollectionDynamics(BaseDynamics):
             StateInstance: the starting state.
 
         """
-        if not self.grid_world.is_in_bounds(self.config.agent_location()):
+        if not self.grid_world.is_in_bounds(self.config.agent_location):
             raise ValueError("config agent location outside of map bounds")
 
-        initial_state_builder = (
-            StateBuilder()
-            .set_agent_location(self.config.agent_location())
-            .set_energy(self.config.initial_energy())
+        initial_state_builder = StateBuilder().set_agent_location(
+            self.config.agent_location
         )
 
         for goal in self.get_spawn_positions():
@@ -95,21 +115,24 @@ class CollectionDynamics(BaseDynamics):
             has been performed and the reward from this action
         """
         next_state_builder = StateBuilder(current_state)
+
+        got_goal = current_state.agent_location in current_state.entities
+        if got_goal:
+            next_state_builder.remove_entity(current_state.agent_location)
+
+            if not next_state_builder.entities:
+                # Terminal state all goals have been collected, loop to
+                # beginning to make task continuous
+                return self.initial_state(), 10
+
         next_agent_location = self.grid_world.movement_action(
             current_state.agent_location, action
         )
         if not self.grid_world.is_in_bounds(next_agent_location):
-            return current_state, 0
+            return next_state_builder.build(), -1
 
         next_state_builder.set_agent_location(next_agent_location)
 
-        if next_agent_location not in current_state.entities:
-            return next_state_builder.build(), 0
+        reward = 10 if got_goal else -1
 
-        next_state_builder.remove_entity(next_agent_location)
-
-        if not next_state_builder.entities:
-            # Terminal state all goals have been collected, loop to beginning to
-            # make task continuous
-            return self.initial_state(), 1
-        return next_state_builder.build(), 1
+        return next_state_builder.build(), reward
