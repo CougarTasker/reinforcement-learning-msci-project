@@ -27,6 +27,7 @@
 - [Week 26 (11/03/24)](#week-26-110324)
 - [Week 27 (18/03/24)](#week-27-180324)
 - [Week 28 (25/03/24)](#week-28-250324)
+- [Week 29 (01/04/24)](#week-29-010424)
 
 <!-- omit in toc -->
 ## Weeks
@@ -294,3 +295,25 @@ This week was spent on a major overhaul to the configuration system to support h
  - (Wed 27)
    - Extended professional issues to focus on reinforcement learning.
    - Attended final supervisor meeting
+ - (Thu 28)
+   - Added Conclusions section to the analysis chapter
+   - Updated system design section 
+   - Started writing the technical decisions section
+
+### Week 29 (01/04/24)
+
+ - (Mon 01) Finished the technical decisions section
+ - (Tue 02) Started literature review section
+ - (Wed 03) 
+   - Finished literature review section
+   - Wrote project analysis section 
+   - Improved and updated abstract
+ - (Thu 04)
+   - Improved the introduction chapter
+     - Wrote the introduction to the introduction
+     - updated the aims and objectives section
+     - Improved the literature review section
+   - Proofreading and grammar fixes.
+   - Final code updates.
+   - Recorded application video
+   - Final diary update.
