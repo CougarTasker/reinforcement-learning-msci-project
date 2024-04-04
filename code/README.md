@@ -1,21 +1,3 @@
-<!-- omit in toc -->
-# Reinforcement Learning App
-
-This application implements reinforcement learning agents in a grid world. 
-
-![Q Learning](../media/images/q_learning_state_table.png)
-![Value Iteration](../media/images/action_value.png)
-
-<!-- omit in toc -->
-## Table Of Contents
-- [Running the Program](#running-the-program)
-- [Project Structure](#project-structure)
-- [Documentation](#documentation)
-- [Development](#development)
-  - [Poetry](#poetry)
-  - [Code quality tooling](#code-quality-tooling)
-  - [Tips](#tips)
-
 ## Running the Program
 
 > Note: This guide is for those only interested in using the application, see [Development](#development) for a development workflow.
@@ -106,8 +88,9 @@ poetry run start
 To avoid bugs and enforce consistency this project has a number of tools. these tools are configured with `pre-commit` to run together before each commit, all tools must pass before a commit can be pushed. 
 
 the tools are:
+
  | Tool     | Description                                    | command                   |
- | -------- | ---------------------------------------------- | ------------------------- |
+ | :-- | :-- | :-- |
  | `black`  | Formats the code in a consistent way.          | `poetry run black src`    |
  | `pytest` | Ensures all tests are passing.                 | `poetry run pytest --cov` |
  | `flake8` | Lints the code, ensure that it meets standard. | `poetry run flake8`       |
