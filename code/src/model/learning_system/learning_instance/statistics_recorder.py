@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 from src.model.transition_information import TransitionInformation
 
 from .statistics_record import StatisticsRecord
@@ -8,7 +10,17 @@ class StatisticsRecorder(object):
 
     def __init__(self) -> None:
         """Initialise the statistics recorder."""
-        self.statistics = StatisticsRecord(0, [], 0)
+        self.statistics = StatisticsRecord(0, [], 0, None)
+
+    def set_current_state(self, state_id: int) -> None:
+        """Set the current state to a specific value.
+
+        Used for resting the state without a traditional transition.
+
+        Args:
+            state_id (int): the new state of the simulation.
+        """
+        self.statistics = replace(self.statistics, current_state=state_id)
 
     def get_statistics(self) -> StatisticsRecord:
         """Get the current statics information.
@@ -30,4 +42,5 @@ class StatisticsRecorder(object):
             stats.time_step + 1,
             [*stats.reward_history, reward],
             stats.total_reward + reward,
+            transition.new_state,
         )

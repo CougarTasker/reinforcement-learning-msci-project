@@ -14,3 +14,6 @@ x * (d -1) = - n
 x = -n/(1-d)
 
 the pessimism encourage going back to known state and if the value is low enough it can lead to stuck agents 
+epsilon greedy is not ideal with q-learning due to its off policy nature not accounting for random bad actions.
+
+Upper confidence bound gets stuck in good but not optimal

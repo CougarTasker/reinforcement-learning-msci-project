@@ -27,9 +27,7 @@ from src.model.learning_system.top_level_entities.options import (
 class RandomSearch(object):
     """Class for performing a random search."""
 
-    worker_count = 8
-    iterations_per_worker = 1000
-    runs = 5
+    worker_count = 4
 
     def __init__(self) -> None:
         """Initialise random search runner."""
