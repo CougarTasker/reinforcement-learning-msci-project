@@ -1,0 +1,48 @@
+classDiagram
+  class BaseBridge {
+    port : Value
+    socket : NoneType
+    state : Value
+    state_lock : lock
+    add_item(queue_item: Any)
+    get_item_blocking() Any
+    get_item_non_blocking() Any
+  }
+  class BridgeState {
+    name
+  }
+  class LearningSystemController {
+    auto : bool
+    state_update_bridge
+    system : LearningSystem
+    user_action_bridge
+    model_mainloop()
+    one_step()
+    send_current_state()
+  }
+  class LearningSystemControllerFactory {
+    controllers : List[LearningSystemController]
+    processes : List[Process]
+    create_controller(agent: AgentOptions, dynamics: DynamicsOptions) LearningSystemController
+  }
+  class StateUpdateBridge {
+    get_latest_state() Optional[StateDescription]
+    update_state(state: StateDescription)
+  }
+  class UserAction {
+    name
+  }
+  class UserActionBridge {
+    get_action() UserActionMessage
+    get_action_non_blocking() UserActionMessage
+    submit_action(action: UserAction, payload: Any)
+  }
+  class UserActionMessage {
+    action
+    payload : Optional[Any]
+  }
+  StateUpdateBridge --|> BaseBridge
+  UserActionBridge --|> BaseBridge
+  StateUpdateBridge --* LearningSystemController : state_update_bridge
+  UserActionBridge --* LearningSystemController : user_action_bridge
+  UserAction --o UserActionMessage : action

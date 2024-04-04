@@ -18,7 +18,7 @@ from src.model.learning_system.top_level_entities.options import (
 class ParameterEvaluator(object):
     """This class simulations and evaluates different configurations."""
 
-    runs = 25
+    runs = 3
     iterations_per_run = 5000
 
     @classmethod
@@ -42,16 +42,17 @@ class ParameterEvaluator(object):
         Returns:
             float: The average total reward for a given configuration.
         """
-        total_reward = float(0)
+        total_reward = float("inf")
 
         for _ in range(cls.runs):
             if not running.get():
                 return -float("inf")
-            total_reward += cls.single_run(
-                options, hyper_parameters
-            ).total_reward
+            total_reward = min(
+                cls.single_run(options, hyper_parameters).total_reward,
+                total_reward,
+            )
 
-        return total_reward / cls.runs
+        return total_reward
 
     @classmethod
     def single_run(

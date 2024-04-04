@@ -1,0 +1,109 @@
+classDiagram
+  class ArrowLayer {
+    draw()
+  }
+  class AutoStateManager {
+    action_bridge : UserActionBridge
+    auto_speed_ms : int
+    auto_timer
+    current_speed : manual
+    paused : bool
+    progress_button_text : dict
+    get_progress_button_text() str
+    progress_button_pressed()
+    set_speed(speed: AutoSpeed)
+  }
+  class BackgroundLayer {
+    default_background_color : Tuple
+    draw()
+  }
+  class BaseLayer {
+    bounding_box : Tuple[int, int, int, int]
+    canvas
+    cell_layout
+    config : CellConfiguration
+    drawing_context
+    icon_loader
+    draw()
+    draw_icon(icon: Image, size: int, rel_pos: Tuple[float, float])
+    value_to_color(worth: float) rgb_type
+  }
+  class Cell {
+    cell_layout
+    config : CellConfiguration
+    draw(canvas: Image, drawing_context: ImageDraw)
+  }
+  class CellLayout {
+    border_ratio : float
+    border_width : int
+    bounding_box : Tuple[int, int, int, int]
+    cell_size
+    min_border_width : int
+    min_padding : int
+    padding : int
+    padding_ratio : float
+    contains_point(pos: Tuple[int, int]) bool
+    get_bounding_box_size(bounding_box: Tuple[int, int, int, int]) int
+    inset_bounding_box(inset_amount: int) Tuple[int, int, int, int]
+  }
+  class Controls {
+    action_bridge : UserActionBridge
+    auto_mode_manger
+    display_mode_options : dict
+    progress_button
+    auto_speed_toggled(speed: AutoSpeed)
+    display_mode_changed(option: str)
+    progress_button_pressed()
+    reset_button_pressed()
+  }
+  class DisplayState {
+    background_color : tuple
+    cell_margins : float
+    cells : dict
+    image_label
+    state : Optional[StateDescription]
+    resizeEvent(event: QResizeEvent)
+    set_state(state: StateDescription)
+  }
+  class GridWorld {
+    action_bridge
+    controls
+    display
+    update_bridge
+    check_for_work()
+  }
+  class IconLoader {
+    action_mapping : Dict[Action, Icon]
+    bitmap_cache : Dict[Icon, Image]
+    cell_entity_mapping : dict
+    default_color : tuple
+    rgb_component_max : int
+    variant_cache : Dict[IconVariantSpecification, Image]
+    get_action_icon(action: Action, size: int, color: Tuple[int, int, int]) Image
+    get_cell_entity_icon(entity: CellEntity, size: int, color: Tuple[int, int, int]) Image
+    get_coloured_icon(image: Image, color: Tuple[int, int, int]) Image
+    get_icon(icon: Icon, size: int, color: Tuple[int, int, int]) Image
+    get_path(icon: Icon) str
+  }
+  class MainIconLayer {
+    draw()
+  }
+  class ReinforcementLearningApp {
+    tab_labels : dict
+    setup_config()
+  }
+  ArrowLayer --|> BaseLayer
+  BackgroundLayer --|> BaseLayer
+  MainIconLayer --|> BaseLayer
+  AutoStateManager --* Controls
+  Controls --* GridWorld 
+  DisplayState --* GridWorld 
+  Cell --* DisplayState
+
+  IconLoader --* BaseLayer 
+  GridWorld --* ReinforcementLearningApp
+  ArrowLayer --* Cell
+  BackgroundLayer --* Cell
+  MainIconLayer --* Cell
+
+  CellLayout --o BaseLayer 

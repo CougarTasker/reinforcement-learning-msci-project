@@ -1,0 +1,199 @@
+\hypertarget{running-the-program}{%
+\subsection{Running the Program}\label{running-the-program}}
+
+\begin{quote}
+Note: This guide is for those only interested in using the application,
+see \protect\hyperlink{development}{Development} for a development
+workflow.
+\end{quote}
+
+This project requires Python 3.10. Python installers can be found
+\href{https://www.python.org/downloads/}{here}. The program has a GU
+
+\begin{quote}
+If you encounter issues or don't want to install this program locally
+there is a docker file \href{../.devcontainer/Dockerfile}{here}. This
+docker file specifies the environment and all the tooling for this
+project.
+\end{quote}
+
+You can install and run the project with a Python package manager such
+as \texttt{pipx} or \texttt{poetry}. we will be using \texttt{pipx} here
+because of its simplicity. There is a guide
+\href{https://pypa.github.io/pipx/installation/}{here} on how you can
+install \texttt{pipx}.
+
+once \texttt{pipx} is installed open your terminal and navigate to this
+folder (\texttt{code}) and run this command to start the program
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python3}\NormalTok{ {-}m pipx run {-}{-}spec . start}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{project-structure}{%
+\subsection{Project Structure}\label{project-structure}}
+
+the project is mostly hierarchical with related features being located
+in the same or nearby folders (packages). the root folder \texttt{code}
+contains all the meta configuration for this project, this includes -
+\texttt{pyproject.toml}: which specifies what dependencies the program
+needs. the entry points and other tooling configurations. -
+\texttt{setup.cfg}: contains the configuration for tools that have not
+migrated to the PEP 518 (\texttt{pyproject.toml}) standard yet -
+\texttt{.pre-commit-config}: specifies what should be run before a
+commit is allowed. - \texttt{.gitignore}: excludes certain files from
+being added to the git repository.
+
+the \texttt{code} folder contains two more important folders
+\texttt{src} and \texttt{tests}. tests contains all the tests and the
+related mocks necessary, code in the tests package is not used at
+runtime.
+
+\texttt{src} folder contains everything necessary at runtime, these are
+in four main parts: - \texttt{model}: where all of the state and
+learning functionality is stored - \texttt{view}: where all of the GUI
+code for visualizing the reinforcement learning is stored -
+\texttt{controller}: the code that updates the model with the user's
+input, this is the code that unites the model and view. -
+\texttt{entry\ points}: this is where execution starts. There are two,
+the main entry point and one for profiling the code.
+
+\texttt{src} is mostly code however it also includes the application's
+config \href{./src/config.toml}{\texttt{src/config.toml}} and the icon
+files used by the program. This
+\href{./src/config.toml}{\texttt{src/config.toml}} is where important
+configuration options for the application are determined such as the
+size of the grid world. The icons are from Flaticon and require the
+following attribution:
+
+UIcons by \href{https://www.flaticon.com/uicons}{Flaticon}
+
+\newpage
+\hypertarget{documentation}{%
+\subsection{Documentation}\label{documentation}}
+
+Documentation is written alongside the code with doc-strings, in the
+Google docstring format. This can be built into a complete documentation
+site. a package called \texttt{mkdocs} has been configured for building
+this site.
+
+The last build of the docs is at \texttt{code/docs} you can open these
+files directly or run one of the following commands to start a local
+server then open \url{http://localhost:3000} in your browser to view the
+documentation.
+
+To start a local server of the last build you can run.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python3}\NormalTok{ {-}m http.server {-}{-}directory docs 3000}
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively use the following command to get the latest docs as a
+local server.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{poetry}\NormalTok{ run mkdocs serve {-}a localhost:3000}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{development}{%
+\subsection{Development}\label{development}}
+
+To develop on this project I recommend using
+\href{https://code.visualstudio.com/download}{Visual Studio Code} and
+the provided
+\href{https://code.visualstudio.com/docs/devcontainers/containers}{development
+container}. using VS Code and this development container standardises
+the environment and avoids device-specific issues and this repository is
+configured for a VS Code workflow.
+
+If not using VS Code, the required tools are: - Python 3.10, including:
+- Virtual environments (\texttt{venv}) - \texttt{tkinter}/ Tcl -
+\texttt{pip} - \texttt{poetry} - \texttt{pre-commit}
+
+\hypertarget{poetry}{%
+\subsubsection{Poetry}\label{poetry}}
+
+Poetry is a Python package manager and it manages the Python retirements
+of this project.
+
+When you first start you will need to run the following command to
+install the dependencies
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{poetry}\NormalTok{ install}
+\end{Highlighting}
+\end{Shaded}
+
+you will also need to run the following command, to ensure each commit
+meets the linting requirements:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{poetry}\NormalTok{ run pre{-}commit install}
+\end{Highlighting}
+\end{Shaded}
+
+To run the project run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{poetry}\NormalTok{ run start}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{code-quality-tooling}{%
+\subsubsection{Code quality tooling}\label{code-quality-tooling}}
+
+To avoid bugs and enforce consistency this project has a number of
+tools. these tools are configured with \texttt{pre-commit} to run
+together before each commit, all tools must pass before a commit can be
+pushed.
+
+the tools are:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Tool & Description & command\tabularnewline
+\midrule
+\endhead
+\texttt{black} & Formats the code in a consistent way. &
+\texttt{poetry\ run\ black\ src}\tabularnewline
+\texttt{pytest} & Ensures all tests are passing. &
+\texttt{poetry\ run\ pytest\ -\/-cov}\tabularnewline
+\texttt{flake8} & Lints the code, ensure that it meets standard. &
+\texttt{poetry\ run\ flake8}\tabularnewline
+\texttt{mypy} & Ensures all static types are correct. &
+\texttt{poetry\ run\ mypy}\tabularnewline
+\bottomrule
+\end{longtable}
+
+they can be all run together with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pre{-}commit}\NormalTok{ run {-}{-}all{-}files}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tips}{%
+\subsubsection{Tips}\label{tips}}
+
+\href{https://readthedocs.org/projects/wemake-python-styleguide/}{we
+make python} is the style guide that this project follows have a look at
+the
+\href{https://wemake-python-styleguide.readthedocs.io/en/latest/}{docs
+here} for an explanation of their rules, some I have found to be
+contradictory with other tooling or excessively restrictive so I have
+disabled them
+
+if the code needs formatting then in the first pass of pre-commit it
+will update the code but it will fail the test because it needed to be
+updated, re-run pre-commit/ try committing again and it will often
+succeed

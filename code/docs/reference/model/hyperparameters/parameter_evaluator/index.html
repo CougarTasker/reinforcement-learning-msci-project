@@ -4299,10 +4299,11 @@
 <span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
-<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParameterEvaluator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">ParameterEvaluator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class simulations and evaluates different configurations.&quot;&quot;&quot;</span>
 
-    <span class="n">runs</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="n">runs</span> <span class="o">=</span> <span class="mi">3</span>
     <span class="n">iterations_per_run</span> <span class="o">=</span> <span class="mi">5000</span>
 
     <span class="nd">@classmethod</span>
@@ -4326,16 +4327,17 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            float: The average total reward for a given configuration.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">total_reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">total_reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
                 <span class="k">return</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
-            <span class="n">total_reward</span> <span class="o">+=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">single_run</span><span class="p">(</span>
-                <span class="n">options</span><span class="p">,</span> <span class="n">hyper_parameters</span>
-            <span class="p">)</span><span class="o">.</span><span class="n">total_reward</span>
+            <span class="n">total_reward</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">single_run</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">hyper_parameters</span><span class="p">)</span><span class="o">.</span><span class="n">total_reward</span><span class="p">,</span>
+                <span class="n">total_reward</span><span class="p">,</span>
+            <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">total_reward</span> <span class="o">/</span> <span class="bp">cls</span><span class="o">.</span><span class="n">runs</span>
+        <span class="k">return</span> <span class="n">total_reward</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">single_run</span><span class="p">(</span>
@@ -4512,7 +4514,8 @@ to use.</p>
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
-<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">evaluate_reward</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">,</span>
@@ -4533,16 +4536,17 @@ to use.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        float: The average total reward for a given configuration.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">total_reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">total_reward</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">runs</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">running</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
             <span class="k">return</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
-        <span class="n">total_reward</span> <span class="o">+=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">single_run</span><span class="p">(</span>
-            <span class="n">options</span><span class="p">,</span> <span class="n">hyper_parameters</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">total_reward</span>
+        <span class="n">total_reward</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">single_run</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">hyper_parameters</span><span class="p">)</span><span class="o">.</span><span class="n">total_reward</span><span class="p">,</span>
+            <span class="n">total_reward</span><span class="p">,</span>
+        <span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">total_reward</span> <span class="o">/</span> <span class="bp">cls</span><span class="o">.</span><span class="n">runs</span>
+    <span class="k">return</span> <span class="n">total_reward</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -4640,8 +4644,7 @@ use.</p>
 
           <details class="quote">
             <summary>Source code in <code>src/model/hyperparameters/parameter_evaluator.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
-<span class="normal">57</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
@@ -4662,7 +4665,8 @@ use.</p>
 <span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
-<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">single_run</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">,</span>

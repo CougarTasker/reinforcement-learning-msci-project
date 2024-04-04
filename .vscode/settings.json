@@ -15,13 +15,17 @@
         "color",
         "colors",
         "columnspan",
+        "Daka",
         "docstrings",
+        "Dogfght",
         "dtype",
+        "explainability",
         "fastmath",
         "finfo",
         "flaticon",
         "fromarray",
         "getchannel",
+        "hyperparameters",
         "kbar",
         "linters",
         "MFBPI",
@@ -30,10 +34,13 @@
         "nopython",
         "numba",
         "numpy",
+        "overfitting",
         "padx",
         "pady",
+        "parameterised",
         "pipx",
         "relx",
+        "resumable",
         "RHUL",
         "softmax",
         "tkinter",
@@ -82,5 +89,21 @@
     "yaml.schemas": {
         "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
     },
+    "grammarly.selectors": [
+        {
+            "language": "latex",
+            "scheme": "file"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "reports/Final/Final_Report.tex"
+        },
+        {
+            "language": "latex",
+            "scheme": "file",
+            "pattern": "reports/Final/Final_Report.tex"
+        }
+    ],
     "python.REPL.enableREPLSmartSend": false
 }

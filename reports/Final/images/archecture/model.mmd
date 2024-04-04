@@ -1,0 +1,282 @@
+classDiagram
+  class AgentConfig {
+    discount_rate_property : str
+    exploration_ratio_property : str
+    learning_rate_property : str
+    sample_count_property : str
+    stopping_epsilon_property : str
+    discount_rate() float
+    exploration_ratio() float
+    learning_rate() float
+    sample_count() int
+    stopping_epsilon() float
+  }
+  class BaseAgent {
+    config
+    evaluate_policy(state: int) Action
+    get_state_action_value(state: int, action: Action) float
+    get_state_value(state: int) float
+    record_transition(previous_state: int, previous_action: Action, new_state: int, reward: float) None
+  }
+  class BaseConfigSection {
+    configuration
+    schema
+    section_name : str
+    initialise(configuration: Any) None
+  }
+  class BaseDynamics {
+    config
+    grid_world
+    state_pool
+    initial_state()* StateInstance
+    initial_state_id() int
+    is_stochastic()* bool
+    next(current_state: StateInstance, action: Action)* tuple[StateInstance, float]
+    next_state_id(current_state_id: int, action: Action) tuple[int, float]
+  }
+  class CellConfiguration {
+    action_values_normalised : Dict
+    action_values_raw : Dict
+    cell_entity
+    cell_value_normalised : Optional[float]
+    cell_value_raw : Optional[float]
+    display_mode
+    location : Tuple[int, int]
+    tooltip_text
+  }
+  class CellStateLookup {
+    cell_lookup_table : NoneType, Optional[lookup_table_type], dict
+    dynamics
+    build_lookup_table() lookup_table_type
+    get_state(reference_state: StateInstance, cell: Tuple[int, int]) Optional[StateInstance]
+  }
+  class CollectionDynamics {
+    spawn_positions : Optional[spawn_positions_type], set
+    get_spawn_positions() spawn_positions_type
+    initial_state() StateInstance
+    is_stochastic() bool
+    next(current_state: StateInstance, action: Action) tuple[StateInstance, float]
+  }
+  class ConfigReader {
+    config_file_name : str
+    agent() AgentConfig
+    grid_world() GridWorldConfig
+    gui() GUIConfig
+    load_config()
+  }
+  class DynamicQTable {
+    learning_rate : float
+    table : Dict[Tuple[int, Action], float]
+    calculate_state_value(state: int) float
+    get_value(state: int, action: Action) float
+    set_value(state: int, action: Action, q_value: float)
+    update_value(state: int, action: Action, q_value: float)
+  }
+  class DynamicsDistribution {
+    dynamics
+    observations : Dict
+    sample_count : int
+    check_compiled() None
+    compile()
+    compute_state_action_distribution(state: int, action: Action) distribution_result
+    get_array_representation() numpy_distribution_information_type
+    get_state_count() int
+    has_compiled() bool
+    list_states() np.ndarray[Any, np.dtype[np.integer]]
+  }
+  class GUIConfig {
+    appearance_mode_property : str
+    color_theme_property : str
+    initial_size_property : str
+    appearance_mode() str
+    color_theme() str
+    initial_size() str
+  }
+  class GridWorld {
+    action_direction : Dict[Action, Tuple[int, int]]
+    height : int
+    width : int
+    get_cell_sizing(width: int, height: int, relative_margins: float) Tuple[int, int]
+    is_in_bounds(position: tuple[int, int]) bool
+    list_cell_positions(width: int, height: int, relative_margins: float) location_generator
+    list_cells() Generator[integer_position, None, None]
+    movement_action(current_position: integer_position, action: Action, distance: int) integer_position
+    random_in_bounds_cell() tuple[int, int]
+  }
+  class GridWorldConfig {
+    energy_capacity_property : str
+    energy_section : str
+    entity_count_property : str
+    height_property : str
+    initial_energy_property : str
+    location_section : str
+    location_x_property : str
+    location_y_property : str
+    width_property : str
+    agent_location() tuple[int, int]
+    energy_capacity() int
+    entity_count() int
+    height() int
+    initial_energy() int
+    width() int
+  }
+  class LearningInstance {
+    agent
+    dynamics
+    get_current_state() int
+    perform_action() Tuple[int, Action, int, float]
+    reset_state() int
+  }
+  class LearningSystem {
+    get_agent() BaseAgent
+    get_current_state() StateDescription
+    get_dynamics() BaseDynamics
+    perform_action()
+    reset_state()
+    set_display_mode(display_mode: DisplayMode)
+  }
+  class NormaliserFactory {
+    agent
+    cache : Dict[entities_type, StateValueNormaliser]
+    dynamics
+    enable_cache : bool
+    has_generated_all_states : bool
+    value_range : Optional[ValueRange]
+    create_normaliser(base_state: int) StateValueNormaliser
+  }
+  class QLearningAgent {
+    exploration_ratio
+    observation_queue
+    replay_queue_length : int
+    table
+    evaluate_policy(state: int) Action
+    get_state_action_value(state: int, action: Action) float
+    get_state_value(state: int) float
+    record_transition(previous_state: int, previous_action: Action, new_state: int, reward: float) None
+  }
+  class RewardReplayQueue {
+    discount_rate : float
+    max_queue_length : int
+    queue : List[observation_type]
+    table
+    add_observation(previous_state: int, previous_action: Action, new_state: int, reward: float)
+  }
+  class StateBuilder {
+    agent_energy : int
+    agent_location : tuple[int, int]
+    entities
+    build() StateInstance
+    decrement_energy(amount) Self
+    remove_entity(cell: tuple[int, int]) Self
+    set_agent_location(pos: tuple[int, int]) Self
+    set_energy(energy: int) Self
+    set_entity(cell: tuple[int, int], entity: CellEntity) Self
+  }
+  class StateDescription {
+    cell_config : Dict
+    display_mode
+    grid_world
+    state
+  }
+  class StateDescriptionFactory {
+    agent
+    cell_state_lookup
+    display_mode : default
+    dynamics
+    grid_world
+    value_normalisation_factory
+    create_state_description(state_id: int) StateDescription
+  }
+  class StateInstance {
+    agent_energy : int
+    agent_location : Tuple[int, int]
+    entities
+    get_blank_state() Self
+  }
+  class StatePool {
+    id_to_state : Dict[int, StateInstance]
+    state_to_id : Dict[StateInstance, int]
+    get_state_from_id(identifier: int) StateInstance
+    get_state_id(state: StateInstance) int
+    is_existing_state(state: StateInstance) bool
+  }
+  class StateValueNormaliser {
+    action_value_cache : Dict[action_value_tuple, float]
+    agent
+    state_pool
+    state_value_cache : Dict[StateInstance, float]
+    value_range
+    get_state_action_value_normalised(state: StateInstance, action: Action) float
+    get_state_value_normalised(state: StateInstance) float
+  }
+  class ValueIterationAgent {
+    discount_rate
+    dynamics
+    dynamics_distribution
+    stopping_epsilon
+    value_table : Optional[value_table_type]
+    compute_updated_value(value_table: value_table_type, state: int) float
+    compute_value_table() value_table_type
+    distribution_value(distribution: distribution_result, value_table: value_table_type) float
+    evaluate_policy(state: int) Action
+    get_state_action_value(state: int, action: Action) float
+    get_state_value(state: int) float
+    get_value_table() value_table_type
+    record_transition(previous_state: int, previous_action: Action, new_state: int, reward: float)* None
+  }
+  class ValueRange {
+    action_range : Optional[Tuple[float, float]], tuple
+    agent
+    state_pool
+    state_range : Optional[Tuple[float, float]], tuple
+    rescale_value(value_type: ValueType, absolute_value: float) float
+  }
+  
+  QLearningAgent --|> BaseAgent
+  ValueIterationAgent --|> BaseAgent
+  AgentConfig --|> BaseConfigSection
+  GridWorldConfig --|> BaseConfigSection
+  GUIConfig --|> BaseConfigSection
+  CollectionDynamics --|> BaseDynamics
+  QLearningAgent --* LearningSystem 
+  DynamicQTable --* QLearningAgent
+  RewardReplayQueue --* QLearningAgent 
+  ValueIterationAgent --* LearningSystem 
+  DynamicsDistribution --* ValueIterationAgent
+  AgentConfig --* LearningSystem 
+  CollectionDynamics --* LearningSystem 
+  GridWorld --* BaseDynamics 
+  LearningInstance --* LearningSystem 
+  CellStateLookup --* StateDescriptionFactory
+  StateDescriptionFactory --* LearningSystem 
+  NormaliserFactory --* StateDescriptionFactory
+  ValueRange --* NormaliserFactory 
+  StatePool --* BaseDynamics 
+  BaseAgent <-- LearningInstance 
+  BaseAgent <-- StateDescriptionFactory 
+  BaseAgent <-- StateValueNormaliser 
+  BaseAgent <-- NormaliserFactory 
+  BaseAgent <-- ValueRange 
+  DynamicQTable <-- RewardReplayQueue
+  AgentConfig --o BaseAgent 
+  GridWorldConfig --o BaseDynamics 
+  BaseDynamics --o ValueIterationAgent 
+  BaseDynamics --o DynamicsDistribution 
+  BaseDynamics --o LearningInstance 
+  BaseDynamics --o CellStateLookup 
+  BaseDynamics --o StateDescriptionFactory 
+  BaseDynamics --o NormaliserFactory 
+  GridWorld --o StateDescription 
+  ValueRange --o StateValueNormaliser 
+  StateInstance --o StateDescription 
+  StatePool --o StateValueNormaliser 
+  StatePool --o ValueRange 
+  CollectionDynamics --> StateBuilder
+  ConfigReader --> AgentConfig
+  ConfigReader --> GridWorldConfig
+  ConfigReader --> GUIConfig
+  StatePool --> StateInstance
+  StateBuilder --> StateInstance
+  StateDescriptionFactory --> StateDescription
+  StateDescription *-- CellConfiguration
+  LearningSystem --> ConfigReader
