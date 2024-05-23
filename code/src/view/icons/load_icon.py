@@ -137,6 +137,8 @@ class IconLoader(object):
         CellEntity.goal: Icon.flag,
         CellEntity.warning: Icon.no_entry,
         CellEntity.empty: Icon.empty,
+        CellEntity.wind_left: Icon.left_arrow,
+        CellEntity.wind_up: Icon.up_arrow,
     }
 
     def get_cell_entity_icon(

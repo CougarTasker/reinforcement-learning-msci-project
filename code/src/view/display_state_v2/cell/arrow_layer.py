@@ -71,5 +71,10 @@ class ArrowLayer(BaseLayer):
             if action_value is None:
                 rescaled_values[action] = None
                 continue
-            rescaled_values[action] = (action_value - min_value) / value_range
+            if value_range == 0:
+                rescaled_values[action] = 0.5
+            else:
+                rescaled_values[action] = (
+                    action_value - min_value
+                ) / value_range
         return rescaled_values

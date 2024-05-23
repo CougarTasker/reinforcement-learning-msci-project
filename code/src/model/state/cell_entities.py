@@ -8,3 +8,5 @@ class CellEntity(Enum):
     goal = 2
     empty = 3
     warning = 4
+    wind_up = 5
+    wind_left = 6

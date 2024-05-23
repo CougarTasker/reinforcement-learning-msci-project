@@ -1,9 +1,5 @@
-from ctypes import c_size_t
-from multiprocessing import Value
-from time import time
-from typing import Optional, Set, Tuple
-
-import numpy as np
+from random import random
+from typing import Set, Tuple
 
 from src.model.config.grid_world_section import GridWorldConfig
 
@@ -16,10 +12,10 @@ from .base_dynamics import BaseDynamics
 spawn_positions_type = Set[Tuple[int, int]]
 
 
-class CollectionDynamics(BaseDynamics):
-    """Simple Dynamics where the agent can move to cells to collect goals."""
+class WindDynamics(BaseDynamics):
+    """Simple Dynamics where the agent should avoid the navigate the wind."""
 
-    location_seed = Value(c_size_t, int(time() * 10), lock=False)
+    wind_probability = 0.4
 
     def __init__(self, config: GridWorldConfig) -> None:
         """Initialise collection dynamics.
@@ -28,7 +24,7 @@ class CollectionDynamics(BaseDynamics):
             config (GridWorldConfig): the configuration used by this dynamics.
         """
         super().__init__(config)
-        self.spawn_positions: Optional[spawn_positions_type] = None
+        self.reset_location = (0, config.height // 2)
 
     def is_stochastic(self) -> bool:
         """Determine weather the dynamics behave stochastically.
@@ -36,7 +32,7 @@ class CollectionDynamics(BaseDynamics):
         Returns:
             bool: false, this dynamics is deterministic
         """
-        return False
+        return True
 
     def state_count_upper_bound(self) -> int:
         """Get an upper bound on the number of states.
@@ -46,34 +42,7 @@ class CollectionDynamics(BaseDynamics):
         Returns:
             int: an upper bound on the number of state.
         """
-        return (
-            self.grid_world.width
-            * self.grid_world.height
-            * (2**self.config.entity_count)
-        )
-
-    def get_spawn_positions(self) -> spawn_positions_type:
-        """Get the positions where flags can be spawned.
-
-        these will be a number of unique positions in the grid world bounds.
-        Initially chosen at random but then fixed for subsequent calls
-
-        Returns:
-            spawn_positions_type: the set of positions where goals can be
-            spawned.
-        """
-        generator = np.random.default_rng(
-            self.location_seed.value  # type: ignore
-        )
-        if self.spawn_positions is not None:
-            return self.spawn_positions
-        agent_location = self.config.agent_location
-        self.spawn_positions = set()
-        while len(self.spawn_positions) < self.config.entity_count:
-            location = self.grid_world.random_in_bounds_cell(generator)
-            if location != agent_location:
-                self.spawn_positions.add(location)
-        return self.spawn_positions
+        return self.grid_world.width * self.grid_world.height
 
     def initial_state(self) -> StateInstance:
         """Provide the initial state of this environment.
@@ -86,16 +55,18 @@ class CollectionDynamics(BaseDynamics):
             StateInstance: the starting state.
 
         """
-        if not self.grid_world.is_in_bounds(self.config.agent_location):
-            raise ValueError("config agent location outside of map bounds")
-
         initial_state_builder = StateBuilder().set_agent_location(
-            self.config.agent_location
+            self.reset_location
         )
+        wind_start = self.config.width // 3
+        for wind_x in range(wind_start, self.config.width):
+            initial_state_builder.set_entity((wind_x, 0), CellEntity.wind_left)
+            for wind_y in range(1, self.config.height):
+                wind_loc = (wind_x, wind_y)
+                initial_state_builder.set_entity(wind_loc, CellEntity.wind_up)
 
-        for goal in self.get_spawn_positions():
-            initial_state_builder.set_entity(goal, CellEntity.goal)
-
+        goal_position = (self.config.width - 2, self.config.height // 2)
+        initial_state_builder.set_entity(goal_position, CellEntity.goal)
         return initial_state_builder.build()
 
     def next(
@@ -118,23 +89,36 @@ class CollectionDynamics(BaseDynamics):
         """
         next_state_builder = StateBuilder(current_state)
 
-        got_goal = current_state.agent_location in current_state.entities
-        if got_goal:
-            next_state_builder.remove_entity(current_state.agent_location)
+        entity = current_state.entities.get(current_state.agent_location, None)
 
-            if not next_state_builder.entities:
-                # Terminal state all goals have been collected, loop to
-                # beginning to make task continuous
-                return self.initial_state(), 10
+        match entity:
+            case CellEntity.wind_up:
+                if random() < self.wind_probability:
+                    next_agent_location = self.grid_world.movement_action(
+                        current_state.agent_location, Action.up
+                    )
+                    next_state_builder.set_agent_location(next_agent_location)
+
+                    return next_state_builder.build(), -1
+            case CellEntity.wind_left:
+                if random() < self.wind_probability:
+                    next_agent_location = self.grid_world.movement_action(
+                        current_state.agent_location, Action.left
+                    )
+                    next_state_builder.set_agent_location(next_agent_location)
+
+                    return next_state_builder.build(), -1
+
+            case CellEntity.goal:
+                next_state_builder.set_agent_location(self.reset_location)
+                return next_state_builder.build(), 100
 
         next_agent_location = self.grid_world.movement_action(
             current_state.agent_location, action
         )
         if not self.grid_world.is_in_bounds(next_agent_location):
-            return next_state_builder.build(), -1
+            return current_state, -10
 
         next_state_builder.set_agent_location(next_agent_location)
 
-        reward = 10 if got_goal else -1
-
-        return next_state_builder.build(), reward
+        return next_state_builder.build(), 0

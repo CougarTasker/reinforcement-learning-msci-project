@@ -1,6 +1,5 @@
 from src.model.agents.base_agent import BaseAgent
 from src.model.agents.q_learning.agent import QLearningAgent
-from src.model.agents.value_iteration.agent import ValueIterationAgent
 from src.model.agents.value_iteration.agent_optimised import (
     ValueIterationAgentOptimised,
 )
@@ -8,6 +7,7 @@ from src.model.config.reader import ConfigReader
 from src.model.dynamics.base_dynamics import BaseDynamics
 from src.model.dynamics.cliff_dynamics import CliffDynamics
 from src.model.dynamics.collection_dynamics import CollectionDynamics
+from src.model.dynamics.wind_dynamics import WindDynamics
 from src.model.hyperparameters.base_parameter_strategy import (
     BaseHyperParameterStrategy,
 )
@@ -72,7 +72,7 @@ class EntityFactory(object):
         """
         match options.agent:
             case AgentOptions.value_iteration:
-                return ValueIterationAgent(hyper_parameters, dynamics)
+                return ValueIterationAgentOptimised(hyper_parameters, dynamics)
             case AgentOptions.value_iteration_optimised:
                 return ValueIterationAgentOptimised(hyper_parameters, dynamics)
             case AgentOptions.q_learning:
@@ -105,5 +105,7 @@ class EntityFactory(object):
                 return CollectionDynamics(dynamic_config)
             case DynamicsOptions.cliff:
                 return CliffDynamics(dynamic_config)
+            case DynamicsOptions.wind:
+                return WindDynamics(dynamic_config)
             case _:
                 raise ValueError(f"unknown dynamics {options.dynamics.name}")

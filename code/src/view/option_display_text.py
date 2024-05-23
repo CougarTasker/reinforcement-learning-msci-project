@@ -121,6 +121,7 @@ class OptionDisplayText(object):
         {
             DynamicsOptions.collection: "Collection",
             DynamicsOptions.cliff: "Cliff",
+            DynamicsOptions.wind: "Wind",
         }
     )
 

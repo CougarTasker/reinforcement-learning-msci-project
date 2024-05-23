@@ -55,7 +55,7 @@ class MainIconLayer(BaseLayer):
         best_action_value = float("-inf")
         best_action = None
         for action in Action:
-            action_value = action_values[action]
+            action_value = action_values.get(action, None)
             if action_value is None:
                 continue
             if best_action_value is None:

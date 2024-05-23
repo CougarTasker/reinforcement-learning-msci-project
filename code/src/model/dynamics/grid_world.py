@@ -131,14 +131,44 @@ class GridWorld(object):
 
         content_ratio = rows / columns
         container_ratio = height / width
+        side_margins = container_ratio < content_ratio
 
-        cell_spacing = int(
-            width / columns
-            if container_ratio > content_ratio
-            else height / rows
-        )
+        cell_spacing = int(height / rows if side_margins else width / columns)
         margins = int(max(cell_spacing * relative_margins, 1))
+
         return cell_spacing, margins
+
+    def get_grid_bounds(
+        self, width: int, height: int, relative_margins: float
+    ) -> Tuple[int, int, int, int]:
+        """Get the bounding box of a grid.
+
+        Args:
+            width (int): the width of the containing rectangle
+            height (int): the hight of the containing rectangle
+            relative_margins (float): how large should the gap between cells be.
+            relative to the size of a cell with no margins
+
+        Returns:
+            Tuple[int, int, int, int]: the bounding box of where the grid will
+                be.
+        """
+        rows = self.height
+        columns = self.width
+
+        cell_spacing, margins = self.get_cell_sizing(
+            width, height, relative_margins
+        )
+
+        offset_min_x = int((width - columns * cell_spacing) / 2)
+        offset_min_y = int((height - rows * cell_spacing) / 2)
+
+        offset_min_x += margins // 2
+        offset_min_y += margins // 2
+
+        offset_max_x = offset_min_x + cell_spacing - margins
+        offset_max_y = offset_min_y + cell_spacing - margins
+        return offset_min_x, offset_min_y, offset_max_x, offset_max_y
 
     def list_cell_positions(
         self, width: int, height: int, relative_margins: float
@@ -162,22 +192,13 @@ class GridWorld(object):
         Yields:
             Iterator[location_generator]: the coordinates
         """
-        rows = self.height
-        columns = self.width
-
-        cell_spacing, margins = self.get_cell_sizing(
-            width, height, relative_margins
-        )
-
-        offset_min_x = int((width - columns * cell_spacing) / 2)
-        offset_min_y = int((height - rows * cell_spacing) / 2)
-
-        offset_min_x += margins // 2
-        offset_min_y += margins // 2
-
-        offset_max_x = offset_min_x + cell_spacing - margins
-        offset_max_y = offset_min_y + cell_spacing - margins
-
+        cell_spacing = self.get_cell_sizing(width, height, relative_margins)[0]
+        (
+            offset_min_x,
+            offset_min_y,
+            offset_max_x,
+            offset_max_y,
+        ) = self.get_grid_bounds(width, height, relative_margins)
         for pos in self.list_cells():
             bounding_box = (
                 offset_min_x + cell_spacing * pos[0],

@@ -1693,6 +1693,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../model/dynamics/wind_dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wind Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4572,7 +4593,9 @@
 <span class="normal">197</span>
 <span class="normal">198</span>
 <span class="normal">199</span>
-<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IconLoader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IconLoader</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load Icon images into the application.&quot;&quot;&quot;</span>
 
     <span class="n">_instance</span> <span class="o">=</span> <span class="kc">None</span>
@@ -4672,6 +4695,8 @@
         <span class="n">CellEntity</span><span class="o">.</span><span class="n">goal</span><span class="p">:</span> <span class="n">Icon</span><span class="o">.</span><span class="n">flag</span><span class="p">,</span>
         <span class="n">CellEntity</span><span class="o">.</span><span class="n">warning</span><span class="p">:</span> <span class="n">Icon</span><span class="o">.</span><span class="n">no_entry</span><span class="p">,</span>
         <span class="n">CellEntity</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="n">Icon</span><span class="o">.</span><span class="n">empty</span><span class="p">,</span>
+        <span class="n">CellEntity</span><span class="o">.</span><span class="n">wind_left</span><span class="p">:</span> <span class="n">Icon</span><span class="o">.</span><span class="n">left_arrow</span><span class="p">,</span>
+        <span class="n">CellEntity</span><span class="o">.</span><span class="n">wind_up</span><span class="p">:</span> <span class="n">Icon</span><span class="o">.</span><span class="n">up_arrow</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">get_cell_entity_icon</span><span class="p">(</span>
@@ -5065,9 +5090,7 @@ for more than one loader</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/icons/load_icon.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">144</span>
 <span class="normal">145</span>
 <span class="normal">146</span>
 <span class="normal">147</span>
@@ -5081,7 +5104,9 @@ for more than one loader</p>
 <span class="normal">155</span>
 <span class="normal">156</span>
 <span class="normal">157</span>
-<span class="normal">158</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_cell_entity_icon</span><span class="p">(</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_cell_entity_icon</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">entity</span><span class="p">:</span> <span class="n">CellEntity</span><span class="p">,</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -5346,9 +5371,7 @@ for more than one loader</p>
 
           <details class="quote">
             <summary>Source code in <code>src/view/icons/load_icon.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">162</span>
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
@@ -5376,7 +5399,9 @@ for more than one loader</p>
 <span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">icon</span><span class="p">:</span> <span class="n">Icon</span><span class="p">,</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>

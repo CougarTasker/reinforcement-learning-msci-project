@@ -1695,6 +1695,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../dynamics/wind_dynamics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wind Dynamics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4344,7 +4365,9 @@
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
-<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EntityFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">EntityFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Factory class for creating entities from the given options.&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -4395,7 +4418,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">match</span> <span class="n">options</span><span class="o">.</span><span class="n">agent</span><span class="p">:</span>
             <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">ValueIterationAgent</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">ValueIterationAgentOptimised</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">ValueIterationAgentOptimised</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">q_learning</span><span class="p">:</span>
@@ -4428,6 +4451,8 @@
                 <span class="k">return</span> <span class="n">CollectionDynamics</span><span class="p">(</span><span class="n">dynamic_config</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">cliff</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">CliffDynamics</span><span class="p">(</span><span class="n">dynamic_config</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">wind</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">WindDynamics</span><span class="p">(</span><span class="n">dynamic_config</span><span class="p">)</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown dynamics </span><span class="si">{</span><span class="n">options</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -4648,7 +4673,7 @@ iteration agent.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">match</span> <span class="n">options</span><span class="o">.</span><span class="n">agent</span><span class="p">:</span>
         <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ValueIterationAgent</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ValueIterationAgentOptimised</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">value_iteration_optimised</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ValueIterationAgentOptimised</span><span class="p">(</span><span class="n">hyper_parameters</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">AgentOptions</span><span class="o">.</span><span class="n">q_learning</span><span class="p">:</span>
@@ -4798,7 +4823,9 @@ dynamics to create.</p>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
-<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">create_dynamics</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">TopEntitiesOptions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BaseDynamics</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the dynamics appropriate for these options.</span>
 
@@ -4819,6 +4846,8 @@ dynamics to create.</p>
             <span class="k">return</span> <span class="n">CollectionDynamics</span><span class="p">(</span><span class="n">dynamic_config</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">cliff</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">CliffDynamics</span><span class="p">(</span><span class="n">dynamic_config</span><span class="p">)</span>
+        <span class="k">case</span> <span class="n">DynamicsOptions</span><span class="o">.</span><span class="n">wind</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">WindDynamics</span><span class="p">(</span><span class="n">dynamic_config</span><span class="p">)</span>
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown dynamics </span><span class="si">{</span><span class="n">options</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>

@@ -19,6 +19,7 @@ class DynamicsOptions(Enum):
 
     collection = 1
     cliff = 2
+    wind = 3
 
 
 @dataclass(frozen=True, slots=True)
